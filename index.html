@@ -3,10 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadence - Voice-First OS Layer</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Cadence — Voice-First OS Layer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="description" content="Local voice transcription meets desktop automation. System-wide voice control for macOS.">
+    <meta property="og:title" content="Cadence - Voice-First OS Layer">
+    <meta property="og:description" content="Local Whisper transcription + desktop automation. Zero cloud. Zero latency.">
+    <meta property="og:image" content="icon.png">
+    <meta name="twitter:card" content="summary">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        :root {
+            --bg-base: #0c0a09;
+            --bg-surface: #1c1917;
+            --bg-elevated: #292524;
+            --accent-primary: #2dd4bf;
+            --accent-glow: rgba(45, 212, 191, 0.25);
+            --accent-border: rgba(45, 212, 191, 0.2);
+            --text-primary: #fafaf9;
+            --text-secondary: #d6d3d1;
+            --text-muted: #a8a29e;
+            --text-dim: #78716c;
+            --text-ghost: #57534e;
+            --border-subtle: rgba(168, 162, 158, 0.08);
+            --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+        }
 
         * {
             margin: 0;
@@ -15,26 +38,14 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #0a0a0a;
-            color: #ffffff;
+            font-family: var(--font-sans);
+            background: var(--bg-base);
+            color: var(--text-primary);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .gradient-text {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff3864 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .fire-glow {
-            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5),
-                         0 0 40px rgba(247, 147, 30, 0.3),
-                         0 0 60px rgba(255, 56, 100, 0.2);
-        }
-
-        #particles-canvas {
+        #dot-grid {
             position: fixed;
             top: 0;
             left: 0;
@@ -42,7 +53,7 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.4;
         }
 
         .content {
@@ -50,171 +61,340 @@
             z-index: 1;
         }
 
-        .download-btn {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+        .accent {
+            color: var(--accent-primary);
         }
 
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6);
+        .glow {
+            text-shadow: 0 0 40px var(--accent-glow);
         }
 
-        .feature-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 107, 53, 0.2);
-            transition: all 0.3s ease;
+        .mono {
+            font-family: var(--font-mono);
         }
 
-        .feature-card:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-            background: rgba(255, 255, 255, 0.05);
+        .btn-primary {
+            background: var(--accent-primary);
+            color: var(--bg-base);
+            border: none;
+            transition: all 0.2s ease;
+            font-weight: 600;
         }
 
-        .shimmer {
-            animation: shimmer 2s infinite;
+        .btn-primary:hover {
+            background: #5eead4;
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        @keyframes shimmer {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--border-subtle);
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-border);
+            color: var(--accent-primary);
+        }
+
+        .spec-grid {
+            display: grid;
+            gap: 1px;
+            background: var(--border-subtle);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .spec-cell {
+            background: var(--bg-base);
+            padding: 12px 16px;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            color: var(--accent-primary);
+            margin-right: 12px;
+            font-weight: 600;
+        }
+
+        a[href^="#"]:hover, nav a:hover {
+            color: var(--accent-primary) !important;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 16px !important;
+            }
         }
     </style>
 </head>
 <body>
-    <canvas id="particles-canvas"></canvas>
+    <canvas id="dot-grid"></canvas>
 
     <div class="content">
-        <!-- Hero Section -->
-        <section class="min-h-screen flex flex-col items-center justify-center px-6">
-            <div class="text-center max-w-4xl">
-                <h1 class="text-7xl md:text-8xl font-bold mb-6 fire-glow gradient-text shimmer">
-                    Cadence
-                </h1>
-                <p class="text-2xl md:text-3xl text-gray-300 mb-4 font-light">
-                    Voice-First OS Layer
-                </p>
-                <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
-                    Local voice transcription meets desktop automation.
-                    Speak naturally, command instantly—anywhere on macOS.
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="#download" class="download-btn px-8 py-4 rounded-lg text-white font-semibold text-lg">
-                        Download for macOS
-                    </a>
+        <!-- Header -->
+        <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+                       backdrop-filter: blur(12px); background: rgba(12, 10, 9, 0.8);
+                       border-bottom: 1px solid var(--border-subtle);">
+            <div style="max-width: 1400px; margin: 0 auto; padding: 16px 24px;
+                        display: flex; align-items: center; justify-content: space-between;">
+                <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 1024 1024" style="flex-shrink: 0;">
+                        <defs>
+                            <linearGradient id="wave-header" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#2dd4bf"/>
+                                <stop offset="100%" stop-color="#5eead4"/>
+                            </linearGradient>
+                        </defs>
+                        <rect x="218" y="362" width="42" height="300" rx="21" fill="url(#wave-header)"/>
+                        <rect x="298" y="282" width="42" height="460" rx="21" fill="url(#wave-header)"/>
+                        <rect x="378" y="202" width="42" height="620" rx="21" fill="url(#wave-header)"/>
+                        <rect x="458" y="152" width="42" height="720" rx="21" fill="url(#wave-header)"/>
+                        <rect x="538" y="122" width="42" height="780" rx="21" fill="url(#wave-header)"/>
+                        <rect x="618" y="172" width="42" height="680" rx="21" fill="url(#wave-header)"/>
+                        <rect x="698" y="252" width="42" height="520" rx="21" fill="url(#wave-header)"/>
+                        <rect x="778" y="342" width="42" height="340" rx="21" fill="url(#wave-header)"/>
+                    </svg>
+                    <span style="font-size: 18px; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary);">Cadence</span>
+                    <span class="mono" style="font-size: 10px; color: var(--text-dim);">v0.1.0</span>
+                </a>
+                <nav style="display: flex; gap: 24px; align-items: center; font-size: 13px;">
+                    <a href="#tech" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Tech</a>
+                    <a href="#download" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Download</a>
                     <a href="https://github.com/yourusername/cadence" target="_blank"
-                       class="px-8 py-4 rounded-lg border border-gray-600 hover:border-gray-400
-                              transition-all text-gray-300 hover:text-white font-semibold text-lg">
-                        View on GitHub
-                    </a>
+                       style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">GitHub</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section style="min-height: 100vh; display: flex; align-items: center; padding: 0 24px;">
+            <div style="max-width: 1400px; margin: 0 auto; width: 100%;">
+                <div style="max-width: 800px;">
+                    <!-- Logo -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 1024 1024"
+                         style="margin-bottom: 32px; opacity: 0.9;">
+                        <defs>
+                            <linearGradient id="wave-hero" x1="0" y1="0" x2="1" y2="1">
+                                <stop offset="0%" stop-color="#2dd4bf"/>
+                                <stop offset="100%" stop-color="#5eead4"/>
+                            </linearGradient>
+                            <filter id="hero-glow">
+                                <feGaussianBlur in="SourceGraphic" stdDeviation="8"/>
+                            </filter>
+                        </defs>
+                        <g filter="url(#hero-glow)" opacity="0.4">
+                            <rect x="218" y="362" width="42" height="300" rx="21" fill="#2dd4bf"/>
+                            <rect x="298" y="282" width="42" height="460" rx="21" fill="#2dd4bf"/>
+                            <rect x="378" y="202" width="42" height="620" rx="21" fill="#2dd4bf"/>
+                            <rect x="458" y="152" width="42" height="720" rx="21" fill="#2dd4bf"/>
+                            <rect x="538" y="122" width="42" height="780" rx="21" fill="#2dd4bf"/>
+                            <rect x="618" y="172" width="42" height="680" rx="21" fill="#2dd4bf"/>
+                            <rect x="698" y="252" width="42" height="520" rx="21" fill="#2dd4bf"/>
+                            <rect x="778" y="342" width="42" height="340" rx="21" fill="#2dd4bf"/>
+                        </g>
+                        <rect x="218" y="362" width="42" height="300" rx="21" fill="url(#wave-hero)"/>
+                        <rect x="298" y="282" width="42" height="460" rx="21" fill="url(#wave-hero)"/>
+                        <rect x="378" y="202" width="42" height="620" rx="21" fill="url(#wave-hero)"/>
+                        <rect x="458" y="152" width="42" height="720" rx="21" fill="url(#wave-hero)"/>
+                        <rect x="538" y="122" width="42" height="780" rx="21" fill="url(#wave-hero)"/>
+                        <rect x="618" y="172" width="42" height="680" rx="21" fill="url(#wave-hero)"/>
+                        <rect x="698" y="252" width="42" height="520" rx="21" fill="url(#wave-hero)"/>
+                        <rect x="778" y="342" width="42" height="340" rx="21" fill="url(#wave-hero)"/>
+                    </svg>
+
+                    <div class="mono" style="font-size: 11px; color: var(--text-dim); margin-bottom: 24px;
+                                             letter-spacing: 0.1em; text-transform: uppercase;">
+                        macOS Voice Layer
+                    </div>
+                    <h1 style="font-size: clamp(48px, 8vw, 96px); font-weight: 600; line-height: 0.95;
+                               margin-bottom: 32px; letter-spacing: -0.03em;">
+                        <span class="accent glow">Speak.</span><br>
+                        Command.<br>
+                        Anywhere.
+                    </h1>
+                    <p style="font-size: 18px; color: var(--text-secondary); max-width: 540px;
+                              line-height: 1.6; margin-bottom: 40px;">
+                        Local Whisper transcription + desktop automation. Zero cloud. Zero latency.
+                        System-wide voice control that actually respects your privacy.
+                    </p>
+
+                    <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px;">
+                        <a href="#download" class="btn-primary"
+                           style="padding: 14px 28px; border-radius: 6px; text-decoration: none;
+                                  font-size: 14px; display: inline-block;">
+                            Download for macOS
+                        </a>
+                        <a href="https://github.com/yourusername/cadence" target="_blank" class="btn-secondary"
+                           style="padding: 14px 28px; border-radius: 6px; text-decoration: none;
+                                  font-size: 14px; display: inline-block;">
+                            View Source
+                        </a>
+                    </div>
+
+                    <!-- Quick Specs -->
+                    <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px;">
+                        <div>
+                            <div class="mono" style="color: var(--text-ghost); margin-bottom: 4px;">PRIVACY</div>
+                            <div style="color: var(--text-secondary);">100% On-Device</div>
+                        </div>
+                        <div>
+                            <div class="mono" style="color: var(--text-ghost); margin-bottom: 4px;">LICENSE</div>
+                            <div style="color: var(--text-secondary);">MIT Open Source</div>
+                        </div>
+                        <div>
+                            <div class="mono" style="color: var(--text-ghost); margin-bottom: 4px;">PLATFORM</div>
+                            <div style="color: var(--text-secondary);">macOS 11+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Section -->
+        <section id="tech" style="padding: 120px 24px; border-top: 1px solid var(--border-subtle);">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px;
+                            background: var(--border-subtle); border: 1px solid var(--border-subtle);">
+                    <!-- Feature 1 -->
+                    <div class="spec-cell">
+                        <div class="mono" style="font-size: 10px; color: var(--text-ghost); margin-bottom: 12px;
+                                                  letter-spacing: 0.1em;">01 / TRANSCRIPTION</div>
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Whisper.cpp Engine</h3>
+                        <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+                            OpenAI's Whisper running locally via C++ inference. Sub-200ms on Apple Silicon.
+                            Your voice never touches a server.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="spec-cell">
+                        <div class="mono" style="font-size: 10px; color: var(--text-ghost); margin-bottom: 12px;
+                                                  letter-spacing: 0.1em;">02 / INJECTION</div>
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">System-Wide Control</h3>
+                        <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+                            CGEvent API for universal text insertion. Works in Slack, VSCode, terminal,
+                            anywhere you can type.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="spec-cell">
+                        <div class="mono" style="font-size: 10px; color: var(--text-ghost); margin-bottom: 12px;
+                                                  letter-spacing: 0.1em;">03 / POLISH</div>
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">LLM Grammar Fix</h3>
+                        <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+                            Optional Qwen 2.5 1.5B (local) or Claude Haiku (cloud) for real-time
+                            grammar correction. Toggle on demand.
+                        </p>
+                    </div>
+
+                    <!-- Feature 4 -->
+                    <div class="spec-cell">
+                        <div class="mono" style="font-size: 10px; color: var(--text-ghost); margin-bottom: 12px;
+                                                  letter-spacing: 0.1em;">04 / COMMANDS</div>
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Custom Automation</h3>
+                        <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+                            Define voice shortcuts for apps, keyboard macros, or text snippets.
+                            "Open Figma" → launches instantly.
+                        </p>
+                    </div>
+
+                    <!-- Feature 5 -->
+                    <div class="spec-cell">
+                        <div class="mono" style="font-size: 10px; color: var(--text-ghost); margin-bottom: 12px;
+                                                  letter-spacing: 0.1em;">05 / ARCHITECTURE</div>
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Tauri + Rust + Svelte</h3>
+                        <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+                            Native performance, tiny binary (~8MB). Modern stack, easy to fork and extend.
+                            Zero Electron bloat.
+                        </p>
+                    </div>
+
+                    <!-- Feature 6 -->
+                    <div class="spec-cell">
+                        <div class="mono" style="font-size: 10px; color: var(--text-ghost); margin-bottom: 12px;
+                                                  letter-spacing: 0.1em;">06 / LATENCY</div>
+                        <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 8px;">Instant Wake</h3>
+                        <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+                            CGEventTap hotkey monitoring. No polling, no lag. Press → record → transcribe → insert
+                            in under 300ms.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download -->
+        <section id="download" style="padding: 120px 24px; border-top: 1px solid var(--border-subtle);">
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="mono" style="font-size: 11px; color: var(--text-dim); margin-bottom: 16px;
+                                         letter-spacing: 0.1em; text-transform: uppercase;">
+                    Download
+                </div>
+                <h2 style="font-size: 36px; font-weight: 600; margin-bottom: 48px; letter-spacing: -0.02em;">
+                    Get Started
+                </h2>
+
+                <div class="spec-grid" style="margin-bottom: 32px;">
+                    <div class="spec-cell">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="mono" style="font-size: 11px; color: var(--text-ghost);">PLATFORM</span>
+                            <span style="font-size: 13px; color: var(--text-secondary);">macOS 11.0+ (Big Sur)</span>
+                        </div>
+                    </div>
+                    <div class="spec-cell">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="mono" style="font-size: 11px; color: var(--text-ghost);">ARCHITECTURE</span>
+                            <span style="font-size: 13px; color: var(--text-secondary);">Apple Silicon / Intel</span>
+                        </div>
+                    </div>
+                    <div class="spec-cell">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="mono" style="font-size: 11px; color: var(--text-ghost);">SIZE</span>
+                            <span style="font-size: 13px; color: var(--text-secondary);">~200MB</span>
+                        </div>
+                    </div>
+                    <div class="spec-cell">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="mono" style="font-size: 11px; color: var(--text-ghost);">PERMISSIONS</span>
+                            <span style="font-size: 13px; color: var(--text-secondary);">Accessibility + Input Monitoring</span>
+                        </div>
+                    </div>
                 </div>
 
-                <p class="text-sm text-gray-500 mt-6">
-                    Free • Open Source • Privacy-First
+                <div id="download-buttons" style="margin-bottom: 24px;">
+                    <p style="font-size: 13px; color: var(--text-dim);">Loading latest release...</p>
+                </div>
+
+                <p style="font-size: 12px; color: var(--text-ghost); line-height: 1.6;">
+                    Cadence will prompt for required permissions on first launch. You can revoke access
+                    anytime via System Settings → Privacy & Security.
                 </p>
-            </div>
-        </section>
-
-        <!-- Features Section -->
-        <section class="py-20 px-6 max-w-6xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">
-                Why Cadence?
-            </h2>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="feature-card p-8 rounded-xl">
-                    <div class="text-4xl mb-4">🎤</div>
-                    <h3 class="text-xl font-semibold mb-3">100% Local</h3>
-                    <p class="text-gray-400">
-                        Whisper.cpp runs on-device. Your voice never leaves your Mac.
-                        No cloud, no API keys, no privacy concerns.
-                    </p>
-                </div>
-
-                <div class="feature-card p-8 rounded-xl">
-                    <div class="text-4xl mb-4">⚡</div>
-                    <h3 class="text-xl font-semibold mb-3">System-Wide</h3>
-                    <p class="text-gray-400">
-                        Works everywhere—Slack, VSCode, email, terminal.
-                        One hotkey, infinite possibilities.
-                    </p>
-                </div>
-
-                <div class="feature-card p-8 rounded-xl">
-                    <div class="text-4xl mb-4">🧠</div>
-                    <h3 class="text-xl font-semibold mb-3">Smart Polish</h3>
-                    <p class="text-gray-400">
-                        Optional LLM grammar correction. Raw transcription or polished prose—you choose.
-                    </p>
-                </div>
-
-                <div class="feature-card p-8 rounded-xl">
-                    <div class="text-4xl mb-4">🎯</div>
-                    <h3 class="text-xl font-semibold mb-3">Custom Commands</h3>
-                    <p class="text-gray-400">
-                        Define your own voice shortcuts and aliases.
-                        "Schedule meeting" → opens calendar, pre-fills event.
-                    </p>
-                </div>
-
-                <div class="feature-card p-8 rounded-xl">
-                    <div class="text-4xl mb-4">🔥</div>
-                    <h3 class="text-xl font-semibold mb-3">Zero Latency</h3>
-                    <p class="text-gray-400">
-                        Instant wake from hotkey. No server round-trips.
-                        Faster than typing.
-                    </p>
-                </div>
-
-                <div class="feature-card p-8 rounded-xl">
-                    <div class="text-4xl mb-4">🛠️</div>
-                    <h3 class="text-xl font-semibold mb-3">Developer-Friendly</h3>
-                    <p class="text-gray-400">
-                        Built with Tauri, Rust, and Svelte.
-                        Easy to fork, extend, and customize.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Download Section -->
-        <section id="download" class="py-20 px-6 max-w-4xl mx-auto text-center">
-            <h2 class="text-4xl font-bold mb-8 gradient-text">Get Started</h2>
-
-            <div class="bg-white/5 border border-gray-800 rounded-xl p-8 mb-8">
-                <h3 class="text-2xl font-semibold mb-4">macOS Requirements</h3>
-                <ul class="text-gray-400 space-y-2 mb-6">
-                    <li>• macOS 11.0+ (Big Sur or later)</li>
-                    <li>• Apple Silicon or Intel</li>
-                    <li>• ~200MB disk space</li>
-                </ul>
-
-                <div id="download-buttons" class="flex flex-col gap-3">
-                    <p class="text-gray-500">Loading latest release...</p>
-                </div>
-            </div>
-
-            <div class="text-sm text-gray-500">
-                <p class="mb-2">First launch requires granting Accessibility & Input Monitoring permissions.</p>
-                <p>Cadence will guide you through the setup.</p>
             </div>
         </section>
 
         <!-- Footer -->
-        <footer class="py-12 px-6 text-center text-gray-500 border-t border-gray-900">
-            <p class="mb-2">
-                Built by <a href="https://github.com/yourusername" class="text-gray-400 hover:text-white transition-colors">@yourusername</a>
-            </p>
-            <p class="text-sm">
-                Open source under MIT License
-            </p>
+        <footer style="padding: 48px 24px; border-top: 1px solid var(--border-subtle);">
+            <div style="max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between;
+                        align-items: center; flex-wrap: wrap; gap: 16px;">
+                <div style="font-size: 12px; color: var(--text-ghost);">
+                    Built by <a href="https://github.com/yourusername"
+                                style="color: var(--text-muted); text-decoration: none;">@yourusername</a>
+                </div>
+                <div style="font-size: 11px; color: var(--text-ghost); font-family: var(--font-mono);">
+                    MIT License • 2026
+                </div>
+            </div>
         </footer>
     </div>
 
-    <script src="particles.js"></script>
+    <script src="dot-grid.js"></script>
     <script src="download.js"></script>
 </body>
 </html>

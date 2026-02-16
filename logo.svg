@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f0d0c"/>
+      <stop offset="100%" stop-color="#1c1917"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2dd4bf"/>
+      <stop offset="100%" stop-color="#5eead4"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#2dd4bf" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#2dd4bf" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#2dd4bf" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="softglow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="1024" height="1024" rx="228" fill="url(#bg)"/>
+
+  <!-- Subtle inner border -->
+  <rect x="3" y="3" width="1018" height="1018" rx="226" fill="none" stroke="#2dd4bf" stroke-opacity="0.12" stroke-width="2"/>
+
+  <!-- Glow behind waveform -->
+  <g filter="url(#softglow)" opacity="0.6">
+    <!-- Center waveform bars (glow layer) -->
+    <rect x="218" y="362" width="42" height="300" rx="21" fill="#2dd4bf"/>
+    <rect x="298" y="282" width="42" height="460" rx="21" fill="#2dd4bf"/>
+    <rect x="378" y="202" width="42" height="620" rx="21" fill="#2dd4bf"/>
+    <rect x="458" y="152" width="42" height="720" rx="21" fill="#2dd4bf"/>
+    <rect x="538" y="122" width="42" height="780" rx="21" fill="#2dd4bf"/>
+    <rect x="618" y="172" width="42" height="680" rx="21" fill="#2dd4bf"/>
+    <rect x="698" y="252" width="42" height="520" rx="21" fill="#2dd4bf"/>
+    <rect x="778" y="342" width="42" height="340" rx="21" fill="#2dd4bf"/>
+  </g>
+
+  <!-- Waveform bars (crisp layer) -->
+  <rect x="218" y="362" width="42" height="300" rx="21" fill="url(#wave)"/>
+  <rect x="298" y="282" width="42" height="460" rx="21" fill="url(#wave)"/>
+  <rect x="378" y="202" width="42" height="620" rx="21" fill="url(#wave)"/>
+  <rect x="458" y="152" width="42" height="720" rx="21" fill="url(#wave)"/>
+  <rect x="538" y="122" width="42" height="780" rx="21" fill="url(#wave)"/>
+  <rect x="618" y="172" width="42" height="680" rx="21" fill="url(#wave)"/>
+  <rect x="698" y="252" width="42" height="520" rx="21" fill="url(#wave)"/>
+  <rect x="778" y="342" width="42" height="340" rx="21" fill="url(#wave)"/>
+</svg>

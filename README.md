@@ -1,14 +1,21 @@
 # Cadence Landing Page
 
-Landing page for [Cadence](https://github.com/yourusername/cadence) - Voice-First OS Layer for macOS.
+Brutalist-minimal landing page for [Cadence](https://github.com/yourusername/cadence) - Voice-First OS Layer for macOS.
 
-## Features
+## Design Philosophy
 
-- 🔥 Matches Cadence's design language (fire particles, gradient text, dark theme)
-- 📱 Fully responsive
-- ⚡ Zero build step - pure HTML/CSS/JS
-- 🚀 Auto-fetches latest GitHub releases
-- 🎨 Tailwind CSS via CDN
+- **2027 aesthetic**: Data-dense, tight spacing, programmer-focused
+- **Matches app**: Uses exact design tokens from Cadence (teal accent, obsidian dark, Space Grotesk)
+- **No cruft**: Zero animations bloat, no trendy gradients, no emoji spam
+- **Spec sheet layout**: Grid-based feature presentation, technical copy
+- **Subtle motion**: Gentle dot grid background (matching DotGrid.svelte)
+
+## Tech Stack
+
+- Pure HTML/CSS/JS (zero build step)
+- Space Grotesk + JetBrains Mono fonts
+- Canvas dot grid background
+- Auto-fetches latest GitHub releases
 
 ## Deploy
 
@@ -25,21 +32,21 @@ netlify deploy --prod --dir .
 ### GitHub Pages
 ```bash
 git add .
-git commit -m "Initial landing page"
+git commit -m "Initial commit"
 git branch -M main
 git remote add origin https://github.com/yourusername/cadence-landing.git
 git push -u origin main
-# Then enable GitHub Pages in repo settings
+# Enable Pages in repo settings → Source: main branch
 ```
 
 ### Cloudflare Pages
-Just connect the repo in Cloudflare dashboard - zero config needed.
+Connect repo in dashboard. Zero config required.
 
 ## Customize
 
-1. Update GitHub links in `index.html` and `download.js`
-2. Replace `yourusername/cadence` with your actual repo
-3. (Optional) Add demo video or screenshots
+1. **GitHub links**: Search/replace `yourusername/cadence` in `index.html` and `download.js`
+2. **Version**: Update v0.1.0 in header
+3. **Author**: Update footer links
 
 ## Local Preview
 
@@ -48,4 +55,4 @@ python3 -m http.server 8000
 # Visit http://localhost:8000
 ```
 
-Or use any static server (e.g., `npx serve`, `npx http-server`, etc.)
+Or: `npx serve`, `php -S localhost:8000`, etc.
