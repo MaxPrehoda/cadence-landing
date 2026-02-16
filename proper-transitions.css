@@ -1,0 +1,203 @@
+/* Proper section transitions - purposeful motion and visual flow */
+
+/* Responsive vertical rhythm using clamp */
+#hero {
+    padding: clamp(100px, 15vh, 160px) 24px clamp(80px, 12vh, 120px) !important;
+}
+
+#demo-section {
+    padding: clamp(80px, 12vh, 120px) 24px !important;
+    margin-top: clamp(-60px, -8vh, -40px);
+}
+
+#tech {
+    padding: clamp(80px, 12vh, 120px) 24px !important;
+    margin-top: clamp(-40px, -5vh, -20px);
+}
+
+#download {
+    padding: clamp(80px, 12vh, 120px) 24px !important;
+    margin-top: clamp(-30px, -4vh, -15px);
+}
+
+/* Color flow through opacity layering */
+section {
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero establishes base with subtle fade at bottom */
+#hero {
+    position: relative;
+    z-index: 3;
+}
+
+#hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: clamp(80px, 12vh, 140px);
+    background: linear-gradient(180deg,
+        transparent 0%,
+        rgba(12, 10, 9, 0.5) 50%,
+        rgba(12, 10, 9, 0.9) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Demo sits behind with elevated z-index on container */
+#demo-section {
+    position: relative;
+    z-index: 2;
+}
+
+#demo-container {
+    position: relative;
+    z-index: 10;
+}
+
+/* Tech recedes with lower opacity accent */
+#tech {
+    position: relative;
+    z-index: 1;
+}
+
+#tech::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: clamp(100px, 15vh, 180px);
+    background: radial-gradient(ellipse 70% 60% at 50% 0%,
+        rgba(45, 212, 191, 0.02) 0%,
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+/* Download section with subtle top border emphasis */
+#download {
+    position: relative;
+    z-index: 2;
+    border-top: 1px solid rgba(45, 212, 191, 0.08);
+}
+
+#download::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: clamp(200px, 40%, 500px);
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(45, 212, 191, 0.4) 50%,
+        transparent 100%
+    );
+}
+
+/* Depth through box-shadow on key elements */
+#demo-container {
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(45, 212, 191, 0.05);
+}
+
+.tech-card {
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.02);
+}
+
+.download-card {
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(45, 212, 191, 0.08);
+}
+
+/* Smooth purposeful transitions */
+section,
+#demo-container,
+.tech-card,
+.download-card {
+    transition: transform 0.6s cubic-bezier(0, 1, 0.5, 1);
+}
+
+/* Hover states add depth */
+#demo-container:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 24px 48px rgba(0, 0, 0, 0.35),
+        0 0 0 1px rgba(45, 212, 191, 0.12);
+}
+
+.tech-card:hover {
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(45, 212, 191, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.download-card:hover {
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(45, 212, 191, 0.15);
+}
+
+/* Remove old spacing overrides that conflict */
+#hero,
+#demo-section,
+#tech,
+#download {
+    padding-top: revert !important;
+    padding-bottom: revert !important;
+    margin-top: revert;
+}
+
+/* Apply new spacing */
+#hero {
+    padding: clamp(100px, 15vh, 160px) 24px clamp(80px, 12vh, 120px) !important;
+    margin: 0;
+}
+
+#demo-section {
+    padding: clamp(80px, 12vh, 120px) 24px !important;
+    margin-top: clamp(-60px, -8vh, -40px);
+}
+
+#tech {
+    padding: clamp(80px, 12vh, 120px) 24px !important;
+    margin-top: clamp(-40px, -5vh, -20px);
+}
+
+#download {
+    padding: clamp(80px, 12vh, 120px) 24px clamp(100px, 15vh, 140px) !important;
+    margin-top: clamp(-30px, -4vh, -15px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #hero {
+        padding: 100px 20px 80px !important;
+    }
+
+    #demo-section {
+        padding: 60px 20px !important;
+        margin-top: -40px;
+    }
+
+    #tech {
+        padding: 60px 20px !important;
+        margin-top: -20px;
+    }
+
+    #download {
+        padding: 60px 20px 80px !important;
+        margin-top: -15px;
+    }
+}
