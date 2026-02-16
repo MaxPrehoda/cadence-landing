@@ -473,6 +473,9 @@
             border-radius: 50%;
         }
 
+        /* Responsive Design */
+
+        /* Large tablets & small laptops (up to 1100px) */
         @media (max-width: 1100px) {
             nav {
                 gap: 16px !important;
@@ -483,6 +486,520 @@
             }
             #audio-viz {
                 height: 400px !important;
+            }
+
+            /* Hero adjustments */
+            section[style*="min-height: 100vh"] > div {
+                grid-template-columns: 1fr !important;
+                gap: 60px !important;
+            }
+        }
+
+        /* Tablets (up to 768px) */
+        @media (max-width: 768px) {
+            /* Header */
+            header > div {
+                padding: 12px 20px !important;
+            }
+
+            header a[href="/"] span:first-of-type {
+                font-size: 16px !important;
+            }
+
+            nav {
+                gap: 12px !important;
+                font-size: 12px !important;
+            }
+
+            /* Hero section */
+            section[style*="min-height: 100vh"] {
+                min-height: auto !important;
+                padding: 100px 20px 60px !important;
+            }
+
+            h1 {
+                font-size: 48px !important;
+                margin-bottom: 24px !important;
+            }
+
+            section[style*="min-height: 100vh"] p {
+                font-size: 16px !important;
+                margin-bottom: 32px !important;
+            }
+
+            /* Buttons */
+            .btn-primary, .btn-secondary {
+                padding: 12px 24px !important;
+                font-size: 13px !important;
+            }
+
+            /* Quick specs */
+            section[style*="min-height: 100vh"] > div > div:last-child {
+                gap: 16px !important;
+            }
+
+            /* Audio viz */
+            #audio-viz {
+                height: 300px !important;
+            }
+
+            /* Demo section */
+            section[style*="padding: 120px"] {
+                padding: 80px 20px !important;
+            }
+
+            h2 {
+                font-size: 28px !important;
+                margin-bottom: 32px !important;
+            }
+
+            /* macOS desktop simulation */
+            .macos-desktop {
+                aspect-ratio: 4 / 3;
+            }
+
+            .macos-menubar {
+                height: 24px;
+                font-size: 11px;
+                padding: 0 8px;
+            }
+
+            .macos-menubar-left {
+                gap: 12px;
+            }
+
+            .macos-menubar-right {
+                gap: 8px;
+                font-size: 10px;
+            }
+
+            .macos-titlebar {
+                height: 44px;
+                padding: 0 12px;
+            }
+
+            .macos-window-title {
+                font-size: 12px;
+            }
+
+            .slack-sidebar {
+                width: 200px;
+                padding: 12px 8px;
+                font-size: 13px;
+            }
+
+            .slack-workspace {
+                font-size: 16px;
+                margin-bottom: 16px;
+            }
+
+            .slack-header {
+                font-size: 16px;
+                padding: 10px 16px;
+            }
+
+            .slack-messages {
+                padding: 16px;
+            }
+
+            .slack-author, .slack-text {
+                font-size: 14px;
+            }
+
+            .mail-compose {
+                padding: 16px;
+            }
+
+            .mail-body {
+                min-height: 150px;
+                font-size: 14px;
+            }
+
+            .cadence-indicator {
+                top: 36px;
+                right: 12px;
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+
+            .dock-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 24px;
+            }
+
+            /* Tech grid */
+            section#tech > div > div {
+                grid-template-columns: 1fr !important;
+            }
+
+            .spec-cell {
+                padding: 16px 20px !important;
+            }
+
+            /* Footer */
+            footer > div {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Mobile landscape & small tablets (up to 640px) */
+        @media (max-width: 640px) {
+            /* Header - hamburger-ready layout */
+            header > div {
+                padding: 12px 16px !important;
+            }
+
+            header a[href="/"] svg {
+                width: 24px !important;
+                height: 24px !important;
+            }
+
+            header a[href="/"] span:first-of-type {
+                font-size: 15px !important;
+            }
+
+            header a[href="/"] .mono {
+                font-size: 9px !important;
+            }
+
+            nav {
+                gap: 8px !important;
+                font-size: 11px !important;
+            }
+
+            /* Hero */
+            section[style*="min-height: 100vh"] {
+                padding: 80px 16px 40px !important;
+            }
+
+            h1 {
+                font-size: 36px !important;
+                margin-bottom: 20px !important;
+            }
+
+            section[style*="min-height: 100vh"] p {
+                font-size: 15px !important;
+                margin-bottom: 28px !important;
+            }
+
+            /* Button stack on mobile */
+            section[style*="min-height: 100vh"] > div > div:nth-child(1) > div:nth-child(4) {
+                flex-direction: column;
+                align-items: stretch !important;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+                padding: 14px 20px !important;
+            }
+
+            /* Audio viz */
+            #audio-viz {
+                height: 250px !important;
+            }
+
+            /* Demo section */
+            section[style*="padding: 120px"] {
+                padding: 60px 16px !important;
+            }
+
+            h2 {
+                font-size: 24px !important;
+                margin-bottom: 28px !important;
+            }
+
+            /* macOS simulation - more compact */
+            .macos-desktop {
+                aspect-ratio: 1 / 1;
+            }
+
+            .macos-menubar {
+                height: 20px;
+                font-size: 10px;
+                padding: 0 6px;
+            }
+
+            .macos-menubar-left {
+                gap: 8px;
+            }
+
+            .macos-menubar-right {
+                display: none; /* Hide on mobile */
+            }
+
+            .macos-titlebar {
+                height: 38px;
+                padding: 0 10px;
+            }
+
+            .macos-traffic-light {
+                width: 10px;
+                height: 10px;
+            }
+
+            .macos-traffic-lights {
+                gap: 6px;
+                margin-right: 12px;
+            }
+
+            .macos-window-title {
+                font-size: 11px;
+            }
+
+            .slack-sidebar {
+                width: 160px;
+                padding: 10px 6px;
+                font-size: 12px;
+            }
+
+            .slack-workspace {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+
+            .slack-channel {
+                padding: 3px 6px;
+                font-size: 12px;
+            }
+
+            .slack-header {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .slack-messages {
+                padding: 12px;
+            }
+
+            .slack-message {
+                margin-bottom: 12px;
+            }
+
+            .slack-author {
+                font-size: 13px;
+            }
+
+            .slack-text {
+                font-size: 13px;
+            }
+
+            .slack-time {
+                font-size: 11px;
+            }
+
+            .slack-input-wrapper {
+                padding: 12px;
+            }
+
+            .slack-input {
+                padding: 10px 12px;
+                font-size: 14px;
+                min-height: 38px;
+            }
+
+            .mail-toolbar {
+                padding: 8px 12px;
+                gap: 8px;
+            }
+
+            .mail-button {
+                padding: 5px 12px;
+                font-size: 12px;
+            }
+
+            .mail-compose {
+                padding: 12px;
+            }
+
+            .mail-field {
+                padding: 6px 0;
+            }
+
+            .mail-label {
+                width: 50px;
+                font-size: 12px;
+            }
+
+            .mail-value {
+                font-size: 12px;
+            }
+
+            .mail-body {
+                margin-top: 16px;
+                font-size: 13px;
+                min-height: 120px;
+            }
+
+            .cadence-indicator {
+                top: 30px;
+                right: 8px;
+                padding: 5px 10px;
+                font-size: 10px;
+                border-radius: 16px;
+            }
+
+            .cadence-waveform {
+                gap: 1.5px;
+            }
+
+            .cadence-bar {
+                width: 2px;
+            }
+
+            .cadence-bar:nth-child(1) { height: 6px; }
+            .cadence-bar:nth-child(2) { height: 9px; }
+            .cadence-bar:nth-child(3) { height: 12px; }
+            .cadence-bar:nth-child(4) { height: 9px; }
+            .cadence-bar:nth-child(5) { height: 6px; }
+
+            .macos-dock {
+                bottom: 6px;
+                padding: 3px;
+                border-radius: 12px;
+                gap: 3px;
+            }
+
+            .dock-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 18px;
+                border-radius: 8px;
+            }
+
+            .dock-indicator {
+                width: 3px;
+                height: 3px;
+                bottom: -4px;
+            }
+
+            /* Demo description */
+            section[style*="padding: 120px"] > div > div:last-child p {
+                font-size: 13px !important;
+            }
+
+            /* Spec cells */
+            .spec-cell {
+                padding: 12px 16px !important;
+            }
+
+            .spec-cell h3 {
+                font-size: 14px !important;
+                margin-bottom: 6px !important;
+            }
+
+            .spec-cell p {
+                font-size: 12px !important;
+            }
+
+            /* Download section specs */
+            section#download .spec-cell > div {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 4px;
+            }
+
+            section#download .spec-cell span {
+                font-size: 12px !important;
+            }
+        }
+
+        /* Small phones (up to 375px) */
+        @media (max-width: 375px) {
+            h1 {
+                font-size: 32px !important;
+            }
+
+            section[style*="min-height: 100vh"] p {
+                font-size: 14px !important;
+            }
+
+            h2 {
+                font-size: 22px !important;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 12px 16px !important;
+                font-size: 12px !important;
+            }
+
+            #audio-viz {
+                height: 200px !important;
+            }
+
+            /* Ultra compact demo */
+            .macos-desktop {
+                border-radius: 8px;
+            }
+
+            .macos-menubar {
+                height: 18px;
+                font-size: 9px;
+                padding: 0 4px;
+            }
+
+            .macos-titlebar {
+                height: 32px;
+                padding: 0 8px;
+            }
+
+            .macos-traffic-light {
+                width: 8px;
+                height: 8px;
+            }
+
+            .macos-traffic-lights {
+                gap: 4px;
+                margin-right: 8px;
+            }
+
+            .slack-sidebar {
+                width: 120px;
+                font-size: 11px;
+            }
+
+            .slack-workspace {
+                font-size: 13px;
+            }
+
+            .macos-window {
+                border-radius: 6px;
+            }
+        }
+
+        /* Landscape phones (max height 500px in landscape) */
+        @media (max-height: 500px) and (orientation: landscape) {
+            section[style*="min-height: 100vh"] {
+                min-height: auto !important;
+                padding: 80px 16px 40px !important;
+            }
+
+            h1 {
+                font-size: 32px !important;
+                margin-bottom: 16px !important;
+            }
+
+            section[style*="min-height: 100vh"] p {
+                font-size: 14px !important;
+                margin-bottom: 20px !important;
+            }
+
+            #audio-viz {
+                height: 200px !important;
+            }
+
+            section[style*="min-height: 100vh"] > div {
+                gap: 40px !important;
+            }
+        }
+
+        /* High DPI / Retina displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            body {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
             }
         }
     </style>
