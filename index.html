@@ -372,56 +372,106 @@
             min-height: 200px;
         }
 
-        /* Cadence Indicator */
+        /* Cadence Indicator - Center screen, highly visible */
         .cadence-indicator {
             position: absolute;
-            top: 44px;
-            right: 20px;
-            background: rgba(45, 212, 191, 0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(45, 212, 191, 0.4);
-            border-radius: 20px;
-            padding: 8px 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(12, 10, 9, 0.95);
+            backdrop-filter: blur(40px);
+            border: 2px solid rgba(45, 212, 191, 0.6);
+            border-radius: 28px;
+            padding: 24px 40px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #2dd4bf;
+            gap: 16px;
             z-index: 200;
-            box-shadow: 0 8px 16px rgba(45, 212, 191, 0.2);
+            box-shadow: 0 20px 60px rgba(45, 212, 191, 0.4), 0 0 0 1px rgba(45, 212, 191, 0.2);
             opacity: 0;
-            transform: translateY(-8px) scale(0.95);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .cadence-indicator.active {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .cadence-mic-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #2dd4bf 0%, #5eead4 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            position: relative;
+            animation: mic-pulse 2s ease-in-out infinite;
+            box-shadow: 0 8px 24px rgba(45, 212, 191, 0.4);
+        }
+
+        .cadence-mic-icon::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            border: 3px solid rgba(45, 212, 191, 0.4);
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .cadence-mic-icon::after {
+            content: '';
+            position: absolute;
+            inset: -24px;
+            border-radius: 50%;
+            border: 2px solid rgba(45, 212, 191, 0.2);
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite 0.4s;
+        }
+
+        @keyframes mic-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes ping {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.8); opacity: 0; }
         }
 
         .cadence-waveform {
             display: flex;
-            gap: 2px;
+            gap: 3px;
             align-items: center;
+            height: 40px;
         }
 
         .cadence-bar {
-            width: 3px;
+            width: 4px;
             background: #2dd4bf;
             border-radius: 2px;
             animation: wave 1.2s ease-in-out infinite;
         }
 
-        .cadence-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
-        .cadence-bar:nth-child(2) { height: 12px; animation-delay: 0.1s; }
-        .cadence-bar:nth-child(3) { height: 16px; animation-delay: 0.2s; }
-        .cadence-bar:nth-child(4) { height: 12px; animation-delay: 0.3s; }
-        .cadence-bar:nth-child(5) { height: 8px; animation-delay: 0.4s; }
+        .cadence-bar:nth-child(1) { height: 12px; animation-delay: 0s; }
+        .cadence-bar:nth-child(2) { height: 24px; animation-delay: 0.1s; }
+        .cadence-bar:nth-child(3) { height: 36px; animation-delay: 0.2s; }
+        .cadence-bar:nth-child(4) { height: 24px; animation-delay: 0.3s; }
+        .cadence-bar:nth-child(5) { height: 16px; animation-delay: 0.4s; }
 
         @keyframes wave {
-            0%, 100% { transform: scaleY(0.5); opacity: 0.6; }
+            0%, 100% { transform: scaleY(0.4); opacity: 0.5; }
             50% { transform: scaleY(1); opacity: 1; }
+        }
+
+        .cadence-status-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2dd4bf;
+            font-family: var(--font-sans);
+            letter-spacing: 0.02em;
         }
 
         .typing-cursor {

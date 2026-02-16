@@ -71,6 +71,7 @@
 
             <!-- Cadence Recording Indicator -->
             <div class="cadence-indicator" id="cadence-indicator">
+                <div class="cadence-mic-icon">🎤</div>
                 <div class="cadence-waveform">
                     <div class="cadence-bar"></div>
                     <div class="cadence-bar"></div>
@@ -78,7 +79,7 @@
                     <div class="cadence-bar"></div>
                     <div class="cadence-bar"></div>
                 </div>
-                <span>Recording</span>
+                <span class="cadence-status-text" id="cadence-status-text">Listening...</span>
             </div>
 
             <!-- Slack Window -->
@@ -142,25 +143,37 @@
 
         const textContainer = document.getElementById('slack-text');
         const indicator = document.getElementById('cadence-indicator');
+        const statusText = document.getElementById('cadence-status-text');
 
         await sleep(1500);
 
-        // Show Cadence recording indicator
+        // Show Cadence recording indicator - user presses hotkey
         indicator.classList.add('active');
+        statusText.textContent = 'Listening...';
 
-        await sleep(1000);
+        await sleep(1800);
+
+        // User is speaking (show speaking state)
+        statusText.textContent = 'Speaking...';
+
+        await sleep(800);
+
+        // Processing transcription
+        statusText.textContent = 'Transcribing...';
+
+        await sleep(600);
+
+        // Hide indicator, inject text
+        indicator.classList.remove('active');
+
+        await sleep(300);
 
         // Type the message
         const message = "Just finished testing. Migration is complete and running stable in staging. Ready for prod deploy tomorrow morning.";
         await typeText(textContainer, message, 35);
         textContainer.innerHTML += '<span class="typing-cursor"></span>';
 
-        await sleep(1000);
-
-        // Hide indicator
-        indicator.classList.remove('active');
-
-        await sleep(4000);
+        await sleep(3500);
     }
 
     // Demo 2: AI Command in Mail
@@ -188,6 +201,7 @@
 
             <!-- Cadence Processing Indicator -->
             <div class="cadence-indicator" id="cadence-indicator">
+                <div class="cadence-mic-icon">🎤</div>
                 <div class="cadence-waveform">
                     <div class="cadence-bar"></div>
                     <div class="cadence-bar"></div>
@@ -195,7 +209,7 @@
                     <div class="cadence-bar"></div>
                     <div class="cadence-bar"></div>
                 </div>
-                <span id="cadence-status">Listening</span>
+                <span class="cadence-status-text" id="cadence-status">Listening...</span>
             </div>
 
             <!-- Mail Window -->
@@ -258,13 +272,17 @@
 
         // User says "Claude, make this more professional"
         indicator.classList.add('active');
-        status.textContent = 'Listening';
+        status.textContent = 'Listening...';
 
         await sleep(1200);
 
-        status.textContent = 'Processing';
+        status.textContent = 'Speaking...';
 
-        await sleep(1500);
+        await sleep(1000);
+
+        status.textContent = 'Processing with Claude...';
+
+        await sleep(1800);
 
         // Delete old text
         const cursor = textContainer.querySelector('.typing-cursor');
