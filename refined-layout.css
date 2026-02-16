@@ -6,121 +6,24 @@ section {
     isolation: isolate;
 }
 
-/* Hero to Demo transition - gradient blend */
+/* Clean section spacing - no weird overlaps */
 #hero {
-    padding-bottom: 0 !important;
-    margin-bottom: -120px;
-    position: relative;
-    z-index: 2;
+    padding: 140px 24px 100px !important;
 }
 
-#hero::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 200px;
-    background: linear-gradient(to bottom, transparent 0%, var(--bg-base) 100%);
-    pointer-events: none;
-}
-
-/* Demo section with proper spacing and background */
+/* Demo section - clean spacing */
 #demo-section {
-    position: relative;
-    padding-top: 160px !important;
-    background: linear-gradient(180deg,
-        var(--bg-base) 0%,
-        rgba(12, 10, 9, 0.95) 50%,
-        var(--bg-base) 100%
-    );
+    padding: 100px 24px !important;
 }
 
-#demo-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(45, 212, 191, 0.3) 50%,
-        transparent
-    );
-}
-
-/* Demo container refined */
-#demo-container {
-    margin: 0 auto;
-    position: relative;
-}
-
-#demo-container::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    background: linear-gradient(135deg,
-        rgba(45, 212, 191, 0.1),
-        transparent 50%,
-        rgba(45, 212, 191, 0.05)
-    );
-    border-radius: 22px;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-    pointer-events: none;
-    z-index: -1;
-}
-
-#demo-container:hover::before {
-    opacity: 1;
-}
-
-/* Tech section with gradient transition */
+/* Tech and download - clean spacing */
 #tech {
-    background: radial-gradient(circle at top center,
-        rgba(45, 212, 191, 0.03) 0%,
-        transparent 50%
-    );
+    padding: 100px 24px !important;
 }
 
-#tech::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60%;
-    height: 1px;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(45, 212, 191, 0.2),
-        transparent
-    );
-}
-
-/* Download section - completely redesigned for clarity */
 #download {
-    background: linear-gradient(135deg,
-        rgba(28, 25, 23, 0.4) 0%,
-        rgba(12, 10, 9, 0.6) 100%
-    );
-    border-top: 1px solid rgba(45, 212, 191, 0.1) !important;
-}
-
-#download::before {
-    content: '';
-    position: absolute;
-    top: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40%;
-    height: 1px;
-    background: linear-gradient(90deg,
-        transparent,
-        var(--accent-primary),
-        transparent
-    );
+    padding: 100px 24px !important;
+    border-top: 1px solid var(--border-subtle);
 }
 
 /* Download card container */
@@ -298,22 +201,9 @@ section {
     font-weight: 600;
 }
 
-/* Compact section spacing */
-section {
-    padding: 100px 24px !important;
-}
-
 @media (max-width: 768px) {
-    section {
+    #hero, #demo-section, #tech, #download {
         padding: 60px 20px !important;
-    }
-
-    #hero {
-        margin-bottom: -80px;
-    }
-
-    #demo-section {
-        padding-top: 120px !important;
     }
 
     .download-specs {
