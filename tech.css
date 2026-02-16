@@ -1,0 +1,160 @@
+/* Modern tech section styles */
+
+.tech-card {
+    padding: 24px;
+    background: rgba(28, 25, 23, 0.4);
+    border: 1px solid rgba(168, 162, 158, 0.12);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tech-card:hover {
+    background: rgba(28, 25, 23, 0.6);
+    border-color: rgba(45, 212, 191, 0.2);
+    transform: translateX(4px);
+}
+
+.tech-card:hover::before {
+    opacity: 1;
+}
+
+.tech-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(45, 212, 191, 0.05));
+    border: 1px solid rgba(45, 212, 191, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-icon::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(45, 212, 191, 0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tech-card:hover .tech-icon::after {
+    opacity: 1;
+}
+
+.icon-waveform {
+    display: flex;
+    gap: 2px;
+    align-items: center;
+    height: 20px;
+}
+
+.icon-waveform span {
+    width: 2px;
+    background: #2dd4bf;
+    border-radius: 1px;
+    animation: wave-idle 2s ease-in-out infinite;
+}
+
+.icon-waveform span:nth-child(1) { height: 6px; animation-delay: 0s; }
+.icon-waveform span:nth-child(2) { height: 12px; animation-delay: 0.1s; }
+.icon-waveform span:nth-child(3) { height: 18px; animation-delay: 0.2s; }
+.icon-waveform span:nth-child(4) { height: 12px; animation-delay: 0.3s; }
+.icon-waveform span:nth-child(5) { height: 8px; animation-delay: 0.4s; }
+
+@keyframes wave-idle {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+    50% { opacity: 1; transform: scaleY(1); }
+}
+
+.tech-card:hover .icon-waveform span {
+    animation: wave-active 0.8s ease-in-out infinite;
+}
+
+@keyframes wave-active {
+    0%, 100% { opacity: 0.5; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+.icon-brain {
+    font-size: 24px;
+    opacity: 0.9;
+}
+
+.icon-screen {
+    font-size: 24px;
+    color: #2dd4bf;
+    opacity: 0.9;
+}
+
+.icon-system {
+    font-size: 24px;
+    color: #2dd4bf;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.tech-metric {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.tech-badge {
+    padding: 4px 10px;
+    background: rgba(45, 212, 191, 0.08);
+    border: 1px solid rgba(45, 212, 191, 0.15);
+    border-radius: 6px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tech-card {
+        padding: 20px;
+    }
+
+    .tech-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .icon-brain,
+    .icon-screen,
+    .icon-system {
+        font-size: 20px;
+    }
+
+    .tech-card h3 {
+        font-size: 16px !important;
+    }
+
+    .tech-card p {
+        font-size: 13px !important;
+    }
+
+    .tech-metric span:first-child {
+        font-size: 20px !important;
+    }
+}
