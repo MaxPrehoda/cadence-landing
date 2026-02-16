@@ -1334,52 +1334,105 @@
             </div>
         </section>
 
-        <!-- Download -->
-        <section id="download" style="padding: 120px 24px; border-top: 1px solid var(--border-subtle);">
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div class="mono" style="font-size: 11px; color: var(--text-dim); margin-bottom: 16px;
-                                         letter-spacing: 0.1em; text-transform: uppercase;">
+        <!-- Download Section - Redesigned for Clarity -->
+        <section id="download">
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="mono" style="font-size: 11px; color: var(--text-dim); margin-bottom: 12px; letter-spacing: 0.1em; text-transform: uppercase;">
                     Download
                 </div>
-                <h2 style="font-size: 36px; font-weight: 600; margin-bottom: 48px; letter-spacing: -0.02em;">
-                    Get Started
+                <h2 style="font-size: clamp(28px, 4vw, 38px); font-weight: 600; margin-bottom: 48px; letter-spacing: -0.02em;">
+                    Get Cadence
                 </h2>
 
-                <div class="spec-grid" style="margin-bottom: 32px;">
-                    <div class="spec-cell">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span class="mono" style="font-size: 11px; color: var(--text-ghost);">PLATFORM</span>
-                            <span style="font-size: 13px; color: var(--text-secondary);">macOS 11.0+ (Big Sur)</span>
+                <!-- Current Release Card -->
+                <div class="download-card" id="current-release">
+                    <div class="download-header">
+                        <div class="download-icon">🎤</div>
+                        <div class="download-info">
+                            <h3>
+                                Cadence v0.1.0
+                                <span class="download-version-badge">Latest</span>
+                            </h3>
+                            <div class="download-meta">macOS 12.0+ • Apple Silicon</div>
                         </div>
                     </div>
-                    <div class="spec-cell">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span class="mono" style="font-size: 11px; color: var(--text-ghost);">ARCHITECTURE</span>
-                            <span style="font-size: 13px; color: var(--text-secondary);">Apple Silicon / Intel</span>
+
+                    <div class="download-specs">
+                        <div class="download-spec-item">
+                            <span class="download-spec-label">Platform</span>
+                            <span class="download-spec-value">macOS Big Sur+</span>
+                        </div>
+                        <div class="download-spec-item">
+                            <span class="download-spec-label">Architecture</span>
+                            <span class="download-spec-value">Apple Silicon (M1/M2/M3/M4)</span>
+                        </div>
+                        <div class="download-spec-item">
+                            <span class="download-spec-label">Size</span>
+                            <span class="download-spec-value" id="download-size">~7 MB</span>
+                        </div>
+                        <div class="download-spec-item">
+                            <span class="download-spec-label">Released</span>
+                            <span class="download-spec-value" id="download-date">Feb 2026</span>
                         </div>
                     </div>
-                    <div class="spec-cell">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span class="mono" style="font-size: 11px; color: var(--text-ghost);">SIZE</span>
-                            <span style="font-size: 13px; color: var(--text-secondary);">~200MB</span>
-                        </div>
+
+                    <div class="download-actions" id="download-buttons-primary">
+                        <button class="download-button">
+                            <span>↓</span>
+                            <span>Download for Mac</span>
+                        </button>
+                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases" class="download-button download-button-secondary" target="_blank">
+                            View All Releases
+                        </a>
                     </div>
-                    <div class="spec-cell">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span class="mono" style="font-size: 11px; color: var(--text-ghost);">PERMISSIONS</span>
-                            <span style="font-size: 13px; color: var(--text-secondary);">Accessibility + Input Monitoring</span>
-                        </div>
+
+                    <div class="download-note">
+                        <strong>Note:</strong> Requires Accessibility and Input Monitoring permissions for system-wide voice control.
                     </div>
                 </div>
 
-                <div id="download-buttons" style="margin-bottom: 24px;">
-                    <p style="font-size: 13px; color: var(--text-dim);">Loading latest release...</p>
+                <!-- Coming Soon Cards -->
+                <div class="download-card download-coming-soon" style="position: relative;">
+                    <span class="download-coming-soon-badge">Coming Soon</span>
+                    <div class="download-header">
+                        <div class="download-icon">💻</div>
+                        <div class="download-info">
+                            <h3>Intel & Universal Builds</h3>
+                            <div class="download-meta">macOS 12.0+ • Intel x64 / Universal Binary</div>
+                        </div>
+                    </div>
+
+                    <div class="download-specs">
+                        <div class="download-spec-item">
+                            <span class="download-spec-label">Intel x64</span>
+                            <span class="download-spec-value">In development</span>
+                        </div>
+                        <div class="download-spec-item">
+                            <span class="download-spec-label">Universal</span>
+                            <span class="download-spec-value">In development</span>
+                        </div>
+                    </div>
+
+                    <div class="download-actions">
+                        <button class="download-button">
+                            Notify Me
+                        </button>
+                    </div>
                 </div>
 
-                <p style="font-size: 12px; color: var(--text-ghost); line-height: 1.6;">
-                    Cadence will prompt for required permissions on first launch. You can revoke access
-                    anytime via System Settings → Privacy & Security.
-                </p>
+                <!-- Build from source -->
+                <div style="margin-top: 40px; padding: 24px; background: rgba(28, 25, 23, 0.3); border: 1px solid rgba(168, 162, 158, 0.08); border-radius: 12px;">
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
+                        <span style="font-size: 20px;">⚙️</span>
+                        <h3 style="font-size: 16px; font-weight: 600; margin: 0;">Build from Source</h3>
+                    </div>
+                    <p style="font-size: 14px; color: var(--text-dim); line-height: 1.6; margin-bottom: 16px;">
+                        Cadence is open source. Clone the repo and build locally for any architecture.
+                    </p>
+                    <a href="https://github.com/MaxPrehoda/voice-flow" class="download-button download-button-secondary" target="_blank" style="display: inline-flex; flex: 0;">
+                        View on GitHub
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -1399,6 +1452,7 @@
     </div>
 
     <link rel="stylesheet" href="scroll-animations.css">
+    <link rel="stylesheet" href="refined-layout.css">
     <script src="dot-grid.js"></script>
     <script src="audio-viz.js"></script>
     <link rel="stylesheet" href="demo-v2.css">
@@ -1406,6 +1460,6 @@
     <script src="demo-v2.js"></script>
     <script src="tech-viz.js"></script>
     <script src="scroll-animations.js"></script>
-    <script src="download.js"></script>
+    <script src="download-v2.js"></script>
 </body>
 </html>
