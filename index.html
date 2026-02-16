@@ -1344,94 +1344,123 @@
                     Get Cadence
                 </h2>
 
-                <!-- Current Release Card -->
-                <div class="download-card" id="current-release">
+                <!-- Apple Silicon Release -->
+                <div class="download-card" id="apple-silicon-release">
                     <div class="download-header">
-                        <div class="download-icon">🎤</div>
+                        <div class="download-icon">
+                            <img src="icon.png" alt="Cadence Logo">
+                        </div>
                         <div class="download-info">
                             <h3>
-                                Cadence v0.1.0
+                                Cadence v0.1.0 — Apple Silicon
                                 <span class="download-version-badge">Latest</span>
                             </h3>
-                            <div class="download-meta">macOS 12.0+ • Apple Silicon</div>
+                            <div class="download-meta">macOS 12.0+ • ARM64 (M1/M2/M3/M4)</div>
                         </div>
                     </div>
 
                     <div class="download-specs">
-                        <div class="download-spec-item">
-                            <span class="download-spec-label">Platform</span>
-                            <span class="download-spec-value">macOS Big Sur+</span>
-                        </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Architecture</span>
                             <span class="download-spec-value">Apple Silicon (M1/M2/M3/M4)</span>
                         </div>
                         <div class="download-spec-item">
+                            <span class="download-spec-label">File</span>
+                            <span class="download-spec-value">Cadence_0.1.0_aarch64.dmg</span>
+                        </div>
+                        <div class="download-spec-item">
                             <span class="download-spec-label">Size</span>
-                            <span class="download-spec-value" id="download-size">~7 MB</span>
+                            <span class="download-spec-value">~7 MB</span>
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Released</span>
-                            <span class="download-spec-value" id="download-date">Feb 2026</span>
+                            <span class="download-spec-value">February 16, 2026</span>
                         </div>
                     </div>
 
-                    <div class="download-actions" id="download-buttons-primary">
-                        <button class="download-button">
+                    <div class="download-actions">
+                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/download/v0.1.0/Cadence_0.1.0_aarch64.dmg" class="download-button">
                             <span>↓</span>
-                            <span>Download for Mac</span>
-                        </button>
-                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases" class="download-button download-button-secondary" target="_blank">
-                            View All Releases
+                            <span>Download for Apple Silicon</span>
+                        </a>
+                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.1.0" class="download-button download-button-secondary" target="_blank">
+                            Release Notes
                         </a>
                     </div>
 
                     <div class="download-note">
-                        <strong>Note:</strong> Requires Accessibility and Input Monitoring permissions for system-wide voice control.
+                        <strong>Note:</strong> Requires Accessibility and Input Monitoring permissions. First launch: Right-click → Open to bypass Gatekeeper.
                     </div>
                 </div>
 
-                <!-- Coming Soon Cards -->
-                <div class="download-card download-coming-soon" style="position: relative;">
-                    <span class="download-coming-soon-badge">Coming Soon</span>
+                <!-- Intel Release -->
+                <div class="download-card" id="intel-release">
                     <div class="download-header">
-                        <div class="download-icon">💻</div>
+                        <div class="download-icon">
+                            <img src="icon.png" alt="Cadence Logo">
+                        </div>
                         <div class="download-info">
-                            <h3>Intel & Universal Builds</h3>
-                            <div class="download-meta">macOS 12.0+ • Intel x64 / Universal Binary</div>
+                            <h3>
+                                Cadence v0.1.0 — Intel
+                                <span class="download-version-badge">Latest</span>
+                            </h3>
+                            <div class="download-meta">macOS 12.0+ • x86_64 (Intel Macs)</div>
                         </div>
                     </div>
 
                     <div class="download-specs">
                         <div class="download-spec-item">
-                            <span class="download-spec-label">Intel x64</span>
-                            <span class="download-spec-value">In development</span>
+                            <span class="download-spec-label">Architecture</span>
+                            <span class="download-spec-value">Intel x86_64</span>
                         </div>
                         <div class="download-spec-item">
-                            <span class="download-spec-label">Universal</span>
-                            <span class="download-spec-value">In development</span>
+                            <span class="download-spec-label">File</span>
+                            <span class="download-spec-value">Cadence_0.1.0_x64.dmg</span>
+                        </div>
+                        <div class="download-spec-item">
+                            <span class="download-spec-label">Size</span>
+                            <span class="download-spec-value">~7 MB</span>
+                        </div>
+                        <div class="download-spec-item">
+                            <span class="download-spec-label">Released</span>
+                            <span class="download-spec-value">February 16, 2026</span>
                         </div>
                     </div>
 
                     <div class="download-actions">
-                        <button class="download-button">
-                            Notify Me
-                        </button>
+                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/download/v0.1.0/Cadence_0.1.0_x64.dmg" class="download-button">
+                            <span>↓</span>
+                            <span>Download for Intel</span>
+                        </a>
+                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.1.0" class="download-button download-button-secondary" target="_blank">
+                            Release Notes
+                        </a>
+                    </div>
+
+                    <div class="download-note">
+                        <strong>Note:</strong> Intel Macs may have slower transcription performance. Apple Silicon is recommended for best experience.
                     </div>
                 </div>
 
+                <!-- All Releases Link -->
+                <div style="margin-top: 32px; text-align: center;">
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases"
+                       style="font-size: 14px; color: var(--text-muted); text-decoration: none; border-bottom: 1px solid var(--border-subtle); padding-bottom: 2px;"
+                       target="_blank">
+                        View All Releases →
+                    </a>
+                </div>
+
                 <!-- Build from source -->
-                <div style="margin-top: 40px; padding: 24px; background: rgba(28, 25, 23, 0.3); border: 1px solid rgba(168, 162, 158, 0.08); border-radius: 12px;">
+                <div style="margin-top: 48px; padding: 24px; background: rgba(28, 25, 23, 0.3); border: 1px solid rgba(168, 162, 158, 0.08); border-radius: 12px;">
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
                         <span style="font-size: 20px;">⚙️</span>
-                        <h3 style="font-size: 16px; font-weight: 600; margin: 0;">Build from Source</h3>
+                        <h3 style="font-size: 16px; font-weight: 600; margin: 0;">Open Source — Coming Soon</h3>
                     </div>
-                    <p style="font-size: 14px; color: var(--text-dim); line-height: 1.6; margin-bottom: 16px;">
-                        Cadence is open source. Clone the repo and build locally for any architecture.
+                    <p style="font-size: 14px; color: var(--text-dim); line-height: 1.6; margin-bottom: 0;">
+                        Cadence will be fully open source under the MIT License. Source code, build instructions, and contribution guidelines coming soon.
+                        Stay tuned for the public repository launch.
                     </p>
-                    <a href="https://github.com/MaxPrehoda/voice-flow" class="download-button download-button-secondary" target="_blank" style="display: inline-flex; flex: 0;">
-                        View on GitHub
-                    </a>
                 </div>
             </div>
         </section>
