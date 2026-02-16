@@ -126,6 +126,108 @@
             color: var(--accent-primary) !important;
         }
 
+        .demo-window {
+            background: #1e1e1e;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 0.5px rgba(255, 255, 255, 0.1);
+            aspect-ratio: 16 / 10;
+        }
+
+        .demo-titlebar {
+            height: 40px;
+            background: linear-gradient(to bottom, #2b2b2b 0%, #252525 100%);
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        .demo-traffic-lights {
+            display: flex;
+            gap: 8px;
+        }
+
+        .demo-traffic-light {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .demo-traffic-light.red { background: #ff5f57; }
+        .demo-traffic-light.yellow { background: #ffbd2e; }
+        .demo-traffic-light.green { background: #28ca42; }
+
+        .demo-title {
+            flex: 1;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            font-weight: 500;
+            margin-left: -52px; /* Center accounting for traffic lights */
+        }
+
+        .demo-content {
+            padding: 24px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.8;
+            color: #d4d4d4;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .demo-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: var(--accent-primary);
+            animation: blink 1s step-end infinite;
+            vertical-align: text-bottom;
+            margin-left: 1px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .demo-cadence-indicator {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 6px 12px;
+            background: rgba(45, 212, 191, 0.12);
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 6px;
+            font-size: 11px;
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+
+        .demo-cadence-indicator.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .demo-pulse {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
         @media (max-width: 1100px) {
             nav {
                 gap: 16px !important;
@@ -233,6 +335,51 @@
                 <!-- Audio Visualization -->
                 <div style="position: relative; height: 600px; display: flex; align-items: center; justify-content: center;">
                     <canvas id="audio-viz" style="width: 100%; height: 100%;"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo Section -->
+        <section style="padding: 120px 24px; border-top: 1px solid var(--border-subtle); background: var(--bg-surface);">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <div class="mono" style="font-size: 11px; color: var(--text-dim); margin-bottom: 16px;
+                                         letter-spacing: 0.1em; text-transform: uppercase; text-align: center;">
+                    See It In Action
+                </div>
+                <h2 style="font-size: 36px; font-weight: 600; margin-bottom: 64px; letter-spacing: -0.02em; text-align: center;">
+                    Two Ways to Work
+                </h2>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); gap: 48px;">
+                    <!-- Demo 1: Dictation -->
+                    <div>
+                        <div style="margin-bottom: 16px;">
+                            <div class="mono" style="font-size: 10px; color: var(--accent-primary); margin-bottom: 8px;
+                                                      letter-spacing: 0.1em;">01 / DICTATION</div>
+                            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Instant Transcription</h3>
+                            <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+                                Press hotkey, speak, release. Text appears anywhere.
+                            </p>
+                        </div>
+                        <div id="demo-dictation" class="demo-window">
+                            <!-- Populated by demo.js -->
+                        </div>
+                    </div>
+
+                    <!-- Demo 2: AI Command -->
+                    <div>
+                        <div style="margin-bottom: 16px;">
+                            <div class="mono" style="font-size: 10px; color: var(--accent-primary); margin-bottom: 8px;
+                                                      letter-spacing: 0.1em;">02 / AI COMMAND</div>
+                            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Smart Automation</h3>
+                            <p style="font-size: 13px; color: var(--text-dim); line-height: 1.6;">
+                                Say "Claude, ..." for AI-powered actions and rewrites.
+                            </p>
+                        </div>
+                        <div id="demo-ai" class="demo-window">
+                            <!-- Populated by demo.js -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -377,6 +524,7 @@
 
     <script src="dot-grid.js"></script>
     <script src="audio-viz.js"></script>
+    <script src="demo.js"></script>
     <script src="download.js"></script>
 </body>
 </html>
