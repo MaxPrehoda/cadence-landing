@@ -69,6 +69,9 @@
                 </div>
             </div>
 
+            <!-- Voice Transcript Bubble -->
+            <div class="voice-transcript" id="voice-transcript"></div>
+
             <!-- Cadence Recording Indicator -->
             <div class="cadence-indicator" id="cadence-indicator">
                 <div class="cadence-mic-icon">🎤</div>
@@ -144,6 +147,7 @@
         const textContainer = document.getElementById('slack-text');
         const indicator = document.getElementById('cadence-indicator');
         const statusText = document.getElementById('cadence-status-text');
+        const voiceTranscript = document.getElementById('voice-transcript');
 
         await sleep(1500);
 
@@ -151,14 +155,17 @@
         indicator.classList.add('active');
         statusText.textContent = 'Listening...';
 
-        await sleep(1800);
-
-        // User is speaking (show speaking state)
-        statusText.textContent = 'Speaking...';
-
         await sleep(800);
 
-        // Processing transcription
+        // User is speaking - show what they're saying
+        statusText.textContent = 'Speaking...';
+        voiceTranscript.textContent = '"Just finished testing. Migration is complete..."';
+        voiceTranscript.classList.add('active');
+
+        await sleep(2200);
+
+        // Hide transcript, process
+        voiceTranscript.classList.remove('active');
         statusText.textContent = 'Transcribing...';
 
         await sleep(600);
@@ -198,6 +205,9 @@
                     <span>${time}</span>
                 </div>
             </div>
+
+            <!-- Voice Transcript Bubble -->
+            <div class="voice-transcript" id="voice-transcript"></div>
 
             <!-- Cadence Processing Indicator -->
             <div class="cadence-indicator" id="cadence-indicator">
@@ -260,6 +270,7 @@
         const textContainer = document.getElementById('mail-body');
         const indicator = document.getElementById('cadence-indicator');
         const status = document.getElementById('cadence-status');
+        const voiceTranscript = document.getElementById('voice-transcript');
 
         await sleep(1000);
 
@@ -274,15 +285,20 @@
         indicator.classList.add('active');
         status.textContent = 'Listening...';
 
-        await sleep(1200);
+        await sleep(600);
 
+        // Show the actual command being spoken
         status.textContent = 'Speaking...';
+        voiceTranscript.textContent = '"Claude, make this more professional"';
+        voiceTranscript.classList.add('active');
 
-        await sleep(1000);
+        await sleep(2200);
 
+        // Hide transcript, start processing
+        voiceTranscript.classList.remove('active');
         status.textContent = 'Processing with Claude...';
 
-        await sleep(1800);
+        await sleep(1500);
 
         // Delete old text
         const cursor = textContainer.querySelector('.typing-cursor');
