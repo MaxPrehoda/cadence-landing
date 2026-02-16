@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — Cadence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        :root {
+            --bg-base: #0c0a09;
+            --bg-surface: #1c1917;
+            --accent-primary: #2dd4bf;
+            --text-primary: #fafaf9;
+            --text-secondary: #d6d3d1;
+            --text-muted: #a8a29e;
+            --text-ghost: #57534e;
+            --border-subtle: rgba(168, 162, 158, 0.08);
+            --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--accent-primary);
+        }
+
+        .last-updated {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            font-family: var(--font-mono);
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 48px;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 32px;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+
+        p, li {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-size: 16px;
+        }
+
+        ul {
+            margin-left: 24px;
+            margin-bottom: 24px;
+        }
+
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 32px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: var(--bg-surface);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 14px;
+            color: var(--accent-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Home</a>
+
+        <h1>Privacy Policy</h1>
+        <div class="last-updated">Last updated: February 16, 2026</div>
+
+        <p>
+            At Cadence, we believe privacy is a fundamental right. This policy explains how we handle your data —
+            spoiler: we barely collect any, and what we do collect stays on your device.
+        </p>
+
+        <h2>TL;DR</h2>
+        <ul>
+            <li><strong>All voice processing happens locally</strong> on your Mac. Your audio never leaves your device.</li>
+            <li><strong>No cloud services.</strong> No servers. No external APIs for transcription.</li>
+            <li><strong>Minimal analytics.</strong> We use Vercel Web Analytics (privacy-friendly, no cookies) to understand basic usage patterns.</li>
+            <li><strong>No account required.</strong> No tracking. No user profiles.</li>
+        </ul>
+
+        <h2>What We Collect</h2>
+
+        <h3>Information You Provide</h3>
+        <p>
+            <strong>None.</strong> Cadence doesn't require an account, login, or any personal information to function.
+        </p>
+
+        <h3>Audio & Voice Data</h3>
+        <p>
+            All voice transcription is performed <strong>locally on your device</strong> using Whisper.cpp. Your voice recordings:
+        </p>
+        <ul>
+            <li>Never leave your Mac</li>
+            <li>Are not stored permanently (processed in memory only)</li>
+            <li>Are never uploaded to any server or cloud service</li>
+            <li>Are immediately discarded after transcription</li>
+        </ul>
+
+        <h3>Website Analytics</h3>
+        <p>
+            Our website uses <strong>Vercel Web Analytics</strong>, which:
+        </p>
+        <ul>
+            <li>Collects anonymous page views and basic traffic data</li>
+            <li>Does NOT use cookies or track you across sites</li>
+            <li>Does NOT collect personally identifiable information</li>
+            <li>Complies with GDPR, CCPA, and other privacy regulations</li>
+        </ul>
+        <p>
+            Learn more: <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank">Vercel Analytics Privacy Policy</a>
+        </p>
+
+        <h3>macOS Permissions</h3>
+        <p>
+            Cadence requires the following macOS permissions to function:
+        </p>
+        <ul>
+            <li><strong>Microphone Access</strong> — To capture voice commands (processed locally)</li>
+            <li><strong>Accessibility Access</strong> — To automate system tasks and control applications</li>
+            <li><strong>Screen Recording</strong> — To detect active windows and context for automation</li>
+        </ul>
+        <p>
+            You can revoke these permissions anytime via <code>System Settings → Privacy & Security</code>.
+        </p>
+
+        <h2>How We Use Your Information</h2>
+        <p>
+            Since we don't collect personal data, there's not much to "use." Here's what happens:
+        </p>
+        <ul>
+            <li><strong>Voice commands</strong> are processed locally and used only to execute the actions you request</li>
+            <li><strong>Website analytics</strong> help us understand which features are most popular and improve the product</li>
+        </ul>
+
+        <h2>Third-Party Services</h2>
+        <p>
+            Cadence does NOT integrate with any third-party services for core functionality. The only external service is:
+        </p>
+        <ul>
+            <li><strong>Vercel Web Analytics</strong> (website only, privacy-friendly)</li>
+        </ul>
+        <p>
+            We do NOT use:
+        </p>
+        <ul>
+            <li>Google Analytics</li>
+            <li>Facebook Pixel</li>
+            <li>Ad networks</li>
+            <li>Cloud transcription services (OpenAI, Google Speech, etc.)</li>
+        </ul>
+
+        <h2>Data Storage & Security</h2>
+        <p>
+            <strong>Local Storage:</strong> Cadence stores minimal application preferences locally on your Mac using standard
+            macOS storage APIs. This includes settings like keyboard shortcuts and automation preferences.
+        </p>
+        <p>
+            <strong>No Cloud Sync:</strong> We don't sync your data to the cloud. Your settings stay on your device.
+        </p>
+        <p>
+            <strong>Security:</strong> All data processing happens within macOS's sandboxed environment with the permissions you grant.
+        </p>
+
+        <h2>Your Rights</h2>
+        <p>
+            Under GDPR, CCPA, and similar privacy laws, you have the right to:
+        </p>
+        <ul>
+            <li><strong>Access</strong> your data (but we don't collect personal data to access)</li>
+            <li><strong>Delete</strong> your data (uninstall the app — no server-side data exists)</li>
+            <li><strong>Opt-out</strong> of analytics (use browser extensions or disable JavaScript on our website)</li>
+        </ul>
+
+        <h2>Children's Privacy</h2>
+        <p>
+            Cadence does not knowingly collect data from children under 13. Since we don't collect personal information
+            from anyone, this is a non-issue.
+        </p>
+
+        <h2>Changes to This Policy</h2>
+        <p>
+            We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated
+            "Last updated" date. Continued use of Cadence after changes constitutes acceptance of the updated policy.
+        </p>
+
+        <h2>Contact Us</h2>
+        <p>
+            Questions about this Privacy Policy? Reach out:
+        </p>
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:privacy@cadence.app">privacy@cadence.app</a></li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/MaxPrehoda/cadence" target="_blank">MaxPrehoda/cadence</a></li>
+        </ul>
+
+        <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 64px 0;">
+
+        <p style="font-size: 14px; color: var(--text-ghost);">
+            <strong>Bottom line:</strong> We built Cadence to respect your privacy. Your voice stays on your device.
+            No tracking. No surveillance. Just local, powerful voice control.
+        </p>
+    </div>
+</body>
+</html>

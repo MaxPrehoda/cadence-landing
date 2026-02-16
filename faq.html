@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Cadence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="icon.png">
+    <style>
+        :root {
+            --bg-base: #0c0a09;
+            --bg-surface: #1c1917;
+            --bg-elevated: #292524;
+            --accent-primary: #2dd4bf;
+            --accent-glow: rgba(45, 212, 191, 0.25);
+            --text-primary: #fafaf9;
+            --text-secondary: #d6d3d1;
+            --text-muted: #a8a29e;
+            --text-ghost: #57534e;
+            --border-subtle: rgba(168, 162, 158, 0.08);
+            --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-base);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--accent-primary);
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 32px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .faq-section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 12px;
+        }
+
+        .faq-item {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(45, 212, 191, 0.3);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.1);
+        }
+
+        .question {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .question::before {
+            content: "Q:";
+            color: var(--accent-primary);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            margin-right: 12px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .answer {
+            color: var(--text-secondary);
+            font-size: 16px;
+            padding-left: 34px;
+        }
+
+        .answer p {
+            margin-bottom: 12px;
+        }
+
+        .answer ul {
+            margin: 12px 0 12px 24px;
+        }
+
+        .answer li {
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        code {
+            font-family: var(--font-mono);
+            background: var(--bg-elevated);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 14px;
+            color: var(--accent-primary);
+        }
+
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .highlight {
+            background: rgba(45, 212, 191, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: var(--accent-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Home</a>
+
+        <h1>Frequently Asked Questions</h1>
+        <p class="subtitle">Everything you need to know about Cadence.</p>
+
+        <!-- General -->
+        <div class="faq-section">
+            <h2 class="section-title">General</h2>
+
+            <div class="faq-item">
+                <div class="question">What is Cadence?</div>
+                <div class="answer">
+                    <p>
+                        Cadence is a <strong>voice-first OS layer for macOS</strong> that lets you control your computer
+                        using natural voice commands. It combines local Whisper transcription with desktop automation —
+                        no cloud, no latency, just instant voice control.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Is Cadence free?</div>
+                <div class="answer">
+                    <p>
+                        Yes! Cadence is <strong>100% free and open source</strong> (MIT License). No subscriptions,
+                        no hidden fees, no paywalls. Download, use, modify — it's yours.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How is this different from Siri?</div>
+                <div class="answer">
+                    <p>
+                        Great question! Here's the breakdown:
+                    </p>
+                    <ul>
+                        <li><strong>Siri:</strong> Cloud-based, limited to specific commands, sends your voice to Apple's servers</li>
+                        <li><strong>Cadence:</strong> 100% local processing, fully customizable automations, zero latency, complete privacy</li>
+                    </ul>
+                    <p>
+                        Cadence is for power users who want <em>real</em> control over their Mac, not pre-canned responses.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Does my voice data get sent to the cloud?</div>
+                <div class="answer">
+                    <p>
+                        <strong>Absolutely not.</strong> All voice processing happens <span class="highlight">locally on your Mac</span>
+                        using Whisper.cpp. Your voice never leaves your device. No servers. No internet required (after initial download).
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Requirements -->
+        <div class="faq-section">
+            <h2 class="section-title">System Requirements</h2>
+
+            <div class="faq-item">
+                <div class="question">What macOS version do I need?</div>
+                <div class="answer">
+                    <p>
+                        <strong>macOS 13.0 (Ventura) or later</strong> is recommended. Cadence may work on older versions
+                        (macOS 12 Monterey), but we don't officially support them.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Does it work on Apple Silicon (M1/M2/M3)?</div>
+                <div class="answer">
+                    <p>
+                        <strong>Yes!</strong> Cadence is optimized for Apple Silicon and runs significantly faster on M-series chips.
+                        Intel Macs are also supported, but transcription may be slower.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How much disk space does it need?</div>
+                <div class="answer">
+                    <p>
+                        Approximately <strong>1-3 GB</strong> for the Whisper models (depending on which model you choose).
+                        The app itself is lightweight (~50 MB).
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Can I run it offline?</div>
+                <div class="answer">
+                    <p>
+                        <strong>100% yes.</strong> After the initial download of Whisper models, Cadence works completely
+                        offline. Perfect for flights, secure environments, or just peace of mind.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Setup & Permissions -->
+        <div class="faq-section">
+            <h2 class="section-title">Setup & Permissions</h2>
+
+            <div class="faq-item">
+                <div class="question">What permissions does Cadence need?</div>
+                <div class="answer">
+                    <p>
+                        Cadence requires three macOS permissions:
+                    </p>
+                    <ul>
+                        <li><strong>Microphone Access</strong> — To capture voice commands</li>
+                        <li><strong>Accessibility Access</strong> — To automate tasks (click buttons, type text, etc.)</li>
+                        <li><strong>Screen Recording</strong> — To detect active windows and context</li>
+                    </ul>
+                    <p>
+                        You can revoke these anytime via <code>System Settings → Privacy & Security</code>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How do I install Cadence?</div>
+                <div class="answer">
+                    <p>
+                        Download the latest release from <a href="https://github.com/MaxPrehoda/cadence" target="_blank">GitHub</a>,
+                        drag it to your Applications folder, and launch. On first run, macOS will prompt for the required permissions.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Why does macOS say Cadence is from an "unidentified developer"?</div>
+                <div class="answer">
+                    <p>
+                        Cadence is not currently notarized by Apple (we're working on it). To bypass this:
+                    </p>
+                    <ul>
+                        <li>Right-click the app → <strong>Open</strong></li>
+                        <li>Click <strong>"Open"</strong> in the security dialog</li>
+                    </ul>
+                    <p>
+                        Since Cadence is open source, you can verify the code yourself before running.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features & Usage -->
+        <div class="faq-section">
+            <h2 class="section-title">Features & Usage</h2>
+
+            <div class="faq-item">
+                <div class="question">What can I do with voice commands?</div>
+                <div class="answer">
+                    <p>
+                        Anything you can do with keyboard/mouse, you can do with voice:
+                    </p>
+                    <ul>
+                        <li>"Open Chrome and navigate to GitHub"</li>
+                        <li>"Switch to Spotify and play my Liked Songs"</li>
+                        <li>"Move this window to the right half of the screen"</li>
+                        <li>"Take a screenshot and save it to Desktop"</li>
+                        <li>Custom automations — the sky's the limit!</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Can I customize voice commands?</div>
+                <div class="answer">
+                    <p>
+                        <strong>Yes!</strong> Cadence is fully programmable. You can create custom voice triggers,
+                        chain actions together, and build complex automations. See the
+                        <a href="https://github.com/MaxPrehoda/cadence#readme" target="_blank">documentation</a> for details.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Does it work with non-English languages?</div>
+                <div class="answer">
+                    <p>
+                        Whisper supports <strong>99+ languages</strong>, and Cadence inherits this capability. However,
+                        custom automations may need language-specific tuning. English is the most tested language.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How fast is the transcription?</div>
+                <div class="answer">
+                    <p>
+                        On Apple Silicon (M1/M2/M3), transcription is <strong>near-instant</strong> (~100-300ms for short commands).
+                        On Intel Macs, it may take 500-1000ms. No internet latency means it's always responsive.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="faq-section">
+            <h2 class="section-title">Troubleshooting</h2>
+
+            <div class="faq-item">
+                <div class="question">Cadence isn't recognizing my voice. What do I do?</div>
+                <div class="answer">
+                    <p>
+                        Try these steps:
+                    </p>
+                    <ul>
+                        <li>Check that <strong>Microphone Access</strong> is granted in System Settings</li>
+                        <li>Test your microphone in another app (Voice Memos, etc.)</li>
+                        <li>Speak clearly and avoid background noise</li>
+                        <li>Try a different Whisper model (smaller models = faster but less accurate)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Automations aren't working. Help!</div>
+                <div class="answer">
+                    <p>
+                        Most automation issues are permission-related:
+                    </p>
+                    <ul>
+                        <li>Ensure <strong>Accessibility Access</strong> is enabled in System Settings</li>
+                        <li>Grant <strong>Screen Recording</strong> permission if needed</li>
+                        <li>Restart Cadence after granting new permissions</li>
+                    </ul>
+                    <p>
+                        Still stuck? <a href="https://github.com/MaxPrehoda/cadence/issues" target="_blank">Open a GitHub issue</a>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How do I uninstall Cadence?</div>
+                <div class="answer">
+                    <p>
+                        Drag the app to Trash, then remove stored preferences:
+                    </p>
+                    <ul>
+                        <li><code>~/Library/Application Support/Cadence</code></li>
+                        <li><code>~/Library/Preferences/com.cadence.app.plist</code></li>
+                    </ul>
+                    <p>
+                        Revoke permissions in <code>System Settings → Privacy & Security</code>.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy & Security -->
+        <div class="faq-section">
+            <h2 class="section-title">Privacy & Security</h2>
+
+            <div class="faq-item">
+                <div class="question">Is Cadence safe?</div>
+                <div class="answer">
+                    <p>
+                        <strong>Yes.</strong> Cadence is open source — you can audit the code yourself. All processing
+                        is local, and we never collect or transmit your data. That said, granting Accessibility permissions
+                        is powerful — only install software you trust.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Can Cadence be used for malicious purposes?</div>
+                <div class="answer">
+                    <p>
+                        Like any automation tool (AppleScript, Keyboard Maestro, etc.), Cadence could theoretically be
+                        misused. <strong>Do not grant permissions to untrusted versions of the app.</strong> Always download
+                        from the official <a href="https://github.com/MaxPrehoda/cadence" target="_blank">GitHub repository</a>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Where is my data stored?</div>
+                <div class="answer">
+                    <p>
+                        All data is stored <strong>locally on your Mac</strong>:
+                    </p>
+                    <ul>
+                        <li>Voice commands are processed in-memory (not saved)</li>
+                        <li>App preferences are stored in <code>~/Library/Application Support/Cadence</code></li>
+                        <li>Whisper models are cached in <code>~/.cache/whisper</code></li>
+                    </ul>
+                    <p>
+                        Nothing is synced to the cloud.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Support -->
+        <div class="faq-section">
+            <h2 class="section-title">Support & Community</h2>
+
+            <div class="faq-item">
+                <div class="question">How do I get help?</div>
+                <div class="answer">
+                    <p>
+                        Reach out via:
+                    </p>
+                    <ul>
+                        <li><strong>GitHub Issues:</strong> <a href="https://github.com/MaxPrehoda/cadence/issues" target="_blank">MaxPrehoda/cadence</a> (bug reports, feature requests)</li>
+                        <li><strong>Email:</strong> <a href="mailto:support@cadence.app">support@cadence.app</a></li>
+                        <li><strong>Documentation:</strong> <a href="https://github.com/MaxPrehoda/cadence#readme" target="_blank">GitHub README</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Can I contribute to Cadence?</div>
+                <div class="answer">
+                    <p>
+                        <strong>Absolutely!</strong> Cadence is open source (MIT License). Contributions are welcome:
+                    </p>
+                    <ul>
+                        <li>Submit pull requests on <a href="https://github.com/MaxPrehoda/cadence" target="_blank">GitHub</a></li>
+                        <li>Report bugs or suggest features via Issues</li>
+                        <li>Improve documentation</li>
+                        <li>Share your custom automations with the community</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Will there be a Windows/Linux version?</div>
+                <div class="answer">
+                    <p>
+                        Cadence is currently <strong>macOS-only</strong> due to deep integration with macOS APIs (Accessibility,
+                        AppleScript, etc.). A Linux version is theoretically possible but not planned. Windows support is
+                        unlikely due to fundamental OS differences.
+                    </p>
+                    <p>
+                        That said, Cadence is open source — community ports are welcome!
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 64px 0;">
+
+        <p style="font-size: 14px; color: var(--text-ghost); text-align: center;">
+            Still have questions? <a href="mailto:support@cadence.app">Email us</a> or
+            <a href="https://github.com/MaxPrehoda/cadence/issues" target="_blank">open a GitHub issue</a>.
+        </p>
+    </div>
+</body>
+</html>
