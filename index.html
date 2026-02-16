@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadence - Voice-First OS Layer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff3864 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .fire-glow {
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5),
+                         0 0 40px rgba(247, 147, 30, 0.3),
+                         0 0 60px rgba(255, 56, 100, 0.2);
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6);
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(255, 107, 53, 0.5);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .shimmer {
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="content">
+        <!-- Hero Section -->
+        <section class="min-h-screen flex flex-col items-center justify-center px-6">
+            <div class="text-center max-w-4xl">
+                <h1 class="text-7xl md:text-8xl font-bold mb-6 fire-glow gradient-text shimmer">
+                    Cadence
+                </h1>
+                <p class="text-2xl md:text-3xl text-gray-300 mb-4 font-light">
+                    Voice-First OS Layer
+                </p>
+                <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
+                    Local voice transcription meets desktop automation.
+                    Speak naturally, command instantly—anywhere on macOS.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#download" class="download-btn px-8 py-4 rounded-lg text-white font-semibold text-lg">
+                        Download for macOS
+                    </a>
+                    <a href="https://github.com/yourusername/cadence" target="_blank"
+                       class="px-8 py-4 rounded-lg border border-gray-600 hover:border-gray-400
+                              transition-all text-gray-300 hover:text-white font-semibold text-lg">
+                        View on GitHub
+                    </a>
+                </div>
+
+                <p class="text-sm text-gray-500 mt-6">
+                    Free • Open Source • Privacy-First
+                </p>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-20 px-6 max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 gradient-text">
+                Why Cadence?
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card p-8 rounded-xl">
+                    <div class="text-4xl mb-4">🎤</div>
+                    <h3 class="text-xl font-semibold mb-3">100% Local</h3>
+                    <p class="text-gray-400">
+                        Whisper.cpp runs on-device. Your voice never leaves your Mac.
+                        No cloud, no API keys, no privacy concerns.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-xl">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-xl font-semibold mb-3">System-Wide</h3>
+                    <p class="text-gray-400">
+                        Works everywhere—Slack, VSCode, email, terminal.
+                        One hotkey, infinite possibilities.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-xl">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="text-xl font-semibold mb-3">Smart Polish</h3>
+                    <p class="text-gray-400">
+                        Optional LLM grammar correction. Raw transcription or polished prose—you choose.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-xl">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h3 class="text-xl font-semibold mb-3">Custom Commands</h3>
+                    <p class="text-gray-400">
+                        Define your own voice shortcuts and aliases.
+                        "Schedule meeting" → opens calendar, pre-fills event.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-xl">
+                    <div class="text-4xl mb-4">🔥</div>
+                    <h3 class="text-xl font-semibold mb-3">Zero Latency</h3>
+                    <p class="text-gray-400">
+                        Instant wake from hotkey. No server round-trips.
+                        Faster than typing.
+                    </p>
+                </div>
+
+                <div class="feature-card p-8 rounded-xl">
+                    <div class="text-4xl mb-4">🛠️</div>
+                    <h3 class="text-xl font-semibold mb-3">Developer-Friendly</h3>
+                    <p class="text-gray-400">
+                        Built with Tauri, Rust, and Svelte.
+                        Easy to fork, extend, and customize.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download Section -->
+        <section id="download" class="py-20 px-6 max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-8 gradient-text">Get Started</h2>
+
+            <div class="bg-white/5 border border-gray-800 rounded-xl p-8 mb-8">
+                <h3 class="text-2xl font-semibold mb-4">macOS Requirements</h3>
+                <ul class="text-gray-400 space-y-2 mb-6">
+                    <li>• macOS 11.0+ (Big Sur or later)</li>
+                    <li>• Apple Silicon or Intel</li>
+                    <li>• ~200MB disk space</li>
+                </ul>
+
+                <div id="download-buttons" class="flex flex-col gap-3">
+                    <p class="text-gray-500">Loading latest release...</p>
+                </div>
+            </div>
+
+            <div class="text-sm text-gray-500">
+                <p class="mb-2">First launch requires granting Accessibility & Input Monitoring permissions.</p>
+                <p>Cadence will guide you through the setup.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 px-6 text-center text-gray-500 border-t border-gray-900">
+            <p class="mb-2">
+                Built by <a href="https://github.com/yourusername" class="text-gray-400 hover:text-white transition-colors">@yourusername</a>
+            </p>
+            <p class="text-sm">
+                Open source under MIT License
+            </p>
+        </footer>
+    </div>
+
+    <script src="particles.js"></script>
+    <script src="download.js"></script>
+</body>
+</html>
