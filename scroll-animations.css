@@ -1,0 +1,277 @@
+/* Buttery smooth scroll animations */
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Base animation states */
+.animate-fade-up,
+.animate-fade-in,
+.animate-slide-right,
+.animate-scale-up {
+    opacity: 0;
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-fade-up {
+    transform: translateY(30px);
+}
+
+.animate-slide-right {
+    transform: translateX(-30px);
+}
+
+.animate-scale-up {
+    transform: scale(0.95);
+}
+
+/* Visible states - super smooth */
+.animate-fade-up.is-visible,
+.animate-fade-in.is-visible,
+.animate-slide-right.is-visible,
+.animate-scale-up.is-visible {
+    opacity: 1;
+    transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Smooth header transitions */
+nav {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
+    will-change: transform;
+}
+
+/* Hero parallax container */
+#hero > div {
+    transition: opacity 0.3s ease;
+    will-change: transform, opacity;
+}
+
+/* Button magnetic effect base */
+.btn-primary,
+.btn-secondary {
+    will-change: transform;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced hover states */
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(45, 212, 191, 0.3);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(45, 212, 191, 0.15);
+}
+
+/* Active states */
+.btn-primary:active,
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* Demo container smooth entrance */
+#demo-container {
+    will-change: transform, opacity;
+}
+
+/* Tech cards enhanced */
+.tech-card {
+    will-change: transform, opacity;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tech-card:hover {
+    transform: translateX(6px) translateY(-2px);
+}
+
+/* Stagger delays for cards */
+.tech-card:nth-child(1) { transition-delay: 0ms; }
+.tech-card:nth-child(2) { transition-delay: 100ms; }
+.tech-card:nth-child(3) { transition-delay: 200ms; }
+.tech-card:nth-child(4) { transition-delay: 300ms; }
+
+/* Stats animation */
+#tech .mono.accent {
+    will-change: opacity;
+    display: inline-block;
+}
+
+/* Smooth section transitions */
+section {
+    will-change: opacity;
+}
+
+/* Audio viz floating effect */
+#audio-viz {
+    will-change: transform;
+    transition: transform 0.3s ease-out;
+}
+
+/* Download section */
+#download-buttons {
+    will-change: opacity, transform;
+}
+
+/* Logo subtle animation */
+.logo {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo:hover {
+    transform: scale(1.02);
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .animate-fade-up,
+    .animate-slide-right,
+    .animate-scale-up {
+        opacity: 1;
+        transform: none;
+    }
+
+    #hero > div {
+        transform: none !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Performance optimizations */
+.tech-card,
+.btn-primary,
+.btn-secondary,
+nav,
+#hero > div {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+}
+
+/* Smooth opacity transitions for stats bar */
+#tech > div > div > div:last-child > div > div {
+    transition: opacity 0.6s ease;
+    will-change: opacity;
+}
+
+/* Hero content smooth fade */
+#hero h1,
+#hero p {
+    will-change: opacity, transform;
+}
+
+/* Demo description */
+#demo-description {
+    transition: opacity 0.5s ease;
+}
+
+/* Cadence pill smooth entrance in demo */
+.cadence-pill {
+    will-change: opacity, transform;
+}
+
+.voice-callout {
+    will-change: opacity, transform;
+}
+
+/* Progress steps */
+.progress-step {
+    will-change: opacity;
+    transition: opacity 0.3s ease;
+}
+
+.step-dot {
+    will-change: transform, background;
+    transition: all 0.3s ease;
+}
+
+/* Spec cells smooth entrance */
+.spec-cell {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.spec-cell:hover {
+    background: rgba(28, 25, 23, 0.6);
+    transform: translateX(2px);
+}
+
+/* Nav links smooth */
+nav a {
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-primary);
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+/* Subtle scale on logo */
+nav img {
+    transition: transform 0.3s ease;
+}
+
+nav img:hover {
+    transform: scale(1.05);
+}
+
+/* Dock icons subtle bounce */
+.dock-icon {
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dock-icon:hover {
+    transform: translateY(-4px);
+}
+
+/* Window animations in demo */
+.app-window {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.6s ease;
+}
+
+/* Message typing cursor blink */
+.typing-cursor {
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Smooth color transitions */
+* {
+    transition-property: color, background-color, border-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+}
+
+/* Override for animated elements to prevent conflicts */
+.animate-fade-up *,
+.animate-slide-right *,
+.animate-scale-up * {
+    transition-property: opacity, transform, color, background-color, border-color !important;
+}
