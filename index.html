@@ -372,10 +372,10 @@
             min-height: 200px;
         }
 
-        /* Cadence Indicator - Center screen, highly visible */
+        /* Cadence Indicator - Upper center, highly visible */
         .cadence-indicator {
             position: absolute;
-            top: 50%;
+            top: 35%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.8);
             background: rgba(12, 10, 9, 0.95);
@@ -476,9 +476,9 @@
 
         .voice-transcript {
             position: absolute;
-            bottom: 120px;
+            bottom: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(140px);
             background: rgba(12, 10, 9, 0.98);
             backdrop-filter: blur(40px);
             border: 1.5px solid rgba(45, 212, 191, 0.4);
@@ -490,7 +490,6 @@
             z-index: 150;
             box-shadow: 0 12px 32px rgba(45, 212, 191, 0.25);
             opacity: 0;
-            transform: translateX(-50%) translateY(8px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             max-width: 600px;
             text-align: center;
@@ -499,20 +498,20 @@
 
         .voice-transcript.active {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translateX(-50%) translateY(130px);
         }
 
         .voice-transcript::before {
             content: '';
             position: absolute;
-            bottom: -8px;
+            top: -8px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 8px solid transparent;
             border-right: 8px solid transparent;
-            border-top: 8px solid rgba(12, 10, 9, 0.98);
+            border-bottom: 8px solid rgba(12, 10, 9, 0.98);
         }
 
         .typing-cursor {

@@ -170,14 +170,14 @@
 
         await sleep(600);
 
-        // Hide indicator, inject text
+        // Hide indicator
         indicator.classList.remove('active');
 
-        await sleep(300);
+        await sleep(400);
 
-        // Type the message
+        // Type the message (text injection appears)
         const message = "Just finished testing. Migration is complete and running stable in staging. Ready for prod deploy tomorrow morning.";
-        await typeText(textContainer, message, 35);
+        await typeText(textContainer, message, 30);
         textContainer.innerHTML += '<span class="typing-cursor"></span>';
 
         await sleep(3500);
