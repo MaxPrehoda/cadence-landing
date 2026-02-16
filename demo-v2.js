@@ -23,15 +23,12 @@
     }
 
     async function deleteText(element, count, speed = 20) {
-        for (let i = 0; i < count; i++) {
-            const lastNode = element.lastChild;
-            if (lastNode) {
-                if (lastNode.nodeType === Node.TEXT_NODE && lastNode.textContent.length > 0) {
-                    lastNode.textContent = lastNode.textContent.slice(0, -1);
-                } else {
-                    lastNode.remove();
-                }
-            }
+        // Get all text content
+        let text = element.textContent;
+
+        for (let i = 0; i < count && text.length > 0; i++) {
+            text = text.slice(0, -1);
+            element.textContent = text;
             await sleep(speed);
         }
     }
@@ -289,11 +286,15 @@
         pillLabel.textContent = 'Processing with AI';
         await sleep(1200);
 
-        // Delete old text
-        await deleteText(noteBody, rough.length, 8);
-        await sleep(300);
+        // Clear the text completely and quickly
+        noteBody.style.opacity = '0.3';
+        await sleep(200);
+        noteBody.textContent = '';
+        await sleep(400);
+        noteBody.style.opacity = '1';
 
         pill.classList.remove('active');
+        await sleep(200);
 
         // Type refined version
         const refined = "Key accomplishments this week:\n\n• Launched new dashboard feature to production\n• Resolved 10 critical bugs across the platform\n• Team performance strong—all objectives on track\n\nNext week's focus: Performance optimization and technical debt reduction.";
