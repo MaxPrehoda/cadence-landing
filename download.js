@@ -3,8 +3,7 @@ async function loadDownloadLinks() {
     const container = document.getElementById('download-buttons');
 
     try {
-        // TODO: Replace with your actual repo URL
-        const response = await fetch('https://api.github.com/repos/yourusername/cadence/releases/latest');
+        const response = await fetch('https://api.github.com/repos/MaxPrehoda/cadence-landing/releases/latest');
 
         if (!response.ok) {
             throw new Error('Release not found');
@@ -61,7 +60,7 @@ async function loadDownloadLinks() {
         container.innerHTML = `
             <div style="display: flex; gap: 12px; flex-direction: column; align-items: flex-start;">
                 <p style="font-size: 13px; color: var(--text-dim);">No releases yet. Build from source:</p>
-                <a href="https://github.com/yourusername/cadence" class="btn-secondary"
+                <a href="https://github.com/MaxPrehoda/cadence-landing" class="btn-secondary"
                    style="padding: 14px 28px; border-radius: 6px; text-decoration: none;
                           font-size: 14px; display: inline-block; font-weight: 500;">
                     View on GitHub
