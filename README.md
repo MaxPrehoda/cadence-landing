@@ -45,7 +45,7 @@ Connect repo in dashboard. Zero config required.
 ## Customize
 
 1. **GitHub links**: Search/replace `yourusername/cadence` in `index.html` and `download.js`
-2. **Version**: Update v0.1.0 in header
+2. **Version**: Update v0.2.0 in header
 3. **Author**: Update footer links
 
 ## Local Preview
