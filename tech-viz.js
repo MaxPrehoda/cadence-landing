@@ -8,6 +8,7 @@
     const particles = [];
     const mousePos = { x: 0, y: 0 };
     let animationId;
+    let isVisible = false;
 
     function resize() {
         const dpr = window.devicePixelRatio || 1;
@@ -112,7 +113,9 @@
         });
 
         ctx.globalAlpha = 1;
-        animationId = requestAnimationFrame(animate);
+        if (isVisible) {
+            animationId = requestAnimationFrame(animate);
+        }
     }
 
     // Mouse tracking
@@ -127,19 +130,41 @@
         mousePos.y = -1000;
     });
 
+    function startLoop() {
+        if (!animationId && isVisible) {
+            animationId = requestAnimationFrame(animate);
+        }
+    }
+
+    function stopLoop() {
+        if (animationId) {
+            cancelAnimationFrame(animationId);
+            animationId = null;
+        }
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+            startLoop();
+        } else {
+            stopLoop();
+        }
+    }, { threshold: 0 });
+
     // Handle resize
     let resizeTimeout;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimeout);
         resizeTimeout = setTimeout(() => {
-            cancelAnimationFrame(animationId);
+            stopLoop();
             particles.length = 0;
             init();
-            animate();
+            if (isVisible) startLoop();
         }, 250);
     });
 
     // Start
     init();
-    animate();
+    observer.observe(canvas);
 })();

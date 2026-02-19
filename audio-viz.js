@@ -7,6 +7,8 @@
 
     let width, height;
     let time = 0;
+    let isVisible = false;
+    let rafId = null;
     const cols = 24;
     const rows = 32;
     const dots = [];
@@ -104,11 +106,6 @@
                 const b = Math.floor(accentColor.b + (accentSoft.b - accentColor.b) * intensity);
                 color = { r, g, b };
 
-                // Add glow for intense dots
-                if (intensity > 0.5) {
-                    ctx.shadowBlur = 10 * intensity;
-                    ctx.shadowColor = `rgba(${accentColor.r}, ${accentColor.g}, ${accentColor.b}, ${alpha})`;
-                }
             }
 
             // Draw dot
@@ -116,15 +113,36 @@
             ctx.beginPath();
             ctx.arc(dot.x, dot.y, radius, 0, Math.PI * 2);
             ctx.fill();
-
-            // Reset shadow
-            ctx.shadowBlur = 0;
         });
 
-        requestAnimationFrame(draw);
+        if (isVisible) {
+            rafId = requestAnimationFrame(draw);
+        }
     }
+
+    function startLoop() {
+        if (!rafId && isVisible) {
+            rafId = requestAnimationFrame(draw);
+        }
+    }
+
+    function stopLoop() {
+        if (rafId) {
+            cancelAnimationFrame(rafId);
+            rafId = null;
+        }
+    }
+
+    const observer = new IntersectionObserver(([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+            startLoop();
+        } else {
+            stopLoop();
+        }
+    }, { threshold: 0 });
 
     window.addEventListener('resize', resize);
     resize();
-    requestAnimationFrame(draw);
+    observer.observe(canvas);
 })();

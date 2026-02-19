@@ -1127,7 +1127,7 @@
                         <rect x="778" y="342" width="42" height="340" rx="21" fill="url(#wave-header)"/>
                     </svg>
                     <span style="font-size: 18px; font-weight: 600; letter-spacing: -0.02em; color: var(--text-primary);">Cadence</span>
-                    <span class="mono" style="font-size: 10px; color: var(--text-dim);">v0.3.0</span>
+                    <span id="header-version" class="mono" style="font-size: 10px; color: var(--text-dim);"></span>
                 </a>
                 <nav style="display: flex; gap: 24px; align-items: center; font-size: 13px;">
                     <a href="#tech" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Tech</a>
@@ -1352,7 +1352,7 @@
                         </div>
                         <div class="download-info">
                             <h3>
-                                Cadence v0.3.0 — Apple Silicon
+                                <span id="arm64-title">Cadence — Apple Silicon</span>
                                 <span class="download-version-badge">Latest</span>
                             </h3>
                             <div class="download-meta">macOS 12.0+ • ARM64 (M1/M2/M3/M4)</div>
@@ -1366,24 +1366,24 @@
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">File</span>
-                            <span class="download-spec-value">Cadence_0.3.0_aarch64.dmg</span>
+                            <span id="arm64-file" class="download-spec-value">—</span>
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Size</span>
-                            <span class="download-spec-value">~7 MB</span>
+                            <span id="arm64-size" class="download-spec-value">—</span>
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Released</span>
-                            <span class="download-spec-value">February 17, 2026</span>
+                            <span id="arm64-date" class="download-spec-value">—</span>
                         </div>
                     </div>
 
                     <div class="download-actions">
-                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/download/v0.3.0/Cadence_0.3.0_aarch64.dmg" class="download-button">
+                        <a id="download-arm64" href="#" class="download-button">
                             <span>↓</span>
                             <span>Download for Apple Silicon</span>
                         </a>
-                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.3.0" class="download-button download-button-secondary" target="_blank">
+                        <a id="release-notes-arm64" href="https://github.com/MaxPrehoda/cadence-landing/releases" class="download-button download-button-secondary" target="_blank">
                             Release Notes
                         </a>
                     </div>
@@ -1401,7 +1401,7 @@
                         </div>
                         <div class="download-info">
                             <h3>
-                                Cadence v0.3.0 — Intel
+                                <span id="x64-title">Cadence — Intel</span>
                                 <span class="download-version-badge">Latest</span>
                             </h3>
                             <div class="download-meta">macOS 12.0+ • x86_64 (Intel Macs)</div>
@@ -1415,24 +1415,24 @@
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">File</span>
-                            <span class="download-spec-value">Cadence_0.3.0_x64.dmg</span>
+                            <span id="x64-file" class="download-spec-value">—</span>
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Size</span>
-                            <span class="download-spec-value">~7 MB</span>
+                            <span id="x64-size" class="download-spec-value">—</span>
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Released</span>
-                            <span class="download-spec-value">February 17, 2026</span>
+                            <span id="x64-date" class="download-spec-value">—</span>
                         </div>
                     </div>
 
                     <div class="download-actions">
-                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/download/v0.3.0/Cadence_0.3.0_x64.dmg" class="download-button">
+                        <a id="download-x64" href="#" class="download-button">
                             <span>↓</span>
                             <span>Download for Intel</span>
                         </a>
-                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.3.0" class="download-button download-button-secondary" target="_blank">
+                        <a id="release-notes-x64" href="https://github.com/MaxPrehoda/cadence-landing/releases" class="download-button download-button-secondary" target="_blank">
                             Release Notes
                         </a>
                     </div>

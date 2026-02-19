@@ -5,6 +5,8 @@ const ctx = canvas.getContext('2d');
 let width, height;
 const dots = [];
 const spacing = 32;
+let isVisible = false;
+let rafId = null;
 const baseColor = { r: 87, g: 83, b: 78 }; // --text-ghost
 const accentColor = { r: 45, g: 212, b: 191 }; // --accent-primary
 
@@ -47,9 +49,33 @@ function draw(time) {
         ctx.fill();
     });
 
-    requestAnimationFrame(draw);
+    if (isVisible) {
+        rafId = requestAnimationFrame(draw);
+    }
 }
+
+function startLoop() {
+    if (!rafId && isVisible) {
+        rafId = requestAnimationFrame(draw);
+    }
+}
+
+function stopLoop() {
+    if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+    }
+}
+
+const dotGridObserver = new IntersectionObserver(([entry]) => {
+    isVisible = entry.isIntersecting;
+    if (isVisible) {
+        startLoop();
+    } else {
+        stopLoop();
+    }
+}, { threshold: 0 });
 
 window.addEventListener('resize', resize);
 resize();
-requestAnimationFrame(draw);
+dotGridObserver.observe(canvas);
