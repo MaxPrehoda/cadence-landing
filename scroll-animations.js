@@ -133,7 +133,7 @@
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const href = this.getAttribute('href');
-            if (href === '#') return;
+            if (href === '#' || !href.startsWith('#')) return;
 
             e.preventDefault();
             const target = document.querySelector(href);
