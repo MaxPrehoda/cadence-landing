@@ -96,6 +96,17 @@
                 observer.observe(downloadButtons);
             }
         }
+
+        // Generic catch-all: any element pre-marked with an animate-* class
+        // in HTML (added later for new sections) gets observed too.
+        document.querySelectorAll(
+            '.animate-fade-up, .animate-fade-in, .animate-slide-right, .animate-scale-up'
+        ).forEach((el) => {
+            if (!el.dataset.observed) {
+                el.dataset.observed = 'true';
+                observer.observe(el);
+            }
+        });
     }
 
     // Parallax scroll effect for hero

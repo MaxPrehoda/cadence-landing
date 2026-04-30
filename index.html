@@ -1195,6 +1195,223 @@
             }
         }
     </style>
+    <!-- Augmented sections — bandwidth, agents, models -->
+    <style>
+        /* Section eyebrow shared */
+        .section-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--accent-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: 20px;
+        }
+
+        /* — Bandwidth comparison cards — */
+        .bandwidth-col {
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 32px;
+            background: var(--bg-surface);
+            transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .bandwidth-col::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 8px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            background: radial-gradient(circle at top right, rgba(45,212,191,0.08), transparent 60%);
+        }
+        .bandwidth-col:hover { transform: translateY(-3px); border-color: rgba(168, 162, 158, 0.18); }
+        .bandwidth-col:hover::after { opacity: 1; }
+        .bandwidth-col.voice {
+            border-color: var(--accent-border);
+            box-shadow: 0 0 40px rgba(45, 212, 191, 0.08);
+        }
+        .bandwidth-col.voice:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 60px rgba(45, 212, 191, 0.22);
+        }
+        .bandwidth-stat {
+            font-family: var(--font-mono);
+            font-size: clamp(44px, 6vw, 64px);
+            font-weight: 600;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin: 16px 0 6px;
+        }
+        .bandwidth-col.keyboard .bandwidth-stat { color: var(--text-muted); }
+        .bandwidth-col.voice .bandwidth-stat {
+            color: var(--accent-primary);
+            text-shadow: 0 0 24px rgba(45, 212, 191, 0.32);
+        }
+        .bandwidth-list { list-style: none; font-size: 14px; line-height: 1.85; color: var(--text-secondary); }
+
+        /* — Agent dashboard preview — */
+        .agent-card {
+            background: linear-gradient(180deg, var(--bg-surface), var(--bg-elevated));
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 18px 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .agent-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--state-color, var(--accent-primary));
+            opacity: 0.6;
+            transition: opacity 0.3s ease, width 0.3s ease;
+        }
+        .agent-card:hover {
+            border-color: rgba(168, 162, 158, 0.18);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+        .agent-card:hover::before { opacity: 1; width: 3px; }
+        .agent-state-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--state-color, var(--accent-primary));
+            box-shadow: 0 0 8px var(--state-color, var(--accent-primary));
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .agent-state-dot.pulsing {
+            animation: agent-pulse 1.6s ease-in-out infinite;
+        }
+        @keyframes agent-pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.45; transform: scale(0.78); }
+        }
+
+        /* — Voice command bar — */
+        .voice-command-bar {
+            background: var(--bg-base);
+            border: 1px solid var(--accent-border);
+            border-radius: 10px;
+            padding: 22px 26px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            color: var(--text-secondary);
+            box-shadow: 0 0 60px rgba(45, 212, 191, 0.06), inset 0 0 0 1px rgba(45,212,191,0.03);
+            position: relative;
+            overflow: hidden;
+        }
+        .voice-command-bar::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -50%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+            animation: voice-scan 4.5s ease-in-out infinite;
+        }
+        @keyframes voice-scan {
+            0% { left: -50%; }
+            100% { left: 100%; }
+        }
+        .voice-command-text {
+            background: linear-gradient(90deg, var(--text-primary) 0%, var(--text-primary) 50%, var(--text-primary) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        /* — Model cards — */
+        .model-card {
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 28px;
+            background: var(--bg-surface);
+            transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .model-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-border), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .model-card:hover {
+            border-color: var(--accent-border);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(45, 212, 191, 0.12);
+        }
+        .model-card:hover::after { opacity: 1; }
+        .model-card .model-vendor {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: 14px;
+        }
+        .model-card .model-name {
+            font-family: var(--font-mono);
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 4px;
+            letter-spacing: -0.02em;
+        }
+        .model-card .model-role {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 18px 0 10px;
+        }
+        .model-card .model-desc {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.65;
+        }
+
+        /* — Inline link arrow — */
+        .inline-link {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent-primary);
+            text-decoration: none;
+            border-bottom: 1px solid var(--accent-border);
+            padding-bottom: 2px;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+        .inline-link:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        /* — Mobile responsiveness for new sections — */
+        @media (max-width: 720px) {
+            .bandwidth-col, .model-card { padding: 22px; }
+            .voice-command-bar { padding: 18px 20px; font-size: 13px; }
+        }
+
+        /* — Honor reduced-motion — */
+        @media (prefers-reduced-motion: reduce) {
+            .agent-state-dot.pulsing { animation: none; }
+            .voice-command-bar::before { animation: none; }
+        }
+    </style>
+
     <!-- Vercel Web Analytics -->
     <script>
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -1299,6 +1516,54 @@
             </div>
         </section>
 
+        <!-- The Bandwidth Problem -->
+        <section id="bandwidth" aria-label="Why voice — input bandwidth" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative;">
+            <div style="max-width: 1100px; margin: 0 auto;">
+                <div class="section-eyebrow animate-fade-up" data-delay="0">§ 01 — Input bandwidth</div>
+                <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 22ch; margin-bottom: 24px;">
+                    You can direct fifteen people in a room. You can't type to them.
+                </h2>
+                <p class="animate-fade-up" data-delay="120" style="font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 56px;">
+                    Conversations scale. Keyboards do not. The interface a human uses to drive
+                    multiple AI agents in parallel is the constraint that decides whether agentic
+                    AI is a real tool or a slow demo. Cadence treats voice as the primary input
+                    channel for one reason: nothing else keeps up.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <!-- Keyboard column -->
+                    <div class="bandwidth-col keyboard animate-fade-up" data-delay="180">
+                        <div class="mono" style="font-size: 10px; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;">Keyboard · mouse</div>
+                        <div class="bandwidth-stat">80<span style="font-size: 22px; color: var(--text-dim); margin-left: 8px; font-weight: 500;">wpm</span></div>
+                        <div class="mono" style="font-size: 12px; color: var(--text-dim); margin-bottom: 24px;">Sustained, expert</div>
+                        <ul class="bandwidth-list">
+                            <li style="color: var(--text-muted);">· Serial. One agent at a time.</li>
+                            <li style="color: var(--text-muted);">· 1.2s per mouse trip (Fitts).</li>
+                            <li style="color: var(--text-muted);">· Window switch breaks attention.</li>
+                            <li style="color: var(--text-muted);">· Addressee = where you click.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Voice column -->
+                    <div class="bandwidth-col voice animate-fade-up" data-delay="240">
+                        <div class="mono" style="font-size: 10px; color: var(--accent-primary); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;">Voice · dictation</div>
+                        <div class="bandwidth-stat">150<span style="font-size: 22px; color: var(--text-dim); margin-left: 8px; font-weight: 500;">wpm</span></div>
+                        <div class="mono" style="font-size: 12px; color: var(--text-dim); margin-bottom: 24px;">Sustained, conversational</div>
+                        <ul class="bandwidth-list">
+                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Parallel. N agents at once.</li>
+                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>&lt;200ms first token, on device.</li>
+                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Eyes free. No window switching.</li>
+                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Addressable by name.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="animate-fade-up" data-delay="320" style="margin-top: 56px; text-align: center;">
+                    <a href="/blog/dictation-is-the-ui-layer" class="inline-link">Read the full argument →</a>
+                </div>
+            </div>
+        </section>
+
         <!-- At a glance — citation-friendly summary -->
         <section id="overview" aria-label="What Cadence is" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle);">
             <div style="max-width: 880px; margin: 0 auto;">
@@ -1390,6 +1655,95 @@
                     </table>
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Agent Orchestra -->
+        <section id="agents" aria-label="Multi-agent orchestration" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative; overflow: hidden;">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <div class="section-eyebrow animate-fade-up">§ 02 — Agent orchestra</div>
+                <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 18ch; margin-bottom: 24px;">
+                    Spawn. Name. Direct. Approve.
+                </h2>
+                <p class="animate-fade-up" data-delay="120" style="font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 56px;">
+                    Run multiple Claude agents in parallel — each one named, each one addressable. Voice routes
+                    by name; the roster is your mental model. Approvals land inline, in context, never in a
+                    separate panel. State is visible at a glance.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 36px;">
+                    <!-- Atlas — streaming -->
+                    <div class="agent-card animate-fade-up" data-delay="180" style="--state-color: #2dd4bf;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                            <div class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Atlas</div>
+                            <div style="display: flex; align-items: center; gap: 7px;">
+                                <span class="agent-state-dot pulsing" style="--state-color: #2dd4bf;"></span>
+                                <span class="mono" style="font-size: 9px; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.12em;">Streaming</span>
+                            </div>
+                        </div>
+                        <div class="mono" style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">→ web_search</div>
+                        <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5;">Researching Tauri 2 audio APIs</div>
+                    </div>
+
+                    <!-- Cypher — running -->
+                    <div class="agent-card animate-fade-up" data-delay="220" style="--state-color: #2dd4bf;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                            <div class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Cypher</div>
+                            <div style="display: flex; align-items: center; gap: 7px;">
+                                <span class="agent-state-dot pulsing" style="--state-color: #2dd4bf;"></span>
+                                <span class="mono" style="font-size: 9px; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.12em;">Running</span>
+                            </div>
+                        </div>
+                        <div class="mono" style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">→ edit_file</div>
+                        <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5;">src-tauri/src/agents/router.rs</div>
+                    </div>
+
+                    <!-- Echo — awaiting approval -->
+                    <div class="agent-card animate-fade-up" data-delay="260" style="--state-color: #fbbf24;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                            <div class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Echo</div>
+                            <div style="display: flex; align-items: center; gap: 7px;">
+                                <span class="agent-state-dot pulsing" style="--state-color: #fbbf24;"></span>
+                                <span class="mono" style="font-size: 9px; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.12em;">Approval</span>
+                            </div>
+                        </div>
+                        <div class="mono" style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">⏸ run_command</div>
+                        <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5;">cargo build --release</div>
+                    </div>
+
+                    <!-- Drift — done -->
+                    <div class="agent-card animate-fade-up" data-delay="300" style="--state-color: #57534e;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+                            <div class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Drift</div>
+                            <div style="display: flex; align-items: center; gap: 7px;">
+                                <span class="agent-state-dot" style="--state-color: #57534e;"></span>
+                                <span class="mono" style="font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em;">Done</span>
+                            </div>
+                        </div>
+                        <div class="mono" style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">✓ commit</div>
+                        <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5;">12 files · 247+ · 38−</div>
+                    </div>
+                </div>
+
+                <!-- Voice command bar -->
+                <div class="voice-command-bar animate-fade-up" data-delay="360">
+                    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+                        <span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-primary); color: var(--bg-base); flex-shrink: 0;" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                        </span>
+                        <span style="color: var(--accent-primary); font-weight: 500;">›</span>
+                        <span style="color: var(--text-primary);">"Atlas keep going. Cypher approve the migration. Echo cancel."</span>
+                    </div>
+                    <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-dim); display: flex; flex-wrap: wrap; gap: 22px;">
+                        <span><span style="color: var(--accent-primary);">↳ Atlas</span> · continuing</span>
+                        <span><span style="color: var(--accent-primary);">↳ Cypher</span> · approved</span>
+                        <span><span style="color: var(--accent-primary);">↳ Echo</span> · cancelled</span>
+                    </div>
+                </div>
+
+                <p class="animate-fade-up" data-delay="420" style="font-size: 15px; line-height: 1.65; color: var(--text-muted); max-width: 60ch; margin: 36px auto 0; text-align: center;">
+                    One sentence. Three agents updated. Try doing this with a mouse.
+                </p>
             </div>
         </section>
 
@@ -1527,6 +1881,48 @@
                             <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;">Extensible</div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Built on Claude -->
+        <section id="models" aria-label="Built on Claude" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative;">
+            <div style="max-width: 1100px; margin: 0 auto;">
+                <div class="section-eyebrow animate-fade-up">§ 03 — Models</div>
+                <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 22ch; margin-bottom: 24px;">
+                    One family. Three models. Calibrated to one voice.
+                </h2>
+                <p class="animate-fade-up" data-delay="120" style="font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 56px;">
+                    Cadence runs Anthropic Claude exclusively. No GPT. No Gemini. No router. Routing happens
+                    automatically, per task type, against one consistent and very good family of models. We made
+                    the call once and built the entire product around it.
+                </p>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+                    <article class="model-card animate-fade-up" data-delay="180">
+                        <div class="model-vendor">By Anthropic</div>
+                        <div class="model-name">Opus 4.7</div>
+                        <div class="model-role">The hard ones</div>
+                        <p class="model-desc">Multi-step planning, code reasoning under uncertainty, decisions that affect the rest of the run. The frontier model in our suite.</p>
+                    </article>
+
+                    <article class="model-card animate-fade-up" data-delay="220">
+                        <div class="model-vendor">By Anthropic</div>
+                        <div class="model-name">Sonnet 4.6</div>
+                        <div class="model-role">Most agent steps</div>
+                        <p class="model-desc">Day-to-day tool use. Edits, searches, runs commands, summarizes output. The default model behind nearly every action.</p>
+                    </article>
+
+                    <article class="model-card animate-fade-up" data-delay="260">
+                        <div class="model-vendor">By Anthropic</div>
+                        <div class="model-name">Haiku 4.5</div>
+                        <div class="model-role">Command parsing</div>
+                        <p class="model-desc">Voice intent classification, command routing, fast confidence checks. Latency-critical work where Opus would be overkill.</p>
+                    </article>
+                </div>
+
+                <div class="animate-fade-up" data-delay="320" style="margin-top: 56px; text-align: center;">
+                    <a href="/blog/why-we-only-ship-claude" class="inline-link">Why one vendor →</a>
                 </div>
             </div>
         </section>
