@@ -40,11 +40,15 @@
         "description": "The engineering case for committing exclusively to Anthropic's Claude in an agentic AI product.",
         "image": "https://cadencevoice.ai/icon.png",
         "datePublished": "2026-03-25T09:00:00-07:00",
-        "dateModified": "2026-03-25T09:00:00-07:00",
+        "dateModified": "2026-04-30T12:00:00-07:00",
+        "inLanguage": "en-US",
+        "wordCount": "1300",
+        "articleSection": "Engineering",
         "author": {
             "@type": "Organization",
             "name": "Cadence Labs",
-            "url": "https://cadencevoice.ai/blog/"
+            "url": "https://cadencevoice.ai/blog/",
+            "sameAs": ["https://github.com/MaxPrehoda/cadence"]
         },
         "publisher": {
             "@type": "Organization",
@@ -55,7 +59,40 @@
             "@type": "WebPage",
             "@id": "https://cadencevoice.ai/blog/why-we-only-ship-claude.html"
         },
-        "keywords": "Claude, Anthropic, Opus, Sonnet, Haiku, agentic AI, tool use, prompt caching, MCP, computer use, model selection"
+        "isPartOf": {
+            "@type": "Blog",
+            "@id": "https://cadencevoice.ai/blog/",
+            "name": "Cadence Labs"
+        },
+        "keywords": "Claude, Anthropic, Opus 4.7, Sonnet 4.6, Haiku 4.5, agentic AI, tool use, prompt caching, MCP, computer use, model selection, single-vendor AI",
+        "mentions": [
+            { "@type": "SoftwareApplication", "name": "Claude", "applicationCategory": "AIApplication", "operatingSystem": "Web/API" },
+            { "@type": "Organization", "name": "Anthropic", "url": "https://www.anthropic.com/" }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Cadence", "item": "https://cadencevoice.ai/" },
+            { "@type": "ListItem", "position": 2, "name": "Writing", "item": "https://cadencevoice.ai/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Why we only ship Claude", "item": "https://cadencevoice.ai/blog/why-we-only-ship-claude.html" }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://cadencevoice.ai/blog/why-we-only-ship-claude.html#webpage",
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".article-title", ".article-dek", ".article-body p:first-of-type"]
+        }
     }
     </script>
 
@@ -132,7 +169,7 @@
 
         <p>Every major model family has a personality. It comes through in tool selection, error messages, code style, refusal patterns, and the way it asks clarifying questions. Anthropic's models are direct, opinionated, and willing to say <em>"I don't know."</em> They push back when a request is malformed instead of confabulating an answer.</p>
 
-        <p>That voice fits our product. It also creates compounding returns: every prompt we tune, every system message we write, every UI affordance we build around model output is calibrated to one behavioral profile. A multi-model product has to write prompts that work across an averaged behavioral surface — which means writing for the lowest-common-denominator model in the rotation. Less optionality, more depth.</p>
+        <p>That voice fits our product. It also creates compounding returns. Every prompt we tune, every system message, every UI affordance built around model output gets calibrated to one consistent behavioral profile. A multi-model product writes prompts that have to work across an averaged behavioral surface, which means writing for the lowest-common-denominator model in the rotation. We chose less optionality and more depth, and we don't regret it.</p>
 
         <h2><span class="section-num">§04</span> The features only available downstream of commitment</h2>
 
@@ -144,13 +181,13 @@
 
         <p><strong>Computer use.</strong> Anthropic shipped a model trained to operate a screen. We use it. There is no abstraction layer that papers over <em>"this model can drive a mouse and that one cannot."</em> Either you commit to the capability or you build around its absence.</p>
 
-        <p><strong>MCP.</strong> The Model Context Protocol Anthropic open-sourced is the most coherent agent-tool interface anyone has shipped. We built our broker on it. Every tool Cadence exposes — system actions, file I/O, app integrations — speaks MCP natively. That stack is portable across Claude versions and survives model upgrades without rewriting tool definitions.</p>
+        <p><strong>MCP.</strong> The <a href="https://modelcontextprotocol.io/" rel="nofollow">Model Context Protocol</a> Anthropic open-sourced is the most coherent agent-tool interface anyone has shipped. We built our broker on it. Every tool Cadence exposes (system actions, file I/O, app integrations) speaks MCP natively. The stack is portable across Claude versions and survives model upgrades without rewriting tool definitions.</p>
 
-        <p>Each of these features is small in isolation. Together they are the difference between a wrapper and a product.</p>
+        <p>None of these features is decisive on its own. Stacked, they're what separates a Claude-flavored wrapper from a product whose entire architecture assumes one model family.</p>
 
         <h2><span class="section-num">§05</span> The research direction is the right one</h2>
 
-        <p>The serious AI safety work happening in 2026 — interpretability, constitutional AI, model welfare, sandboxing for computer use, scalable oversight — is happening at Anthropic. Other labs treat these as PR exercises or skip them entirely. Anthropic publishes results, ships them into the model, and lets the safety team gate releases.</p>
+        <p>The serious AI safety work in 2026 is happening at Anthropic. <a href="https://www.anthropic.com/research" rel="nofollow">Interpretability research</a>, constitutional AI, model welfare, sandboxing for computer use, scalable oversight: each of these has working artifacts you can read, not press releases you can't. Other labs treat them as PR exercises or skip them entirely. Anthropic publishes results, ships them into the model, and lets the safety team gate releases.</p>
 
         <p>That is not a soft preference. It is a bet about which lab will still be shipping useful frontier models in 2030 and which will have either capped out, pivoted, or shipped something that breaks loudly enough to lose its enterprise contracts. We are betting on the lab that is doing the science.</p>
 
@@ -160,17 +197,17 @@
 
         <p>We have heard the complaints. Refusal rates on edge-case prompts. Pricing per token. Context-window economics. Latency on Opus calls.</p>
 
-        <p>Some of it is real. Most of it is solved at the product layer. Caching brings cost down by an order of magnitude. Streaming hides latency. Prompt design pulls refusal rates near zero for legitimate use cases. The criticism is loudest from people building shallow integrations and rotating it constantly. Companies doing depth work with Claude — and there are now hundreds — do not have these problems anymore.</p>
+        <p>Some of it is real. Most of it is solved at the product layer. <a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" rel="nofollow">Prompt caching</a> brings cost down by roughly an order of magnitude. Streaming hides latency. Prompt design pulls refusal rates near zero for legitimate use cases. The complaints are loudest from people building shallow integrations and rotating providers constantly. The hundreds of companies doing depth work with Claude have largely stopped having these problems.</p>
 
         <p>We picked the constraint. The product is better for it.</p>
 
         <h2><span class="section-num">§07</span> What this means in practice</h2>
 
-        <p>You will never see a model picker in Cadence. You will not be asked to choose between speed and quality. We make those decisions for you, per request, against one consistent and very good family of models.</p>
+        <p>There's no model picker in Cadence and there isn't going to be one. The choice between speed and quality gets made automatically, per request, against one consistent and very good family of models. We took the responsibility of being right about that choice. Users don't have to.</p>
 
-        <p>Haiku 4.5 handles command parsing and quick classifications. Sonnet 4.6 runs most agent steps. Opus 4.7 takes the hard ones — multi-step plans, code reasoning under uncertainty, decisions that affect the rest of the run. The routing is automatic, deterministic per task type, and tuned against quality outcomes rather than per-token cost.</p>
+        <p>The routing layer is straightforward. Haiku 4.5 handles command parsing and quick classifications. Sonnet 4.6 runs most agent steps. Opus 4.7 takes the hard ones: multi-step plans, code reasoning under uncertainty, decisions that affect the rest of the run. The routing is deterministic per task type and tuned against quality outcomes rather than per-token cost.</p>
 
-        <p>If Anthropic ships something better, we update the day it lands. Until then, every pixel of this product is calibrated to Claude.</p>
+        <p>If Anthropic ships something better, we update the day it lands. Until then, every pixel of this product is calibrated to Claude. The case for that choice is what <a href="/blog/cadence-labs-ui-of-agency">we built Cadence Labs to write down</a>, and the consequence of it is what <a href="/">the product</a> looks like in practice.</p>
 
     </div>
 

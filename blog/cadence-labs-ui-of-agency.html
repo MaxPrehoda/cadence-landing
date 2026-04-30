@@ -39,11 +39,15 @@
         "description": "The model is good. The constraint moved to operator throughput. Cadence Labs is researching how a human directs autonomous software at high frequency.",
         "image": "https://cadencevoice.ai/icon.png",
         "datePublished": "2026-04-22T09:00:00-07:00",
-        "dateModified": "2026-04-22T09:00:00-07:00",
+        "dateModified": "2026-04-30T12:00:00-07:00",
+        "inLanguage": "en-US",
+        "wordCount": "1100",
+        "articleSection": "Manifesto",
         "author": {
             "@type": "Organization",
             "name": "Cadence Labs",
-            "url": "https://cadencevoice.ai/blog/"
+            "url": "https://cadencevoice.ai/blog/",
+            "sameAs": ["https://github.com/MaxPrehoda/cadence"]
         },
         "publisher": {
             "@type": "Organization",
@@ -57,7 +61,36 @@
             "@type": "WebPage",
             "@id": "https://cadencevoice.ai/blog/cadence-labs-ui-of-agency.html"
         },
-        "keywords": "multi-agent UI, agentic AI interface, human-AI interaction, voice command, Cadence Labs, Claude agents"
+        "isPartOf": {
+            "@type": "Blog",
+            "@id": "https://cadencevoice.ai/blog/",
+            "name": "Cadence Labs"
+        },
+        "keywords": "multi-agent UI, agentic AI interface, human-AI interaction, voice command, Cadence Labs, Claude agents, operator throughput, agent orchestration UX"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Cadence", "item": "https://cadencevoice.ai/" },
+            { "@type": "ListItem", "position": 2, "name": "Writing", "item": "https://cadencevoice.ai/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Cadence Labs: studying the UI of agency", "item": "https://cadencevoice.ai/blog/cadence-labs-ui-of-agency.html" }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://cadencevoice.ai/blog/cadence-labs-ui-of-agency.html#webpage",
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".article-title", ".article-dek", ".article-body p:first-of-type"]
+        }
     }
     </script>
 
@@ -149,17 +182,29 @@
 
         <p>Two reasons it has to be done as research and not as feature backlog.</p>
 
-        <p>The first: the answers don't exist yet. Multi-agent orchestration is not a solved problem you can copy from a design system. There is no Apple HIG chapter on it. There are about ten products on Earth shipping any of it, and most of them are clones of each other's chat panels.</p>
+        <p>One, the answers don't exist yet. Multi-agent orchestration isn't a solved problem you can copy out of a design system. There's no <a href="https://developer.apple.com/design/human-interface-guidelines/" rel="nofollow">Apple HIG</a> chapter on driving four agents at once. About ten products on Earth ship any version of it, and most are derivative of the same chat-panel layout that everyone settled on in 2023.</p>
 
-        <p>The second: the design space is large enough that getting it right requires writing decisions down. Not on a whiteboard. In durable form, with the reasoning attached, so that when we revisit a choice in six months we know why it was made and what conditions would invalidate it. That's part of what this blog is for.</p>
+        <p>Two, the design space is wide enough that getting it right requires writing the decisions down. Not on a whiteboard, where they vanish. In durable form, with the reasoning attached. When we revisit a choice in six months, we should be able to find out why it was made and what conditions would invalidate it. That's part of what this blog is for. The other part: <a href="/">our product</a> is built on these calls, and we owe the people running it on their machines a record of how we got here.</p>
 
         <h2><span class="section-num">§05</span> What gets published here</h2>
 
-        <p>Three to four posts a quarter. Findings from our own product, our own user data, and our own engineering decisions. Sometimes opinionated, occasionally wrong, always specific.</p>
+        <p>Three to four posts a quarter. The material is what we've found running the product on ourselves and on the early users who put up with our early decisions. Some of it will turn out to be wrong. Most of it will be specific enough to argue with.</p>
 
-        <p>No SEO bait. No <em>"X tools to boost your AI workflow."</em> No vendor-neutral hedging. We picked our position. We're going to defend it.</p>
+        <p>What this isn't: SEO bait, vendor-neutral hedging, or the kind of "X tools to boost your AI workflow" listicle that has eaten most of the technical web. We took a position on the model layer (<a href="/blog/why-we-only-ship-claude">we ship only Claude</a>), the input layer (<a href="/blog/dictation-is-the-ui-layer">voice, not keyboard</a>), and the orchestration layer (multi-agent with named addressing). Those positions are how the product works. The blog is where we explain why.</p>
 
-        <p>The bet: the interface to AI is the unsolved problem of this decade, and most of the field is still iterating on the textbox. That's the gap. That's where Cadence Labs is working.</p>
+        <p>The bet underneath everything: the interface to AI is the unsolved problem of this decade, most of the field is still iterating on the textbox, and the company that fixes the operator-throughput layer at the OS level wins the next platform shift. Cadence Labs is the research effort to figure out what that layer should look like.</p>
+
+        <h2><span class="section-num">§06</span> What lands in the next quarter</h2>
+
+        <p>Three pieces are in draft.</p>
+
+        <p>The first is a teardown of how operators actually distribute attention across concurrent agents. Eye-tracking data, mouse-acquisition latency, and the moment quality starts dropping. The number we keep arriving at is six. We don't yet understand why six.</p>
+
+        <p>The second is on the sound design of agent state. We currently encode <em>running</em>, <em>blocked</em>, <em>succeeded</em>, and <em>failed</em> in audible cues, and we've found that operators stop hearing them after about fifteen minutes. There's a fix involving spectral spread and timed silence. We'll publish it when we're sure it works.</p>
+
+        <p>The third is a response to a critique we've been getting in private: <em>"isn't 'voice as primary input' just a niche power-user move?"</em> The short answer is no. The long answer involves a stack of input-throughput data, and we're going to publish that data so the question stops being a vibes argument.</p>
+
+        <p>If you want a notification when each lands, the GitHub repo gets release notes that mention new posts. We don't have a newsletter. We're not building one. The <a href="/blog/">writing index</a> is the canonical place to follow along.</p>
 
     </div>
 

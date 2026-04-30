@@ -37,14 +37,18 @@
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": "Dictation is the UI layer for agentic AI",
-        "description": "Why voice input — local, low-latency, name-routed — is the only operator interface that scales to multi-agent control.",
+        "description": "Why voice input, local and low-latency and name-routed, is the only operator interface that scales to multi-agent control.",
         "image": "https://cadencevoice.ai/icon.png",
         "datePublished": "2026-04-08T09:00:00-07:00",
-        "dateModified": "2026-04-08T09:00:00-07:00",
+        "dateModified": "2026-04-30T12:00:00-07:00",
+        "inLanguage": "en-US",
+        "wordCount": "1500",
+        "articleSection": "Interaction Design",
         "author": {
             "@type": "Organization",
             "name": "Cadence Labs",
-            "url": "https://cadencevoice.ai/blog/"
+            "url": "https://cadencevoice.ai/blog/",
+            "sameAs": ["https://github.com/MaxPrehoda/cadence"]
         },
         "publisher": {
             "@type": "Organization",
@@ -55,7 +59,36 @@
             "@type": "WebPage",
             "@id": "https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html"
         },
-        "keywords": "dictation, voice control, agent orchestration, multi-agent UI, local Whisper, voice as interface, Claude agents, macOS voice"
+        "isPartOf": {
+            "@type": "Blog",
+            "@id": "https://cadencevoice.ai/blog/",
+            "name": "Cadence Labs"
+        },
+        "keywords": "dictation, voice control, agent orchestration, multi-agent UI, local Whisper, voice as interface, Claude agents, macOS voice, Fitts's Law, push-to-talk"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Cadence", "item": "https://cadencevoice.ai/" },
+            { "@type": "ListItem", "position": 2, "name": "Writing", "item": "https://cadencevoice.ai/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Dictation is the UI layer for agentic AI", "item": "https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html" }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html#webpage",
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".article-title", ".article-dek", ".article-body p:first-of-type"]
+        }
     }
     </script>
 
@@ -118,11 +151,11 @@
 
         <h2><span class="section-num">§02</span> Why GUIs hit a ceiling</h2>
 
-        <p>Click-driven interfaces encode every action as a coordinate plus a target. A mouse trip averages 1.2 seconds end-to-end including target reacquisition (Fitts' Law, well-replicated since 1954). A typical multi-agent operation — switch window, navigate to the right agent card, click an approval — runs four seconds of operator time. During those four seconds, an agent on the other side of the screen has emitted six thousand tokens of new context.</p>
+        <p>Click-driven interfaces encode every action as a coordinate plus a target. A mouse trip averages 1.2 seconds end-to-end including target reacquisition (<a href="https://en.wikipedia.org/wiki/Fitts%27s_law" rel="nofollow">Fitts's Law</a>, well-replicated since 1954). A typical multi-agent operation runs about four seconds of operator time: switch window, navigate to the agent card, click an approval. During those four seconds, an agent on the other side of the screen has emitted six thousand tokens of new context.</p>
 
         <p>The math compounds with concurrency. Three agents in parallel, each waiting on operator decisions, turns the GUI driver into a serialization point. The agents are async. The human, working through a mouse, is not.</p>
 
-        <p>Bigger buttons don't fix this. Better keyboard shortcuts don't fix this. The problem is that the input channel and the response channel are sharing one cursor.</p>
+        <p>Bigger buttons don't fix this. Better keyboard shortcuts don't either. The deeper problem is that the input channel and the response channel are sharing one cursor.</p>
 
         <h2><span class="section-num">§03</span> Why voice fits the shape of the problem</h2>
 
@@ -130,7 +163,7 @@
 
         <p><strong>Concurrency-safe input.</strong> Speaking <em>"approve the migration"</em> while looking at a different agent's output costs almost nothing. Switching windows to click an approval button breaks visual attention. The eyes and the voice are independent muscle groups; the eyes and the cursor are not.</p>
 
-        <p><strong>Name-based addressing.</strong> <em>"Atlas, kill that"</em> routes to one of N agents in a single syntactic move. Cursor-driven systems encode the addressee in <em>where</em> you click — which means the cursor has to physically be there before the command can begin. Voice routes by name in any window state.</p>
+        <p><strong>Name-based addressing.</strong> <em>"Atlas, kill that"</em> routes to one of N agents in a single syntactic move. In cursor-driven systems the addressee is encoded in <em>where</em> you click, so the cursor has to physically be there before the command can begin. Voice routes by name in any window state. The corollary: the more agents you run, the larger voice's lead grows.</p>
 
         <p><strong>Granularity at speed.</strong> <em>"Approve the migration but skip the rename"</em> is one second of speech and unambiguous to a properly-routed parser. Clicking the same intent requires three discrete UI affordances, all visible, all correctly hit-tested. The number of distinct commands a voice operator can issue per minute exceeds the number a click operator can issue by an order of magnitude. We've measured this. The gap is wider than the WPM ratio because of the per-action setup cost on the cursor side.</p>
 
@@ -158,15 +191,27 @@
 
         <h3>Confidence-aware execution</h3>
 
-        <p>High-confidence commands execute. Medium-confidence commands prompt a single-keystroke confirmation. Low-confidence is rejected silently. The thresholds are tuned against false-positive cost — accidentally killing an agent is much worse than missing a command — not against transcript accuracy.</p>
+        <p>High-confidence commands execute. Medium-confidence commands prompt a single-keystroke confirmation. Low-confidence is rejected silently. The thresholds are tuned against false-positive cost, not against transcript accuracy. Accidentally killing an agent is much worse than missing a command, and the tuning reflects that asymmetry.</p>
 
         <h2><span class="section-num">§05</span> The substrate is the product</h2>
 
         <p>We did not set out to build a dictation app. We set out to build the operator interface for multi-agent AI. Dictation is the substrate that makes that interface possible at speeds the GUI cannot match.</p>
 
-        <p>If you are driving one agent, GUI works. Type, read, type, read. If you are driving four — and four is realistic now, not a future scenario — GUI is the bottleneck. You spend more time orchestrating windows than directing work.</p>
+        <p>If you are driving one agent, GUI works. Type, read, type, read. If you are driving four, and four is realistic now rather than a future scenario, GUI is the bottleneck. You spend more time orchestrating windows than directing work.</p>
 
         <p>The interface model that scales is voice in, screen out, agents named and addressable, state visible at a glance. Cadence is what that looks like running on a Mac.</p>
+
+        <h2><span class="section-num">§06</span> Where this falls down</h2>
+
+        <p>Voice as primary input is not a universal claim. There are three places where it's the wrong choice, and we want to be specific about them so the position doesn't read as ideology.</p>
+
+        <p><strong>Open offices.</strong> Shared desks, glass meeting rooms, hot-desking. Speaking commands draws attention you may not want, and the social cost is real. Push-to-talk with a held key helps. Foot pedals help more. Some of our heavier users wear bone-conduction headsets with directional mics, which moves the social problem rather than eliminating it. We're not going to pretend this is solved at the OS layer.</p>
+
+        <p><strong>High-precision text editing.</strong> Renaming a variable, fixing a typo, picking the right closing brace. These are tasks where the cursor is faster than naming what you want, because the cursor's whole purpose is high-precision spatial selection. Cadence stays out of the way during them. The hotkey is silent until you press it.</p>
+
+        <p><strong>Searching for the words.</strong> Voice is great when you know what you want to say and bad when you're inventing it. Brainstorming, exploratory writing, hunting for a phrase. These are jobs for the keyboard. We don't try to sell voice as an everything-tool. <a href="/blog/cadence-labs-ui-of-agency">Voice in, screen out</a> is a design principle, not a religious commitment.</p>
+
+        <p>Where does that leave the thesis? Roughly: voice wins decisively when you're directing work and reading results, which is the dominant shape of agent operation. It loses when you're producing prose, formatting it precisely, or talking to a system you don't have words for yet. We built Cadence for the first kind of work and we put real effort into staying out of the way during the second.</p>
 
     </div>
 
