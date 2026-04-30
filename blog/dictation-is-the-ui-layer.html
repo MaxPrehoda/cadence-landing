@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictation is the UI layer for agentic AI — Cadence</title>
+
+    <meta name="description" content="Frontier models output 1500+ words per minute. Click-driven interfaces serialize at four seconds per decision. Voice is the only input channel that scales to multi-agent control — and it has to be local, fast, and routed by name.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Dictation is the UI layer for agentic AI">
+    <meta property="og:description" content="Frontier models output 1500+ words per minute. Click-driven UIs serialize at four seconds per decision. Voice is the only input channel that scales.">
+    <meta property="og:url" content="https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html">
+    <meta property="og:image" content="https://cadencevoice.ai/icon.png">
+    <meta property="article:published_time" content="2026-04-08T09:00:00-07:00">
+    <meta property="article:author" content="Cadence Labs">
+    <meta property="article:section" content="Interaction Design">
+    <meta property="article:tag" content="voice control">
+    <meta property="article:tag" content="dictation">
+    <meta property="article:tag" content="agent orchestration">
+    <meta property="article:tag" content="local AI">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dictation is the UI layer for agentic AI">
+    <meta name="twitter:description" content="Models output 1500+ wpm. Click UIs serialize at four seconds per decision. Voice is the only input channel that scales.">
+    <meta name="twitter:image" content="https://cadencevoice.ai/icon.png">
+
+    <meta name="theme-color" content="#0c0a09">
+    <link rel="icon" type="image/png" href="/icon.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Dictation is the UI layer for agentic AI",
+        "description": "Why voice input — local, low-latency, name-routed — is the only operator interface that scales to multi-agent control.",
+        "image": "https://cadencevoice.ai/icon.png",
+        "datePublished": "2026-04-08T09:00:00-07:00",
+        "dateModified": "2026-04-08T09:00:00-07:00",
+        "author": {
+            "@type": "Organization",
+            "name": "Cadence Labs",
+            "url": "https://cadencevoice.ai/blog/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Cadence",
+            "logo": { "@type": "ImageObject", "url": "https://cadencevoice.ai/icon.png" }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html"
+        },
+        "keywords": "dictation, voice control, agent orchestration, multi-agent UI, local Whisper, voice as interface, Claude agents, macOS voice"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-brand">cadence<span class="accent">·</span>labs</a>
+        <div class="nav-links">
+            <a href="/">Product</a>
+            <a href="/blog/" class="active">Writing</a>
+            <a href="https://github.com/MaxPrehoda/cadence" target="_blank" rel="noopener">Source</a>
+        </div>
+    </div>
+</nav>
+
+<article class="article">
+
+    <div class="meta-strip">
+        <span class="tag">§ Interaction</span>
+        <span>2026 · 04 · 08</span>
+        <span class="sep">/</span>
+        <span>5 min read</span>
+        <span class="sep">/</span>
+        <span>Cadence Labs № 02</span>
+    </div>
+
+    <h1 class="article-title">Dictation is the UI layer for agentic AI.</h1>
+
+    <p class="article-dek">
+        Models output 1500 words per minute. Click-driven interfaces serialize at four seconds per decision. Voice is the only input channel that scales to multi-agent control — provided you build it correctly.
+    </p>
+
+    <div class="byline">
+        <span class="author">By Cadence Labs</span> · Filed in Interaction Design
+    </div>
+
+    <div class="article-body">
+
+        <h2><span class="section-num">§01</span> The throughput problem</h2>
+
+        <p>A skilled typist sustains 80 words per minute. Sustained professional dictation runs 150 to 180. Reading comprehension peaks around 250 to 300. Frontier LLMs produce between 100 and 500 tokens per second at the API layer — call it 600 to 3,000 words per minute, depending on the model.</p>
+
+        <div class="spec">
+            <span class="spec-label">Channel bandwidth · 2026</span>
+            <div class="spec-row"><span class="k">Operator typing</span><span class="v">~80 wpm</span></div>
+            <div class="spec-row"><span class="k">Operator dictation</span><span class="v">~150 wpm</span></div>
+            <div class="spec-row"><span class="k">Operator reading</span><span class="v">~280 wpm</span></div>
+            <div class="spec-row"><span class="k">Frontier model output</span><span class="v">~1,500 wpm</span></div>
+        </div>
+
+        <p>Two years ago this was fine. You typed a prompt, you read the answer, the limiting factor was the model. The model is now cheap and fast and running tools. The constraint moved.</p>
+
+        <p>It moved to the operator. Specifically, the channel from operator intent to system action.</p>
+
+        <h2><span class="section-num">§02</span> Why GUIs hit a ceiling</h2>
+
+        <p>Click-driven interfaces encode every action as a coordinate plus a target. A mouse trip averages 1.2 seconds end-to-end including target reacquisition (Fitts' Law, well-replicated since 1954). A typical multi-agent operation — switch window, navigate to the right agent card, click an approval — runs four seconds of operator time. During those four seconds, an agent on the other side of the screen has emitted six thousand tokens of new context.</p>
+
+        <p>The math compounds with concurrency. Three agents in parallel, each waiting on operator decisions, turns the GUI driver into a serialization point. The agents are async. The human, working through a mouse, is not.</p>
+
+        <p>Bigger buttons don't fix this. Better keyboard shortcuts don't fix this. The problem is that the input channel and the response channel are sharing one cursor.</p>
+
+        <h2><span class="section-num">§03</span> Why voice fits the shape of the problem</h2>
+
+        <p>Voice has three properties that matter for agent orchestration:</p>
+
+        <p><strong>Concurrency-safe input.</strong> Speaking <em>"approve the migration"</em> while looking at a different agent's output costs almost nothing. Switching windows to click an approval button breaks visual attention. The eyes and the voice are independent muscle groups; the eyes and the cursor are not.</p>
+
+        <p><strong>Name-based addressing.</strong> <em>"Atlas, kill that"</em> routes to one of N agents in a single syntactic move. Cursor-driven systems encode the addressee in <em>where</em> you click — which means the cursor has to physically be there before the command can begin. Voice routes by name in any window state.</p>
+
+        <p><strong>Granularity at speed.</strong> <em>"Approve the migration but skip the rename"</em> is one second of speech and unambiguous to a properly-routed parser. Clicking the same intent requires three discrete UI affordances, all visible, all correctly hit-tested. The number of distinct commands a voice operator can issue per minute exceeds the number a click operator can issue by an order of magnitude. We've measured this. The gap is wider than the WPM ratio because of the per-action setup cost on the cursor side.</p>
+
+        <p>The asymmetry is the design point. Voice is the command channel because it is bandwidth-efficient for emit. Screen is the response channel because it is bandwidth-efficient for consume. Don't try to use either channel for both.</p>
+
+        <h2><span class="section-num">§04</span> What dictation has to be to make this work</h2>
+
+        <p>Most dictation is wrong for agent control. Voice assistants and traditional speech-to-text were built for short queries to a single endpoint, with cloud round-trips and ambiguous wake words. Operating a multi-agent system needs something different.</p>
+
+        <h3>Local execution</h3>
+
+        <p>A 400ms cloud round-trip per command is fine for <em>"what's the weather."</em> It is lethal in a flow where you issue a command every five to fifteen seconds. We run Whisper locally; first transcript token lands in under 200ms on Apple Silicon. Cloud-only dictation is a non-starter for this use case, regardless of which model is in the cloud.</p>
+
+        <h3>Persistent listening with cheap activation</h3>
+
+        <p>Wake words are friction. A held hotkey is faster, more deliberate, and works in noisy environments. We default to push-to-talk and let users opt into wake-word activation. The activation cost has to round to zero or operators stop using the channel.</p>
+
+        <h3>Context capture at command time</h3>
+
+        <p>Every command attaches the active app, the current selection, the focused agent, and the clipboard. The parser disambiguates <em>"approve that"</em> without asking back. Context-free voice command systems force the operator to over-specify, which negates the speed advantage.</p>
+
+        <h3>Routing, not monolithic intent</h3>
+
+        <p>Commands fan out to one of: a system action, a specific agent by name, the agent currently in focus, or a broadcast. Routing is part of the parse, not a step after it. This is what lets <em>"Atlas, kill that. Cypher, keep going"</em> resolve in one utterance.</p>
+
+        <h3>Confidence-aware execution</h3>
+
+        <p>High-confidence commands execute. Medium-confidence commands prompt a single-keystroke confirmation. Low-confidence is rejected silently. The thresholds are tuned against false-positive cost — accidentally killing an agent is much worse than missing a command — not against transcript accuracy.</p>
+
+        <h2><span class="section-num">§05</span> The substrate is the product</h2>
+
+        <p>We did not set out to build a dictation app. We set out to build the operator interface for multi-agent AI. Dictation is the substrate that makes that interface possible at speeds the GUI cannot match.</p>
+
+        <p>If you are driving one agent, GUI works. Type, read, type, read. If you are driving four — and four is realistic now, not a future scenario — GUI is the bottleneck. You spend more time orchestrating windows than directing work.</p>
+
+        <p>The interface model that scales is voice in, screen out, agents named and addressable, state visible at a glance. Cadence is what that looks like running on a Mac.</p>
+
+    </div>
+
+    <p class="endmark"><span class="em-glyph">§</span> END · Cadence Labs № 02 · Filed 2026/04/08</p>
+
+    <div class="cross-links">
+        <div class="cross-links-label">Read next</div>
+        <a href="why-we-only-ship-claude.html"><span class="arrow">→</span>Why we only ship Claude</a>
+        <a href="cadence-labs-ui-of-agency.html"><span class="arrow">→</span>Cadence Labs: studying the UI of agency</a>
+    </div>
+
+</article>
+
+<footer class="footer">
+    <a href="/">Cadence</a>
+    <a href="/blog/">Writing</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/faq.html">FAQ</a>
+    <div style="margin-top: 16px; color: var(--text-ghost);">© 2026 Cadence Labs · Built on Claude</div>
+</footer>
+
+</body>
+</html>

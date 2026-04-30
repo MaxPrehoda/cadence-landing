@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why we only ship Claude — Cadence</title>
+
+    <meta name="description" content="Multi-model routing is the default in 2026. Cadence runs exclusively on Anthropic's Claude — Opus, Sonnet, Haiku — and nothing else. The product is better for the constraint, and we're going to defend the choice.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://cadencevoice.ai/blog/why-we-only-ship-claude.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Why we only ship Claude">
+    <meta property="og:description" content="Multi-model routing is the default in 2026. We picked one family — Anthropic's Claude — and committed. Here is the engineering case.">
+    <meta property="og:url" content="https://cadencevoice.ai/blog/why-we-only-ship-claude.html">
+    <meta property="og:image" content="https://cadencevoice.ai/icon.png">
+    <meta property="article:published_time" content="2026-03-25T09:00:00-07:00">
+    <meta property="article:author" content="Cadence Labs">
+    <meta property="article:section" content="Engineering">
+    <meta property="article:tag" content="Anthropic">
+    <meta property="article:tag" content="Claude">
+    <meta property="article:tag" content="agentic AI">
+    <meta property="article:tag" content="model selection">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Why we only ship Claude">
+    <meta name="twitter:description" content="Multi-model is the default. We picked one family and committed. The engineering case.">
+    <meta name="twitter:image" content="https://cadencevoice.ai/icon.png">
+
+    <meta name="theme-color" content="#0c0a09">
+    <link rel="icon" type="image/png" href="/icon.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Why we only ship Claude",
+        "description": "The engineering case for committing exclusively to Anthropic's Claude in an agentic AI product.",
+        "image": "https://cadencevoice.ai/icon.png",
+        "datePublished": "2026-03-25T09:00:00-07:00",
+        "dateModified": "2026-03-25T09:00:00-07:00",
+        "author": {
+            "@type": "Organization",
+            "name": "Cadence Labs",
+            "url": "https://cadencevoice.ai/blog/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Cadence",
+            "logo": { "@type": "ImageObject", "url": "https://cadencevoice.ai/icon.png" }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://cadencevoice.ai/blog/why-we-only-ship-claude.html"
+        },
+        "keywords": "Claude, Anthropic, Opus, Sonnet, Haiku, agentic AI, tool use, prompt caching, MCP, computer use, model selection"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-brand">cadence<span class="accent">·</span>labs</a>
+        <div class="nav-links">
+            <a href="/">Product</a>
+            <a href="/blog/" class="active">Writing</a>
+            <a href="https://github.com/MaxPrehoda/cadence" target="_blank" rel="noopener">Source</a>
+        </div>
+    </div>
+</nav>
+
+<article class="article">
+
+    <div class="meta-strip">
+        <span class="tag">§ Engineering</span>
+        <span>2026 · 03 · 25</span>
+        <span class="sep">/</span>
+        <span>5 min read</span>
+        <span class="sep">/</span>
+        <span>Cadence Labs № 03</span>
+    </div>
+
+    <h1 class="article-title">Why we only ship Claude.</h1>
+
+    <p class="article-dek">
+        Multi-model routing is the default pattern in 2026. We picked one family and committed. Here is the engineering case.
+    </p>
+
+    <div class="byline">
+        <span class="author">By Cadence Labs</span> · Filed in Engineering
+    </div>
+
+    <div class="article-body">
+
+        <h2><span class="section-num">§01</span> The position</h2>
+
+        <p>Cadence runs Claude. Opus 4.7, Sonnet 4.6, Haiku 4.5. That is the entire model lineup. No GPT, no Gemini, no Llama, no router, no <em>"best model per task"</em> abstraction layer.</p>
+
+        <p>This is contrarian. The dominant pattern in AI products today is multi-model: pick the cheapest model that passes your eval, swap when prices change, route by latency. It looks like flexibility. We think it is mostly cope.</p>
+
+        <h2><span class="section-num">§02</span> Tool use is the only benchmark that matters for this product</h2>
+
+        <p>Cadence is an agent product. Agents call tools. Multi-step tool use under load is where models actually differ from each other, and most public evals do not measure it.</p>
+
+        <p>Our internal benchmark, run quarterly:</p>
+
+        <ul>
+            <li>40-task suite across 8 tool categories — filesystem, shell, search, code edit, computer use, MCP, web fetch, structured output</li>
+            <li>Tasks require 4 to 12 tool calls in sequence with state dependencies between them</li>
+            <li>Failure modes scored: dropped calls, hallucinated arguments, infinite loops, premature completion, cost runaway</li>
+        </ul>
+
+        <div class="spec">
+            <span class="spec-label">Internal tool-use benchmark · 2026 · Q1</span>
+            <div class="spec-row"><span class="k">Claude Opus 4.7</span><span class="v">94% pass</span></div>
+            <div class="spec-row"><span class="k">Closest competitor (rotating)</span><span class="v">71% pass</span></div>
+            <div class="spec-row"><span class="k">Open-weight frontier (8B class)</span><span class="v">38% pass</span></div>
+            <div class="spec-row"><span class="k">Gap, four runs running</span><span class="v">~22 pp · stable</span></div>
+        </div>
+
+        <p>You can argue with our methodology. You can't argue with the user-facing impact. Agent products built on Opus feel reliable. Agent products built on the rest feel like demos that hit the showroom floor too early.</p>
+
+        <h2><span class="section-num">§03</span> Coherence beats configurability</h2>
+
+        <p>Every major model family has a personality. It comes through in tool selection, error messages, code style, refusal patterns, and the way it asks clarifying questions. Anthropic's models are direct, opinionated, and willing to say <em>"I don't know."</em> They push back when a request is malformed instead of confabulating an answer.</p>
+
+        <p>That voice fits our product. It also creates compounding returns: every prompt we tune, every system message we write, every UI affordance we build around model output is calibrated to one behavioral profile. A multi-model product has to write prompts that work across an averaged behavioral surface — which means writing for the lowest-common-denominator model in the rotation. Less optionality, more depth.</p>
+
+        <h2><span class="section-num">§04</span> The features only available downstream of commitment</h2>
+
+        <p>Single-vendor commitment unlocks features that routing layers cannot expose:</p>
+
+        <p><strong>Prompt caching.</strong> A 90% discount on repeat tokens turns long-context agent flows from prohibitive to default. We cache aggressively across system prompts, tool definitions, and conversation prefixes. Routers cannot do this — the cache key isn't portable across vendors, and the price/latency model changes underneath them.</p>
+
+        <p><strong>Extended thinking.</strong> Sonnet and Opus expose thinking budgets we control per call. Other vendors approximate this with chain-of-thought prompting. Approximations leak — the budget isn't real, the trace isn't reliable, the signal you wanted is gone.</p>
+
+        <p><strong>Computer use.</strong> Anthropic shipped a model trained to operate a screen. We use it. There is no abstraction layer that papers over <em>"this model can drive a mouse and that one cannot."</em> Either you commit to the capability or you build around its absence.</p>
+
+        <p><strong>MCP.</strong> The Model Context Protocol Anthropic open-sourced is the most coherent agent-tool interface anyone has shipped. We built our broker on it. Every tool Cadence exposes — system actions, file I/O, app integrations — speaks MCP natively. That stack is portable across Claude versions and survives model upgrades without rewriting tool definitions.</p>
+
+        <p>Each of these features is small in isolation. Together they are the difference between a wrapper and a product.</p>
+
+        <h2><span class="section-num">§05</span> The research direction is the right one</h2>
+
+        <p>The serious AI safety work happening in 2026 — interpretability, constitutional AI, model welfare, sandboxing for computer use, scalable oversight — is happening at Anthropic. Other labs treat these as PR exercises or skip them entirely. Anthropic publishes results, ships them into the model, and lets the safety team gate releases.</p>
+
+        <p>That is not a soft preference. It is a bet about which lab will still be shipping useful frontier models in 2030 and which will have either capped out, pivoted, or shipped something that breaks loudly enough to lose its enterprise contracts. We are betting on the lab that is doing the science.</p>
+
+        <p>For a product whose entire value proposition is "trust this autonomous software to drive your computer," picking the model family with the strongest interpretability and alignment story is not a vibes call. It is the only defensible engineering decision.</p>
+
+        <h2><span class="section-num">§06</span> On the criticism</h2>
+
+        <p>We have heard the complaints. Refusal rates on edge-case prompts. Pricing per token. Context-window economics. Latency on Opus calls.</p>
+
+        <p>Some of it is real. Most of it is solved at the product layer. Caching brings cost down by an order of magnitude. Streaming hides latency. Prompt design pulls refusal rates near zero for legitimate use cases. The criticism is loudest from people building shallow integrations and rotating it constantly. Companies doing depth work with Claude — and there are now hundreds — do not have these problems anymore.</p>
+
+        <p>We picked the constraint. The product is better for it.</p>
+
+        <h2><span class="section-num">§07</span> What this means in practice</h2>
+
+        <p>You will never see a model picker in Cadence. You will not be asked to choose between speed and quality. We make those decisions for you, per request, against one consistent and very good family of models.</p>
+
+        <p>Haiku 4.5 handles command parsing and quick classifications. Sonnet 4.6 runs most agent steps. Opus 4.7 takes the hard ones — multi-step plans, code reasoning under uncertainty, decisions that affect the rest of the run. The routing is automatic, deterministic per task type, and tuned against quality outcomes rather than per-token cost.</p>
+
+        <p>If Anthropic ships something better, we update the day it lands. Until then, every pixel of this product is calibrated to Claude.</p>
+
+    </div>
+
+    <p class="endmark"><span class="em-glyph">§</span> END · Cadence Labs № 03 · Filed 2026/03/25</p>
+
+    <div class="cross-links">
+        <div class="cross-links-label">Read next</div>
+        <a href="cadence-labs-ui-of-agency.html"><span class="arrow">→</span>Cadence Labs: studying the UI of agency</a>
+        <a href="dictation-is-the-ui-layer.html"><span class="arrow">→</span>Dictation is the UI layer for agentic AI</a>
+    </div>
+
+</article>
+
+<footer class="footer">
+    <a href="/">Cadence</a>
+    <a href="/blog/">Writing</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/faq.html">FAQ</a>
+    <div style="margin-top: 16px; color: var(--text-ghost);">© 2026 Cadence Labs · Built on Claude</div>
+</footer>
+
+</body>
+</html>

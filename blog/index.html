@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadence Labs — Field notes on the UI of AI agents</title>
+
+    <meta name="description" content="Cadence Labs publishes findings from our research on multi-agent interfaces, voice as a command channel, and the engineering depth of building exclusively on Claude.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://cadencevoice.ai/blog/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Cadence Labs — Field notes on the UI of AI agents">
+    <meta property="og:description" content="Research notes on multi-agent interfaces, voice as a command channel, and the engineering depth of building on Claude.">
+    <meta property="og:url" content="https://cadencevoice.ai/blog/">
+    <meta property="og:image" content="https://cadencevoice.ai/icon.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cadence Labs — Field notes on the UI of AI agents">
+    <meta name="twitter:description" content="Research notes on multi-agent interfaces, voice as a command channel, and Claude.">
+    <meta name="twitter:image" content="https://cadencevoice.ai/icon.png">
+
+    <meta name="theme-color" content="#0c0a09">
+    <link rel="icon" type="image/png" href="/icon.png">
+
+    <!-- JSON-LD: Blog -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Cadence Labs",
+        "description": "Field notes on multi-agent interfaces, voice command, and building on Claude.",
+        "url": "https://cadencevoice.ai/blog/",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Cadence",
+            "url": "https://cadencevoice.ai/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://cadencevoice.ai/icon.png"
+            }
+        },
+        "blogPost": [
+            {
+                "@type": "BlogPosting",
+                "headline": "Cadence Labs: studying the UI of agency",
+                "url": "https://cadencevoice.ai/blog/cadence-labs-ui-of-agency.html",
+                "datePublished": "2026-04-22",
+                "author": { "@type": "Organization", "name": "Cadence Labs" }
+            },
+            {
+                "@type": "BlogPosting",
+                "headline": "Dictation is the UI layer for agentic AI",
+                "url": "https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html",
+                "datePublished": "2026-04-08",
+                "author": { "@type": "Organization", "name": "Cadence Labs" }
+            },
+            {
+                "@type": "BlogPosting",
+                "headline": "Why we only ship Claude",
+                "url": "https://cadencevoice.ai/blog/why-we-only-ship-claude.html",
+                "datePublished": "2026-03-25",
+                "author": { "@type": "Organization", "name": "Cadence Labs" }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-brand">cadence<span class="accent">·</span>labs</a>
+        <div class="nav-links">
+            <a href="/">Product</a>
+            <a href="/blog/" class="active">Writing</a>
+            <a href="https://github.com/MaxPrehoda/cadence" target="_blank" rel="noopener">Source</a>
+        </div>
+    </div>
+</nav>
+
+<main class="index-wrap">
+
+    <header class="index-header">
+        <div class="index-eyebrow">§ Cadence Labs · Quarterly notes</div>
+        <h1 class="index-title">The interface is<br>the unsolved problem.</h1>
+        <p class="index-sub">
+            We build Cadence in public and we publish what we learn. Findings from our own product
+            and our own data on multi-agent orchestration, voice as a command channel, and the
+            engineering choice to ship exclusively on Claude.
+        </p>
+    </header>
+
+    <section class="post-list" aria-label="Articles">
+
+        <a href="cadence-labs-ui-of-agency.html" class="post-row">
+            <div class="post-date">2026 · 04 · 22</div>
+            <div class="post-main">
+                <span class="post-tag">§ Manifesto</span>
+                <h2 class="post-title">Cadence Labs: studying the UI of agency</h2>
+                <p class="post-dek">Most AI products bolt a chat box onto existing software. We think the interface, not the model, is the constraint that defines the next decade.</p>
+            </div>
+            <div class="post-read">4 min</div>
+        </a>
+
+        <a href="dictation-is-the-ui-layer.html" class="post-row">
+            <div class="post-date">2026 · 04 · 08</div>
+            <div class="post-main">
+                <span class="post-tag">§ Interaction</span>
+                <h2 class="post-title">Dictation is the UI layer for agentic AI</h2>
+                <p class="post-dek">Models output 1500+ words per minute. Click-driven interfaces serialize at four seconds per decision. Voice is the only input channel that scales to multi-agent control.</p>
+            </div>
+            <div class="post-read">5 min</div>
+        </a>
+
+        <a href="why-we-only-ship-claude.html" class="post-row">
+            <div class="post-date">2026 · 03 · 25</div>
+            <div class="post-main">
+                <span class="post-tag">§ Engineering</span>
+                <h2 class="post-title">Why we only ship Claude</h2>
+                <p class="post-dek">Multi-model routing is the default pattern in 2026. We picked one family and committed. The product is better for the constraint.</p>
+            </div>
+            <div class="post-read">5 min</div>
+        </a>
+
+    </section>
+
+    <p class="endmark"><span class="em-glyph">§</span> Updated quarterly. No newsletter, no subscribe modal.</p>
+
+</main>
+
+<footer class="footer">
+    <a href="/">Cadence</a>
+    <a href="/blog/">Writing</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/faq.html">FAQ</a>
+    <div style="margin-top: 16px; color: var(--text-ghost);">© 2026 Cadence Labs · Built on Claude</div>
+</footer>
+
+</body>
+</html>

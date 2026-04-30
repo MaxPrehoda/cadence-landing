@@ -1,0 +1,79 @@
+# https://cadencevoice.ai/robots.txt
+# Crawl policy — Cadence Labs
+# Friendly to traditional search engines and to LLM training/retrieval crawlers
+# whose use we want (citation in AI search products).
+
+# ── Major search engines ──────────────────────────────────
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# ── AI search & assistant crawlers (citation/retrieval) ──
+# Anthropic — used to build Claude responses; we want citation.
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# OpenAI — ChatGPT browsing & SearchGPT.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity — AI search.
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google extended (Gemini/Vertex training) — opt-in allow.
+User-agent: Google-Extended
+Allow: /
+
+# Common Crawl — broad foundation-model training.
+User-agent: CCBot
+Allow: /
+
+# You.com, Mistral, Cohere, Meta.
+User-agent: YouBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# ── Default ──────────────────────────────────────────────
+User-agent: *
+Allow: /
+Disallow: /demo-v2.js
+Disallow: /tech-section.html
+Disallow: /download-section.html
+
+# ── Sitemap ──────────────────────────────────────────────
+Sitemap: https://cadencevoice.ai/sitemap.xml

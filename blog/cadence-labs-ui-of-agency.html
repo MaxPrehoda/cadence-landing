@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadence Labs: studying the UI of agency — Cadence</title>
+
+    <meta name="description" content="The model is good. The constraint moved to operator throughput. Cadence Labs is researching how a human directs autonomous software at high frequency, and what the interface for that has to look like.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://cadencevoice.ai/blog/cadence-labs-ui-of-agency.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Cadence Labs: studying the UI of agency">
+    <meta property="og:description" content="The model is good. The constraint moved to operator throughput. We're researching the interface that scales when one human drives many agents.">
+    <meta property="og:url" content="https://cadencevoice.ai/blog/cadence-labs-ui-of-agency.html">
+    <meta property="og:image" content="https://cadencevoice.ai/icon.png">
+    <meta property="article:published_time" content="2026-04-22T09:00:00-07:00">
+    <meta property="article:author" content="Cadence Labs">
+    <meta property="article:section" content="Manifesto">
+    <meta property="article:tag" content="agentic AI">
+    <meta property="article:tag" content="multi-agent UI">
+    <meta property="article:tag" content="human-AI interaction">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cadence Labs: studying the UI of agency">
+    <meta name="twitter:description" content="The model is good. The constraint moved. We're researching the interface that scales when one human drives many agents.">
+    <meta name="twitter:image" content="https://cadencevoice.ai/icon.png">
+
+    <meta name="theme-color" content="#0c0a09">
+    <link rel="icon" type="image/png" href="/icon.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Cadence Labs: studying the UI of agency",
+        "description": "The model is good. The constraint moved to operator throughput. Cadence Labs is researching how a human directs autonomous software at high frequency.",
+        "image": "https://cadencevoice.ai/icon.png",
+        "datePublished": "2026-04-22T09:00:00-07:00",
+        "dateModified": "2026-04-22T09:00:00-07:00",
+        "author": {
+            "@type": "Organization",
+            "name": "Cadence Labs",
+            "url": "https://cadencevoice.ai/blog/"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Cadence",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://cadencevoice.ai/icon.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://cadencevoice.ai/blog/cadence-labs-ui-of-agency.html"
+        },
+        "keywords": "multi-agent UI, agentic AI interface, human-AI interaction, voice command, Cadence Labs, Claude agents"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="blog.css">
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-brand">cadence<span class="accent">·</span>labs</a>
+        <div class="nav-links">
+            <a href="/">Product</a>
+            <a href="/blog/" class="active">Writing</a>
+            <a href="https://github.com/MaxPrehoda/cadence" target="_blank" rel="noopener">Source</a>
+        </div>
+    </div>
+</nav>
+
+<article class="article">
+
+    <div class="meta-strip">
+        <span class="tag">§ Manifesto</span>
+        <span>2026 · 04 · 22</span>
+        <span class="sep">/</span>
+        <span>4 min read</span>
+        <span class="sep">/</span>
+        <span>Cadence Labs № 01</span>
+    </div>
+
+    <h1 class="article-title">Cadence Labs: studying the UI of agency.</h1>
+
+    <p class="article-dek">
+        Most AI products bolt a chat box onto existing software. We think the interface, not the model, is the constraint that defines the next decade.
+    </p>
+
+    <div class="byline">
+        <span class="author">By Cadence Labs</span> · Filed in Manifesto · First post in a quarterly series
+    </div>
+
+    <div class="article-body">
+
+        <h2><span class="section-num">§01</span> The premise</h2>
+
+        <p>The model is good. It has been for two years. Claude Opus 4.7 reads code, writes code, runs tools, holds context across hours of work without supervision. The bottleneck moved.</p>
+
+        <p>What it moved to is operator throughput. How fast can one person direct autonomous software, observe its state, course-correct, approve, intervene? Almost no one is researching this seriously. The dominant pattern across the industry is a chat textbox in a sidebar — the same input rectangle that has been on the web since 1996.</p>
+
+        <p>We started Cadence Labs because that pattern is wrong. The interface to AI is the unsolved problem of this decade. The companies that solve it at the operating-system level will own the next platform shift.</p>
+
+        <h2><span class="section-num">§02</span> The research questions</h2>
+
+        <p>Four questions guide most of the work. We don't have closed answers to any of them. We have working hypotheses and a product where we test them on ourselves daily.</p>
+
+        <p><strong>Operator capacity.</strong> How many concurrent agents can one person manage before quality degrades? Internal data so far suggests four to six with proper UI scaffolding, one to two with chat. The variable that moves the number isn't model speed. It's interrupt latency — the time between an operator noticing a problem and the agent actually changing course.</p>
+
+        <p><strong>Ambient state.</strong> What does <em>"this agent is fine, leave it alone"</em> look like at a glance, when six of them are running in parallel? Logs are wrong: too dense, too unstructured, too easy to miss a signal. Progress bars are wrong: they encode time, not health. Animated state icons with tight motion design encode more bits per pixel than either.</p>
+
+        <p><strong>Interruption design.</strong> When an agent is mid-tool-call and the operator notices it's heading the wrong way, the cost of interrupting must be lower than the cost of letting it finish. Most products invert this. A well-placed stop command should land in under 200ms and unwind cleanly. We've measured ours; we're not done tuning.</p>
+
+        <p><strong>Voice in, screen out.</strong> The asymmetry is the design point. Voice is fast to emit and slow to consume. Screen is the opposite. So the operator speaks commands and reads results. Trying to use either channel for both directions degrades both.</p>
+
+        <h2><span class="section-num">§03</span> What has shipped from the research</h2>
+
+        <p>A few findings that moved from internal experiments into the product:</p>
+
+        <ul>
+            <li><strong>Per-agent mute toggles</strong> cut audio fatigue by an order of magnitude. We initially had global TTS. Operators stopped speaking after the third concurrent agent because the noise was worse than the gain. Mute-by-default for new spawns was the fix.</li>
+
+            <li><strong>Inline approval banners</strong> resolve roughly ten times faster than approval lists in a separate panel. The context for the decision is the action being approved; separating them adds a switch tax that compounds across agents.</li>
+
+            <li><strong>Named addressing</strong> beat structured turn-taking. When operators can say <em>"Atlas, kill that. Cypher, keep going,"</em> their mental model is a roster, not a thread. Latency to correct one of N agents drops to a single sentence.</li>
+
+            <li><strong>Tool-call summaries</strong> as TTS output land. Verbose narration ("I'm now going to read the routing file in order to understand...") does not. We trimmed our progress summaries to subject-verb-object on tool name and target.</li>
+        </ul>
+
+        <div class="spec">
+            <span class="spec-label">Internal benchmark · 2026 · Q1</span>
+            <div class="spec-row"><span class="k">Concurrent agents (chat UI baseline)</span><span class="v">1.4 avg</span></div>
+            <div class="spec-row"><span class="k">Concurrent agents (Cadence dashboard)</span><span class="v">4.7 avg</span></div>
+            <div class="spec-row"><span class="k">Time-to-approve (separate panel)</span><span class="v">11.2s</span></div>
+            <div class="spec-row"><span class="k">Time-to-approve (inline banner)</span><span class="v">1.1s</span></div>
+            <div class="spec-row"><span class="k">Voice command → action latency (p50)</span><span class="v">198ms</span></div>
+        </div>
+
+        <h2><span class="section-num">§04</span> Why this is research, not just product work</h2>
+
+        <p>Two reasons it has to be done as research and not as feature backlog.</p>
+
+        <p>The first: the answers don't exist yet. Multi-agent orchestration is not a solved problem you can copy from a design system. There is no Apple HIG chapter on it. There are about ten products on Earth shipping any of it, and most of them are clones of each other's chat panels.</p>
+
+        <p>The second: the design space is large enough that getting it right requires writing decisions down. Not on a whiteboard. In durable form, with the reasoning attached, so that when we revisit a choice in six months we know why it was made and what conditions would invalidate it. That's part of what this blog is for.</p>
+
+        <h2><span class="section-num">§05</span> What gets published here</h2>
+
+        <p>Three to four posts a quarter. Findings from our own product, our own user data, and our own engineering decisions. Sometimes opinionated, occasionally wrong, always specific.</p>
+
+        <p>No SEO bait. No <em>"X tools to boost your AI workflow."</em> No vendor-neutral hedging. We picked our position. We're going to defend it.</p>
+
+        <p>The bet: the interface to AI is the unsolved problem of this decade, and most of the field is still iterating on the textbox. That's the gap. That's where Cadence Labs is working.</p>
+
+    </div>
+
+    <p class="endmark"><span class="em-glyph">§</span> END · Cadence Labs № 01 · Filed 2026/04/22</p>
+
+    <div class="cross-links">
+        <div class="cross-links-label">Read next</div>
+        <a href="dictation-is-the-ui-layer.html"><span class="arrow">→</span>Dictation is the UI layer for agentic AI</a>
+        <a href="why-we-only-ship-claude.html"><span class="arrow">→</span>Why we only ship Claude</a>
+    </div>
+
+</article>
+
+<footer class="footer">
+    <a href="/">Cadence</a>
+    <a href="/blog/">Writing</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/faq.html">FAQ</a>
+    <div style="margin-top: 16px; color: var(--text-ghost);">© 2026 Cadence Labs · Built on Claude</div>
+</footer>
+
+</body>
+</html>
