@@ -7,43 +7,37 @@
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "cadencevoice.org" }],
-      "destination": "https://cadencevoice.ai/:path*",
+      "destination": "https://www.cadencevoice.ai/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.cadencevoice.org" }],
-      "destination": "https://cadencevoice.ai/:path*",
+      "destination": "https://www.cadencevoice.ai/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "cadencevoice.net" }],
-      "destination": "https://cadencevoice.ai/:path*",
+      "destination": "https://www.cadencevoice.ai/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.cadencevoice.net" }],
-      "destination": "https://cadencevoice.ai/:path*",
+      "destination": "https://www.cadencevoice.ai/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "cadence-voice.com" }],
-      "destination": "https://cadencevoice.ai/:path*",
+      "destination": "https://www.cadencevoice.ai/:path*",
       "permanent": true
     },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.cadence-voice.com" }],
-      "destination": "https://cadencevoice.ai/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.cadencevoice.ai" }],
-      "destination": "https://cadencevoice.ai/:path*",
+      "destination": "https://www.cadencevoice.ai/:path*",
       "permanent": true
     }
   ],
