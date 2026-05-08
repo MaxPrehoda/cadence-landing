@@ -1,6 +1,6 @@
 # Agents
 
-Cadence is an orchestrator for Claude Code agents. You spawn them, address them by name, approve or deny their tool calls, and review their diffs — all by voice.
+Cadence is an orchestrator for Claude Code agents. You spawn them, address them by name, approve or deny their tool calls, and review their diffs, all by voice.
 
 ## Setup
 
@@ -8,8 +8,8 @@ Agents require the `claude` CLI on your `PATH`. If it's installed in a non-stand
 
 You'll also need to be authenticated with Claude. Cadence supports two auth modes:
 
-- **Anthropic API key** — paste in **Settings → Agents → Auth → API key**
-- **Claude Pro / Max subscription** — log in via the OAuth flow in the same panel
+- **Anthropic API key**: paste in **Settings → Agents → Auth → API key**
+- **Claude Pro / Max subscription**: log in via the OAuth flow in the same panel
 
 The selected mode is passed through to every spawned `claude -p` process.
 
@@ -35,7 +35,7 @@ When the agent finishes spawning, Cadence speaks `"<name> ready in <dir>."`.
 
 ### Worktrees
 
-By default each agent runs in its own git worktree on a dedicated branch — so two agents in the same repo don't trample each other. Disable in **Settings → Agents → Worktrees**.
+By default each agent runs in its own git worktree on a dedicated branch, so two agents in the same repo don't trample each other. Disable in **Settings → Agents → Worktrees**.
 
 ### Teams
 
@@ -53,7 +53,7 @@ Once an agent is running, address it by name:
 
 Cadence routes the rest of the utterance as a new turn to the named agent. Names are fuzzy-matched (exact → prefix → Jaro-Winkler) so "front end" resolves to "Frontend".
 
-If you don't say a name, Cadence routes to the **last addressed agent** — useful for follow-ups:
+If you don't say a name, Cadence routes to the **last addressed agent**, useful for follow-ups:
 
 > "Frontend, what files did you change?"
 > "Add a test for the dark mode toggle"   *(routed to Frontend)*
@@ -68,9 +68,9 @@ When an agent wants to run a tool that requires permission (Edit, Write, Bash, e
 
 Answer:
 
-- "approve" / "yes" — run the tool
-- "deny" / "no" — reject it
-- "deny Frontend, use yarn instead" — reject with a message the agent sees as tool feedback
+- "approve" / "yes", run the tool
+- "deny" / "no", reject it
+- "deny Frontend, use yarn instead", reject with a message the agent sees as tool feedback
 
 If multiple agents are waiting on approval, name the one you mean: "approve Backend".
 
@@ -105,7 +105,7 @@ This is the same as direct-turn syntactically but works even when the agent name
 | "Close Frontend" | Same |
 | "Close all" / "Kill all" / "Close all agents" | Stop every agent |
 
-Killing an agent does **not** clean up its worktree — the branch and changes remain so you can review and merge (or discard) afterward.
+Killing an agent does **not** clean up its worktree. The branch and changes remain so you can review and merge (or discard) afterward.
 
 ## Dashboard
 
@@ -115,4 +115,4 @@ The dashboard has tabs per agent for Diff, History, and live output. You can als
 
 ## Hooks
 
-Cadence ships a custom `cadence-hook` binary that the spawned `claude` process invokes on every PreToolUse / PostToolUse / Stop event. This is what powers the voice approval flow and the history/diff capture. The hook is wired up automatically — no configuration needed.
+Cadence ships a custom `cadence-hook` binary that the spawned `claude` process invokes on every PreToolUse / PostToolUse / Stop event. This is what powers the voice approval flow and the history/diff capture. The hook is wired up automatically. No configuration needed.

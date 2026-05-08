@@ -1,6 +1,6 @@
 # Voice commands
 
-The fast path. These commands are handled by a deterministic pattern parser — no LLM round-trip, sub-100 ms response.
+The fast path. These commands are handled by a deterministic pattern parser. No LLM round-trip. Sub-100 ms response.
 
 If your utterance doesn't match a built-in pattern, it falls through to the [intent engine](#/intent-engine), which uses Claude to compose multi-step plans.
 
@@ -76,8 +76,8 @@ If you've set **Obsidian vault path** in settings, these commands write directly
 
 Create your own triggers in **Settings → Custom commands**. Each command has:
 
-- **Trigger phrase** — what you say
-- **Action** — keyboard shortcut, app open, shell command, or URL
+- **Trigger phrase**: what you say
+- **Action**: keyboard shortcut, app open, shell command, or URL
 - **Enabled** toggle
 
 Trigger phrases are case-insensitive and match anywhere in the utterance (after the wake word, if applicable).

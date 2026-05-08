@@ -1,6 +1,6 @@
 # Dictation
 
-Cadence dictates into whatever app has focus — text fields, editors, browser textareas, terminal prompts. The pipeline:
+Cadence dictates into whatever app has focus, text fields, editors, browser textareas, terminal prompts. The pipeline:
 
 ```
 microphone → VAD → Whisper → polish → keystroke injection
@@ -10,7 +10,7 @@ microphone → VAD → Whisper → polish → keystroke injection
 
 Transcription runs locally via [whisper.cpp](https://github.com/ggerganov/whisper.cpp). Default model: `ggml-small.en.bin` (~500 MB, English-only, fast on Apple Silicon).
 
-Swap models in **Settings → Whisper**. Larger models (`medium`, `large-v3`) are more accurate but slower. Multilingual models (without the `.en` suffix) handle 90+ languages — set **Language** in settings to your target locale or leave it blank for auto-detect.
+Swap models in **Settings → Whisper**. Larger models (`medium`, `large-v3`) are more accurate but slower. Multilingual models (without the `.en` suffix) handle 90+ languages, set **Language** in settings to your target locale or leave it blank for auto-detect.
 
 ## Voice activity detection (VAD)
 
@@ -23,7 +23,7 @@ These live under **Settings → Audio**.
 
 ## Polish
 
-After Whisper transcribes, the result runs through a local polish LLM that fixes punctuation, capitalization, and minor word choice without changing meaning. The polish model is bundled as a sidecar binary — no setup required.
+After Whisper transcribes, the result runs through a local polish LLM that fixes punctuation, capitalization, and minor word choice without changing meaning. The polish model is bundled as a sidecar binary. No setup required.
 
 To disable: **Settings → Polish → Off**.
 
@@ -32,7 +32,7 @@ To upgrade to cloud polish (Anthropic Claude) for higher quality on long-form te
 1. **Settings → Polish → Use cloud**
 2. Paste an Anthropic API key
 
-Cloud polish only fires after local Whisper has already produced text — the audio itself never leaves your machine.
+Cloud polish only fires after local Whisper has already produced text. The audio itself never leaves your machine.
 
 ## Per-app tone profiles
 
@@ -42,18 +42,18 @@ Different apps want different prose. Cadence reads the bundle ID of the active a
 
 Profile choices:
 
-- **default** — neutral cleanup
-- **casual** — friendly, contractions, emoji-friendly
-- **formal** — business tone, no slang
-- **technical** — preserves jargon, code-friendly
-- **raw** — disables polish entirely (good for terminals and code editors)
-- **custom** — your own one-line instruction
+- **default**: neutral cleanup
+- **casual**: friendly, contractions, emoji-friendly
+- **formal**: business tone, no slang
+- **technical**: preserves jargon, code-friendly
+- **raw**: disables polish entirely (good for terminals and code editors)
+- **custom**: your own one-line instruction
 
 ## Hallucination filtering
 
 Whisper has a known tendency to invent text on near-silent audio (`"Thanks for watching!"`, `"Subtitles by..."`, `"Subscribe!"`). Cadence drops these on the floor before they reach your cursor.
 
-If a real phrase you actually use gets filtered, file an issue — the suppression list is small and intentional.
+If a real phrase you actually use gets filtered, file an issue. The suppression list is small and intentional.
 
 ## Keystroke injection
 

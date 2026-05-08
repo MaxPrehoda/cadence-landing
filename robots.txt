@@ -1,5 +1,5 @@
 # https://cadencevoice.ai/robots.txt
-# Crawl policy — Cadence Labs
+# Crawl policy. Cadence Labs
 # Friendly to traditional search engines and to LLM training/retrieval crawlers
 # whose use we want (citation in AI search products).
 
@@ -17,7 +17,7 @@ User-agent: Applebot
 Allow: /
 
 # ── AI search & assistant crawlers (citation/retrieval) ──
-# Anthropic — used to build Claude responses; we want citation.
+# Anthropic, used to build Claude responses; we want citation.
 User-agent: ClaudeBot
 Allow: /
 
@@ -27,7 +27,7 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
-# OpenAI — ChatGPT browsing & SearchGPT.
+# OpenAI. ChatGPT browsing & SearchGPT.
 User-agent: GPTBot
 Allow: /
 
@@ -37,18 +37,18 @@ Allow: /
 User-agent: ChatGPT-User
 Allow: /
 
-# Perplexity — AI search.
+# Perplexity. AI search.
 User-agent: PerplexityBot
 Allow: /
 
 User-agent: Perplexity-User
 Allow: /
 
-# Google extended (Gemini/Vertex training) — opt-in allow.
+# Google extended (Gemini/Vertex training), opt-in allow.
 User-agent: Google-Extended
 Allow: /
 
-# Common Crawl — broad foundation-model training.
+# Common Crawl, broad foundation-model training.
 User-agent: CCBot
 Allow: /
 

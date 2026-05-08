@@ -8,7 +8,7 @@ This is how you get from "make this email more formal" or "run the tests and tel
 
 **Settings → Intent engine → Enabled**. Off by default if you haven't supplied an Anthropic API key.
 
-The engine uses Claude Haiku for plan resolution — fast and cheap (typically <$0.001 per command).
+The engine uses Claude Haiku for plan resolution, fast and cheap (typically <$0.001 per command).
 
 ## What it sees
 
@@ -81,12 +81,12 @@ The engine composes plans from 35 primitive actions:
 
 Actions execute sequentially, and outputs from earlier steps are available as template variables in later steps:
 
-- `{{selection}}` — output of `get_selection`
-- `{{clipboard}}` — output of `read_clipboard` (or context)
-- `{{shell_output}}` — output of `shell_command`
-- `{{llm_result}}` — output of `llm_transform`
-- `{{browser_result}}` — output of any `browser_*` action
-- `{{comms_result}}` — output of any `slack_*` / `email_*` / `imessage_*` action
+- `{{selection}}`, output of `get_selection`
+- `{{clipboard}}`, output of `read_clipboard` (or context)
+- `{{shell_output}}`, output of `shell_command`
+- `{{llm_result}}`, output of `llm_transform`
+- `{{browser_result}}`, output of any `browser_*` action
+- `{{comms_result}}`, output of any `slack_*` / `email_*` / `imessage_*` action
 
 This is what lets the engine compose patterns like:
 
@@ -110,6 +110,6 @@ This is what lets the engine compose patterns like:
 
 ## Safety guardrails
 
-The system prompt forbids destructive shell commands (`rm -rf` etc.) without explicit user request. You can review the planned actions before they execute by enabling **Settings → Intent engine → Confirm before executing** — Cadence will speak the plan and wait for "approve" / "deny".
+The system prompt forbids destructive shell commands (`rm -rf` etc.) without explicit user request. You can review the planned actions before they execute by enabling **Settings → Intent engine → Confirm before executing**. Cadence will speak the plan and wait for "approve" / "deny".
 
 For higher-risk integrations (email send, Slack send, shell), enable per-action confirmation in **Settings → Intent engine → Action policy**.

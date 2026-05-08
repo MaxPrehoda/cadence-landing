@@ -38,7 +38,7 @@ async function loadDownloadLinks() {
 
     } catch (error) {
         console.error('Failed to load release:', error);
-        // Cards keep their placeholder state — download buttons point to releases page
+        // Cards keep their placeholder state, download buttons point to releases page
     }
 }
 
@@ -53,7 +53,7 @@ function populateCard(arch, asset, version, releaseDate, releaseUrl) {
     const label = arch === 'arm64' ? 'Apple Silicon' : 'Intel';
     const sizeInMB = (asset.size / (1024 * 1024)).toFixed(1);
 
-    if (title) title.textContent = `Cadence ${version} — ${label}`;
+    if (title) title.textContent = `Cadence ${version}, ${label}`;
     if (file) file.textContent = asset.name;
     if (size) size.textContent = `${sizeInMB} MB`;
     if (date) date.textContent = releaseDate;

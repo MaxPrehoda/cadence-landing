@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadence — Voice control for AI agents on macOS</title>
+    <title>Cadence: Voice control for AI agents on macOS</title>
 
     <meta name="description" content="Local voice control for macOS. Dictate to multiple Claude AI agents in parallel, with system-wide hotkeys, on-device transcription, and zero cloud round-trips. Open source.">
     <meta name="author" content="Cadence Labs">
@@ -16,18 +16,18 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Cadence">
-    <meta property="og:title" content="Cadence — Voice control for AI agents on macOS">
+    <meta property="og:title" content="Cadence: Voice control for AI agents on macOS">
     <meta property="og:description" content="Local voice control for macOS. Dictate to multiple Claude AI agents in parallel. Zero cloud, zero latency, MIT open source.">
     <meta property="og:url" content="https://cadencevoice.ai/">
     <meta property="og:image" content="https://cadencevoice.ai/icon.png">
     <meta property="og:image:width" content="256">
     <meta property="og:image:height" content="256">
-    <meta property="og:image:alt" content="Cadence — voice control for AI agents on macOS">
+    <meta property="og:image:alt" content="Cadence: voice control for AI agents on macOS">
     <meta property="og:locale" content="en_US">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Cadence — Voice control for AI agents on macOS">
+    <meta name="twitter:title" content="Cadence: Voice control for AI agents on macOS">
     <meta name="twitter:description" content="Local voice control for macOS. Dictate to multiple Claude AI agents in parallel. Zero cloud, zero latency.">
     <meta name="twitter:image" content="https://cadencevoice.ai/icon.png">
     <meta name="twitter:image:alt" content="Cadence app icon">
@@ -1195,7 +1195,7 @@
             }
         }
     </style>
-    <!-- Augmented sections — bandwidth, agents, models -->
+    <!-- Augmented sections, bandwidth, agents, models -->
     <style>
         /* Section eyebrow shared */
         .section-eyebrow {
@@ -1207,7 +1207,7 @@
             margin-bottom: 20px;
         }
 
-        /* — Bandwidth comparison cards — */
+        /* Bandwidth comparison cards */
         .bandwidth-col {
             border: 1px solid var(--border-subtle);
             border-radius: 8px;
@@ -1254,7 +1254,7 @@
         }
         .bandwidth-list { list-style: none; font-size: 14px; line-height: 1.85; color: var(--text-secondary); }
 
-        /* — Agent dashboard preview — */
+        /* Agent dashboard preview */
         .agent-card {
             background: linear-gradient(180deg, var(--bg-surface), var(--bg-elevated));
             border: 1px solid var(--border-subtle);
@@ -1297,7 +1297,7 @@
             50% { opacity: 0.45; transform: scale(0.78); }
         }
 
-        /* — Voice command bar — */
+        /* Voice command bar */
         .voice-command-bar {
             background: var(--bg-base);
             border: 1px solid var(--accent-border);
@@ -1329,7 +1329,7 @@
             background-clip: text;
         }
 
-        /* — Inline link arrow — */
+        /* Inline link arrow */
         .inline-link {
             font-family: var(--font-mono);
             font-size: 13px;
@@ -1344,13 +1344,13 @@
             color: var(--accent-primary);
         }
 
-        /* — Mobile responsiveness for new sections — */
+        /* Mobile responsiveness for new sections */
         @media (max-width: 720px) {
             .bandwidth-col { padding: 22px; }
             .voice-command-bar { padding: 18px 20px; font-size: 13px; }
         }
 
-        /* — Honor reduced-motion — */
+        /* Honor reduced-motion */
         @media (prefers-reduced-motion: reduce) {
             .agent-state-dot.pulsing { animation: none; }
             .voice-command-bar::before { animation: none; }
@@ -1421,7 +1421,7 @@
                     </h1>
                     <p style="font-size: 18px; color: var(--text-secondary); max-width: 540px;
                               line-height: 1.6; margin-bottom: 40px;">
-                        Hold a hotkey and talk. Your words appear at the cursor — in any app, any window.
+                        Hold a hotkey and talk. Your words appear at the cursor, in any app, any window.
                         The same voice directs Claude AI assistants running on your Mac, by name, in parallel.
                         Transcription happens on the device. Nothing is sent to the cloud.
                     </p>
@@ -1466,12 +1466,12 @@
         <!-- Voice for your Mac -->
         <section id="bandwidth" aria-label="Voice for your Mac" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative;">
             <div style="max-width: 1100px; margin: 0 auto;">
-                <div class="section-eyebrow animate-fade-up" data-delay="0">§ 01 — Voice for your Mac</div>
+                <div class="section-eyebrow animate-fade-up" data-delay="0">§ 01. Voice for your Mac</div>
                 <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 22ch; margin-bottom: 24px;">
                     Hold a key. Speak. The words appear where you're typing.
                 </h2>
                 <p class="animate-fade-up" data-delay="120" style="font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 56px;">
-                    An email draft, a Slack message, a Google Doc, a terminal, a code editor — anywhere on
+                    An email draft, a Slack message, a Google Doc, a terminal, a code editor: anywhere on
                     your Mac with a cursor. Hold the hotkey, say what you want to write, let go. Cadence
                     transcribes it on your Mac with Whisper and types it where the cursor is. The audio
                     never leaves the device.
@@ -1498,7 +1498,7 @@
                         <div class="mono" style="font-size: 12px; color: var(--text-dim); margin-bottom: 24px;">A normal conversation, sustained</div>
                         <ul class="bandwidth-list">
                             <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Hands free.</li>
-                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Words appear in under 200ms — on your Mac.</li>
+                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Words appear in under 200ms, on your Mac.</li>
                             <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Works in every app, no plugins.</li>
                             <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Talk while you read or think.</li>
                         </ul>
@@ -1511,7 +1511,7 @@
             </div>
         </section>
 
-        <!-- At a glance — citation-friendly summary -->
+        <!-- At a glance, citation-friendly summary -->
         <section id="overview" aria-label="What Cadence is" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle);">
             <div style="max-width: 880px; margin: 0 auto;">
                 <div class="mono" style="font-size: 11px; color: var(--accent-primary); margin-bottom: 20px;
@@ -1524,11 +1524,11 @@
                 </h2>
                 <p style="font-size: 18px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 40px;">
                     Cadence is a Mac app that lets you talk to your computer and talk to your AI assistants the
-                    same way: hold a hotkey and speak. Speech is turned into text on your Mac using Whisper —
+                    same way: hold a hotkey and speak. Speech is turned into text on your Mac using Whisper, so
                     no audio leaves the device. The same voice can direct several Claude assistants running in
                     parallel, each addressed by name. No model picker, no cloud transcription, no subscription.
                     Built by Cadence Labs, open source under the MIT license, runs exclusively on Anthropic
-                    Claude — Opus, Sonnet, and Haiku.
+                    Claude (Opus, Sonnet, and Haiku).
                 </p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 40px;">
@@ -1657,7 +1657,7 @@
                                     Speech recognition, on your Mac
                                 </h3>
                                 <p style="font-size: 14px; color: var(--text-dim); line-height: 1.7; margin-bottom: 12px;">
-                                    Whisper runs directly on the chip in your Mac — tuned for Apple Silicon. Words start appearing in under 200ms. The audio never touches the internet.
+                                    Whisper runs directly on the chip in your Mac, tuned for Apple Silicon. Words start appearing in under 200ms. The audio never touches the internet.
                                 </p>
                                 <div class="tech-metric">
                                     <span class="mono accent" style="font-size: 22px; font-weight: 700;">< 200ms</span>
@@ -1713,7 +1713,7 @@
                                     Works in every app
                                 </h3>
                                 <p style="font-size: 14px; color: var(--text-dim); line-height: 1.7;">
-                                    Cadence types into whatever app you're already using — Terminal, your browser, a code editor, Slack, Mail, Figma. No plugins to install. No copy-and-paste.
+                                    Cadence types into whatever app you're already using: Terminal, your browser, a code editor, Slack, Mail, Figma. No plugins to install. No copy-and-paste.
                                 </p>
                             </div>
                         </div>
@@ -1762,7 +1762,7 @@
                         </div>
                         <div class="download-info">
                             <h3>
-                                <span id="arm64-title">Cadence — Apple Silicon</span>
+                                <span id="arm64-title">Cadence. Apple Silicon</span>
                                 <span class="download-version-badge">Latest</span>
                             </h3>
                             <div class="download-meta">macOS 12.0+ • ARM64 (M1/M2/M3/M4)</div>
@@ -1776,15 +1776,15 @@
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">File</span>
-                            <span id="arm64-file" class="download-spec-value">—</span>
+                            <span id="arm64-file" class="download-spec-value">-</span>
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Size</span>
-                            <span id="arm64-size" class="download-spec-value">—</span>
+                            <span id="arm64-size" class="download-spec-value">-</span>
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Released</span>
-                            <span id="arm64-date" class="download-spec-value">—</span>
+                            <span id="arm64-date" class="download-spec-value">-</span>
                         </div>
                     </div>
 
@@ -1811,7 +1811,7 @@
                         </div>
                         <div class="download-info">
                             <h3>
-                                <span id="x64-title">Cadence — Intel</span>
+                                <span id="x64-title">Cadence. Intel</span>
                                 <span class="download-version-badge">Latest</span>
                             </h3>
                             <div class="download-meta">macOS 12.0+ • x86_64 (Intel Macs)</div>
@@ -1825,15 +1825,15 @@
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">File</span>
-                            <span id="x64-file" class="download-spec-value">—</span>
+                            <span id="x64-file" class="download-spec-value">-</span>
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Size</span>
-                            <span id="x64-size" class="download-spec-value">—</span>
+                            <span id="x64-size" class="download-spec-value">-</span>
                         </div>
                         <div class="download-spec-item">
                             <span class="download-spec-label">Released</span>
-                            <span id="x64-date" class="download-spec-value">—</span>
+                            <span id="x64-date" class="download-spec-value">-</span>
                         </div>
                     </div>
 
@@ -1865,7 +1865,7 @@
                 <div style="margin-top: 48px; padding: 24px; background: rgba(28, 25, 23, 0.3); border: 1px solid rgba(168, 162, 158, 0.08); border-radius: 12px;">
                     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 12px;">
                         <span style="font-size: 20px;">⚙️</span>
-                        <h3 style="font-size: 16px; font-weight: 600; margin: 0;">Open Source — Coming Soon</h3>
+                        <h3 style="font-size: 16px; font-weight: 600; margin: 0;">Open Source. Coming Soon</h3>
                     </div>
                     <p style="font-size: 14px; color: var(--text-dim); line-height: 1.6; margin-bottom: 0;">
                         Cadence will be fully open source under the MIT License. Source code, build instructions, and contribution guidelines coming soon.

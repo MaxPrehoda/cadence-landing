@@ -1,6 +1,6 @@
 # Integrations
 
-External tools Cadence can drive by voice. Each is opt-in — Cadence won't reach for cloud or APIs you haven't configured.
+External tools Cadence can drive by voice. Each is opt-in. Cadence won't reach for cloud or APIs you haven't configured.
 
 ## Browser (Chrome DevTools Protocol)
 
@@ -50,7 +50,7 @@ Driven by AppleScript, so it works with whatever account(s) Mail is configured w
 
 **Setup**
 
-Make sure Cadence has **Automation** permission for Mail — macOS will prompt the first time:
+Make sure Cadence has **Automation** permission for Mail; macOS will prompt the first time:
 
 **System Settings → Privacy & Security → Automation → Cadence → Mail**
 
@@ -75,11 +75,11 @@ Contacts are resolved by name; Cadence will fall back to phone number / email if
 
 ## Obsidian
 
-Native vault integration — Cadence reads and writes Markdown files directly. No plugin required.
+Native vault integration. Cadence reads and writes Markdown files directly. No plugin required.
 
 **Setup**
 
-**Settings → Integrations → Obsidian vault path** — point at the folder that contains your `.obsidian/` directory.
+**Settings → Integrations → Obsidian vault path**: point at the folder that contains your `.obsidian/` directory.
 
 **What you can say**
 
@@ -87,7 +87,7 @@ Native vault integration — Cadence reads and writes Markdown files directly. N
 > "Add to my Ideas note in Obsidian: try a new color scheme"
 > "Read my Standup note"
 
-Notes are created at the root of the vault unless you specify a path. Daily notes, templates, and folder organization are not yet automated — Cadence treats the vault as a flat Markdown directory.
+Notes are created at the root of the vault unless you specify a path. Daily notes, templates, and folder organization are not yet automated. Cadence treats the vault as a flat Markdown directory.
 
 ## Claude Code
 
@@ -98,7 +98,7 @@ Covered in depth on the [agents page](#/agents). The integration is what powers 
 The following integrations are on the roadmap but not yet shipped:
 
 - Linear / Jira (read tickets, create issues by voice)
-- Calendar (Google + Apple) — schedule events, list today's meetings
+- Calendar (Google + Apple): schedule events, list today's meetings
 - Notion (page create / append / read)
 - Custom MCP servers (bring your own tool surface)
 

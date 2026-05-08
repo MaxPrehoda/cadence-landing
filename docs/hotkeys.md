@@ -49,7 +49,7 @@ Restart the app after granting.
 
 ## Troubleshooting
 
-- **Hotkey doesn't fire.** Check Input Monitoring is enabled. If a screen-sharing or remote-control app is running, it can hold an exclusive event tap — quit it and try again.
+- **Hotkey doesn't fire.** Check Input Monitoring is enabled. If a screen-sharing or remote-control app is running, it can hold an exclusive event tap, quit it and try again.
 - **Hotkey conflicts with another app.** Pick a different chord. Cadence won't override a system shortcut you've reserved.
 - **Recording starts but no audio is captured.** Check Microphone permission and that the right input device is selected in **Settings → Audio**.
 

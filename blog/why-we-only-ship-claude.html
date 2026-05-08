@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Why we only ship Claude — Cadence</title>
+    <title>Why we only ship Claude · Cadence</title>
 
-    <meta name="description" content="Multi-model routing is the default in 2026. Cadence runs exclusively on Anthropic's Claude — Opus, Sonnet, Haiku — and nothing else. The product is better for the constraint, and we're going to defend the choice.">
+    <meta name="description" content="Multi-model routing is the default in 2026. Cadence runs exclusively on Anthropic's Claude (Opus, Sonnet, Haiku) and nothing else. The product is better for the constraint, and we're going to defend the choice.">
     <meta name="author" content="Cadence Labs">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://cadencevoice.ai/blog/why-we-only-ship-claude.html">
@@ -13,7 +13,7 @@
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Cadence">
     <meta property="og:title" content="Why we only ship Claude">
-    <meta property="og:description" content="Multi-model routing is the default in 2026. We picked one family — Anthropic's Claude — and committed. Here is the engineering case.">
+    <meta property="og:description" content="Multi-model routing is the default in 2026. We picked one family (Anthropic's Claude) and committed. Here is the engineering case.">
     <meta property="og:url" content="https://cadencevoice.ai/blog/why-we-only-ship-claude.html">
     <meta property="og:image" content="https://cadencevoice.ai/icon.png">
     <meta property="article:published_time" content="2026-03-25T09:00:00-07:00">
@@ -150,7 +150,7 @@
         <p>Our internal benchmark, run quarterly:</p>
 
         <ul>
-            <li>40-task suite across 8 tool categories — filesystem, shell, search, code edit, computer use, MCP, web fetch, structured output</li>
+            <li>40-task suite across 8 tool categories, filesystem, shell, search, code edit, computer use, MCP, web fetch, structured output</li>
             <li>Tasks require 4 to 12 tool calls in sequence with state dependencies between them</li>
             <li>Failure modes scored: dropped calls, hallucinated arguments, infinite loops, premature completion, cost runaway</li>
         </ul>
@@ -173,11 +173,11 @@
 
         <h2><span class="section-num">§04</span> The features only available downstream of commitment</h2>
 
-        <p>Single-vendor commitment unlocks features that routing layers cannot expose:</p>
+        <p>Single-vendor commitment exposes features routing layers can't:</p>
 
-        <p><strong>Prompt caching.</strong> A 90% discount on repeat tokens turns long-context agent flows from prohibitive to default. We cache aggressively across system prompts, tool definitions, and conversation prefixes. Routers cannot do this — the cache key isn't portable across vendors, and the price/latency model changes underneath them.</p>
+        <p><strong>Prompt caching.</strong> A 90% discount on repeat tokens turns long-context agent flows from prohibitive to default. We cache aggressively across system prompts, tool definitions, and conversation prefixes. Routers cannot do this, the cache key isn't portable across vendors, and the price/latency model changes underneath them.</p>
 
-        <p><strong>Extended thinking.</strong> Sonnet and Opus expose thinking budgets we control per call. Other vendors approximate this with chain-of-thought prompting. Approximations leak — the budget isn't real, the trace isn't reliable, the signal you wanted is gone.</p>
+        <p><strong>Extended thinking.</strong> Sonnet and Opus expose thinking budgets we control per call. Other vendors approximate this with chain-of-thought prompting. Approximations leak, the budget isn't real, the trace isn't reliable, the signal you wanted is gone.</p>
 
         <p><strong>Computer use.</strong> Anthropic shipped a model trained to operate a screen. We use it. There is no abstraction layer that papers over <em>"this model can drive a mouse and that one cannot."</em> Either you commit to the capability or you build around its absence.</p>
 

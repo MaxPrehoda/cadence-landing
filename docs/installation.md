@@ -36,7 +36,7 @@ On first launch Cadence will:
 
 1. Download the default Whisper model (`ggml-small.en.bin`) into the app's data directory.
 2. Show the indicator pill at the bottom-center of your primary display.
-3. Open the onboarding sheet — confirm your hotkey and wake word here.
+3. Open the onboarding sheet, confirm your hotkey and wake word here.
 
 Once onboarding completes, the pill stays in place. Hold the hotkey to record; release to transcribe.
 

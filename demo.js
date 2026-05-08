@@ -48,7 +48,7 @@
 
     // Demo 1: Dictation in Slack
     async function runSlackDemo() {
-        demoDescription.textContent = 'Demo 1: Voice dictation in Slack — Press hotkey, speak naturally, release. Text appears instantly.';
+        demoDescription.textContent = 'Demo 1: Voice dictation in Slack. Press hotkey, speak naturally, release. Text appears instantly.';
 
         const time = getCurrentTime();
 
@@ -185,7 +185,7 @@
 
     // Demo 2: AI Command in Mail
     async function runMailDemo() {
-        demoDescription.textContent = 'Demo 2: AI-powered rewrite — Say "Claude, make this more professional" to transform rough drafts instantly.';
+        demoDescription.textContent = 'Demo 2: AI-powered rewrite. Say "Claude, make this more professional" to transform rough drafts instantly.';
 
         const time = getCurrentTime();
 

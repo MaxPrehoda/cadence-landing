@@ -1,6 +1,6 @@
 # Wake word
 
-The wake word is an opt-in, hands-free alternative to push-to-talk. It's off by default — turn it on in **Settings → Voice → Wake word**.
+The wake word is an opt-in, hands-free alternative to push-to-talk. It's off by default, turn it on in **Settings → Voice → Wake word**.
 
 ## How it works
 
@@ -25,7 +25,7 @@ The simpler **command parser** (the one that handles non-LLM patterns like "open
 
 **Settings → Voice → Command wake word**
 
-Pick anything pronounceable — `jarvis`, `friday`, `computer`, your dog's name. Cadence handles common Whisper variants automatically (e.g. `"computers"` for `"computer"`).
+Pick anything pronounceable, `jarvis`, `friday`, `computer`, your dog's name. Cadence handles common Whisper variants automatically (e.g. `"computers"` for `"computer"`).
 
 > "Computer, switch to Slack"
 
@@ -44,4 +44,4 @@ If privacy or battery life matters to you, leave wake word off and use push-to-t
 
 ## Future: Porcupine
 
-The codebase is structured so a low-latency Porcupine keyword model can be plugged in without changing downstream parsing. If you want that today, you can supply your own `.ppn` model file and a Picovoice access key in settings — but it isn't required.
+The codebase is structured so a low-latency Porcupine keyword model can be plugged in without changing downstream parsing. If you want that today, you can supply your own `.ppn` model file and a Picovoice access key in settings, but it isn't required.

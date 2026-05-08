@@ -13,17 +13,17 @@ Most issues come down to one of: missing permission, wrong audio device, an out-
 
 - Open **Settings → Audio → Input device**, make sure the right mic is selected.
 - Speak louder, or lower **VAD threshold** in **Settings → Audio**.
-- The default `silence_duration_ms` is 2000 — if you trail off, Cadence may still be waiting. Lower it to 1200 if you talk in short bursts.
+- The default `silence_duration_ms` is 2000, if you trail off, Cadence may still be waiting. Lower it to 1200 if you talk in short bursts.
 
 ## Whisper hallucinates phrases like "Thanks for watching!"
 
-This is a known Whisper artifact on near-silent audio. Cadence already filters the most common ones. If a real phrase you use is being suppressed, file an issue — the suppression list is intentionally short.
+This is a known Whisper artifact on near-silent audio. Cadence already filters the most common ones. If a real phrase you use is being suppressed, file an issue. The suppression list is intentionally short.
 
 ## Text inserts at the wrong cursor / nothing inserts
 
 - Confirm **Accessibility** permission is granted.
 - Some apps (sandboxed inputs, certain 1Password fields) block synthesized keystrokes. Try **Settings → Injection → Use clipboard** to switch to paste mode.
-- If you're in a terminal, the polish pipeline may be inserting smart quotes that the shell rejects — set the per-app tone for that terminal to **raw**.
+- If you're in a terminal, the polish pipeline may be inserting smart quotes that the shell rejects. Set the per-app tone for that terminal to **raw**.
 
 ## Wake word never triggers
 
@@ -33,7 +33,7 @@ This is a known Whisper artifact on near-silent audio. Cadence already filters t
 
 ## Agent commands don't work
 
-- Confirm the `claude` CLI is installed and on your `PATH`. Run `which claude` in a terminal — if it returns nothing, install via `npm i -g @anthropic-ai/claude-code` or set the path manually in **Settings → Agents → CLI path**.
+- Confirm the `claude` CLI is installed and on your `PATH`. Run `which claude` in a terminal, if it returns nothing, install via `npm i -g @anthropic-ai/claude-code` or set the path manually in **Settings → Agents → CLI path**.
 - Confirm your auth mode in **Settings → Agents → Auth**. Try a quick smoke test: `claude -p "say hi"` from a terminal.
 - If a spawn announces "ready" but turns time out, check for firewall blocks on outbound HTTPS to `api.anthropic.com`.
 
@@ -45,11 +45,11 @@ This is a known Whisper artifact on near-silent audio. Cadence already filters t
 
 ## Agent dashboard opens on the wrong display
 
-**Settings → Agents → Dashboard monitor preference** — choose primary, current, or a specific display.
+**Settings → Agents → Dashboard monitor preference**: choose primary, current, or a specific display.
 
 ## "claude_session" actions fail in the intent engine
 
-The `claude_session` action shells out to the same `claude` CLI as agents. If standalone agents work but `claude_session` doesn't, check that the working directory you're invoking from has appropriate file permissions — `claude` will refuse to run in a directory it can't read.
+The `claude_session` action shells out to the same `claude` CLI as agents. If standalone agents work but `claude_session` doesn't, check that the working directory you're invoking from has appropriate file permissions, `claude` will refuse to run in a directory it can't read.
 
 ## Logs
 

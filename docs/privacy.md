@@ -19,16 +19,16 @@ Cadence is built around a single principle: **your audio never leaves your machi
 | **Agents (Claude Code)** | Whatever you say to the agent + repo context the agent reads | Per spawned agent session |
 | **TTS summarization** | Long agent responses are summarized before being spoken | If TTS is on and a response exceeds the inline-read threshold |
 
-All four use the Anthropic API directly — no Cadence server in the middle.
+All four use the Anthropic API directly. No Cadence server in the middle.
 
 ## What is sent to third-party integrations
 
 Each integration is **off by default** and only activates after you provide credentials:
 
-- **Slack** — your bot token authorizes Cadence to read/write messages. Slack's API logs the requests; Cadence does not.
-- **Mail.app / Messages.app** — driven via local AppleScript. No third-party network calls beyond what Mail/Messages already do.
-- **Browser CDP** — a localhost connection to your running Chrome instance. Nothing leaves the machine.
-- **Obsidian** — files are read and written locally; no network.
+- **Slack**: your bot token authorizes Cadence to read/write messages. Slack's API logs the requests; Cadence does not.
+- **Mail.app / Messages.app**: driven via local AppleScript. No third-party network calls beyond what Mail/Messages already do.
+- **Browser CDP**: a localhost connection to your running Chrome instance. Nothing leaves the machine.
+- **Obsidian**: files are read and written locally; no network.
 
 ## What we don't do
 
@@ -49,10 +49,10 @@ If you want the strongest privacy posture, leave wake word off.
 
 The macOS permissions Cadence requests:
 
-- **Microphone** — required for transcription
-- **Accessibility** — required to read window titles and synthesize keystrokes
-- **Input Monitoring** — required for the global push-to-talk hotkey
-- **Automation** — required only if you use the email / iMessage / Mail.app integrations
+- **Microphone**: required for transcription
+- **Accessibility**: required to read window titles and synthesize keystrokes
+- **Input Monitoring**: required for the global push-to-talk hotkey
+- **Automation**: required only if you use the email / iMessage / Mail.app integrations
 
 Each can be revoked independently in System Settings → Privacy & Security.
 
@@ -60,7 +60,7 @@ Each can be revoked independently in System Settings → Privacy & Security.
 
 Cadence is open source under the MIT license. The transcription and command-routing code paths are fully auditable: <https://github.com/MaxPrehoda/cadence>
 
-If you want stronger guarantees than "trust the binary," build from source — the README has instructions.
+If you want stronger guarantees than "trust the binary," build from source. The README has instructions.
 
 ## Reporting a privacy concern
 

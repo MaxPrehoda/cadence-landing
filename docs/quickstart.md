@@ -4,7 +4,7 @@ Five things to try in your first five minutes.
 
 ## 1. Dictate into anything
 
-Click into a text field in any app — Slack, Mail, your editor, a browser textarea.
+Click into a text field in any app: Slack, Mail, your editor, a browser textarea.
 
 Hold **Option** (or your configured hotkey). Speak. Release.
 
@@ -16,7 +16,7 @@ Hold the hotkey and say:
 
 > "Open Safari"
 
-Cadence recognizes the leading verb as a command — no wake word needed when push-to-talk is engaged. See [voice commands](#/voice-commands) for the full grammar.
+Cadence recognizes the leading verb as a command. No wake word needed when push-to-talk is engaged. See [voice commands](#/voice-commands) for the full grammar.
 
 Other quick tries:
 
@@ -33,13 +33,13 @@ Cadence spawns a Claude Code session in that directory and announces it. Then sa
 
 > "Frontend, add a dark mode toggle to the settings page"
 
-The agent picks up the work. When it asks for permission to run a tool, Cadence speaks the request — answer **"approve"** or **"deny"**.
+The agent picks up the work. When it asks for permission to run a tool, Cadence speaks the request. Answer **"approve"** or **"deny"**.
 
 See [agents](#/agents) for the full vocabulary (status, kill, show diff, teams, …).
 
 ## 4. Drive the desktop with intent
 
-Anything that isn't a built-in command falls through to the **intent engine** — Claude interprets your spoken sentence and composes a plan from 35 primitive actions:
+Anything that isn't a built-in command falls through to the **intent engine**. Claude interprets your spoken sentence and composes a plan from 35 primitive actions:
 
 > "Make this email more formal" *(with text selected)*
 
@@ -58,12 +58,12 @@ Open **Settings → Voice** and enable **Wake word**. Now you don't need to hold
 > "Hey Cadence, open VS Code"
 > "Computer, what time is it?"
 
-The wake word stays armed in the background using the same Whisper pipeline — no separate model required.
+The wake word stays armed in the background using the same Whisper pipeline. No separate model required.
 
 ---
 
 Where to go next:
 
-- [Hotkeys](#/hotkeys) — customize your push-to-talk chord.
-- [Settings](#/settings) — tune VAD, polish, TTS, and more.
-- [Privacy](#/privacy) — exactly what stays local and what calls the cloud.
+- [Hotkeys](#/hotkeys): customize your push-to-talk chord.
+- [Settings](#/settings): tune VAD, polish, TTS, and more.
+- [Privacy](#/privacy): exactly what stays local and what calls the cloud.

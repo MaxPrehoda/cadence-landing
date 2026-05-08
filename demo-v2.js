@@ -297,7 +297,7 @@
         await sleep(200);
 
         // Type refined version
-        const refined = "Key accomplishments this week:\n\n• Launched new dashboard feature to production\n• Resolved 10 critical bugs across the platform\n• Team performance strong—all objectives on track\n\nNext week's focus: Performance optimization and technical debt reduction.";
+        const refined = "Key accomplishments this week:\n\n• Launched new dashboard feature to production\n• Resolved 10 critical bugs across the platform\n• Team performance strong-all objectives on track\n\nNext week's focus: Performance optimization and technical debt reduction.";
         await typeText(noteBody, refined, 25);
 
         await sleep(3500);
