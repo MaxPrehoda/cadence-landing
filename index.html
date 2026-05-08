@@ -1465,18 +1465,19 @@
                 <div>
                     <div class="mono" style="font-size: 11px; color: var(--text-dim); margin-bottom: 24px;
                                              letter-spacing: 0.1em; text-transform: uppercase;">
-                        macOS Voice Layer
+                        Voice for macOS
                     </div>
                     <h1 style="font-size: clamp(48px, 8vw, 96px); font-weight: 600; line-height: 0.95;
                                margin-bottom: 32px; letter-spacing: -0.03em;">
-                        <span class="accent glow">Speak.</span><br>
-                        Command.<br>
-                        Anywhere.
+                        <span class="accent glow">Speak</span> to your Mac.<br>
+                        Speak to your<br>
+                        AI assistants.
                     </h1>
                     <p style="font-size: 18px; color: var(--text-secondary); max-width: 540px;
                               line-height: 1.6; margin-bottom: 40px;">
-                        Local Whisper transcription + desktop automation. Zero cloud. Zero latency.
-                        System-wide voice control that actually respects your privacy.
+                        Hold a hotkey and talk. Your words appear at the cursor — in any app, any window.
+                        The same voice directs Claude AI assistants running on your Mac, by name, in parallel.
+                        Transcription happens on the device. Nothing is sent to the cloud.
                     </p>
 
                     <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px;">
@@ -1516,50 +1517,50 @@
             </div>
         </section>
 
-        <!-- The Bandwidth Problem -->
-        <section id="bandwidth" aria-label="Why voice — input bandwidth" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative;">
+        <!-- Voice for your Mac -->
+        <section id="bandwidth" aria-label="Voice for your Mac" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative;">
             <div style="max-width: 1100px; margin: 0 auto;">
-                <div class="section-eyebrow animate-fade-up" data-delay="0">§ 01 — Input bandwidth</div>
+                <div class="section-eyebrow animate-fade-up" data-delay="0">§ 01 — Voice for your Mac</div>
                 <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 22ch; margin-bottom: 24px;">
-                    You can direct fifteen people in a room. You can't type to them.
+                    Hold a key. Speak. The words appear where you're typing.
                 </h2>
                 <p class="animate-fade-up" data-delay="120" style="font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 56px;">
-                    Conversations scale. Keyboards do not. The interface a human uses to drive
-                    multiple AI agents in parallel is the constraint that decides whether agentic
-                    AI is a real tool or a slow demo. Cadence treats voice as the primary input
-                    channel for one reason: nothing else keeps up.
+                    An email draft, a Slack message, a Google Doc, a terminal, a code editor — anywhere on
+                    your Mac with a cursor. Hold the hotkey, say what you want to write, let go. Cadence
+                    transcribes it on your Mac with Whisper and types it where the cursor is. The audio
+                    never leaves the device.
                 </p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                     <!-- Keyboard column -->
                     <div class="bandwidth-col keyboard animate-fade-up" data-delay="180">
-                        <div class="mono" style="font-size: 10px; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;">Keyboard · mouse</div>
+                        <div class="mono" style="font-size: 10px; color: var(--text-dim); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;">Typing</div>
                         <div class="bandwidth-stat">80<span style="font-size: 22px; color: var(--text-dim); margin-left: 8px; font-weight: 500;">wpm</span></div>
-                        <div class="mono" style="font-size: 12px; color: var(--text-dim); margin-bottom: 24px;">Sustained, expert</div>
+                        <div class="mono" style="font-size: 12px; color: var(--text-dim); margin-bottom: 24px;">A fast typist, sustained</div>
                         <ul class="bandwidth-list">
-                            <li style="color: var(--text-muted);">· Serial. One agent at a time.</li>
-                            <li style="color: var(--text-muted);">· 1.2s per mouse trip (Fitts).</li>
-                            <li style="color: var(--text-muted);">· Window switch breaks attention.</li>
-                            <li style="color: var(--text-muted);">· Addressee = where you click.</li>
+                            <li style="color: var(--text-muted);">· Hands on the keyboard.</li>
+                            <li style="color: var(--text-muted);">· Eyes locked to the screen.</li>
+                            <li style="color: var(--text-muted);">· One window at a time.</li>
+                            <li style="color: var(--text-muted);">· You stop to switch apps.</li>
                         </ul>
                     </div>
 
                     <!-- Voice column -->
                     <div class="bandwidth-col voice animate-fade-up" data-delay="240">
-                        <div class="mono" style="font-size: 10px; color: var(--accent-primary); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;">Voice · dictation</div>
+                        <div class="mono" style="font-size: 10px; color: var(--accent-primary); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 6px;">Speaking</div>
                         <div class="bandwidth-stat">150<span style="font-size: 22px; color: var(--text-dim); margin-left: 8px; font-weight: 500;">wpm</span></div>
-                        <div class="mono" style="font-size: 12px; color: var(--text-dim); margin-bottom: 24px;">Sustained, conversational</div>
+                        <div class="mono" style="font-size: 12px; color: var(--text-dim); margin-bottom: 24px;">A normal conversation, sustained</div>
                         <ul class="bandwidth-list">
-                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Parallel. N agents at once.</li>
-                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>&lt;200ms first token, on device.</li>
-                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Eyes free. No window switching.</li>
-                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Addressable by name.</li>
+                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Hands free.</li>
+                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Words appear in under 200ms — on your Mac.</li>
+                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Works in every app, no plugins.</li>
+                            <li><span style="color: var(--accent-primary); margin-right: 6px;">·</span>Talk while you read or think.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="animate-fade-up" data-delay="320" style="margin-top: 56px; text-align: center;">
-                    <a href="/blog/dictation-is-the-ui-layer" class="inline-link">Read the full argument →</a>
+                    <a href="/blog/dictation-is-the-ui-layer" class="inline-link">Read more about dictation →</a>
                 </div>
             </div>
         </section>
@@ -1573,14 +1574,15 @@
                 </div>
                 <h2 style="font-size: clamp(28px, 4vw, 38px); font-weight: 600; line-height: 1.15;
                            letter-spacing: -0.02em; margin-bottom: 28px; max-width: 22ch;">
-                    What Cadence is, in one paragraph.
+                    The whole thing in one paragraph.
                 </h2>
                 <p style="font-size: 18px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 40px;">
-                    Cadence is a voice-first interface for AI agents on macOS. One operator dictates commands by hotkey;
-                    Cadence transcribes locally with Whisper, routes the command to one of several Anthropic Claude
-                    agents running in parallel, and surfaces results inline. There is no model picker, no cloud
-                    transcription, no subscription. The product is built and maintained by Cadence Labs, open-source
-                    under the MIT license, and runs exclusively on Claude — Opus, Sonnet, and Haiku.
+                    Cadence is a Mac app that lets you talk to your computer and talk to your AI assistants the
+                    same way: hold a hotkey and speak. Speech is turned into text on your Mac using Whisper —
+                    no audio leaves the device. The same voice can direct several Claude assistants running in
+                    parallel, each addressed by name. No model picker, no cloud transcription, no subscription.
+                    Built by Cadence Labs, open source under the MIT license, runs exclusively on Anthropic
+                    Claude — Opus, Sonnet, and Haiku.
                 </p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 40px;">
@@ -1658,17 +1660,18 @@
             </div>
         </section>
 
-        <!-- Agent Orchestra -->
-        <section id="agents" aria-label="Multi-agent orchestration" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative; overflow: hidden;">
+        <!-- Voice for your AI assistants -->
+        <section id="agents" aria-label="Voice for your AI assistants" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative; overflow: hidden;">
             <div style="max-width: 1200px; margin: 0 auto;">
-                <div class="section-eyebrow animate-fade-up">§ 02 — Agent orchestra</div>
+                <div class="section-eyebrow animate-fade-up">§ 02 — Voice for your AI assistants</div>
                 <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 18ch; margin-bottom: 24px;">
-                    Spawn. Name. Direct. Approve.
+                    Give them names. Then call them by name.
                 </h2>
                 <p class="animate-fade-up" data-delay="120" style="font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 56px;">
-                    Run multiple Claude agents in parallel — each one named, each one addressable. Voice routes
-                    by name; the roster is your mental model. Approvals land inline, in context, never in a
-                    separate panel. State is visible at a glance.
+                    Cadence runs Claude — Anthropic's AI — as several assistants on your Mac at the same time.
+                    You name them. You speak to them. Each one keeps working on its own task in the background
+                    while you keep talking. When one needs your okay before doing something risky, it asks
+                    right there in the same panel.
                 </p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 36px;">
@@ -1742,7 +1745,7 @@
                 </div>
 
                 <p class="animate-fade-up" data-delay="420" style="font-size: 15px; line-height: 1.65; color: var(--text-muted); max-width: 60ch; margin: 36px auto 0; text-align: center;">
-                    One sentence. Three agents updated. Try doing this with a mouse.
+                    Three assistants directed in one sentence. Each one keeps working on its own task in the background.
                 </p>
             </div>
         </section>
@@ -1781,7 +1784,7 @@
                     Architecture
                 </div>
                 <h2 style="font-size: clamp(28px, 4.5vw, 42px); font-weight: 600; margin-bottom: 56px; letter-spacing: -0.02em; max-width: 600px; line-height: 1.1;">
-                    Hybrid intelligence meets OS-level control
+                    What's actually running on your Mac
                 </h2>
 
                 <div style="display: grid; gap: 20px;">
@@ -1795,10 +1798,10 @@
                             </div>
                             <div style="flex: 1;">
                                 <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 6px; color: var(--text-primary);">
-                                    Optimized Whisper Runtime
+                                    Speech recognition, on your Mac
                                 </h3>
                                 <p style="font-size: 14px; color: var(--text-dim); line-height: 1.7; margin-bottom: 12px;">
-                                    Custom-tuned speech recognition optimized for Apple Silicon. Sub-200ms inference with zero network calls.
+                                    Whisper runs directly on the chip in your Mac — tuned for Apple Silicon. Words start appearing in under 200ms. The audio never touches the internet.
                                 </p>
                                 <div class="tech-metric">
                                     <span class="mono accent" style="font-size: 22px; font-weight: 700;">< 200ms</span>
@@ -1815,14 +1818,14 @@
                             </div>
                             <div style="flex: 1;">
                                 <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 6px; color: var(--text-primary);">
-                                    Adaptive Model Selection
+                                    The right Claude for the job
                                 </h3>
                                 <p style="font-size: 14px; color: var(--text-dim); line-height: 1.7; margin-bottom: 12px;">
-                                    Seamlessly routes between on-device and frontier models. Fast local refinement with optional cloud intelligence.
+                                    Cadence picks between Claude Opus, Sonnet, and Haiku for you, depending on what you've asked for. Hard reasoning gets the strong model. Quick tasks get the fast one.
                                 </p>
                                 <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                                    <div class="tech-badge">Local models</div>
-                                    <div class="tech-badge">Cloud fallback</div>
+                                    <div class="tech-badge">Opus · Sonnet · Haiku</div>
+                                    <div class="tech-badge">Auto-routed</div>
                                 </div>
                             </div>
                         </div>
@@ -1835,10 +1838,10 @@
                             </div>
                             <div style="flex: 1;">
                                 <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 6px; color: var(--text-primary);">
-                                    Screen-Aware Processing
+                                    Knows what app you're in
                                 </h3>
                                 <p style="font-size: 14px; color: var(--text-dim); line-height: 1.7;">
-                                    Context engine detects active app, selected text, clipboard state. Knows when you're coding vs. writing vs. messaging.
+                                    Cadence sees which app is in front, what text you have selected, and what's on the clipboard. So "fix this" in your code editor and "fix this" in an email don't get treated the same way.
                                 </p>
                             </div>
                         </div>
@@ -1851,10 +1854,10 @@
                             </div>
                             <div style="flex: 1;">
                                 <h3 style="font-size: 17px; font-weight: 600; margin-bottom: 6px; color: var(--text-primary);">
-                                    Universal Text Control
+                                    Works in every app
                                 </h3>
                                 <p style="font-size: 14px; color: var(--text-dim); line-height: 1.7;">
-                                    Native macOS APIs for system-wide injection. Terminal, browser, IDE, design tools—no app-specific plugins.
+                                    Cadence types into whatever app you're already using — Terminal, your browser, a code editor, Slack, Mail, Figma. No plugins to install. No copy-and-paste.
                                 </p>
                             </div>
                         </div>
@@ -1890,12 +1893,13 @@
             <div style="max-width: 1100px; margin: 0 auto;">
                 <div class="section-eyebrow animate-fade-up">§ 03 — Models</div>
                 <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 22ch; margin-bottom: 24px;">
-                    One family. Three models. Calibrated to one voice.
+                    Three Claude models. We pick the right one for you.
                 </h2>
                 <p class="animate-fade-up" data-delay="120" style="font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 56px;">
-                    Cadence runs Anthropic Claude exclusively. No GPT. No Gemini. No router. Routing happens
-                    automatically, per task type, against one consistent and very good family of models. We made
-                    the call once and built the entire product around it.
+                    Cadence runs Anthropic's Claude — and only Claude. No GPT, no Gemini, no model picker for
+                    you to fiddle with. Each request goes to whichever Claude model is best for the task: the
+                    strong one for hard problems, the fast one for quick replies, the in-between one for
+                    everyday work.
                 </p>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
