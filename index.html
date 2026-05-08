@@ -1329,61 +1329,6 @@
             background-clip: text;
         }
 
-        /* — Model cards — */
-        .model-card {
-            border: 1px solid var(--border-subtle);
-            border-radius: 8px;
-            padding: 28px;
-            background: var(--bg-surface);
-            transition: border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .model-card::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-border), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .model-card:hover {
-            border-color: var(--accent-border);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(45, 212, 191, 0.12);
-        }
-        .model-card:hover::after { opacity: 1; }
-        .model-card .model-vendor {
-            font-family: var(--font-mono);
-            font-size: 10px;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            margin-bottom: 14px;
-        }
-        .model-card .model-name {
-            font-family: var(--font-mono);
-            font-size: 22px;
-            font-weight: 600;
-            color: var(--accent-primary);
-            margin-bottom: 4px;
-            letter-spacing: -0.02em;
-        }
-        .model-card .model-role {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--text-primary);
-            margin: 18px 0 10px;
-        }
-        .model-card .model-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.65;
-        }
-
         /* — Inline link arrow — */
         .inline-link {
             font-family: var(--font-mono);
@@ -1401,7 +1346,7 @@
 
         /* — Mobile responsiveness for new sections — */
         @media (max-width: 720px) {
-            .bandwidth-col, .model-card { padding: 22px; }
+            .bandwidth-col { padding: 22px; }
             .voice-command-bar { padding: 18px 20px; font-size: 13px; }
         }
 
@@ -1795,49 +1740,6 @@
                             <div style="font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em;">Extensible</div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Built on Claude -->
-        <section id="models" aria-label="Built on Claude" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative;">
-            <div style="max-width: 1100px; margin: 0 auto;">
-                <div class="section-eyebrow animate-fade-up">§ 02 — Models</div>
-                <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 22ch; margin-bottom: 24px;">
-                    Three Claude models. We pick the right one for you.
-                </h2>
-                <p class="animate-fade-up" data-delay="120" style="font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 56px;">
-                    Cadence runs Anthropic's Claude — and only Claude. No GPT, no Gemini, no model picker for
-                    you to fiddle with. Each request goes to whichever Claude model is best for the task: the
-                    strong one for hard problems, the fast one for quick replies, the in-between one for
-                    everyday work.
-                </p>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
-                    <article class="model-card animate-fade-up" data-delay="180">
-                        <div class="model-vendor">By Anthropic</div>
-                        <div class="model-name">Opus 4.7</div>
-                        <div class="model-role">The hard ones</div>
-                        <p class="model-desc">Multi-step planning, code reasoning under uncertainty, decisions that affect the rest of the run. The frontier model in our suite.</p>
-                    </article>
-
-                    <article class="model-card animate-fade-up" data-delay="220">
-                        <div class="model-vendor">By Anthropic</div>
-                        <div class="model-name">Sonnet 4.6</div>
-                        <div class="model-role">Most agent steps</div>
-                        <p class="model-desc">Day-to-day tool use. Edits, searches, runs commands, summarizes output. The default model behind nearly every action.</p>
-                    </article>
-
-                    <article class="model-card animate-fade-up" data-delay="260">
-                        <div class="model-vendor">By Anthropic</div>
-                        <div class="model-name">Haiku 4.5</div>
-                        <div class="model-role">Command parsing</div>
-                        <p class="model-desc">Voice intent classification, command routing, fast confidence checks. Latency-critical work where Opus would be overkill.</p>
-                    </article>
-                </div>
-
-                <div class="animate-fade-up" data-delay="320" style="margin-top: 56px; text-align: center;">
-                    <a href="/blog/why-we-only-ship-claude" class="inline-link">Why one vendor →</a>
                 </div>
             </div>
         </section>
