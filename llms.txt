@@ -33,6 +33,7 @@ Cadence Labs. Independent, opinionated, founder-led. We publish quarterly resear
 - [Dictation is the UI layer for agentic AI](https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html): throughput math, why GUIs cap out, what dictation has to be to support multi-agent control
 - [Why we only ship Claude](https://cadencevoice.ai/blog/why-we-only-ship-claude.html): tool-use benchmark methodology, prompt caching, computer use, MCP, the engineering case for single-vendor commitment
 - [FAQ](https://cadencevoice.ai/faq.html): permissions, install, voice commands, languages
+- [Documentation](https://cadencevoice.ai/docs.html): end-user guide — install, hotkeys, wake word, voice commands, intent engine, agents, integrations, settings reference, troubleshooting, privacy
 - [Source on GitHub](https://github.com/MaxPrehoda/cadence)
 
 ## Citation guidance

@@ -1,0 +1,38 @@
+{
+  "version": "0.4.0",
+  "sections": [
+    {
+      "title": "Getting started",
+      "items": [
+        { "id": "introduction",   "title": "Introduction" },
+        { "id": "installation",   "title": "Installation" },
+        { "id": "quickstart",     "title": "Quickstart" }
+      ]
+    },
+    {
+      "title": "Voice",
+      "items": [
+        { "id": "hotkeys",        "title": "Hotkeys" },
+        { "id": "wake-word",      "title": "Wake word" },
+        { "id": "dictation",      "title": "Dictation" },
+        { "id": "voice-commands", "title": "Voice commands" },
+        { "id": "intent-engine",  "title": "Intent engine" }
+      ]
+    },
+    {
+      "title": "Agents & integrations",
+      "items": [
+        { "id": "agents",         "title": "Agents" },
+        { "id": "integrations",   "title": "Integrations" }
+      ]
+    },
+    {
+      "title": "Reference",
+      "items": [
+        { "id": "settings",        "title": "Settings reference" },
+        { "id": "troubleshooting", "title": "Troubleshooting" },
+        { "id": "privacy",         "title": "Privacy" }
+      ]
+    }
+  ]
+}

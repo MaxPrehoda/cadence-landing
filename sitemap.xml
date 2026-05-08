@@ -45,6 +45,13 @@
     </url>
 
     <url>
+        <loc>https://cadencevoice.ai/docs.html</loc>
+        <lastmod>2026-05-08</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <url>
         <loc>https://cadencevoice.ai/privacy.html</loc>
         <lastmod>2026-04-30</lastmod>
         <changefreq>yearly</changefreq>
