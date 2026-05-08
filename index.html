@@ -1450,6 +1450,7 @@
                 </a>
                 <nav style="display: flex; gap: 24px; align-items: center; font-size: 13px;" aria-label="Primary">
                     <a href="#tech" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Tech</a>
+                    <a href="/docs.html" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Docs</a>
                     <a href="/blog/" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Writing</a>
                     <a href="#download" style="color: var(--text-muted); text-decoration: none; transition: color 0.2s;">Download</a>
                     <a href="https://github.com/MaxPrehoda/cadence" target="_blank" rel="noopener"
@@ -1469,9 +1470,9 @@
                     </div>
                     <h1 style="font-size: clamp(48px, 8vw, 96px); font-weight: 600; line-height: 0.95;
                                margin-bottom: 32px; letter-spacing: -0.03em;">
-                        <span class="accent glow">Speak</span> to your Mac.<br>
-                        Speak to your<br>
-                        AI assistants.
+                        <span class="accent glow">Speak.</span><br>
+                        Anywhere on<br>
+                        your Mac.
                     </h1>
                     <p style="font-size: 18px; color: var(--text-secondary); max-width: 540px;
                               line-height: 1.6; margin-bottom: 40px;">
@@ -1660,96 +1661,6 @@
             </div>
         </section>
 
-        <!-- Voice for your AI assistants -->
-        <section id="agents" aria-label="Voice for your AI assistants" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative; overflow: hidden;">
-            <div style="max-width: 1200px; margin: 0 auto;">
-                <div class="section-eyebrow animate-fade-up">§ 02 — Voice for your AI assistants</div>
-                <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 18ch; margin-bottom: 24px;">
-                    Give them names. Then call them by name.
-                </h2>
-                <p class="animate-fade-up" data-delay="120" style="font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 62ch; margin-bottom: 56px;">
-                    Cadence runs Claude — Anthropic's AI — as several assistants on your Mac at the same time.
-                    You name them. You speak to them. Each one keeps working on its own task in the background
-                    while you keep talking. When one needs your okay before doing something risky, it asks
-                    right there in the same panel.
-                </p>
-
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 36px;">
-                    <!-- Atlas — streaming -->
-                    <div class="agent-card animate-fade-up" data-delay="180" style="--state-color: #2dd4bf;">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-                            <div class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Atlas</div>
-                            <div style="display: flex; align-items: center; gap: 7px;">
-                                <span class="agent-state-dot pulsing" style="--state-color: #2dd4bf;"></span>
-                                <span class="mono" style="font-size: 9px; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.12em;">Streaming</span>
-                            </div>
-                        </div>
-                        <div class="mono" style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">→ web_search</div>
-                        <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5;">Researching Tauri 2 audio APIs</div>
-                    </div>
-
-                    <!-- Cypher — running -->
-                    <div class="agent-card animate-fade-up" data-delay="220" style="--state-color: #2dd4bf;">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-                            <div class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Cypher</div>
-                            <div style="display: flex; align-items: center; gap: 7px;">
-                                <span class="agent-state-dot pulsing" style="--state-color: #2dd4bf;"></span>
-                                <span class="mono" style="font-size: 9px; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.12em;">Running</span>
-                            </div>
-                        </div>
-                        <div class="mono" style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">→ edit_file</div>
-                        <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5;">src-tauri/src/agents/router.rs</div>
-                    </div>
-
-                    <!-- Echo — awaiting approval -->
-                    <div class="agent-card animate-fade-up" data-delay="260" style="--state-color: #fbbf24;">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-                            <div class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Echo</div>
-                            <div style="display: flex; align-items: center; gap: 7px;">
-                                <span class="agent-state-dot pulsing" style="--state-color: #fbbf24;"></span>
-                                <span class="mono" style="font-size: 9px; color: #fbbf24; text-transform: uppercase; letter-spacing: 0.12em;">Approval</span>
-                            </div>
-                        </div>
-                        <div class="mono" style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">⏸ run_command</div>
-                        <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5;">cargo build --release</div>
-                    </div>
-
-                    <!-- Drift — done -->
-                    <div class="agent-card animate-fade-up" data-delay="300" style="--state-color: #57534e;">
-                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
-                            <div class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-primary);">Drift</div>
-                            <div style="display: flex; align-items: center; gap: 7px;">
-                                <span class="agent-state-dot" style="--state-color: #57534e;"></span>
-                                <span class="mono" style="font-size: 9px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.12em;">Done</span>
-                            </div>
-                        </div>
-                        <div class="mono" style="font-size: 11px; color: var(--text-muted); margin-bottom: 6px;">✓ commit</div>
-                        <div style="font-size: 12px; color: var(--text-dim); line-height: 1.5;">12 files · 247+ · 38−</div>
-                    </div>
-                </div>
-
-                <!-- Voice command bar -->
-                <div class="voice-command-bar animate-fade-up" data-delay="360">
-                    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
-                        <span style="display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-primary); color: var(--bg-base); flex-shrink: 0;" aria-hidden="true">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-                        </span>
-                        <span style="color: var(--accent-primary); font-weight: 500;">›</span>
-                        <span style="color: var(--text-primary);">"Atlas keep going. Cypher approve the migration. Echo cancel."</span>
-                    </div>
-                    <div style="margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--text-dim); display: flex; flex-wrap: wrap; gap: 22px;">
-                        <span><span style="color: var(--accent-primary);">↳ Atlas</span> · continuing</span>
-                        <span><span style="color: var(--accent-primary);">↳ Cypher</span> · approved</span>
-                        <span><span style="color: var(--accent-primary);">↳ Echo</span> · cancelled</span>
-                    </div>
-                </div>
-
-                <p class="animate-fade-up" data-delay="420" style="font-size: 15px; line-height: 1.65; color: var(--text-muted); max-width: 60ch; margin: 36px auto 0; text-align: center;">
-                    Three assistants directed in one sentence. Each one keeps working on its own task in the background.
-                </p>
-            </div>
-        </section>
-
         <!-- Demo Section -->
         <section id="demo-section" style="border-top: 1px solid var(--border-subtle);">
             <div style="max-width: 1200px; margin: 0 auto;">
@@ -1891,7 +1802,7 @@
         <!-- Built on Claude -->
         <section id="models" aria-label="Built on Claude" style="padding: 96px 24px; border-top: 1px solid var(--border-subtle); position: relative;">
             <div style="max-width: 1100px; margin: 0 auto;">
-                <div class="section-eyebrow animate-fade-up">§ 03 — Models</div>
+                <div class="section-eyebrow animate-fade-up">§ 02 — Models</div>
                 <h2 class="animate-fade-up" data-delay="60" style="font-size: clamp(32px, 5vw, 52px); font-weight: 600; line-height: 1.06; letter-spacing: -0.025em; max-width: 22ch; margin-bottom: 24px;">
                     Three Claude models. We pick the right one for you.
                 </h2>
