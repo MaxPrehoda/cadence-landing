@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scouts before editors: a division of labor for parallel agents · Cadence</title>
+
+    <meta name="description" content="Running many agents at once fails when they all hold the same authority. The pattern that works is read-only scouts reporting to a single decision-maker. Field notes from a multi-repo session.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://cadencevoice.ai/blog/scouts-before-editors.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Scouts before editors: a division of labor for parallel agents">
+    <meta property="og:description" content="Read-only scouts map the territory. One decision-maker edits. Field notes from running four agents across four unrelated codebases.">
+    <meta property="og:url" content="https://cadencevoice.ai/blog/scouts-before-editors.html">
+    <meta property="og:image" content="https://cadencevoice.ai/icon.png">
+    <meta property="article:published_time" content="2026-07-20T09:00:00-07:00">
+    <meta property="article:author" content="Cadence Labs">
+    <meta property="article:section" content="Engineering">
+    <meta property="article:tag" content="agentic AI">
+    <meta property="article:tag" content="multi-agent orchestration">
+    <meta property="article:tag" content="parallel agents">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Scouts before editors: a division of labor for parallel agents">
+    <meta name="twitter:description" content="Read-only scouts map the territory. One decision-maker edits. Field notes from a multi-repo session.">
+    <meta name="twitter:image" content="https://cadencevoice.ai/icon.png">
+
+    <meta name="theme-color" content="#0c0a09">
+    <link rel="icon" type="image/png" href="/icon.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Scouts before editors: a division of labor for parallel agents",
+        "description": "Running many agents at once fails when they all hold the same authority. The pattern that works is read-only scouts reporting to a single decision-maker.",
+        "image": "https://cadencevoice.ai/icon.png",
+        "datePublished": "2026-07-20T09:00:00-07:00",
+        "dateModified": "2026-07-20T09:00:00-07:00",
+        "inLanguage": "en-US",
+        "wordCount": "1000",
+        "articleSection": "Engineering",
+        "author": {
+            "@type": "Organization",
+            "name": "Cadence Labs",
+            "url": "https://cadencevoice.ai/blog/",
+            "sameAs": ["https://github.com/MaxPrehoda/cadence"]
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Cadence",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://cadencevoice.ai/icon.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://cadencevoice.ai/blog/scouts-before-editors.html"
+        },
+        "isPartOf": {
+            "@type": "Blog",
+            "@id": "https://cadencevoice.ai/blog/",
+            "name": "Cadence Labs"
+        },
+        "keywords": "parallel agents, multi-agent orchestration, agent division of labor, read-only agents, operator throughput, Claude agents, codebase exploration"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Cadence", "item": "https://cadencevoice.ai/" },
+            { "@type": "ListItem", "position": 2, "name": "Writing", "item": "https://cadencevoice.ai/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Scouts before editors", "item": "https://cadencevoice.ai/blog/scouts-before-editors.html" }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://cadencevoice.ai/blog/scouts-before-editors.html#webpage",
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".article-title", ".article-dek", ".article-body p:first-of-type"]
+        }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/blog/blog.css">
+</head>
+<body>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <a href="/" class="nav-brand">cadence<span class="accent">·</span>labs</a>
+        <div class="nav-links">
+            <a href="/">Product</a>
+            <a href="/blog/" class="active">Writing</a>
+            <a href="https://github.com/MaxPrehoda/cadence" target="_blank" rel="noopener">Source</a>
+        </div>
+    </div>
+</nav>
+
+<article class="article">
+
+    <div class="meta-strip">
+        <span class="tag">§ Engineering</span>
+        <span>2026 · 07 · 20</span>
+        <span class="sep">/</span>
+        <span>5 min read</span>
+        <span class="sep">/</span>
+        <span>Cadence Labs № 04</span>
+    </div>
+
+    <h1 class="article-title">Scouts before editors.</h1>
+
+    <p class="article-dek">
+        Parallel agents fail in a specific way: give four of them equal authority over the same work and you get four plausible answers you now have to referee. The fix is a division of labor, not a better prompt.
+    </p>
+
+    <div class="byline">
+        <span class="author">By Cadence Labs</span> · Filed in Engineering · Field notes
+    </div>
+
+    <div class="article-body">
+
+        <h2><span class="section-num">§01</span> The failure mode</h2>
+
+        <p>The naive way to use concurrency is to hand the same task to several agents and take the best result. This works for generation. It does not work for anything that touches state.</p>
+
+        <p>When several agents can all edit, the operator's job silently changes from <em>directing work</em> to <em>reconciling conflicting work</em>. That is a worse job. It scales badly, it requires holding every agent's reasoning in your head at once, and it produces the specific kind of exhaustion where you stop reading diffs carefully around the third one.</p>
+
+        <p>The division that holds up: <strong>many readers, one writer.</strong> Agents that only look are cheap to run concurrently, because their outputs merge trivially — a map of one territory does not conflict with a map of another. Agents that change things are serialized through a single decision-maker who holds the whole picture.</p>
+
+        <h2><span class="section-num">§02</span> What a scout is for</h2>
+
+        <p>A scout answers <em>where does this live and what shape is it</em>. It does not answer <em>what should we do</em>. That distinction is the entire discipline.</p>
+
+        <p>A well-scoped scout task looks like: <em>find where projects are defined in this repo, quote one existing entry verbatim so I can copy its shape, tell me every file that must change to add another, and do not modify anything.</em> It comes back with paths, formats, and constraints. The decision about what to actually write stays with the operator.</p>
+
+        <p>The reason this works is that reading is where the token cost and the context bloat live, and it is also the part that parallelizes without coordination. Four unrelated repositories can be mapped at once by four agents that never need to know the others exist.</p>
+
+        <h2><span class="section-num">§03</span> The session</h2>
+
+        <p>A concrete run: four codebases, unrelated to each other, four scouts dispatched concurrently. A single-page Svelte app with hand-written markup and no data layer. A SvelteKit site whose blog posts are flat markdown but whose metadata is hardcoded in three separate files. A zero-build static site of hand-authored HTML with JSON-LD in every page. A Create React App with no content layer at all.</p>
+
+        <p>Two findings from that run are worth reporting, because they are the kind of thing that decides whether the subsequent edit is correct or a broken deploy.</p>
+
+        <p><strong>A premise was wrong and the scout said so.</strong> The dispatch described one of the four as a Svelte site. It was not — it was Create React App, and the scout's first line was the correction. Every plan downstream of that assumption would have been wrong. An agent with edit authority and an agreeable disposition would have started writing Svelte into a React project.</p>
+
+        <p><strong>A constraint surfaced that no diff would have shown.</strong> In the single-page app, the project cards sit in an absolutely-positioned grid inside a container with hardcoded minimum heights per breakpoint. Adding one card adds a row, and the row overflows the container into the footer. The scout reported the constraint alongside the format. The edit that followed changed two things — the card and the container heights — and shipped clean. An agent that only knew "add a card like the others" would have shipped a visually broken page that compiles perfectly.</p>
+
+        <p>That second one generalizes. <strong>The expensive knowledge in a codebase is rarely the pattern. It is the constraint next to the pattern.</strong> Scouts are good at surfacing those precisely because they are reading rather than producing, and there is no pressure toward a finished-looking answer.</p>
+
+        <h2><span class="section-num">§04</span> Where it stops working</h2>
+
+        <p>Three limits we keep hitting.</p>
+
+        <p><strong>Scouts inherit your framing.</strong> Ask "where is the blog" and a scout will tell you where the blog is. It will not tell you the blog is the wrong place for what you're about to write. Judgment about whether a task is worth doing does not delegate — the operator who dispatched four agents is still the only one who knows why.</p>
+
+        <p><strong>Summaries lose the thing you didn't ask about.</strong> A scout returns what its prompt asked for. Detail outside the question is dropped, and you cannot tell from the report what was dropped. The mitigation is asking for verbatim quotes of real code rather than descriptions of it — a quoted block carries the details your question failed to anticipate.</p>
+
+        <p><strong>Parallelism is bounded by your reading speed, not theirs.</strong> Four scouts return four reports that one human must actually read. Past roughly that number, the operator becomes the queue. This is the same ceiling we keep measuring in the product — the bottleneck is never the model, it is the person integrating what comes back.</p>
+
+        <h2><span class="section-num">§05</span> The rule</h2>
+
+        <p>Concurrency for reading. Serialization for writing. One context that holds the decision.</p>
+
+        <p>Stated that way it sounds obvious, and it is — it is roughly how a competent team of humans already works. The reason it needs saying is that the tooling makes the opposite easy. Spawning five agents that can all edit is one command, and it feels like leverage right up until you are refereeing five diffs against a codebase none of them fully read.</p>
+
+        <p>What we're testing next is whether the writer role can hand off cleanly mid-task — whether a decision-maker's context can transfer to a fresh one without the receiving agent quietly re-deciding things that were already settled. Early attempts say no. We don't yet understand what would have to be true for it to work.</p>
+
+        <p>The examples in this post came from ordinary product work rather than a benchmark — multi-repo edits, a Godot game's web build, and the analytics behind <a href="https://playmushies.com" rel="noopener">a small browser game</a> that happens to be a convenient test subject because it is real, shipping, and has users who notice when something breaks.</p>
+
+    </div>
+
+    <p class="endmark"><span class="em-glyph">§</span> END · Cadence Labs № 04 · Filed 2026/07/20</p>
+
+    <div class="cross-links">
+        <div class="cross-links-label">Read next</div>
+        <a href="/blog/cadence-labs-ui-of-agency"><span class="arrow">→</span>Cadence Labs: studying the UI of agency</a>
+        <a href="/blog/dictation-is-the-ui-layer"><span class="arrow">→</span>Dictation is the UI layer for agentic AI</a>
+    </div>
+
+</article>
+
+<footer class="footer">
+    <a href="/">Cadence</a>
+    <a href="/blog/">Writing</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/faq.html">FAQ</a>
+    <div style="margin-top: 16px; color: var(--text-ghost);">© 2026 Cadence Labs · Built on Claude</div>
+</footer>
+
+</body>
+</html>

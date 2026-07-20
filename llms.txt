@@ -29,6 +29,7 @@ Cadence Labs. Independent, opinionated, founder-led. We publish quarterly resear
 
 - [Home](https://cadencevoice.ai/): product overview, hero, tech architecture, download
 - [Cadence Labs blog index](https://cadencevoice.ai/blog/): research notes
+- [Scouts before editors](https://cadencevoice.ai/blog/scouts-before-editors.html): division of labor for parallel agents, read-only scouts vs a single writer, where the pattern breaks
 - [Cadence Labs: studying the UI of agency](https://cadencevoice.ai/blog/cadence-labs-ui-of-agency.html): manifesto, four open research questions, what's shipped from the lab
 - [Dictation is the UI layer for agentic AI](https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html): throughput math, why GUIs cap out, what dictation has to be to support multi-agent control
 - [Why we only ship Claude](https://cadencevoice.ai/blog/why-we-only-ship-claude.html): tool-use benchmark methodology, prompt caching, computer use, MCP, the engineering case for single-vendor commitment
