@@ -1,56 +1,60 @@
 # Hotkeys
 
-Cadence supports two activation styles. Pick the one that matches your reflexes.
+Cadence uses one key for two jobs. The default is `⌥` (Option).
 
-## Push-to-talk (default)
-
-Hold a single modifier key (or chord). Cadence listens while held; releasing starts transcription.
-
-The default modifier is **Option (⌥)**. To change it:
-
-**Settings → Hotkey → Modifier**
-
-Supported tokens (combinable with `+`):
-
-| Token | Key |
+| Gesture | What happens |
 |---|---|
-| `cmd` | ⌘ Command |
-| `option` | ⌥ Option |
-| `ctrl` | ⌃ Control |
-| `shift` | ⇧ Shift |
+| **Hold** the key (longer than 200 ms) | [Dictation](#/dictation). Speak, release, and your words are typed into the focused app. |
+| **Double-tap** the key (both taps within 350 ms) | [Talk](#/talk). Say or type a request for your agents. |
+| **Tap** the key while Talk is open | Send the request. |
+| **Double-tap and hold** | Talk, sent when you let go. |
+| A quick tap, or a shortcut such as `⌥←` | Nothing. The recording is cancelled and nothing is typed. |
 
-Examples: `option`, `cmd+shift`, `ctrl+option`.
+## Change the key
 
-## Chord hotkey
+Open **Settings → Hotkey → Push-to-Talk Key**.
 
-If you'd rather press a full chord (e.g. ⌘⇧Space), set **Hotkey** to a Tauri-style accelerator:
+- Click a preset: **⌥ Option**, **⌘ Cmd**, **⌃ Control**, **⌘⌥** or **⌃⌥**.
+- Or click **Record** and hold the combination you want, up to three modifiers. Click **Cancel** to stop recording without changing it.
 
-```
-CmdOrCtrl+Shift+Space
-```
+The same key is used for both dictation and Talk. The **Talk to your agents** section below it shows the current double-tap trigger.
 
-The chord toggles a recording session: press once to start, press again (or release the modifier) to stop.
+Option is recommended because it rarely clashes with app shortcuts. Command works, but you use it in shortcuts all the time. A hold that turns into a shortcut, like `⌘C`, is cancelled and types nothing.
 
-## Double-tap activation
+## Other keys
 
-Double-tap the modifier key to lock recording on without holding it. A second double-tap stops the session. Useful for long dictations where holding the key gets tiring.
+These only work when the matching Cadence window is in front.
 
-## Why it's reliable
+**Inbox panel**
 
-Cadence runs a **CGEventTap** on the main run loop *and* a low-frequency modifier-state poller. The tap is the fast path; the poller backstops the case where macOS silently disables the tap (Secure Input, screen sharing, sleep/wake). You don't lose the hotkey when those things happen.
+| Key | Action |
+|---|---|
+| `1` to `9` | Pick an option or suggested reply |
+| `J` / `K` | Next / previous card |
+| `E` | Skip or clear the card |
+| `Space` | Type a reply |
+| `V` | Speak a reply |
+| `S` | Capture a screen region |
+| `↑` | Open the agent's thread |
+| `Esc` | Undo an answer within two seconds, or close |
+| `⌘N` | New agent |
 
-## Required permission
+**Talk pill**
 
-Hotkey detection requires **Input Monitoring** permission. If you skipped it during onboarding:
+| Key | Action |
+|---|---|
+| `⌥` (tap) or `Return` | Send |
+| `Esc` | Cancel |
+| `Return` | **Move to herdr and send**, when offered |
 
-**System Settings → Privacy & Security → Input Monitoring → Enable Cadence**
+## Permission
 
-Restart the app after granting.
+The global hotkey needs **Input Monitoring**. If you skipped it during onboarding, open **System Settings → Privacy & Security → Input Monitoring**, turn on Cadence, then quit and reopen Cadence.
 
-## Troubleshooting
+Cadence listens for the key in two ways at once: an event tap, and a fast check of the modifier keys' state as a backup. If macOS turns off the event tap (Secure Input, screen sharing, sleep and wake), the hotkey keeps working.
 
-- **Hotkey doesn't fire.** Check Input Monitoring is enabled. If a screen-sharing or remote-control app is running, it can hold an exclusive event tap, quit it and try again.
-- **Hotkey conflicts with another app.** Pick a different chord. Cadence won't override a system shortcut you've reserved.
-- **Recording starts but no audio is captured.** Check Microphone permission and that the right input device is selected in **Settings → Audio**.
+## If the hotkey does not work
 
-See [troubleshooting](#/troubleshooting) for more.
+- Check that Input Monitoring is on for Cadence, then quit and reopen it.
+- Some remote-control and screen-sharing apps grab the keyboard. Quit them and try again.
+- If permissions look granted but nothing works after an upgrade, see [Troubleshooting](#/troubleshooting).

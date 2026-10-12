@@ -1,69 +1,62 @@
 # Quickstart
 
-Five things to try in your first five minutes.
+Five things to try in your first ten minutes. This assumes you finished [onboarding](#/installation) and have Claude Code installed and signed in.
 
-## 1. Dictate into anything
+## 1. Find the toolbar
 
-Click into a text field in any app: Slack, Mail, your editor, a browser textarea.
+Look at the right edge of your screen. The thin strip there is the [toolbar](#/toolbar). From top to bottom:
 
-Hold **Option** (or your configured hotkey). Speak. Release.
+- the **Inbox** button
+- the **agents pill**, one dot per agent (empty for now)
+- the **Talk**, **mic** and **camera** buttons
+- the **⋯** menu
 
-Your words appear at the cursor, polished by the local LLM. No cloud round-trip.
+You can move it to another edge from **⋯ → Edge of the screen**.
 
-## 2. Run a system command
+## 2. Start an agent
 
-Hold the hotkey and say:
+Click the empty dot in the agents pill, or press **⋯ → New agent…**.
 
-> "Open Safari"
+1. Pick **Claude Code**.
+2. Choose **Terminal** (runs in herdr) or **Cadence chat** (runs inside Cadence, no herdr needed).
+3. Enter a **Folder**, for example `~/Developer/my-app`, and an optional **First message**.
+4. Click **Start**.
 
-Cadence recognizes the leading verb as a command. No wake word needed when push-to-talk is engaged. See [voice commands](#/voice-commands) for the full grammar.
+A blue dot appears. After a few seconds the agent gets a short title, like "settings page dark mode".
 
-Other quick tries:
+## 3. Talk to it
 
-- "Switch to Slack"
-- "New tab"
-- "Take a note: pick up groceries after work"
-- "Make a todo to email Dana about the budget"
+Double-tap `⌥` anywhere. A black pill appears near the middle of the screen. Say what you want, for example:
 
-## 3. Talk to an AI agent
+> Add a dark mode toggle to the settings page
 
-> "New agent named Frontend in ~/code/my-app"
+Tap `⌥` or press `Return` to send. Cadence picks the agent already working in that area, or starts a new one, and shows a receipt such as "Sent to claude-2, the settings page dark mode thread". You can type into the pill instead of speaking. `Esc` cancels.
 
-Cadence spawns a Claude Code session in that directory and announces it. Then say:
+More in [Talk](#/talk).
 
-> "Frontend, add a dark mode toggle to the settings page"
+## 4. Answer from the Inbox
 
-The agent picks up the work. When it asks for permission to run a tool, Cadence speaks the request. Answer **"approve"** or **"deny"**.
+When the agent asks a question or wants permission to run a command, its dot turns amber and the Inbox button shows a badge. Click the Inbox button.
 
-See [agents](#/agents) for the full vocabulary (status, kill, show diff, teams, …).
+- Press `1`, `2`, `3` to pick an option.
+- Press `Space` to type a reply, or `V` to speak one.
+- Changed your mind? Press `Esc` within two seconds to take the answer back.
 
-## 4. Drive the desktop with intent
+When the agent finishes, its dot turns green and a card with a short recap lands in the Inbox. Reply from there, or press `E` to clear it.
 
-Anything that isn't a built-in command falls through to the **intent engine**. Claude interprets your spoken sentence and composes a plan from 35 primitive actions:
+More in [Inbox](#/inbox).
 
-> "Make this email more formal" *(with text selected)*
+## 5. Dictate into any app
 
-> "Run the tests and tell me if they pass"
+Click into any text field: Slack, Mail, your editor, a browser. Hold `⌥`, speak, and let go. Your words appear at the cursor.
 
-> "Search the page for 'checkout' and click it" *(with Chrome on a remote-debug port)*
-
-> "Text Mom saying I'll be late"
-
-See [intent engine](#/intent-engine) for the full action catalog.
-
-## 5. Hands-free with the wake word
-
-Open **Settings → Voice** and enable **Wake word**. Now you don't need to hold the hotkey:
-
-> "Hey Cadence, open VS Code"
-> "Computer, what time is it?"
-
-The wake word stays armed in the background using the same Whisper pipeline. No separate model required.
+A quick tap of `⌥`, or using `⌥` as part of a shortcut like `⌥←`, types nothing. More in [Dictation](#/dictation).
 
 ---
 
 Where to go next:
 
-- [Hotkeys](#/hotkeys): customize your push-to-talk chord.
-- [Settings](#/settings): tune VAD, polish, TTS, and more.
-- [Privacy](#/privacy): exactly what stays local and what calls the cloud.
+- [Director](#/director): ask about all your agents at once.
+- [Agents and CLIs](#/agents-and-clis): Codex, OpenCode and the rest.
+- [Sets](#/sets): put a group of agents away without stopping them.
+- [Privacy](#/privacy): what stays on your Mac and what goes to Claude.

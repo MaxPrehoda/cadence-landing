@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ · Cadence · Voice control for AI agents on macOS</title>
+    <title>FAQ · Cadence · Every agent, one inbox, on macOS</title>
 
-    <meta name="description" content="Answers to common questions about Cadence: privacy, system requirements, voice commands, languages, transcription speed, and how Cadence compares to Siri.">
+    <meta name="description" content="Answers to common questions about Cadence, the macOS control layer for AI coding agents: supported agents and CLIs, the Inbox, Talk and the Director, on-device dictation, requirements, install, privacy, and troubleshooting.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://cadencevoice.ai/faq.html">
     <meta name="theme-color" content="#0c0a09">
@@ -13,13 +13,13 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Cadence">
     <meta property="og:title" content="FAQ · Cadence">
-    <meta property="og:description" content="Answers to common questions about Cadence: privacy, system requirements, voice commands, languages, and how it compares to Siri.">
+    <meta property="og:description" content="Which agents Cadence works with, whether you need an API key, how the Inbox and Talk work, on-device dictation, macOS requirements, and privacy.">
     <meta property="og:url" content="https://cadencevoice.ai/faq.html">
     <meta property="og:image" content="https://cadencevoice.ai/icon.png">
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="FAQ: Cadence">
-    <meta name="twitter:description" content="Answers to common questions about Cadence.">
+    <meta name="twitter:description" content="Answers to common questions about Cadence, the macOS control layer for AI coding agents.">
     <meta name="twitter:image" content="https://cadencevoice.ai/icon.png">
 
     <link rel="icon" type="image/png" href="/icon.png">
@@ -36,7 +36,23 @@
                 "name": "What is Cadence?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Cadence is a voice-first OS layer for macOS that lets you control your computer using natural voice commands. It combines local Whisper transcription with desktop automation and multi-agent orchestration powered by Anthropic's Claude. No cloud round-trips for transcription, low latency, system-wide voice control."
+                    "text": "Cadence is a native macOS control layer for AI coding agents. It sits between you and your agents so you can run many of them without keeping any of them waiting. Every question and finished task lands in one Inbox, where you answer in a keystroke or just talk. It also includes on-device dictation that types into any app."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which agents and CLIs does Cadence work with?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Claude Code is hosted natively, with real allow/deny approvals, cost, and worktree diffs. Other command-line agents run through herdr, an open-source terminal multiplexer: Codex, OpenCode, Pi, Amp, Grok, Cursor, Copilot, Gemini, and Aider."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Do I need an API key?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. Cadence uses your existing Claude Code login (the claude CLI) for agents, routing, titles, recaps, and the Director. An Anthropic API key is only needed for two optional features: Cloud Polish and the Intent Engine."
                 }
             },
             {
@@ -44,63 +60,39 @@
                 "name": "Is Cadence free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes. Cadence is 100% free and open source under the MIT License. No subscriptions, no hidden fees, no paywalls."
+                    "text": "Yes. Cadence is free, with no account and no subscription. Agents you run use your own Claude Code plan or whichever provider each CLI is set up with."
                 }
             },
             {
                 "@type": "Question",
-                "name": "How is Cadence different from Siri?",
+                "name": "Is there an iPhone app?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Siri is cloud-based and limited to a fixed set of commands; voice data is sent to Apple servers. Cadence runs transcription 100% locally, supports fully customizable automations, has near-zero latency, and is built for power users directing AI agents, not pre-canned voice queries."
+                    "text": "An iPhone companion that shows your Inbox and agents is coming soon. It is not publicly available yet."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Does my voice data get sent to the cloud?",
+                "name": "What are the system requirements?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "No. All voice transcription happens locally on your Mac using Whisper.cpp. Your voice never leaves your device. No servers, no internet required for transcription after the initial model download."
+                    "text": "macOS 13 (Ventura) or later on Apple Silicon. There is no Intel build. Agent features need the claude CLI installed and logged in; agents other than Claude Code also need herdr."
                 }
             },
             {
                 "@type": "Question",
-                "name": "What macOS version do I need?",
+                "name": "Does my voice leave my Mac?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "macOS 13.0 (Ventura) or later is recommended. Cadence may work on macOS 12 Monterey but it is not officially supported."
+                    "text": "No. Audio, dictation, and Text Polish run on-device. Agent features are different: routing, titles, recaps, the Director, and the agents themselves talk to Claude through your own Claude Code login, and other CLIs talk to their own providers."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Does Cadence work on Apple Silicon?",
+                "name": "Why does macOS say Cadence is from an unidentified developer?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes. Cadence is optimized for Apple Silicon and runs significantly faster on M-series chips. Intel Macs are also supported, but transcription is slower."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "How much disk space does Cadence need?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Approximately 1-3 GB for the Whisper models, depending on which model you choose. The app itself is lightweight at around 50 MB."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Can Cadence run offline?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes. After the initial download of Whisper models, Cadence transcription works completely offline. Cloud Claude features require internet but are optional."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Which AI models does Cadence use?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Cadence uses Anthropic's Claude exclusively. Opus 4.7 for hard reasoning, Sonnet 4.6 for most agent steps, and Haiku 4.5 for command parsing. There is no model picker; routing is automatic per task type."
+                    "text": "Cadence is not notarized by Apple yet. On first launch, right-click Cadence in Applications and choose Open, then confirm. Or run xattr -cr /Applications/Cadence.app in Terminal."
                 }
             }
         ]
@@ -269,17 +261,57 @@
         <h1>Frequently Asked Questions</h1>
         <p class="subtitle">Everything you need to know about Cadence.</p>
 
-        <!-- General -->
+        <!-- Agents -->
         <div class="faq-section">
-            <h2 class="section-title">General</h2>
+            <h2 class="section-title">Agents</h2>
 
             <div class="faq-item">
                 <div class="question">What is Cadence?</div>
                 <div class="answer">
                     <p>
-                        Cadence is a <strong>voice-first OS layer for macOS</strong> that lets you control your computer
-                        using natural voice commands. It combines local Whisper transcription with desktop automation.
-                        No cloud, no latency, just instant voice control.
+                        Cadence is a <strong>native macOS control layer for AI coding agents</strong>. It sits between you
+                        and your agents, so you can run many of them without keeping any of them waiting.
+                    </p>
+                    <p>
+                        Every question and finished task lands in one Inbox. Answer in a keystroke, or just talk.
+                        A thin toolbar on the edge of your screen shows one dot per agent: blue while it works,
+                        amber when it needs you, green when it's done. Cadence also does on-device dictation
+                        into any app.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Which agents and CLIs does it work with?</div>
+                <div class="answer">
+                    <p>
+                        <strong>Claude Code</strong> is hosted natively: real Allow/Deny approvals, cost, and worktree diffs.
+                    </p>
+                    <p>
+                        Other command-line agents run through <strong>herdr</strong>, an open-source terminal multiplexer:
+                    </p>
+                    <ul>
+                        <li>Codex, OpenCode, Pi, Amp, Grok</li>
+                        <li>Cursor, Copilot, Gemini, Aider</li>
+                    </ul>
+                    <p>
+                        herdr agents open in a Cadence terminal window with tabs (<code>⌘1</code>–<code>⌘9</code>,
+                        <code>⌘N</code> for a new one), and their questions still land in the Inbox.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Do I need an API key?</div>
+                <div class="answer">
+                    <p>
+                        <strong>No.</strong> Cadence uses your existing <strong>Claude Code login</strong> (the
+                        <code>claude</code> CLI) for agents, routing, titles, recaps, and the Director.
+                    </p>
+                    <p>
+                        An Anthropic API key is only needed for two optional features: <strong>Cloud Polish</strong>
+                        (cleans up dictated text with Claude Haiku) and the <strong>Intent Engine</strong> (interprets
+                        voice commands Cadence doesn't recognize). Both are off unless you turn them on.
                     </p>
                 </div>
             </div>
@@ -288,59 +320,179 @@
                 <div class="question">Is Cadence free?</div>
                 <div class="answer">
                     <p>
-                        Yes! Cadence is <strong>100% free and open source</strong> (MIT License). No subscriptions,
-                        no hidden fees, no paywalls. Download, use, modify, it's yours.
+                        <strong>Yes.</strong> No account, no subscription. The agents you run use your own Claude Code
+                        plan, or whichever provider each CLI is set up with.
                     </p>
                 </div>
             </div>
 
             <div class="faq-item">
-                <div class="question">How is this different from Siri?</div>
+                <div class="question">What's the Inbox?</div>
                 <div class="answer">
                     <p>
-                        Great question! Here's the breakdown:
+                        One place for everything your agents need from you: questions, plan approvals, and tool
+                        Allow/Deny requests, shown as numbered options. Finished work arrives as a card with a short
+                        recap and suggested replies.
                     </p>
                     <ul>
-                        <li><strong>Siri:</strong> Cloud-based, limited to specific commands, sends your voice to Apple's servers</li>
-                        <li><strong>Cadence:</strong> 100% local processing, fully customizable automations, zero latency, complete privacy</li>
+                        <li><code>1</code>–<code>9</code> answer, <code>J</code>/<code>K</code> move, <code>E</code> discards, <code>Esc</code> closes</li>
+                        <li><code>Space</code> or just start typing to reply; <code>V</code> for the mic, <code>S</code> to attach a screenshot of a region</li>
+                        <li>Every answer has a 2-second take-back</li>
                     </ul>
                     <p>
-                        Cadence is for power users who want <em>real</em> control over their Mac, not pre-canned responses.
+                        When it's empty, it says "Nothing needs you."
                     </p>
                 </div>
             </div>
 
             <div class="faq-item">
-                <div class="question">Does my voice data get sent to the cloud?</div>
+                <div class="question">What's Talk?</div>
                 <div class="answer">
                     <p>
-                        <strong>Absolutely not.</strong> All voice processing happens <span class="highlight">locally on your Mac</span>
-                        using Whisper.cpp. Your voice never leaves your device. No servers. No internet required (after initial download).
+                        Double-tap <code>⌥</code>, then say or type what you want. Cadence decides where it goes: to the
+                        agent already on that work, to a new agent, or to the Director. If it can't tell, it asks.
+                        You get a short receipt like "Sent to {agent}" or "Answering in Director".
+                    </p>
+                    <p>
+                        The routing runs on Claude Haiku through your own <code>claude</code> login. It looks at your
+                        agents' titles and recent output, the app in front, an optional screenshot, and the folders in
+                        <code>~/Developer</code>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">What's the Director?</div>
+                <div class="answer">
+                    <p>
+                        An always-on Claude session that can see and command every agent. Ask it what's going on
+                        across your work, and it can start agents, message them, read their output, and close them.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How do I keep track of many agents?</div>
+                <div class="answer">
+                    <ul>
+                        <li><strong>AI titles and recaps:</strong> each agent gets a 2 to 5 word title, and long finished messages get a one-line recap.</li>
+                        <li><strong>Sets:</strong> "Put away as a set" closes a group of agents' windows, keeps them running, and folds them into one chip that turns amber when something needs you.</li>
+                        <li><strong>Agents dashboard:</strong> Chat and Board views, with branch, worktree, and diffs on each card.</li>
+                        <li><strong>Peek:</strong> hover the agent pill on the toolbar for two seconds to see every title.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Is there an iPhone app?</div>
+                <div class="answer">
+                    <p>
+                        <strong>Coming soon.</strong> An iPhone companion that shows your Inbox and agents is in the works.
+                        It isn't publicly available yet.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- System Requirements -->
+        <!-- Dictation -->
         <div class="faq-section">
-            <h2 class="section-title">System Requirements</h2>
+            <h2 class="section-title">Dictation</h2>
 
             <div class="faq-item">
-                <div class="question">What macOS version do I need?</div>
+                <div class="question">How does dictation work?</div>
                 <div class="answer">
                     <p>
-                        <strong>macOS 13.0 (Ventura) or later</strong> is recommended. Cadence may work on older versions
-                        (macOS 12 Monterey), but we don't officially support them.
+                        Hold <code>⌥</code> and speak; release and the text is typed into whatever app you're in. The
+                        key is configurable (<code>⌘</code> or a combination). The mic button on the toolbar starts
+                        continuous dictation instead.
+                    </p>
+                    <p>
+                        Speech is transcribed <span class="highlight">on your Mac</span> with NVIDIA Parakeet, plus a
+                        Whisper pass for names. It transcribes while you're still holding the key, so text lands
+                        quickly after you let go.
                     </p>
                 </div>
             </div>
 
             <div class="faq-item">
-                <div class="question">Does it work on Apple Silicon (M1/M2/M3)?</div>
+                <div class="question">How accurate and fast is it?</div>
                 <div class="answer">
                     <p>
-                        <strong>Yes!</strong> Cadence is optimized for Apple Silicon and runs significantly faster on M-series chips.
-                        Intel Macs are also supported, but transcription may be slower.
+                        In our measurements: <strong>1.88% word error rate</strong> on clean speech, and about
+                        <strong>330 ms</strong> from releasing the key to text (95th percentile). Background noise
+                        doesn't produce phantom words.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Can I teach it names and jargon?</div>
+                <div class="answer">
+                    <p>
+                        Yes. Add words to <strong>Vocabulary</strong> so they're spelled right, and set up
+                        <strong>auto-corrections</strong> for anything it keeps getting wrong. You can also pick which
+                        microphone to use.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">What is Text Polish?</div>
+                <div class="answer">
+                    <p>
+                        Local cleanup of filler words, capitalization, and punctuation, using a small on-device model
+                        (Qwen 2.5 1.5B). It's on by default, and you can set a tone per app.
+                    </p>
+                    <p>
+                        Cloud Polish is an optional alternative that uses Claude Haiku with your own Anthropic API key.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Does it work with languages other than English?</div>
+                <div class="answer">
+                    <p>
+                        Yes. The default model is tuned for English. For other languages, switch to a multilingual
+                        speech model in Settings (Parakeet v3 covers 25 languages, and Whisper models are available too).
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Does Cadence still have voice commands and a wake word?</div>
+                <div class="answer">
+                    <p>
+                        Yes, as secondary features. Voice commands can open apps, search, manage tabs and windows,
+                        drive VS Code, and run custom commands. The wake word (default "computer") is
+                        <strong>off by default</strong>. See the <a href="/docs.html">documentation</a> for details.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requirements -->
+        <div class="faq-section">
+            <h2 class="section-title">Requirements</h2>
+
+            <div class="faq-item">
+                <div class="question">What Mac do I need?</div>
+                <div class="answer">
+                    <p>
+                        <strong>macOS 13 (Ventura) or later on Apple Silicon</strong> (M1 or newer). There is no Intel build.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">What else do I need for the agent features?</div>
+                <div class="answer">
+                    <ul>
+                        <li>The <code>claude</code> CLI (Claude Code), installed and logged in</li>
+                        <li><strong>herdr</strong>, if you want to run agents other than Claude Code</li>
+                    </ul>
+                    <p>
+                        Dictation works without either.
                     </p>
                 </div>
             </div>
@@ -349,50 +501,44 @@
                 <div class="question">How much disk space does it need?</div>
                 <div class="answer">
                     <p>
-                        Approximately <strong>1-3 GB</strong> for the Whisper models (depending on which model you choose).
-                        The app itself is lightweight (~50 MB).
+                        The speech and Text Polish models download on first run: roughly <strong>2 to 3 GB</strong>
+                        in total, depending on which models you pick.
                     </p>
                 </div>
             </div>
 
             <div class="faq-item">
-                <div class="question">Can I run it offline?</div>
+                <div class="question">Does it work offline?</div>
                 <div class="answer">
                     <p>
-                        <strong>100% yes.</strong> After the initial download of Whisper models, Cadence works completely
-                        offline. Perfect for flights, secure environments, or just peace of mind.
+                        Dictation and Text Polish do, once the models are downloaded. Agents, Talk routing, and the
+                        Director need an internet connection, because they talk to Claude (or your other agents' providers).
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Will there be a Windows or Linux version?</div>
+                <div class="answer">
+                    <p>
+                        Not planned. Cadence is built on macOS APIs (Accessibility, input monitoring, window management)
+                        and is <strong>macOS-only</strong>.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Setup & Permissions -->
+        <!-- Install & Permissions -->
         <div class="faq-section">
-            <h2 class="section-title">Setup & Permissions</h2>
-
-            <div class="faq-item">
-                <div class="question">What permissions does Cadence need?</div>
-                <div class="answer">
-                    <p>
-                        Cadence requires three macOS permissions:
-                    </p>
-                    <ul>
-                        <li><strong>Microphone Access</strong>. To capture voice commands</li>
-                        <li><strong>Accessibility Access</strong>. To automate tasks (click buttons, type text, etc.)</li>
-                        <li><strong>Screen Recording</strong>. To detect active windows and context</li>
-                    </ul>
-                    <p>
-                        You can revoke these anytime via <code>System Settings → Privacy & Security</code>.
-                    </p>
-                </div>
-            </div>
+            <h2 class="section-title">Install & Permissions</h2>
 
             <div class="faq-item">
                 <div class="question">How do I install Cadence?</div>
                 <div class="answer">
                     <p>
-                        Download the latest release from <a href="https://github.com/MaxPrehoda/cadence" target="_blank">GitHub</a>,
-                        drag it to your Applications folder, and launch. On first run, macOS will prompt for the required permissions.
+                        Download the latest <code>.dmg</code> from the
+                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/latest" target="_blank" rel="noopener">releases page</a>,
+                        drag Cadence to Applications, and open it. Cadence checks for updates on its own.
                     </p>
                 </div>
             </div>
@@ -401,66 +547,105 @@
                 <div class="question">Why does macOS say Cadence is from an "unidentified developer"?</div>
                 <div class="answer">
                     <p>
-                        Cadence is not currently notarized by Apple (we're working on it). To bypass this:
+                        Cadence isn't notarized by Apple yet. To open it the first time:
                     </p>
                     <ul>
-                        <li>Right-click the app → <strong>Open</strong></li>
-                        <li>Click <strong>"Open"</strong> in the security dialog</li>
+                        <li>Right-click Cadence in Applications and choose <strong>Open</strong></li>
+                        <li>Click <strong>Open</strong> in the dialog</li>
                     </ul>
                     <p>
-                        Since Cadence is open source, you can verify the code yourself before running.
+                        Or run this in Terminal:
+                    </p>
+                    <p>
+                        <code>xattr -cr /Applications/Cadence.app</code>
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">What permissions does Cadence need?</div>
+                <div class="answer">
+                    <ul>
+                        <li><strong>Microphone</strong>: to hear you</li>
+                        <li><strong>Accessibility</strong>: to type dictated text into other apps</li>
+                        <li><strong>Input Monitoring</strong>: to notice the dictation and Talk hotkeys in any app</li>
+                    </ul>
+                    <p>
+                        If you attach screenshots in Talk or the Inbox, macOS may also ask for Screen Recording.
+                        You can revoke any of these in <code>System Settings → Privacy & Security</code>.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Features & Usage -->
+        <!-- Privacy -->
         <div class="faq-section">
-            <h2 class="section-title">Features & Usage</h2>
+            <h2 class="section-title">Privacy</h2>
 
             <div class="faq-item">
-                <div class="question">What can I do with voice commands?</div>
+                <div class="question">Does my voice leave my Mac?</div>
                 <div class="answer">
                     <p>
-                        Anything you can do with keyboard/mouse, you can do with voice:
-                    </p>
-                    <ul>
-                        <li>"Open Chrome and navigate to GitHub"</li>
-                        <li>"Switch to Spotify and play my Liked Songs"</li>
-                        <li>"Move this window to the right half of the screen"</li>
-                        <li>"Take a screenshot and save it to Desktop"</li>
-                        <li>Custom automations, the sky's the limit!</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question">Can I customize voice commands?</div>
-                <div class="answer">
-                    <p>
-                        <strong>Yes!</strong> Cadence is fully programmable. You can create custom voice triggers,
-                        chain actions together, and build complex automations. See the
-                        <a href="/docs.html#/voice-commands">voice commands documentation</a> for details.
+                        <strong>No.</strong> Audio, dictation, and Text Polish run <span class="highlight">on-device</span>.
+                        Recordings aren't kept unless you turn on the setting that saves them.
                     </p>
                 </div>
             </div>
 
             <div class="faq-item">
-                <div class="question">Does it work with non-English languages?</div>
+                <div class="question">What does go to the cloud?</div>
                 <div class="answer">
                     <p>
-                        Whisper supports <strong>99+ languages</strong>, and Cadence inherits this capability. However,
-                        custom automations may need language-specific tuning. English is the most tested language.
+                        The agent side does. Talk routing, titles, recaps, the Director, and Claude Code agents talk to
+                        Claude through <strong>your own Claude Code login</strong>. That can include what you said or typed,
+                        your agents' titles and recent output, the name of the app in front, and a screenshot if you
+                        attach one. Other CLIs talk to their own providers.
+                    </p>
+                    <p>
+                        Cloud Polish and the Intent Engine send text to Anthropic only if you add your API key and turn
+                        them on.
                     </p>
                 </div>
             </div>
 
             <div class="faq-item">
-                <div class="question">How fast is the transcription?</div>
+                <div class="question">Do I need a Cadence account? Is there tracking?</div>
                 <div class="answer">
                     <p>
-                        On Apple Silicon (M1/M2/M3), transcription is <strong>near-instant</strong> (~100-300ms for short commands).
-                        On Intel Macs, it may take 500-1000ms. No internet latency means it's always responsive.
+                        There's no Cadence account, and the app doesn't report usage to a Cadence server. It does check
+                        GitHub for new releases. See the <a href="/privacy.html">privacy policy</a> for the details.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">How will the iPhone companion connect?</div>
+                <div class="answer">
+                    <p>
+                        On the same Wi-Fi, directly. From anywhere else, through a relay: your Mac dials out (no open
+                        ports), and everything is end-to-end encrypted with AES-256-GCM, so the relay only sees ciphertext.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Where is my data stored?</div>
+                <div class="answer">
+                    <p>
+                        On your Mac, in <code>~/Library/Application Support/com.cadence.app</code>: settings, downloaded
+                        models, agent history, and titles.
+                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Is it safe to grant these permissions?</div>
+                <div class="answer">
+                    <p>
+                        Accessibility and Input Monitoring are powerful permissions, and agents can change files on
+                        your machine. Only download Cadence from the official
+                        <a href="https://github.com/MaxPrehoda/cadence-landing/releases/latest" target="_blank" rel="noopener">releases page</a>,
+                        and review what your agents ask to do before you allow it.
                     </p>
                 </div>
             </div>
@@ -471,34 +656,36 @@
             <h2 class="section-title">Troubleshooting</h2>
 
             <div class="faq-item">
-                <div class="question">Cadence isn't recognizing my voice. What do I do?</div>
+                <div class="question">Holding ⌥ does nothing, or text isn't typed.</div>
                 <div class="answer">
-                    <p>
-                        Try these steps:
-                    </p>
                     <ul>
-                        <li>Check that <strong>Microphone Access</strong> is granted in System Settings</li>
-                        <li>Test your microphone in another app (Voice Memos, etc.)</li>
-                        <li>Speak clearly and avoid background noise</li>
-                        <li>Try a different Whisper model (smaller models = faster but less accurate)</li>
+                        <li>Check that <strong>Input Monitoring</strong> and <strong>Accessibility</strong> are granted in System Settings</li>
+                        <li>Quit and reopen Cadence after granting permissions</li>
+                        <li>Make sure the speech model finished downloading</li>
                     </ul>
                 </div>
             </div>
 
             <div class="faq-item">
-                <div class="question">Automations aren't working. Help!</div>
+                <div class="question">It isn't hearing me, or accuracy is poor.</div>
                 <div class="answer">
-                    <p>
-                        Most automation issues are permission-related:
-                    </p>
                     <ul>
-                        <li>Ensure <strong>Accessibility Access</strong> is enabled in System Settings</li>
-                        <li>Grant <strong>Screen Recording</strong> permission if needed</li>
-                        <li>Restart Cadence after granting new permissions</li>
+                        <li>Check that <strong>Microphone</strong> access is granted</li>
+                        <li>Pick the right input in Cadence's mic picker</li>
+                        <li>Bluetooth headsets drop to a low-quality mic while recording; the built-in mic is often better</li>
+                        <li>Add names and jargon to Vocabulary</li>
                     </ul>
-                    <p>
-                        Still stuck? <a href="https://github.com/MaxPrehoda/cadence/issues" target="_blank">Open a GitHub issue</a>.
-                    </p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="question">Agents won't start, or Talk can't route.</div>
+                <div class="answer">
+                    <ul>
+                        <li>Run <code>claude</code> in Terminal and make sure you're logged in</li>
+                        <li>For Codex, OpenCode, and other non-Claude agents, make sure herdr is installed</li>
+                        <li>Check your internet connection</li>
+                    </ul>
                 </div>
             </div>
 
@@ -506,58 +693,9 @@
                 <div class="question">How do I uninstall Cadence?</div>
                 <div class="answer">
                     <p>
-                        Drag the app to Trash, then remove stored preferences:
-                    </p>
-                    <ul>
-                        <li><code>~/Library/Application Support/Cadence</code></li>
-                        <li><code>~/Library/Preferences/com.cadence.app.plist</code></li>
-                    </ul>
-                    <p>
-                        Revoke permissions in <code>System Settings → Privacy & Security</code>.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Privacy & Security -->
-        <div class="faq-section">
-            <h2 class="section-title">Privacy & Security</h2>
-
-            <div class="faq-item">
-                <div class="question">Is Cadence safe?</div>
-                <div class="answer">
-                    <p>
-                        <strong>Yes.</strong> Cadence is open source, you can audit the code yourself. All processing
-                        is local, and we never collect or transmit your data. That said, granting Accessibility permissions
-                        is powerful, only install software you trust.
-                    </p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question">Can Cadence be used for malicious purposes?</div>
-                <div class="answer">
-                    <p>
-                        Like any automation tool (AppleScript, Keyboard Maestro, etc.), Cadence could theoretically be
-                        misused. <strong>Do not grant permissions to untrusted versions of the app.</strong> Always download
-                        from the official <a href="https://github.com/MaxPrehoda/cadence" target="_blank">GitHub repository</a>.
-                    </p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question">Where is my data stored?</div>
-                <div class="answer">
-                    <p>
-                        All data is stored <strong>locally on your Mac</strong>:
-                    </p>
-                    <ul>
-                        <li>Voice commands are processed in-memory (not saved)</li>
-                        <li>App preferences are stored in <code>~/Library/Application Support/Cadence</code></li>
-                        <li>Whisper models are cached in <code>~/.cache/whisper</code></li>
-                    </ul>
-                    <p>
-                        Nothing is synced to the cloud.
+                        Quit Cadence, drag it to Trash, then delete
+                        <code>~/Library/Application Support/com.cadence.app</code> to remove settings and models.
+                        Revoke its permissions in <code>System Settings → Privacy & Security</code>.
                     </p>
                 </div>
             </div>
@@ -565,48 +703,15 @@
 
         <!-- Support -->
         <div class="faq-section">
-            <h2 class="section-title">Support & Community</h2>
+            <h2 class="section-title">Support</h2>
 
             <div class="faq-item">
                 <div class="question">How do I get help?</div>
                 <div class="answer">
-                    <p>
-                        Reach out via:
-                    </p>
                     <ul>
-                        <li><strong>GitHub Issues:</strong> <a href="https://github.com/MaxPrehoda/cadence/issues" target="_blank">MaxPrehoda/cadence</a> (bug reports, feature requests)</li>
                         <li><strong>Email:</strong> <a href="mailto:support@cadence.app">support@cadence.app</a></li>
                         <li><strong>Documentation:</strong> <a href="/docs.html">cadencevoice.ai/docs</a></li>
                     </ul>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question">Can I contribute to Cadence?</div>
-                <div class="answer">
-                    <p>
-                        <strong>Absolutely!</strong> Cadence is open source (MIT License). Contributions are welcome:
-                    </p>
-                    <ul>
-                        <li>Submit pull requests on <a href="https://github.com/MaxPrehoda/cadence" target="_blank">GitHub</a></li>
-                        <li>Report bugs or suggest features via Issues</li>
-                        <li>Improve documentation</li>
-                        <li>Share your custom automations with the community</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="question">Will there be a Windows/Linux version?</div>
-                <div class="answer">
-                    <p>
-                        Cadence is currently <strong>macOS-only</strong> due to deep integration with macOS APIs (Accessibility,
-                        AppleScript, etc.). A Linux version is theoretically possible but not planned. Windows support is
-                        unlikely due to fundamental OS differences.
-                    </p>
-                    <p>
-                        That said, Cadence is open source, community ports are welcome!
-                    </p>
                 </div>
             </div>
         </div>
@@ -614,8 +719,8 @@
         <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 64px 0;">
 
         <p style="font-size: 14px; color: var(--text-ghost); text-align: center;">
-            Still have questions? <a href="mailto:support@cadence.app">Email us</a> or
-            <a href="https://github.com/MaxPrehoda/cadence/issues" target="_blank">open a GitHub issue</a>.
+            Still have questions? <a href="mailto:support@cadence.app">Email us</a> or read the
+            <a href="/docs.html">docs</a>.
         </p>
     </div>
 </body>
