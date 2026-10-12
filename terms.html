@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service · Cadence</title>
-    <meta name="description" content="Cadence Terms of Service. Cadence is open-source software (MIT License) provided as-is by Cadence Labs.">
+    <meta name="description" content="Cadence Terms of Service. Cadence is free software provided as-is by Cadence Labs.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://cadencevoice.ai/terms.html">
     <meta name="theme-color" content="#0c0a09">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Terms of Service · Cadence">
-    <meta property="og:description" content="Cadence is open-source software (MIT License) provided as-is by Cadence Labs.">
+    <meta property="og:description" content="Cadence is free software provided as-is by Cadence Labs.">
     <meta property="og:url" content="https://cadencevoice.ai/terms.html">
     <meta property="og:image" content="https://cadencevoice.ai/icon.png">
     <meta name="twitter:card" content="summary">
@@ -143,7 +143,7 @@
         <a href="/" class="back-link">← Back to Home</a>
 
         <h1>Terms of Service</h1>
-        <div class="last-updated">Last updated: February 16, 2026</div>
+        <div class="last-updated">Last updated: October 12, 2026</div>
 
         <div class="warning" style="margin-top: 24px;">
             <p>
@@ -160,7 +160,7 @@
 
         <h2>1. Acceptance of Terms & User Responsibility</h2>
         <p>
-            These Terms of Service ("Terms") govern your use of Cadence, a voice-controlled automation tool for macOS
+            These Terms of Service ("Terms") govern your use of Cadence, a macOS control layer for AI coding agents with on-device dictation and voice automation
             ("Software"). By using Cadence, you accept these Terms in full and acknowledge that:
         </p>
         <ul>
@@ -172,18 +172,15 @@
 
         <h2>2. License</h2>
         <p>
-            Cadence is distributed under the <strong>MIT License</strong>. You are granted a free, non-exclusive,
-            worldwide license to use, copy, modify, and distribute the Software, subject to the terms of the MIT License.
-        </p>
-        <p>
-            Full MIT License text: <a href="https://opensource.org/licenses/MIT" target="_blank">https://opensource.org/licenses/MIT</a>
+            Cadence is free software, provided at no charge and <strong>"as is"</strong>. You are granted a free,
+            non-exclusive, revocable license to download, install, and use the Software, subject to these Terms.
+            All rights not expressly granted are reserved.
         </p>
 
         <h3>What This Means:</h3>
         <ul>
             <li>✅ You can use Cadence for personal or commercial purposes</li>
-            <li>✅ You can modify the source code</li>
-            <li>✅ You can redistribute the software (with attribution)</li>
+            <li>✅ There is no fee, account, or subscription</li>
             <li>❌ You cannot hold us liable for damages (see "Disclaimer" below)</li>
         </ul>
 
@@ -194,7 +191,7 @@
         <ul>
             <li>Use Cadence to violate any laws or regulations</li>
             <li>Use Cadence to automate malicious, harmful, or unauthorized activities</li>
-            <li>Reverse engineer, decompile, or attempt to extract proprietary components (though the source is open)</li>
+            <li>Reverse engineer, decompile, or attempt to extract proprietary components, except where applicable law allows it</li>
             <li>Use Cadence to spam, harass, or harm others</li>
             <li>Circumvent macOS security features or access unauthorized systems</li>
         </ul>
@@ -216,9 +213,9 @@
             Cadence requires sensitive macOS permissions to function:
         </p>
         <ul>
-            <li><strong>Microphone Access</strong>. To capture voice commands</li>
-            <li><strong>Accessibility Access</strong>. To automate system tasks</li>
-            <li><strong>Screen Recording</strong>. To detect context and active windows</li>
+            <li><strong>Microphone Access</strong>. To capture your voice</li>
+            <li><strong>Accessibility Access</strong>. To type dictated text and automate system tasks</li>
+            <li><strong>Input Monitoring</strong>. To detect hotkeys in any app</li>
         </ul>
         <p>
             <strong>You acknowledge that:</strong>
@@ -227,7 +224,7 @@
             <li>These permissions grant Cadence significant control over your system</li>
             <li>You are granting these permissions voluntarily and understand the implications</li>
             <li>You can revoke permissions anytime via <code>System Settings → Privacy & Security</code></li>
-            <li>We process all data locally, nothing is sent to external servers</li>
+            <li>Audio is processed locally; agent features send data to the AI providers you use, as described in the <a href="/privacy.html">Privacy Policy</a></li>
         </ul>
 
         <h2>5. No Warranty (Disclaimer)</h2>
@@ -259,6 +256,7 @@
             <li><strong>Data loss, corruption, or deletion</strong> caused directly or indirectly by the Software</li>
             <li><strong>System damage, crashes, or instability</strong> resulting from Cadence's automation capabilities</li>
             <li><strong>Unintended automations</strong> triggered by misheard voice commands or software errors</li>
+            <li><strong>Actions taken by AI agents</strong> you run, direct, or approve through Cadence</li>
             <li><strong>Security breaches or unauthorized access</strong> resulting from granted permissions</li>
             <li><strong>Lost profits, revenue, business opportunities, or productivity</strong></li>
             <li><strong>Any direct, indirect, incidental, special, consequential, or punitive damages</strong> whatsoever</li>
@@ -287,19 +285,21 @@
             See our <a href="/privacy.html">Privacy Policy</a> for details. Key points:
         </p>
         <ul>
-            <li>All voice processing happens locally on your device</li>
-            <li>We don't collect, store, or transmit your voice data</li>
+            <li>Speech-to-text happens locally on your device; we don't collect, store, or transmit your audio</li>
+            <li>Agent features use your own Claude Code login, and other agent CLIs use their own providers</li>
+            <li>Optional features (Cloud Polish, Intent Engine) use your own Anthropic API key</li>
             <li>Minimal website analytics (Vercel Analytics, privacy-friendly)</li>
         </ul>
 
-        <h2>8. Open Source & Contributions</h2>
+        <h2>8. Third-Party AI Services</h2>
         <p>
-            Cadence is open source. If you contribute code, documentation, or other materials:
+            Cadence works with AI services you set up yourself, such as Claude Code, the Anthropic API, and other agent
+            command-line tools. Your use of those services:
         </p>
         <ul>
-            <li>You grant us a perpetual, royalty-free license to use your contributions</li>
-            <li>You confirm you have the right to submit the contribution</li>
-            <li>Your contributions are subject to the MIT License</li>
+            <li>Is governed by your agreements with their providers, not by these Terms</li>
+            <li>Is your responsibility, including any usage costs or plan limits</li>
+            <li>Depends on services we don't control and can't guarantee</li>
         </ul>
 
         <h2>9. Updates & Modifications</h2>
@@ -325,21 +325,20 @@
             <li>Deleting all local data and preferences</li>
         </ul>
         <p>
-            We reserve the right to discontinue development or support for Cadence at any time (it's open source, so the
-            community can continue development).
+            We reserve the right to discontinue development or support for Cadence at any time.
         </p>
 
         <h2>11. Third-Party Software</h2>
         <p>
-            Cadence uses third-party open-source libraries and components, including:
+            Cadence uses third-party libraries, models, and tools, including:
         </p>
         <ul>
-            <li><strong>Whisper.cpp</strong>. Local speech recognition (MIT License)</li>
-            <li>Other dependencies listed in the project repository</li>
+            <li><strong>NVIDIA Parakeet</strong> and <strong>Whisper</strong> (via whisper.cpp). On-device speech recognition</li>
+            <li><strong>Qwen 2.5</strong>. On-device Text Polish</li>
+            <li><strong>herdr</strong> (optional). Terminal multiplexer for running agents other than Claude Code</li>
         </ul>
         <p>
-            These components are governed by their respective licenses. See the project's <code>LICENSE</code> and
-            <code>NOTICE</code> files for details.
+            These components are governed by their respective licenses.
         </p>
 
         <h2>12. macOS Compatibility</h2>
@@ -347,9 +346,9 @@
             Cadence is designed for macOS and requires:
         </p>
         <ul>
-            <li><strong>macOS 13.0 (Ventura) or later</strong> recommended</li>
-            <li>Apple Silicon (M1/M2/M3) or Intel Mac</li>
-            <li>Sufficient disk space for Whisper models (~1-3 GB)</li>
+            <li><strong>macOS 13.0 (Ventura) or later</strong></li>
+            <li>Apple Silicon (M1 or newer); there is no Intel build</li>
+            <li>Sufficient disk space for on-device speech and Text Polish models (~2-3 GB)</li>
         </ul>
         <p>
             We do not guarantee compatibility with future macOS versions. Updates may be required.
@@ -378,8 +377,7 @@
         </p>
         <ul>
             <li><strong>Email:</strong> <a href="mailto:support@cadence.app">support@cadence.app</a></li>
-            <li><strong>GitHub Issues:</strong> <a href="https://github.com/MaxPrehoda/cadence/issues" target="_blank">MaxPrehoda/cadence</a></li>
-            <li><strong>Documentation:</strong> <a href="https://github.com/MaxPrehoda/cadence#readme" target="_blank">GitHub README</a></li>
+            <li><strong>Documentation:</strong> <a href="/docs.html">cadencevoice.ai/docs</a></li>
         </ul>
 
         <h2>16. Severability</h2>
@@ -398,7 +396,7 @@
 
         <p style="font-size: 14px; color: var(--text-ghost);">
             <strong>TL;DR:</strong> Use Cadence responsibly. Don't break the law. We're not liable if things go wrong
-            (it's free, open-source software). All voice processing is local. Read the full terms above for details.
+            (it's free software provided as-is). Voice is processed locally; agent features use your own AI provider accounts. Read the full terms above for details.
         </p>
     </div>
 </body>

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy · Cadence</title>
-    <meta name="description" content="Cadence privacy policy. All voice transcription is processed locally on-device. Your voice never leaves your Mac.">
+    <meta name="description" content="Cadence privacy policy. Speech is transcribed on-device and your audio never leaves your Mac. Agent features use your own Claude Code login. No Cadence account, no usage tracking.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://cadencevoice.ai/privacy.html">
     <meta name="theme-color" content="#0c0a09">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Privacy Policy · Cadence">
-    <meta property="og:description" content="All voice transcription is processed locally on-device. Your voice never leaves your Mac.">
+    <meta property="og:description" content="Speech is transcribed on-device and your audio never leaves your Mac. Agent features use your own Claude Code login.">
     <meta property="og:url" content="https://cadencevoice.ai/privacy.html">
     <meta property="og:image" content="https://cadencevoice.ai/icon.png">
     <meta name="twitter:card" content="summary">
@@ -130,38 +130,78 @@
         <a href="/" class="back-link">← Back to Home</a>
 
         <h1>Privacy Policy</h1>
-        <div class="last-updated">Last updated: February 16, 2026</div>
+        <div class="last-updated">Last updated: October 12, 2026</div>
 
         <p>
             At Cadence, we believe privacy is a fundamental right. This policy explains how we handle your data.
-            Spoiler: we barely collect any, and what we do collect stays on your device.
+            Short version: your voice stays on your Mac, we don't run accounts or collect usage data, and the agent
+            features talk to AI providers through logins and keys you already control.
         </p>
 
         <h2>TL;DR</h2>
         <ul>
-            <li><strong>All voice processing happens locally</strong> on your Mac. Your audio never leaves your device.</li>
-            <li><strong>No cloud services.</strong> No servers. No external APIs for transcription.</li>
-            <li><strong>Minimal analytics.</strong> We use Vercel Web Analytics (privacy-friendly, no cookies) to understand basic usage patterns.</li>
-            <li><strong>No account required.</strong> No tracking. No user profiles.</li>
+            <li><strong>Voice stays local.</strong> Audio capture, speech-to-text, and Text Polish run on your Mac. Your audio is not uploaded.</li>
+            <li><strong>Agent features use your own Claude Code login.</strong> Routing, titles, recaps, the Director, and Claude Code agents send text (and screenshots you attach) to Anthropic through the <code>claude</code> CLI you are signed in to. Other agent CLIs talk to their own providers.</li>
+            <li><strong>Optional features use your own API key.</strong> Cloud Polish and the Intent Engine contact Anthropic only if you add an Anthropic API key and turn them on.</li>
+            <li><strong>No Cadence account.</strong> No user profiles, and the app does not send usage analytics to us.</li>
+            <li><strong>Minimal website analytics.</strong> This website uses Vercel Web Analytics (privacy-friendly, no cookies).</li>
         </ul>
 
         <h2>What We Collect</h2>
 
         <h3>Information You Provide</h3>
         <p>
-            <strong>None.</strong> Cadence doesn't require an account, login, or any personal information to function.
+            <strong>None.</strong> Cadence doesn't require a Cadence account, login, or any personal information to function.
+            Agent features rely on your existing Claude Code login, which is between you and Anthropic.
         </p>
 
         <h3>Audio & Voice Data</h3>
         <p>
-            All voice transcription is performed <strong>locally on your device</strong> using Whisper.cpp. Your voice recordings:
+            Speech is transcribed <strong>locally on your device</strong> using on-device speech models (NVIDIA Parakeet
+            and Whisper). Your audio:
         </p>
         <ul>
-            <li>Never leave your Mac</li>
-            <li>Are not stored permanently (processed in memory only)</li>
-            <li>Are never uploaded to any server or cloud service</li>
-            <li>Are immediately discarded after transcription</li>
+            <li>Never leaves your Mac</li>
+            <li>Is processed in memory and discarded after transcription</li>
+            <li>Is not saved, unless you turn on the setting that keeps recordings on your Mac for testing</li>
         </ul>
+        <p>
+            Text Polish (cleanup of filler words, capitalization, and punctuation) also runs on-device by default.
+        </p>
+
+        <h3>What Goes to AI Providers</h3>
+        <p>
+            Cadence is a control layer for AI coding agents, and those agents run on cloud models. When you use agent
+            features, Cadence sends data to Anthropic's Claude through <strong>your own Claude Code login</strong>:
+        </p>
+        <ul>
+            <li><strong>Talk routing:</strong> what you said or typed, your agents' titles and recent output, the app and window in front, folder names in <code>~/Developer</code>, and a screenshot when one is attached</li>
+            <li><strong>Titles and recaps:</strong> agent messages, so each agent can be named and long results summarized</li>
+            <li><strong>The Director and Claude Code agents:</strong> your messages and whatever those agents read or produce while working, as with Claude Code on its own</li>
+        </ul>
+        <p>
+            Agents you run through herdr (for example Codex, OpenCode, or Gemini) talk to their own providers under
+            their own terms. Cadence does not route their traffic through any Cadence server.
+        </p>
+        <p>
+            <strong>Optional, off by default:</strong> Cloud Polish and the Intent Engine send dictated text or commands to
+            Anthropic using an Anthropic API key you supply.
+        </p>
+        <p>
+            How Anthropic and other providers handle that data is governed by your agreement with them, not by this policy.
+        </p>
+
+        <h3>iPhone Companion (Coming Soon)</h3>
+        <p>
+            When the iPhone companion is available, it will reach your Mac directly on the same Wi-Fi, or through a relay
+            from anywhere else. With the relay, your Mac dials out (no open ports), and every request and reply is
+            end-to-end encrypted with AES-256-GCM using a key derived from your pairing. The relay only sees ciphertext.
+        </p>
+
+        <h3>Update Checks</h3>
+        <p>
+            The app checks GitHub for new releases so it can offer updates. You can turn automatic checks off in Settings.
+        </p>
 
         <h3>Website Analytics</h3>
         <p>
@@ -182,12 +222,13 @@
             Cadence requires the following macOS permissions to function:
         </p>
         <ul>
-            <li><strong>Microphone Access</strong>. To capture voice commands (processed locally)</li>
-            <li><strong>Accessibility Access</strong>. To automate system tasks and control applications</li>
-            <li><strong>Screen Recording</strong>. To detect active windows and context for automation</li>
+            <li><strong>Microphone</strong>. To capture your voice (processed locally)</li>
+            <li><strong>Accessibility</strong>. To type dictated text and control applications</li>
+            <li><strong>Input Monitoring</strong>. To detect the dictation and Talk hotkeys in any app</li>
         </ul>
         <p>
-            You can revoke these permissions anytime via <code>System Settings → Privacy & Security</code>.
+            macOS may also ask for Screen Recording if you attach screenshots. You can revoke these permissions anytime
+            via <code>System Settings → Privacy & Security</code>.
         </p>
 
         <h2>How We Use Your Information</h2>
@@ -195,16 +236,21 @@
             Since we don't collect personal data, there's not much to "use." Here's what happens:
         </p>
         <ul>
-            <li><strong>Voice commands</strong> are processed locally and used only to execute the actions you request</li>
-            <li><strong>Website analytics</strong> help us understand which features are most popular and improve the product</li>
+            <li><strong>Voice</strong> is transcribed locally and used only to type text or carry out the request you made</li>
+            <li><strong>Agent data</strong> goes to the providers described above, only to do what you asked</li>
+            <li><strong>Website analytics</strong> help us understand which pages are useful and improve the product</li>
         </ul>
 
         <h2>Third-Party Services</h2>
         <p>
-            Cadence does NOT integrate with any third-party services for core functionality. The only external service is:
+            Depending on the features you use, Cadence or this website may interact with:
         </p>
         <ul>
-            <li><strong>Vercel Web Analytics</strong> (website only, privacy-friendly)</li>
+            <li><strong>Anthropic</strong> (agent features through your Claude Code login; optional features through your API key)</li>
+            <li><strong>Providers of other agent CLIs</strong> you choose to run</li>
+            <li><strong>Hugging Face</strong> (one-time downloads of speech and Text Polish models)</li>
+            <li><strong>GitHub</strong> (app downloads and update checks)</li>
+            <li><strong>Vercel</strong> (website analytics and the optional phone relay)</li>
         </ul>
         <p>
             We do NOT use:
@@ -213,19 +259,20 @@
             <li>Google Analytics</li>
             <li>Facebook Pixel</li>
             <li>Ad networks</li>
-            <li>Cloud transcription services (OpenAI, Google Speech, etc.)</li>
+            <li>Cloud transcription services</li>
         </ul>
 
         <h2>Data Storage & Security</h2>
         <p>
-            <strong>Local Storage:</strong> Cadence stores minimal application preferences locally on your Mac using standard
-            macOS storage APIs. This includes settings like keyboard shortcuts and automation preferences.
+            <strong>Local Storage:</strong> Cadence stores its settings, downloaded models, agent history, and agent titles
+            locally on your Mac in <code>~/Library/Application Support/com.cadence.app</code>.
         </p>
         <p>
-            <strong>No Cloud Sync:</strong> We don't sync your data to the cloud. Your settings stay on your device.
+            <strong>No Cadence Cloud Sync:</strong> We don't sync your data to a Cadence server. Your settings stay on your device.
         </p>
         <p>
-            <strong>Security:</strong> All data processing happens within macOS's sandboxed environment with the permissions you grant.
+            <strong>Security:</strong> Cadence acts only with the macOS permissions you grant, and the phone relay is
+            end-to-end encrypted.
         </p>
 
         <h2>Your Rights</h2>
@@ -233,10 +280,13 @@
             Under GDPR, CCPA, and similar privacy laws, you have the right to:
         </p>
         <ul>
-            <li><strong>Access</strong> your data (but we don't collect personal data to access)</li>
-            <li><strong>Delete</strong> your data (uninstall the app, no server-side data exists)</li>
+            <li><strong>Access</strong> your data (we don't hold personal data on our servers; local data is in the folder above)</li>
+            <li><strong>Delete</strong> your data (uninstall the app and delete its Application Support folder; no Cadence server-side data exists)</li>
             <li><strong>Opt-out</strong> of analytics (use browser extensions or disable JavaScript on our website)</li>
         </ul>
+        <p>
+            For data held by Anthropic or other AI providers, use their privacy controls.
+        </p>
 
         <h2>Children's Privacy</h2>
         <p>
@@ -256,14 +306,13 @@
         </p>
         <ul>
             <li><strong>Email:</strong> <a href="mailto:privacy@cadence.app">privacy@cadence.app</a></li>
-            <li><strong>GitHub:</strong> <a href="https://github.com/MaxPrehoda/cadence" target="_blank">MaxPrehoda/cadence</a></li>
         </ul>
 
         <hr style="border: none; border-top: 1px solid var(--border-subtle); margin: 64px 0;">
 
         <p style="font-size: 14px; color: var(--text-ghost);">
-            <strong>Bottom line:</strong> We built Cadence to respect your privacy. Your voice stays on your device.
-            No tracking. No surveillance. Just local, powerful voice control.
+            <strong>Bottom line:</strong> Your voice stays on your Mac. Your agents talk to the AI providers you already
+            use, under your own login. No Cadence account, no tracking.
         </p>
     </div>
 </body>
