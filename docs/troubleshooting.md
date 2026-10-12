@@ -1,79 +1,99 @@
 # Troubleshooting
 
-Most issues come down to one of: missing permission, wrong audio device, an out-of-date Whisper model, or a sandboxed app blocking keystroke injection. Work through the checklist below.
+Most problems come down to a missing permission, the wrong microphone, or the `claude` CLI not being signed in. Start with the section that matches what you see.
 
-## Hotkey doesn't fire
+## macOS says Cadence can't be opened
 
-- Confirm **Input Monitoring** is granted: System Settings → Privacy & Security → Input Monitoring.
-- After granting, **fully quit and relaunch Cadence** (not just close the window).
-- Check that no other app holds an exclusive event tap (some screen-recording or remote-desktop tools do).
-- If using a chord, verify it isn't already bound by macOS or another running app.
+Cadence is not notarized yet. Right-click **Cadence** in Applications and choose **Open**, or click **Open Anyway** in **System Settings → Privacy & Security**. You can also run:
 
-## "Recording…" but no transcription
+```sh
+xattr -cr /Applications/Cadence.app
+```
 
-- Open **Settings → Audio → Input device**, make sure the right mic is selected.
-- Speak louder, or lower **VAD threshold** in **Settings → Audio**.
-- The default `silence_duration_ms` is 2000, if you trail off, Cadence may still be waiting. Lower it to 1200 if you talk in short bursts.
+See [Installation](#/installation).
 
-## Whisper hallucinates phrases like "Thanks for watching!"
+## The hotkey does nothing
 
-This is a known Whisper artifact on near-silent audio. Cadence already filters the most common ones. If a real phrase you use is being suppressed, file an issue. The suppression list is intentionally short.
+- Check **Input Monitoring** in **System Settings → Privacy & Security**. After turning it on, quit and reopen Cadence.
+- Remote-control and some screen-sharing apps can grab the keyboard. Quit them and try again.
+- Make sure you are holding the key for longer than 200 ms. A quick tap is ignored on purpose.
 
-## Text inserts at the wrong cursor / nothing inserts
+## Permissions look granted but still fail
 
-- Confirm **Accessibility** permission is granted.
-- Some apps (sandboxed inputs, certain 1Password fields) block synthesized keystrokes. Try **Settings → Injection → Use clipboard** to switch to paste mode.
-- If you're in a terminal, the polish pipeline may be inserting smart quotes that the shell rejects. Set the per-app tone for that terminal to **raw**.
+This can happen after upgrading from an older build: macOS keeps a cached "denied" decision. Open **Settings → Permissions**, click **Reset TCC Permissions**, then quit and reopen Cadence and grant the permissions again.
 
-## Wake word never triggers
+## Recording works but no text appears
 
-- Confirm **Wake word enabled** is on in **Settings → Voice**.
-- Speak the wake word with a clear pause after it: `"Hey Cadence,"` then your command.
-- The wake word reuses the Whisper pipeline, so it inherits all of Whisper's noise sensitivity. Try a quieter environment or a larger model.
+- Check the main window for a banner saying there is no speech model, and click **Download**.
+- Open **Settings → Audio** and check which microphone it says it is **Recording from**. Pick the right one under **Input device**.
+- AirPods and other Bluetooth headsets lower mic quality. Leave **Prefer the built-in mic over Bluetooth headsets** on.
+- Look at the **Log** tab in the main window for errors, or start Cadence from a terminal to see full logs (see below).
 
-## Agent commands don't work
+## Text goes to the wrong place, or nowhere
 
-- Confirm the `claude` CLI is installed and on your `PATH`. Run `which claude` in a terminal, if it returns nothing, install via `npm i -g @anthropic-ai/claude-code` or set the path manually in **Settings → Agents → CLI path**.
-- Confirm your auth mode in **Settings → Agents → Auth**. Try a quick smoke test: `claude -p "say hi"` from a terminal.
-- If a spawn announces "ready" but turns time out, check for firewall blocks on outbound HTTPS to `api.anthropic.com`.
+- Check **Accessibility** in **System Settings → Privacy & Security**. Cadence pastes text with `⌘V`, which needs it.
+- Click into the text field before you start speaking. Text goes to whatever has focus when the transcript is ready.
+- In a terminal, polish can change punctuation you did not want changed. Add a **Raw (no polish)** tone for that app in **Settings → AI → App Tone Profiles**.
 
-## Indicator pill is in the wrong place
+## A word is always wrong
 
-- It anchors to the bottom-center of the **current monitor**, 70px above the Dock.
-- If you've moved the Dock to a side, the math still uses bottom-center; this is a known limitation.
-- Hide it entirely with **"hide indicator"** or in Settings.
+Add it to **Settings → Commands → Vocabulary**. If one phrase is always heard as another, add an **Auto-Corrections** rule. See [Dictation](#/dictation).
 
-## Agent dashboard opens on the wrong display
+## Agents don't start, or Talk can't route
 
-**Settings → Agents → Dashboard monitor preference**: choose primary, current, or a specific display.
+- Run `which claude` in a terminal. If it prints nothing, install Claude Code, or set **Settings → Agents → Claude CLI → Binary path**.
+- Run `claude` once in a terminal and make sure you are signed in.
+- Open **Settings → Agents** and click **Test connection**. If it warns about a stale `ANTHROPIC_API_KEY`, unset that variable in your shell. It overrides your subscription login.
+- If Talk can't reach Claude, it sends your request to where the last one went, or to the Director. Fix the login and try again.
 
-## "claude_session" actions fail in the intent engine
+## Terminal agents or other CLIs won't start
 
-The `claude_session` action shells out to the same `claude` CLI as agents. If standalone agents work but `claude_session` doesn't, check that the working directory you're invoking from has appropriate file permissions, `claude` will refuse to run in a directory it can't read.
+- herdr must be installed and running. The New agent view shows the install command and a **Start herdr** button when needed.
+- The CLI itself (Codex, OpenCode and so on) must be installed and signed in. Try starting it once in a normal terminal.
+
+## An agent is stuck waiting
+
+- Open the [Inbox](#/inbox). There may be a question or permission request you have not answered.
+- If the panel is on **Ask**, every tool call needs your OK. **Edits** lets file edits through and still asks before running commands.
+- Open the agent's thread and click **Stop** to end the current turn.
+
+## Talk sends to the wrong agent
+
+- Name the agent: "claude-2, run the tests" or "tell backend to add pagination" always goes to that agent.
+- Look at the agents' titles in the toolbar peek. If two agents look like the same work, close the one you no longer need.
+
+## Screenshots or region capture don't work
+
+macOS needs **Screen Recording** permission for Cadence to take screenshots. Turn it on in **System Settings → Privacy & Security → Screen Recording**, then quit and reopen Cadence.
+
+## Sets don't put windows away or bring them back
+
+macOS asks whether Cadence may control Terminal. If you clicked **Don't Allow**, turn it on in **System Settings → Privacy & Security → Automation → Cadence → Terminal**.
+
+## The toolbar is gone
+
+- You may have hidden it from the **⋯** menu. Turn on **Settings → About → Show floating indicator**.
+- If you picked **Hide for a while**, it comes back on its own.
+- If you disconnected the display it was on, it moves to another display.
 
 ## Logs
 
-When in doubt, check the log file:
-
-```sh
-~/Library/Logs/com.cadence.app/cadence.log
-```
-
-Or run Cadence from the terminal to see logs live:
+The **Log** tab in the main window shows recent activity. For full logs, quit Cadence and start it from a terminal:
 
 ```sh
 /Applications/Cadence.app/Contents/MacOS/Cadence
 ```
 
-## Reset
+## Reset to defaults
 
-To wipe Cadence back to defaults without uninstalling:
+Quit Cadence, then:
 
 ```sh
 rm ~/Library/Application\ Support/com.cadence.app/settings.json
 ```
 
+This resets settings and onboarding. Downloaded models are kept.
+
 ## Still stuck
 
-- File an issue at <https://github.com/MaxPrehoda/cadence/issues>
-- Include macOS version, Cadence version (top-left of the indicator), and the relevant snippet from the log.
+Email <support@cadence.app> with your macOS version, your Cadence version (**Settings → About**) and the relevant part of the log.

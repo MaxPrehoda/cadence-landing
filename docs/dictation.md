@@ -1,70 +1,67 @@
 # Dictation
 
-Cadence dictates into whatever app has focus, text fields, editors, browser textareas, terminal prompts. The pipeline:
+Hold a key, speak, let go, and your words are typed into whatever app has focus: a text field, an editor, a browser, a terminal prompt. Speech recognition runs on your Mac.
 
-```
-microphone → VAD → Whisper → polish → keystroke injection
-```
+## Two ways to dictate
 
-## Whisper transcription
+- **Hold to talk.** Hold `⌥` (or your chosen [hotkey](#/hotkeys)), speak, and release. Your text appears at the cursor.
+- **Continuous.** Click the **mic** button on the [toolbar](#/toolbar) to start, and click it again to stop. Good for long passages.
 
-Transcription runs locally via [whisper.cpp](https://github.com/ggerganov/whisper.cpp). Default model: `ggml-small.en.bin` (~500 MB, English-only, fast on Apple Silicon).
+A quick tap of the hotkey, or a shortcut that uses it (like `⌥←`), types nothing. Cadence throws that audio away.
 
-Swap models in **Settings → Whisper**. Larger models (`medium`, `large-v3`) are more accurate but slower. Multilingual models (without the `.en` suffix) handle 90+ languages, set **Language** in settings to your target locale or leave it blank for auto-detect.
+You can also speak to agents directly: press `V` in the [Inbox](#/inbox), or click the mic in an agent's thread or terminal. The words go into that reply box instead of the app in front.
 
-## Voice activity detection (VAD)
+## How it works
 
-Two thresholds gate when audio is sent to Whisper:
+1. **Capture.** Cadence keeps the half second before you pressed the key, so your first word is not clipped, and up to 600 ms after release while you finish a word.
+2. **Speech detection.** Silero VAD, a small neural model running on your Mac, finds where you are speaking and where you paused.
+3. **Transcription while you talk.** Each piece is transcribed at the next pause while you are still holding the key, so on release only the last bit is left.
+4. **Recognition.** NVIDIA Parakeet TDT 0.6B v2 turns speech into text. If you have a Whisper Large v3 Turbo model downloaded, it double-checks words that might be from your vocabulary.
+5. **Text Polish.** An optional local model fixes punctuation, capitalization and filler words. See [Text Polish](#/text-polish).
+6. **Typing.** The text is pasted at your cursor.
 
-- **VAD threshold** (default `0.025`): RMS amplitude required to count as speech. Raise it if quiet rooms produce false starts; lower it if your voice gets clipped.
-- **Silence duration** (default `2000 ms`): how long the trailing silence must last before Cadence considers the utterance done.
+On Cadence's own test set, this setup measured 1.88% word error rate on clean read speech, about 330 ms from release to text at the 95th percentile, and no phantom words on recordings of silence, keyboard noise, fans or music.
 
-These live under **Settings → Audio**.
+## Speech models
 
-## Polish
+Pick a model in **Settings → Models**. Changing models needs a restart.
 
-After Whisper transcribes, the result runs through a local polish LLM that fixes punctuation, capitalization, and minor word choice without changing meaning. The polish model is bundled as a sidecar binary. No setup required.
+| Model | Size | Notes |
+|---|---|---|
+| **Parakeet v2 (English, recommended)** | 630 MB | The default. Fastest and most accurate in Cadence's tests. |
+| **Parakeet v3 (25 languages)** | 640 MB | For dictating in other languages. |
+| Tiny / Base / Small / Medium (English) | 75 to 539 MB | Whisper models. Smaller and less accurate. |
+| **Large v3 Turbo (Q5)** | 574 MB | Whisper. With Parakeet active, it runs the vocabulary check described above. |
+| Large v3 Turbo | 1.6 GB | Full-size version of the above. |
 
-To disable: **Settings → Polish → Off**.
+Models download from Hugging Face the first time you pick them and are stored in `~/Library/Application Support/com.cadence.app/models/`.
 
-To upgrade to cloud polish (Anthropic Claude) for higher quality on long-form text:
+## Vocabulary
 
-1. **Settings → Polish → Use cloud**
-2. Paste an Anthropic API key
+Add names and jargon you want spelled your way, like people, products, repos and tools, in **Settings → Commands → Vocabulary**. Type terms and press `Return`. The speech model is primed with them.
 
-Cloud polish only fires after local Whisper has already produced text. The audio itself never leaves your machine.
+Your agents' names and your auto-correction targets are added to the vocabulary automatically.
 
-## Per-app tone profiles
+## Auto-corrections
 
-Different apps want different prose. Cadence reads the bundle ID of the active app and applies a per-app polish profile.
+If a word is always heard wrong, add a rule in **Settings → Commands → Auto-Corrections**: the phrase Cadence hears, and the phrase you want. Rules apply to dictation and voice commands.
 
-**Settings → Polish → App profiles**
+Cadence also notices when you keep fixing the same word by hand. An **Auto-correction detected** notice appears in the main window. Click **Add** to keep the rule or **Dismiss** to ignore it.
 
-Profile choices:
+## Microphone
 
-- **default**: neutral cleanup
-- **casual**: friendly, contractions, emoji-friendly
-- **formal**: business tone, no slang
-- **technical**: preserves jargon, code-friendly
-- **raw**: disables polish entirely (good for terminals and code editors)
-- **custom**: your own one-line instruction
+Choose an input in **Settings → Audio → Microphone**. **Automatic** follows the macOS default and switches when you plug in or unplug a device.
 
-## Hallucination filtering
+**Prefer the built-in mic over Bluetooth headsets** is on by default. AirPods and other headsets switch to a low-quality call codec while their mic is open, which costs accuracy and muffles whatever they are playing. This applies when the input is set to Automatic.
 
-Whisper has a known tendency to invent text on near-silent audio (`"Thanks for watching!"`, `"Subtitles by..."`, `"Subscribe!"`). Cadence drops these on the floor before they reach your cursor.
+## How text is typed
 
-If a real phrase you actually use gets filtered, file an issue. The suppression list is small and intentional.
+Cadence pastes the text with the clipboard and `⌘V`, then puts your previous clipboard contents back. This needs the **Accessibility** permission.
 
-## Keystroke injection
+## History
 
-Polished text reaches the active app via simulated keypress events (not pasteboard). This means:
+The **Feed** tab in the main window shows dictations live. Switch to **History** to see your last 50, with the app each one went to. They are kept in your local settings file.
 
-- Your clipboard isn't clobbered.
-- It works in apps that block paste (some 1Password fields, sandboxed inputs).
-- The cost is slightly slower insertion for very long blocks.
+## Save recordings
 
-If you need clipboard injection (e.g. for terminals where keystroke replay is awkward), enable **Settings → Injection → Use clipboard**.
-
-## Dictation history
-
-The last N transcriptions are kept locally in `~/Library/Application Support/com.cadence.app/settings.json` so you can re-paste a previous result. Clear them anytime from **Settings → History → Clear**.
+**Settings → Audio → Save recordings** keeps the audio and text of each dictation (newest 300) in `~/Library/Application Support/com.cadence.app/recordings/`. It is off by default and nothing leaves your Mac. It is useful if you want to build a test set from your own voice.

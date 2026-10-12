@@ -1,114 +1,143 @@
 # Voice commands
 
-The fast path. These commands are handled by a deterministic pattern parser. No LLM round-trip. Sub-100 ms response.
+Before Cadence focused on agents, it was a voice control app for the Mac. Those features are still here. They are optional, and most people never need them.
 
-If your utterance doesn't match a built-in pattern, it falls through to the [intent engine](#/intent-engine), which uses Claude to compose multi-step plans.
+This page covers:
 
-## Apps
+- **Command word**: start a dictation with "computer" to run a command instead of typing.
+- **Built-in and custom commands**: open apps, search, control tabs and VS Code, take notes.
+- **Hands-free listening**: use Cadence without holding a key. Off by default.
+- **Intent Engine**: send commands Cadence does not recognize to Claude. Needs your API key.
+- **Spoken updates**: hear agents finish and ask for approval.
 
-| Phrase | Action |
+To talk to your agents, use [Talk](#/talk). It is a better fit for that than these commands.
+
+## The command word
+
+Hold your hotkey and start with the command word, then say the command:
+
+> Computer, open Safari
+
+Without the command word, your speech is typed as normal [dictation](#/dictation). The default word is **computer**. Change it in **Settings → Commands → Wake Word**. Cadence also accepts a trailing "s", because speech models sometimes hear "computers".
+
+Built-in and custom commands are matched on your Mac, with no model call.
+
+## Built-in commands
+
+The full list is in **Settings → Commands → Built-in Commands**.
+
+**Apps**
+
+| Say | What happens |
 |---|---|
-| "Open Safari" | Launch / activate an app |
-| "Switch to Slack" | Activate without launching |
-| "Launch Notion" | Same as open |
-| "Open Chrome and Safari" | Multi-app open |
-| "Close window" | ⌘W |
-| "Close tab" | ⌘W in browsers |
-| "New tab" | ⌘T |
+| "open Safari" | Launch or focus an app. "launch" and "start" also work. |
+| "switch to Slack" | Focus an app |
+| "open Chrome and Notion" | Open several apps |
+| "open work apps" | Open a named app group (see below) |
 
-App names are matched fuzzily, so "VS Code" and "Visual Studio Code" both work.
+**Search**
 
-## Search
-
-| Phrase | Action |
+| Say | What happens |
 |---|---|
-| "Search for rust async patterns" | Google search in default browser |
-| "Google macOS hidden defaults" | Same |
-| "Look up the history of bell labs" | Same |
+| "search for rust async patterns" | Google search in your default browser. "search", "google" and "look up" also work. |
 
-## VS Code
+**Tabs and windows**
 
-When VS Code is the active app, these commands map to native shortcuts:
-
-| Phrase | Action |
+| Say | What happens |
 |---|---|
-| "Open terminal" | ⌃` |
-| "Search file foo.ts" | Quick open |
-| "Command palette" | ⇧⌘P |
-| "Toggle sidebar" | ⌘B |
-| "Go to line 42" | ⌃G then number |
-| "Close all editors" | ⌘K W |
-| "Split editor" | ⌘\ |
-| "Toggle zen mode" | ⌘K Z |
-| "Focus explorer" | ⇧⌘E |
+| "new tab" | `⌘T` |
+| "close tab" | `⌘W` |
+| "close window" | `⌘⇧W` |
+| "split view" | VS Code on the left, browser on the right, with your localhost tab in front |
 
-## Notes & todos
+**VS Code** (when it is the active app)
 
-| Phrase | Action |
+| Say | What happens |
 |---|---|
-| "Take a note: feedback from Dana on onboarding" | Add to local notes store |
-| "Note that the budget review is Tuesday" | Same |
-| "Make a todo to email Dana" | Add a todo (not yet completed) |
-| "Add a todo to refactor the parser" | Same |
+| "open terminal" | Toggle the integrated terminal |
+| "search for file parser" | Quick Open with that name |
+| "command palette" | `⌘⇧P` |
+| "toggle sidebar" | `⌘B` |
+| "go to line 42" | Jump to a line |
+| "close all editors" | Close every tab |
+| "split editor" | Split the editor |
+| "zen mode" | Toggle Zen mode |
+| "focus explorer" | `⌘⇧E` |
 
-Notes and todos live in `settings.json` and are visible from the indicator menu.
+**Notes and other**
 
-## Obsidian
-
-If you've set **Obsidian vault path** in settings, these commands write directly into your vault as Markdown files:
-
-| Phrase | Action |
+| Say | What happens |
 |---|---|
-| "Write an Obsidian note about meeting notes" | Create new note |
-| "Add to my ideas note in Obsidian saying try a new color scheme" | Append to existing note |
-| "Read my Obsidian note titled standup" | Speak contents back |
+| "take a note, call Dana about the budget" | Save a note. A sticky note pops up to confirm. |
+| "make a todo to clean my room" | Save a to-do |
+| "hide indicator" / "show indicator" | Hide or show the toolbar |
+| "stop speaking" / "be quiet" | Stop spoken updates that are playing |
 
-## Indicator & TTS
+Notes and to-dos appear in the **Notes** tab of the main window.
 
-| Phrase | Action |
-|---|---|
-| "Hide indicator" | Hide the floating pill |
-| "Show indicator" | Bring it back |
-| "Stop speaking" | Silence in-flight TTS |
-| "Be quiet" | Same |
+Cadence strips filler before matching, so "could you please open up Safari for me" works the same as "open Safari".
 
 ## Custom commands
 
-Create your own triggers in **Settings → Custom commands**. Each command has:
+Add your own in **Settings → Commands → Custom Commands**:
 
-- **Trigger phrase**: what you say
-- **Action**: keyboard shortcut, app open, shell command, or URL
-- **Enabled** toggle
+- **Trigger phrase**: what you say after the command word, for example "screenshot".
+- **Action type**: **Open App**, **Keyboard Shortcut** (like `Cmd+Shift+4`) or **Insert Text**.
 
-Trigger phrases are case-insensitive and match anywhere in the utterance (after the wake word, if applicable).
+Click **Add Command**. Then "computer, screenshot" runs it.
 
 ## App aliases
 
-Whisper sometimes mishears app names. Add aliases in **Settings → App aliases**:
-
-| Spoken | Resolves to |
-|---|---|
-| "vs code" | "Visual Studio Code" |
-| "chat gpt" | "ChatGPT" |
-| "obsidian vault" | "Obsidian" |
+If Cadence mishears an app name, or you call an app something else, map it in **Settings → Commands → Custom App Aliases**. For example, spoken name "browser" opens "Arc".
 
 ## App groups
 
-Define groups so one phrase opens many apps:
+In **Settings → Commands → App Groups**, give a group a name and a comma-separated list of apps. Then "computer, open work apps" opens all of them.
 
-```
-Group: "morning setup"
-Apps: Slack, Linear, Cron, Gmail
-```
+## Hands-free listening
 
-> "Open my morning setup"
+Cadence can also listen without a key press. When it is on, the microphone stays open and Cadence handles each thing you say as if you had held the key. If you start with "Hey Cadence" (also "Cadence," or "Okay Cadence"), that part is removed before the rest is handled.
 
-opens all four.
+It is off by default. Turn it on with **Settings → Agents → Wake word → Enable "Hey Cadence" always-on activation**. Holding the key keeps working as usual. Treat it as experimental.
 
-## Conversational filler
+Keep in mind:
 
-Cadence strips common filler words (`up`, `the`, `my`, `a`, `please`, `can you`, `could you`) before matching. So all of these work:
+- Anything it hears that is not a command is typed into the focused app, like dictation.
+- The microphone stays open the whole time. Audio is processed on your Mac and is not saved unless **Save recordings** is on.
+- It uses more battery and CPU than holding a key, and it is less reliable in noisy rooms.
 
-- "Open Safari"
-- "Open up Safari please"
-- "Could you open Safari for me"
+Holding a key is the recommended way to use Cadence.
+
+## Intent Engine
+
+When a command after the command word does not match anything built in, the Intent Engine can send it to Claude Haiku, which plans a sequence of actions that Cadence then runs on your Mac. For example:
+
+- "computer, make this more formal" (rewrites the selected text)
+- "computer, translate this to French"
+- "computer, run the tests"
+- "computer, read my last three emails"
+
+The Intent Engine needs your own Anthropic API key in **Settings → AI → Anthropic API Key**. With a key, it is on by default; turn it off with **Settings → AI → Intent Engine**.
+
+For each request, Claude receives the words you said plus context from your Mac: the active app and window title, and, when relevant, your selected text and clipboard. It never receives audio.
+
+It can use these kinds of actions:
+
+| Area | Actions |
+|---|---|
+| System | Open apps, files and URLs, press shortcuts, type text, read or replace the selection, read or write the clipboard, run shell commands |
+| Text | Rewrite text with an instruction |
+| Browser | Find and click elements, read the console and styles, navigate, take screenshots. Needs Chrome started with `--remote-debugging-port=9222`. Change the port in **Settings → Injection → Integrations**. |
+| Mail and Messages | Read, send, draft and reply to email in Mail; send and read iMessages. macOS asks for Automation permission the first time. |
+| Slack | Send and read messages, list channels. Needs a Slack bot token in **Settings → Injection → Integrations**. |
+| Obsidian | Create, append to and read notes. Set your vault first: "computer, set obsidian vault to ~/Documents/Vault". |
+
+The Intent Engine can run shell commands and send messages for you. Only turn it on if you are comfortable with that.
+
+## Spoken updates
+
+Cadence can speak when an agent finishes or asks for approval, using a built-in macOS voice. Configure it in **Settings → Agents → Text-to-speech**: on or off, **Voice**, **Rate (wpm)** (default 190) and **Output device**, for example to send agent updates to headphones.
+
+Short messages are read in full. For messages over about 180 words, Cadence says the agent finished. If you have an Anthropic API key set, it reads a short summary written by Claude Haiku instead.
+
+Mute spoken updates any time with the speaker button in the Inbox panel header, or by saying "computer, stop speaking".
