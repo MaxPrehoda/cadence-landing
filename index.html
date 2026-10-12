@@ -18,15 +18,15 @@
     <meta property="og:title" content="Cadence: every coding agent, one inbox">
     <meta property="og:description" content="Run many coding agents without keeping any of them waiting. Questions and finished work land in one Inbox. Answer in a keystroke, or just talk.">
     <meta property="og:url" content="https://cadencevoice.ai/">
-    <meta property="og:image" content="https://cadencevoice.ai/art/hero.png">
-    <meta property="og:image:width" content="1920">
-    <meta property="og:image:height" content="1080">
-    <meta property="og:image:alt" content="Pixel art of a desk in a meadow, the monitor showing the Cadence toolbar">
+    <meta property="og:image" content="https://cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Cadence: every agent, one inbox. Pixel art of a desk in a meadow with agent status chips.">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cadence: every coding agent, one inbox">
     <meta name="twitter:description" content="Run many coding agents without keeping any of them waiting. Answer in a keystroke, or just talk.">
-    <meta name="twitter:image" content="https://cadencevoice.ai/art/hero.png">
+    <meta name="twitter:image" content="https://cadencevoice.ai/art/og.png">
 
     <link rel="icon" type="image/png" href="/icon.png">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -118,7 +118,7 @@
         .hero { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; background: #3e7fd9; }
         .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 100%; }
         .hero-copy { position: relative; z-index: 2; padding: 140px 24px 0; max-width: 620px; color: #fff; }
-        .hero h1 { font-size: clamp(38px, 4.4vw, 54px); font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 20px; text-shadow: 0 1px 12px rgba(20,60,140,.25); }
+        .hero h1 { font-size: clamp(48px, 6.2vw, 80px); line-height: 1.02; font-weight: 400; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 20px; text-shadow: 0 1px 12px rgba(20,60,140,.25); }
         .hero p { font-size: 18px; line-height: 1.45; opacity: .95; margin-bottom: 28px; max-width: 520px; }
         .hero .row { display: flex; gap: 10px; flex-wrap: wrap; }
         .hero .fine { margin-top: 18px; font-size: 14px; opacity: .85; }
@@ -167,6 +167,51 @@
         .ask { margin: 10px; border: 1px solid var(--line-2); border-radius: 9px; background: #fff; padding: 10px 12px; font-size: 12px; color: var(--ink-3); display: flex; justify-content: space-between; align-items: center; }
         .ask b { width: 22px; height: 22px; border-radius: 6px; background: #2b2b2a; color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 500; }
 
+
+        /* Interactive Inbox demo */
+        .node i { background: var(--blue); transition: background .4s, box-shadow .4s; }
+        .node[data-state="needs"] i { background: var(--amber); box-shadow: 0 0 0 4px rgba(242,162,12,.18); }
+        .node[data-state="done"] i { background: var(--green); }
+        .node[data-state="idle"] i { background: #c4c4bc; }
+        .side { text-align: left; }
+        .node[data-state="working"] i { animation: pulse 2.2s ease-in-out infinite; }
+        .node.ping { animation: ping .9s ease; }
+        @keyframes ping { 30% { transform: translate(-50%, -50%) scale(1.08); border-color: #f2a20c; } }
+        .side:focus { outline: none; }
+        .side:focus-visible { box-shadow: 0 0 0 2px var(--blue); }
+        .tabs .try { margin-left: auto; display: flex; align-items: center; gap: 4px; color: var(--ink-3); font-size: 11.5px; }
+        .tabs .try kbd { font-family: var(--mono); font-size: 10px; border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: #fff; color: var(--ink-2); }
+        .tabs .try.hide { opacity: 0; transition: opacity .6s; }
+        .q { position: relative; animation: cardIn .35s ease; }
+        @keyframes cardIn { from { opacity: 0; transform: translateY(6px); } }
+        .q .pager { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-left: 8px; font-weight: 400; }
+        .q .kind { margin-left: auto; font-weight: 400; color: var(--ink-3); font-size: 11px; }
+        .q pre { font-family: var(--mono); font-size: 11.5px; background: #f3f3ef; border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; margin: -2px 0 10px; color: var(--ink); white-space: pre-wrap; }
+        button.opt { width: 100%; font: inherit; text-align: left; background: #fff; cursor: pointer; transition: background .15s, border-color .15s; }
+        button.opt:hover { border-color: #b9b9b1; }
+        button.opt.sel { background: #2b2b2a; color: #fff; border-color: #2b2b2a; }
+        button.opt:disabled { cursor: default; }
+        button.opt:disabled:not(.sel) { opacity: .45; }
+        .sugs button { font: inherit; font-size: 12px; padding: 4px 10px 4px 6px; border-radius: 99px; background: #f0f0eb; border: 1px solid var(--line); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; color: var(--ink); }
+        .sugs button kbd { font-family: var(--mono); font-size: 10px; color: var(--ink-3); background: #fff; border: 1px solid var(--line-2); border-radius: 4px; padding: 0 4px; }
+        .sugs button.sel { background: #2b2b2a; color: #fff; border-color: #2b2b2a; }
+        .sent { position: relative; overflow: hidden; display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 8px 10px; border-radius: 7px; background: #eaf7ef; border: 1px solid #c4e8d1; color: #17703b; font-size: 12.5px; font-weight: 500; }
+        .sent button { margin-left: auto; font: inherit; font-size: 11.5px; font-weight: 400; background: none; border: 0; color: #2f6b45; cursor: pointer; display: flex; gap: 5px; align-items: center; }
+        .sent kbd { font-family: var(--mono); font-size: 10px; border: 1px solid #b5dcc3; border-radius: 4px; padding: 0 4px; background: #fff; }
+        .sent .bar { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--green); width: 0; }
+        .sent.go .bar { width: 100%; transition: width 2s linear; }
+        .cardfoot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 11.5px; color: var(--ink-3); }
+        .cardfoot button { font: inherit; background: none; border: 0; color: var(--ink-3); cursor: pointer; display: flex; gap: 5px; align-items: center; padding: 0; }
+        .cardfoot button:hover { color: var(--ink); }
+        .cardfoot kbd { font-family: var(--mono); font-size: 10px; border: 1px solid var(--line-2); border-radius: 4px; padding: 0 4px; background: #fff; }
+        .empty { text-align: center; padding: 48px 12px; }
+        .empty .h { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+        .empty .b { font-size: 13px; color: var(--ink-3); margin-bottom: 16px; }
+        .empty button { font: inherit; font-size: 12.5px; padding: 6px 12px; border-radius: 7px; border: 1px solid var(--line-2); background: #fff; cursor: pointer; }
+        .ask input { flex: 1; border: 0; outline: 0; background: transparent; font: inherit; font-size: 12.5px; color: var(--ink); min-width: 0; }
+        .ask button { background: none; border: 0; padding: 0; cursor: pointer; }
+        .ask.flash { border-color: var(--green); transition: border-color .2s; }
+        .demo-cap { margin-top: 14px; font-size: 13.5px; color: var(--ink-3); }
         .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: 44px; text-align: left; color: var(--ink-2); font-size: 16px; }
         .cols3 b { color: var(--ink); font-weight: 600; }
         .ctarow { display: flex; justify-content: center; align-items: center; gap: 48px; margin-top: 56px; text-align: left; color: var(--ink-2); }
@@ -249,6 +294,53 @@
         .clis span.native { background: #2b2b2a; color: #fff; border-color: #2b2b2a; }
         .tray-in p { font-size: 14px; color: var(--ink-2); }
 
+
+
+        /* Real app reel */
+        .reel { margin-top: 72px; }
+        .reel-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
+        .reel-tabs button { text-align: left; font: inherit; background: var(--panel); border: 1px solid var(--line-2); border-radius: 10px; padding: 12px 14px; cursor: pointer; color: var(--ink-2); display: grid; gap: 2px; transition: background .15s, border-color .15s; }
+        .reel-tabs button small { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+        .reel-tabs button span { font-size: 13.5px; color: var(--ink-3); }
+        .reel-tabs button { font-weight: 500; font-size: 15.5px; }
+        .reel-tabs button[aria-selected="true"] { background: #fff; border-color: #b9b9b1; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+        .reel-frame { position: relative; border: 1px solid var(--line-2); border-radius: 18px; background: #efefeb; padding: 8px; box-shadow: 0 30px 60px -40px rgba(0,0,0,.3); }
+        .reel-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 12px; background: #3e7fd9; }
+        .reel-play { position: absolute; right: 20px; bottom: 20px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(16,20,30,.55); color: #fff; font-size: 11px; cursor: pointer; backdrop-filter: blur(6px); }
+        .reel-cap { margin-top: 12px; font-size: 13.5px; color: var(--ink-3); }
+        @media (max-width: 700px) { .reel-tabs button span { display: none; } .reel-tabs button { padding: 10px; } }
+        /* iPhone waitlist */
+        .iphone { padding: 150px 0 0; }
+        .iphone-grid { display: grid; grid-template-columns: 1fr 340px; gap: 72px; align-items: center; }
+        .iphone h2 { margin-bottom: 22px; }
+        .iphone .lead { color: var(--ink-2); max-width: 520px; margin: 0 0 28px; }
+        .wl { display: flex; gap: 8px; max-width: 460px; }
+        .wl input[type=email] { flex: 1; min-width: 0; height: 44px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 8px; background: #fff; font: inherit; font-size: 15px; color: var(--ink); }
+        .wl input[type=email]:focus { outline: none; border-color: #9a9a92; box-shadow: 0 0 0 3px rgba(0,0,0,.05); }
+        .wl input[aria-invalid=true] { border-color: #d9534f; }
+        .wl .cta { height: 44px; border: 0; cursor: pointer; font-family: inherit; }
+        .wl .cta[disabled] { opacity: .6; cursor: default; }
+        .wl .hp, .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        .wl-msg { margin-top: 12px; font-size: 13.5px; color: var(--ink-3); min-height: 20px; }
+        .wl-msg.ok { color: #17703b; } .wl-msg.err { color: #b4382f; }
+        .wl.done { display: none; }
+        .phone { justify-self: center; width: 300px; padding: 10px; border-radius: 52px; background: #1b1a1f; box-shadow: 0 40px 70px -40px rgba(0,0,0,.45), inset 0 0 0 2px #3a3940; }
+        .phone-in { position: relative; border-radius: 42px; background: var(--page); padding: 54px 16px 22px; min-height: 560px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+        .island { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 96px; height: 28px; border-radius: 20px; background: #000; }
+        .ph-top { position: absolute; top: 18px; left: 30px; right: 26px; display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; }
+        .ph-sig { font-size: 9px; letter-spacing: 1px; }
+        .ph-title { font-family: var(--serif); font-size: 34px; line-height: 1; margin: 6px 4px 6px; }
+        .ph-title small { font-family: var(--sans); font-size: 13px; vertical-align: middle; background: var(--amber); color: #111; border-radius: 99px; padding: 1px 7px; font-weight: 600; }
+        .ph-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 12px; font-size: 13px; }
+        .ph-card .h { display: flex; gap: 7px; align-items: center; font-weight: 600; margin-bottom: 4px; }
+        .ph-card .h i { width: 7px; height: 7px; border-radius: 50%; }
+        .ph-card p { color: var(--ink-2); margin-bottom: 8px; }
+        .ph-opt { padding: 7px 9px; border: 1px solid var(--line); border-radius: 9px; margin-top: 5px; font-size: 12.5px; }
+        .ph-opt.sel { background: #2b2b2a; color: #fff; border-color: #2b2b2a; }
+        .ph-chips { display: flex; gap: 6px; } .ph-chips span { font-size: 12px; padding: 4px 10px; border-radius: 99px; background: #f0f0eb; border: 1px solid var(--line); }
+        .ph-agents { margin-top: auto; display: flex; align-items: center; gap: 6px; background: #151418; color: #b9b7c2; border-radius: 99px; padding: 10px 14px; font-size: 12px; }
+        .ph-agents i { width: 9px; height: 9px; border-radius: 50%; }
+        .ph-agents span { margin-left: auto; }
         /* Privacy */
         .privacy { padding: 140px 0 0; }
         .ledger { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 44px; }
@@ -296,11 +388,12 @@
             .feat, .feat.flip { grid-template-columns: 1fr; gap: 32px; }
             .feat.flip > .copy { order: 0; }
             .ctarow { flex-direction: column; gap: 20px; text-align: center; }
-            .dl-grid { grid-template-columns: 1fr; }
+            .dl-grid, .iphone-grid { grid-template-columns: 1fr; gap: 48px; }
             .lh-card { max-width: 380px; }
         }
         @media (max-width: 600px) {
             .cols3, .ledger, .rcpt, .stats { grid-template-columns: 1fr; }
+            .wl { flex-direction: column; } .phone { width: 280px; }
             .hero-copy { padding-top: 112px; }
             .links { gap: 32px; flex-wrap: wrap; }
             .node { font-size: 11px; padding: 6px 9px; }
@@ -334,8 +427,8 @@
 <header class="hero">
     <img class="px" src="art/hero.png" alt="Pixel art of a desk in a sunny meadow. The monitor shows the Cadence toolbar with blue, amber and green agent dots." width="1920" height="1080">
     <div class="hero-copy">
-        <h1>Cadence keeps every coding agent moving, from one inbox</h1>
-        <p>Run Claude Code, Codex and the rest side by side. Every question and finished task lands in one place. Answer with a keystroke, or just say it.</p>
+        <h1>Every agent,<br>one inbox.</h1>
+        <p>Cadence keeps Claude Code, Codex and the rest moving. Every question and finished task lands in one place. Answer with a keystroke, or just say it.</p>
         <div class="row">
             <a href="#download" class="cta">Download for Mac</a>
             <a href="#inbox" class="cta glass">See how it works</a>
@@ -354,44 +447,35 @@
     <div class="wrap">
         <h2 class="two reveal">Cadence is a control layer for your coding agents<br><span>so none of them sit waiting on you</span></h2>
 
-        <div class="mock reveal" role="img" aria-label="Mock of Cadence: the Director connected to five agents, next to the Inbox with a question and a finished task">
+        <div class="mock reveal" id="demo-mock">
             <div class="mock-in">
-                <div class="canvas">
+                <div class="canvas" aria-hidden="true">
                     <div class="top"><span class="tag">~/Developer · 5 agents</span><span>⌥⌥ to talk</span></div>
-                    <svg viewBox="0 0 600 520" preserveAspectRatio="none" aria-hidden="true">
+                    <svg viewBox="0 0 600 520" preserveAspectRatio="none">
                         <circle cx="300" cy="275" r="165" fill="none" stroke="#cfcfc7"/>
                         <g stroke="#bdbdb5" stroke-dasharray="4 5" fill="none">
                             <path d="M300 275 L300 110"/><path d="M300 275 L148 190"/><path d="M300 275 L452 190"/><path d="M300 275 L160 390"/><path d="M300 275 L440 390"/>
                         </g>
                     </svg>
-                    <div class="node" style="left:50%;top:21%"><i style="background:var(--blue)"></i>Auth refactor <small>claude</small></div>
-                    <div class="node" style="left:24.5%;top:36.5%"><i style="background:var(--amber)"></i>Billing webhooks <small>claude</small></div>
-                    <div class="node" style="left:75.5%;top:36.5%"><i style="background:var(--blue)"></i>Flaky CI tests <small>codex</small></div>
-                    <div class="node" style="left:26.5%;top:75%"><i style="background:var(--green)"></i>Docs site upgrade <small>amp</small></div>
-                    <div class="node" style="left:73.5%;top:75%"><i style="background:var(--blue)"></i>Onboarding copy <small>gemini</small></div>
+                    <div class="node" data-agent="auth" style="left:50%;top:21%"><i></i>Auth refactor <small>claude</small></div>
+                    <div class="node" data-agent="billing" style="left:24.5%;top:36.5%"><i></i>Billing webhooks <small>claude</small></div>
+                    <div class="node" data-agent="ci" style="left:75.5%;top:36.5%"><i></i>Flaky CI tests <small>codex</small></div>
+                    <div class="node" data-agent="docs" style="left:26.5%;top:75%"><i></i>Docs site upgrade <small>amp</small></div>
+                    <div class="node" data-agent="onboard" style="left:73.5%;top:75%"><i></i>Onboarding copy <small>gemini</small></div>
                     <div class="node dir" style="left:50%;top:53%">Director</div>
                     <div class="foot">blue working · amber needs you · green done</div>
                 </div>
-                <div class="side">
-                    <div class="tabs"><span class="on">Inbox · 2</span><span>Agents</span><span>Sets</span></div>
-                    <div class="inbox">
-                        <div class="q">
-                            <div class="h"><i style="background:var(--amber)"></i>Billing webhooks<small>question</small></div>
-                            <p>Stripe retries can arrive out of order. How should I handle duplicates?</p>
-                            <div class="opt sel"><kbd>1</kbd>Idempotency key per event</div>
-                            <div class="opt"><kbd>2</kbd>Lock the row while processing</div>
-                            <div class="opt"><kbd>3</kbd>Ignore and log them</div>
-                        </div>
-                        <div class="q">
-                            <div class="h"><i style="background:var(--green)"></i>Docs site upgrade<small>done</small></div>
-                            <p>Next 15.2, build green. One deprecation left in the nav.</p>
-                            <div class="sugs"><span>Fix the deprecation</span><span>Ship it</span></div>
-                        </div>
-                    </div>
-                    <div class="ask">Say or type what you need… <b>↑</b></div>
+                <div class="side" id="demo" tabindex="0" aria-label="Interactive Inbox demo. Press 1 to 9 to answer, J and K to move between cards, E to skip, Escape to undo.">
+                    <div class="tabs"><span class="on" id="demo-tab">Inbox</span><span>Agents</span><span>Sets</span><span class="try" id="demo-try">Try it <kbd>1</kbd><kbd>J</kbd><kbd>K</kbd><kbd>E</kbd></span></div>
+                    <div class="inbox" id="demo-card" aria-live="polite"></div>
+                    <form class="ask" id="demo-ask" autocomplete="off">
+                        <input id="demo-input" placeholder="Reply…" aria-label="Type a reply">
+                        <button type="submit" aria-label="Send"><b>↑</b></button>
+                    </form>
                 </div>
             </div>
         </div>
+        <p class="demo-cap reveal">This is a working copy of the Inbox. Click an answer or use the keys, the same ones the app uses.</p>
 
         <div class="cols3 reveal">
             <div><b>One inbox.</b> Plan approvals, tool permissions and questions from every agent, as numbered choices you answer with one key.</div>
@@ -411,6 +495,23 @@
         <div class="eyebrow reveal">What Cadence does</div>
         <h2 class="two reveal">Keep writing the code.<br><span>Let Cadence keep the agents moving.</span></h2>
         <p class="lead reveal">Five terminals, three of them waiting on a yes, and you find out ten minutes later when you happen to tab back. Cadence watches every agent for you, brings you only what needs a decision, and sends your answer back to the right place.</p>
+
+        <!-- Real app footage -->
+        <div class="reel reveal" id="reel">
+            <div class="reel-tabs" role="tablist" aria-label="App clips">
+                <button role="tab" aria-selected="true" data-clip="toolbar"><small>01</small>Toolbar<span>An agent needs you, peek at every title</span></button>
+                <button role="tab" aria-selected="false" data-clip="inbox"><small>02</small>Inbox<span>Answer with 1, take it back with esc</span></button>
+                <button role="tab" aria-selected="false" data-clip="talk"><small>03</small>Talk<span>Say it once, it goes to the right agent</span></button>
+            </div>
+            <div class="reel-frame">
+                <video id="reel-video" muted loop playsinline preload="metadata" poster="media/toolbar-poster.jpg" width="1600" height="1000" aria-label="The Cadence toolbar on a Mac desktop">
+                    <source src="media/toolbar.webm" type="video/webm">
+                    <source src="media/toolbar.mp4" type="video/mp4">
+                </video>
+                <button class="reel-play" id="reel-play" aria-label="Pause">❚❚</button>
+            </div>
+            <p class="reel-cap">Recorded from Cadence's real interface, with sample agents.</p>
+        </div>
 
         <!-- 1.0 Toolbar + Inbox -->
         <div class="feat" id="inbox">
@@ -509,6 +610,43 @@
     </div>
 </section>
 
+<!-- iPhone waitlist -->
+<section class="iphone" id="iphone">
+    <div class="wrap iphone-grid">
+        <div class="reveal">
+            <div class="eyebrow">Coming soon / iPhone</div>
+            <h2 class="two">Your inbox,<br><span>in your pocket</span></h2>
+            <p class="lead">Pair your iPhone with a QR code and answer your agents from the couch, the train or the coffee line. Traffic between your phone and your Mac is end-to-end encrypted, and your Mac never opens a port.</p>
+            <form class="wl" id="waitlist" novalidate>
+                <label class="sr" for="wl-email">Email address</label>
+                <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
+                <input class="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <button type="submit" class="cta dark" id="wl-btn">Join the waitlist</button>
+            </form>
+            <p class="wl-msg" id="wl-msg" role="status" aria-live="polite">One email when the iPhone app is ready. Nothing else.</p>
+        </div>
+        <div class="phone reveal" role="img" aria-label="The Cadence Inbox on an iPhone, showing a question from the Billing webhooks agent">
+            <div class="phone-in">
+                <div class="island"></div>
+                <div class="ph-top"><span>9:41</span><span class="ph-sig">●●● ◗</span></div>
+                <div class="ph-title">Inbox <small>2</small></div>
+                <div class="ph-card">
+                    <div class="h"><i style="background:var(--amber)"></i>Billing webhooks</div>
+                    <p>How should I handle duplicate Stripe retries?</p>
+                    <div class="ph-opt sel">1 · Idempotency key per event</div>
+                    <div class="ph-opt">2 · Lock the row</div>
+                </div>
+                <div class="ph-card">
+                    <div class="h"><i style="background:var(--green)"></i>Docs site upgrade</div>
+                    <p>Done. Build green, one deprecation left.</p>
+                    <div class="ph-chips"><span>Fix it</span><span>Ship it</span></div>
+                </div>
+                <div class="ph-agents"><i style="background:var(--blue)"></i><i style="background:var(--amber)"></i><i style="background:var(--blue)"></i><i style="background:var(--green)"></i><i style="background:var(--blue)"></i><span>5 agents</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Privacy -->
 <section class="privacy" id="privacy">
     <div class="wrap">
@@ -565,6 +703,224 @@
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
     }), { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+<script>
+/* Interactive Inbox: mirrors the app's AgentsPopover (one card at a time,
+   1-9 answer, J/K move, E skip/clear, Esc take-back within 2 s). */
+(() => {
+    const root = document.getElementById('demo');
+    const cardEl = document.getElementById('demo-card');
+    const tab = document.getElementById('demo-tab');
+    const tryEl = document.getElementById('demo-try');
+    const form = document.getElementById('demo-ask');
+    const input = document.getElementById('demo-input');
+    const mock = document.getElementById('demo-mock');
+    if (!root) return;
+    const UNDO_MS = 2000;
+    const nodes = Object.fromEntries([...document.querySelectorAll('.node[data-agent]')].map(n => [n.dataset.agent, n]));
+    const AG = { auth: 'Auth refactor', billing: 'Billing webhooks', ci: 'Flaky CI tests', docs: 'Docs site upgrade', onboard: 'Onboarding copy' };
+
+    const SCRIPT = {
+        billing: { agent: 'billing', kind: 'question', text: 'Stripe retries can arrive out of order. How should I handle duplicates?',
+                   options: ['Idempotency key per event', 'Lock the row while processing', 'Ignore and log them'] },
+        docs:    { agent: 'docs', kind: 'finished', text: 'Upgraded to Next 15.2, build is green. One deprecation left in the nav.',
+                   suggestions: ['Fix the deprecation', 'Ship it'] },
+        ci:      { agent: 'ci', kind: 'plan', text: 'Plan: quarantine the 2 flaky e2e specs, add one retry to the CI job, open an issue for each.',
+                   options: ['Approve plan', 'Keep retries out, just quarantine'] },
+        auth:    { agent: 'auth', kind: 'permission', text: 'Wants to run a command:', cmd: 'pnpm test src/auth',
+                   options: ['Allow', 'Deny'] },
+        onboard: { agent: 'onboard', kind: 'finished', text: 'Rewrote the 4 onboarding screens. Shorter, and each one names a single action.',
+                   suggestions: ['Open the diff', 'Ship it'] },
+    };
+    const LATER = [['auth', 2600], ['onboard', 6500]];
+    let items, idx, pending, timers = [], touched = false;
+
+    function setNode(id, state) { const n = nodes[id]; if (!n) return; n.dataset.state = state; if (state === 'needs' || state === 'done') { n.classList.remove('ping'); void n.offsetWidth; n.classList.add('ping'); } }
+    function reset() {
+        timers.forEach(clearTimeout); timers = [];
+        pending = null;
+        items = [SCRIPT.billing, SCRIPT.docs, SCRIPT.ci].map(x => ({ ...x }));
+        idx = 0;
+        setNode('auth', 'working'); setNode('onboard', 'working');
+        setNode('billing', 'needs'); setNode('ci', 'needs'); setNode('docs', 'done');
+        render();
+    }
+    function arrive(id) {
+        const it = { ...SCRIPT[id] };
+        items.push(it);
+        setNode(id, it.kind === 'finished' ? 'done' : 'needs');
+        render();
+    }
+    function render() {
+        tab.textContent = items.length ? `Inbox · ${items.length}` : 'Inbox';
+        if (!items.length) {
+            cardEl.innerHTML = `<div class="empty"><div class="h">Nothing needs you.</div><div class="b">Suspiciously quiet. Questions and finished work land here.</div><button type="button" data-act="replay">Replay the demo</button></div>`;
+            input.placeholder = 'Reply…';
+            return;
+        }
+        idx = Math.max(0, Math.min(idx, items.length - 1));
+        const it = items[idx];
+        const color = it.kind === 'finished' ? 'var(--green)' : 'var(--amber)';
+        const kindLabel = { question: 'question', plan: 'plan approval', permission: 'permission', finished: 'done' }[it.kind];
+        const chosen = pending && pending.item === it ? pending.choice : -1;
+        const dis = pending ? 'disabled' : '';
+        let body = `<p>${it.text}</p>`;
+        if (it.cmd) body += `<pre>$ ${it.cmd}</pre>`;
+        if (it.options) body += it.options.map((o, i) => `<button type="button" class="opt${i === chosen ? ' sel' : ''}" data-choice="${i}" ${dis}><kbd>${i + 1}</kbd>${o}</button>`).join('');
+        else body += `<div class="sugs">${it.suggestions.map((o, i) => `<button type="button" class="${i === chosen ? 'sel' : ''}" data-choice="${i}" ${dis}><kbd>${i + 1}</kbd>${o}</button>`).join('')}</div>`;
+        let foot;
+        if (pending && pending.item === it) {
+            foot = `<div class="sent" id="demo-sent">✓ ${it.kind === 'finished' ? 'Reply sent' : 'Answer sent'}<button type="button" data-act="undo"><kbd>esc</kbd> to undo</button><span class="bar"></span></div>`;
+        } else {
+            foot = `<div class="cardfoot"><button type="button" data-act="skip">${it.kind === 'finished' ? 'Clear' : 'Skip'} <kbd>E</kbd></button><span><kbd>J</kbd> <kbd>K</kbd> ${idx + 1} of ${items.length}</span></div>`;
+        }
+        cardEl.innerHTML = `<div class="q"><div class="h"><i style="background:${color}"></i>${AG[it.agent]}<span class="pager">${idx + 1}/${items.length}</span><small class="kind">${kindLabel}</small></div>${body}${foot}</div>`;
+        input.placeholder = `Reply to ${AG[it.agent]}…`;
+        const sent = document.getElementById('demo-sent');
+        if (sent) requestAnimationFrame(() => requestAnimationFrame(() => sent.classList.add('go')));
+    }
+    function firstTouch() {
+        if (touched) return; touched = true;
+        tryEl.classList.add('hide');
+        LATER.forEach(([id, ms]) => timers.push(setTimeout(() => arrive(id), ms)));
+    }
+    function choose(i, label) {
+        const it = items[idx];
+        if (!it || pending) return;
+        const list = it.options || it.suggestions;
+        if (label === undefined && !list[i]) return;
+        firstTouch();
+        pending = { item: it, choice: i, t: setTimeout(commit, UNDO_MS) };
+        render();
+    }
+    function commit() {
+        const p = pending; if (!p) return;
+        pending = null;
+        const at = items.indexOf(p.item);
+        if (at >= 0) items.splice(at, 1);
+        setNode(p.item.agent, 'working');
+        render();
+    }
+    function undo() { if (!pending) return; clearTimeout(pending.t); pending = null; render(); }
+    function skip() {
+        const it = items[idx]; if (!it || pending) return;
+        firstTouch();
+        items.splice(idx, 1);
+        setNode(it.agent, 'idle');
+        render();
+    }
+    function move(d) { if (pending || !items.length) return; firstTouch(); idx = (idx + d + items.length) % items.length; render(); }
+
+    cardEl.addEventListener('click', e => {
+        const b = e.target.closest('button'); if (!b) return;
+        if (b.dataset.choice !== undefined) choose(+b.dataset.choice);
+        else if (b.dataset.act === 'undo') undo();
+        else if (b.dataset.act === 'skip') skip();
+        else if (b.dataset.act === 'replay') { touched = false; tryEl.classList.remove('hide'); reset(); }
+    });
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const v = input.value.trim(); if (!v || !items.length || pending) return;
+        input.value = ''; input.blur();
+        firstTouch();
+        pending = { item: items[idx], choice: -1, t: setTimeout(commit, UNDO_MS) };
+        form.classList.add('flash'); setTimeout(() => form.classList.remove('flash'), 600);
+        render();
+    });
+
+    // Keys work while the demo is focused, or while it fills most of the
+    // screen, so the page itself never loses J/K/space scrolling elsewhere.
+    let visible = false;
+    new IntersectionObserver(es => es.forEach(e => visible = e.intersectionRatio > 0.6), { threshold: [0, 0.6, 1] }).observe(root);
+    document.addEventListener('keydown', e => {
+        if (e.metaKey || e.ctrlKey || e.altKey) return;
+        const inField = e.target === input;
+        const active = root.contains(document.activeElement) || visible;
+        if (!active) return;
+        if (e.target !== input && e.target.closest && e.target.closest('input, textarea, select')) return;
+        if (e.key === 'Escape') { if (pending) { e.preventDefault(); undo(); } else if (inField) input.blur(); return; }
+        if (inField) return;
+        if (/^[1-9]$/.test(e.key)) { e.preventDefault(); choose(+e.key - 1); }
+        else if (e.key === 'j' || e.key === 'J') { e.preventDefault(); move(1); }
+        else if (e.key === 'k' || e.key === 'K') { e.preventDefault(); move(-1); }
+        else if (e.key === 'e' || e.key === 'E') { e.preventDefault(); skip(); }
+        else if (e.key === ' ' && root.contains(document.activeElement)) { e.preventDefault(); input.focus(); }
+    });
+    reset();
+})();
+</script>
+
+<script>
+/* iPhone waitlist: POST /api/waitlist. If the store isn't connected yet,
+   fall back to a prefilled email so no sign-up is lost. */
+(() => {
+    const form = document.getElementById('waitlist');
+    if (!form) return;
+    const email = document.getElementById('wl-email');
+    const btn = document.getElementById('wl-btn');
+    const msg = document.getElementById('wl-msg');
+    const say = (t, cls) => { msg.className = 'wl-msg ' + (cls || ''); msg.innerHTML = t; };
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const v = email.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+            email.setAttribute('aria-invalid', 'true'); email.focus();
+            return say('That email doesn’t look right.', 'err');
+        }
+        email.removeAttribute('aria-invalid');
+        btn.disabled = true; btn.textContent = 'Joining…';
+        try {
+            const r = await fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: v, list: 'iphone', company: form.company.value }) });
+            const j = await r.json().catch(() => ({}));
+            if (r.ok) {
+                form.classList.add('done');
+                say(j.already ? 'You’re already on the list. We’ll email you when it’s ready.' : 'You’re on the list. We’ll email you once, when the iPhone app is ready.', 'ok');
+                if (window.va) window.va('event', { name: 'waitlist_join', data: { list: 'iphone' } });
+                return;
+            }
+            if (r.status === 422) { email.setAttribute('aria-invalid', 'true'); throw { shown: 'That email doesn’t look right.' }; }
+            throw { fallback: true };
+        } catch (err) {
+            btn.disabled = false; btn.textContent = 'Join the waitlist';
+            if (err && err.shown) return say(err.shown, 'err');
+            const href = 'mailto:support@cadence.app?subject=' + encodeURIComponent('iPhone waitlist') + '&body=' + encodeURIComponent('Please add ' + v + ' to the iPhone waitlist.');
+            say('The waitlist is down for a moment. <a href="' + href + '">Email us</a> and we’ll add you by hand.', 'err');
+        }
+    });
+})();
+</script>
+
+<script>
+/* Real-app reel: tabs swap clips; plays only while on screen; no autoplay
+   for people who prefer reduced motion. */
+(() => {
+    const reel = document.getElementById('reel'); if (!reel) return;
+    const video = document.getElementById('reel-video');
+    const play = document.getElementById('reel-play');
+    const tabs = [...reel.querySelectorAll('[role=tab]')];
+    const labels = { toolbar: 'The Cadence toolbar on a Mac desktop', inbox: 'Answering a question in the Cadence Inbox', talk: 'Talking to Cadence to route requests to agents' };
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let onScreen = false, paused = reduce;
+    const sync = () => {
+        if (onScreen && !paused) video.play().catch(() => {}); else video.pause();
+        play.textContent = paused ? '▶' : '❚❚';
+        play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
+    };
+    tabs.forEach(t => t.addEventListener('click', () => {
+        const c = t.dataset.clip;
+        tabs.forEach(x => x.setAttribute('aria-selected', String(x === t)));
+        video.poster = `media/${c}-poster.jpg`;
+        video.setAttribute('aria-label', labels[c]);
+        video.innerHTML = `<source src="media/${c}.webm" type="video/webm"><source src="media/${c}.mp4" type="video/mp4">`;
+        video.load();
+        if (reduce && paused) return sync();
+        paused = false; sync();
+    }));
+    play.addEventListener('click', () => { paused = !paused; sync(); });
+    new IntersectionObserver(es => es.forEach(e => { onScreen = e.isIntersecting; sync(); }), { threshold: 0.35 }).observe(video);
+})();
 </script>
 <script src="download-v2.js" defer></script>
 </body>
