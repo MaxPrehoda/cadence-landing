@@ -23,6 +23,8 @@ Plain HTML, CSS and JS with no build step, deployed on Vercel.
 
 The pixel art is generated, not drawn: `python3 art/generate.py` (needs Pillow and NumPy) rewrites `art/hero.png`, `art/harbour.png` and `art/lighthouse.png`. Output is deterministic.
 
+The homepage hero is animated: `generate.py` also writes the layers in `art/hero/` (sky, drifting wisps, cloud bank, scene, tree, four foreground sway frames, edge dissolve) plus `meta.json`, and `hero-anim.js` composites them in a 480x270 canvas at 12 fps (toolbar dots on the monitor, typing, steam, birds, a butterfly). It pauses off screen and shows one still frame with reduced motion; `art/hero.png` is the static fallback.
+
 The social card `art/og.png` (1200x630) is a screenshot of `art/og-card.html`. Serve the repo locally, open that page at 1200x630 and screenshot it after editing.
 
 ## iPhone waitlist
