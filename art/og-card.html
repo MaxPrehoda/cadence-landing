@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- Source for art/og.png (1200x630 social card). Re-render with:
+     node <playwright script> that screenshots this page at 1200x630. -->
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; box-sizing: border-box; }
+  body { width: 1200px; height: 630px; overflow: hidden; position: relative; font-family: 'Hanken Grotesk', sans-serif; background: #3e7fd9; }
+  img { position: absolute; left: -330px; top: -300px; width: 1920px; height: 1080px; image-rendering: pixelated; }
+  .shade { position: absolute; inset: 0; background: linear-gradient(100deg, rgba(30,80,170,.45) 0%, rgba(30,80,170,.15) 45%, rgba(30,80,170,0) 60%); }
+  .copy { position: absolute; left: 64px; top: 58px; color: #fff; }
+  .mark { font-family: 'Instrument Serif', serif; font-size: 40px; margin-bottom: 92px; }
+  h1 { font-weight: 400; font-size: 96px; line-height: 1; letter-spacing: -0.01em; text-shadow: 0 2px 18px rgba(20,60,140,.3); }
+  p { margin-top: 26px; font-size: 27px; opacity: .95; }
+  .chips { position: absolute; right: 56px; top: 64px; display: grid; gap: 10px; }
+  .chip { display: flex; align-items: center; gap: 10px; width: 330px; padding: 13px 18px; border-radius: 10px; background: rgba(16,36,70,.55); border: 1px solid rgba(255,255,255,.22); color: rgba(255,255,255,.78); font-size: 18px; backdrop-filter: blur(10px); }
+  .chip:nth-child(2) { margin-left: 20px; }
+  .chip b { color: #fff; font-weight: 600; }
+  .chip i { width: 10px; height: 10px; border-radius: 50%; }
+  .url { position: absolute; left: 64px; bottom: 44px; color: #fff; font-size: 20px; font-weight: 500; background: rgba(20,40,20,.35); padding: 6px 12px; border-radius: 8px; }
+</style></head><body>
+  <img src="hero.png" alt="">
+  <div class="shade"></div>
+  <div class="copy">
+    <div class="mark">Cadence</div>
+    <h1>Every agent,<br>one inbox.</h1>
+    <p>For people who run more than one coding agent.</p>
+  </div>
+  <div class="chips">
+    <div class="chip"><i style="background:#f2a20c"></i>Needs you <b>Billing webhooks</b></div>
+    <div class="chip"><i style="background:#3b82f6"></i>Working <b>Auth refactor</b></div>
+    <div class="chip"><i style="background:#22b357"></i>Done <b>Docs site upgrade</b></div>
+  </div>
+  <div class="url">cadencevoice.ai · Free for Mac</div>
+</body></html>

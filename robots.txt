@@ -71,9 +71,8 @@ Allow: /
 # ── Default ──────────────────────────────────────────────
 User-agent: *
 Allow: /
-Disallow: /demo-v2.js
-Disallow: /tech-section.html
-Disallow: /download-section.html
+Disallow: /api/
+Disallow: /art/og-card.html
 
 # ── Sitemap ──────────────────────────────────────────────
 Sitemap: https://cadencevoice.ai/sitemap.xml

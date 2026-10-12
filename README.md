@@ -1,58 +1,48 @@
-# Cadence Landing Page
+# cadencevoice.ai
 
-Brutalist-minimal landing page for [Cadence](https://github.com/yourusername/cadence) - Voice-First OS Layer for macOS.
+Marketing site, docs and blog for **Cadence**, the macOS app that keeps every coding agent moving from one inbox. The app itself lives in [`voice-flow`](https://github.com/MaxPrehoda/voice-flow).
 
-## Design Philosophy
+Plain HTML, CSS and JS with no build step, deployed on Vercel.
 
-- **2027 aesthetic**: Data-dense, tight spacing, programmer-focused
-- **Matches app**: Uses exact design tokens from Cadence (teal accent, obsidian dark, Space Grotesk)
-- **No cruft**: Zero animations bloat, no trendy gradients, no emoji spam
-- **Spec sheet layout**: Grid-based feature presentation, technical copy
-- **Subtle motion**: Gentle dot grid background (matching DotGrid.svelte)
+## Layout
 
-## Tech Stack
+| Path | What it is |
+|---|---|
+| `index.html` | Homepage (inline styles and scripts, including the interactive Inbox demo and the iPhone waitlist form) |
+| `site.css` | Shared design tokens, header, footer and prose styles for every other page |
+| `docs.html` + `docs/*.md` | Docs browser; pages are listed in `docs/index.json` |
+| `faq.html`, `privacy.html`, `terms.html` | Secondary pages |
+| `blog/` | Writing (Cadence Labs); `blog/blog.css` sits on top of `site.css` |
+| `art/` | Pixel art and the social card (see below) |
+| `media/` | Recorded clips of the app UI used on the homepage |
+| `api/waitlist.js` | Vercel serverless function for the iPhone waitlist |
+| `download-v2.js` | Fills the download card from the latest GitHub release of this repo |
+| `llms.txt`, `robots.txt`, `sitemap.xml` | Crawler and AI-search metadata |
 
-- Pure HTML/CSS/JS (zero build step)
-- Space Grotesk + JetBrains Mono fonts
-- Canvas dot grid background
-- Auto-fetches latest GitHub releases
+## Art
 
-## Deploy
+The pixel art is generated, not drawn: `python3 art/generate.py` (needs Pillow and NumPy) rewrites `art/hero.png`, `art/harbour.png` and `art/lighthouse.png`. Output is deterministic.
 
-### Vercel
-```bash
-vercel --prod
-```
+The homepage hero is animated: `generate.py` also writes the layers in `art/hero/` (sky, drifting wisps, cloud bank, scene, tree, four foreground sway frames, edge dissolve) plus `meta.json`, and `hero-anim.js` composites them in a 480x270 canvas at 12 fps (toolbar dots on the monitor, typing, steam, birds, a butterfly). It pauses off screen and shows one still frame with reduced motion; `art/hero.png` is the static fallback.
 
-### Netlify
-```bash
-netlify deploy --prod --dir .
-```
+The social card `art/og.png` (1200x630) is a screenshot of `art/og-card.html`. Serve the repo locally, open that page at 1200x630 and screenshot it after editing.
 
-### GitHub Pages
-```bash
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/yourusername/cadence-landing.git
-git push -u origin main
-# Enable Pages in repo settings → Source: main branch
-```
+## iPhone waitlist
 
-### Cloudflare Pages
-Connect repo in dashboard. Zero config required.
+The form on the homepage posts to `/api/waitlist`, which stores emails in Upstash Redis.
 
-## Customize
+To turn it on: in the Vercel project, open **Storage**, create an **Upstash for Redis** database (free tier is fine) and connect it to this project. That adds `KV_REST_API_URL` and `KV_REST_API_TOKEN` (or the `UPSTASH_REDIS_REST_*` pair) to the environment; redeploy. Until then the endpoint returns 503 and the form offers an email link instead, so no sign-up is lost.
 
-1. **GitHub links**: Search/replace `yourusername/cadence` in `index.html` and `download.js`
-2. **Version**: Update v0.2.0 in header
-3. **Author**: Update footer links
+To read the list, run `SMEMBERS waitlist:iphone` in the Upstash console. Sign-up times are in the hash `waitlist:iphone:joined`.
 
-## Local Preview
+## Releases
+
+`create-release.sh` in `voice-flow` publishes DMGs as GitHub releases on **this** repo, and the in-app updater and `download-v2.js` both read the latest one.
+
+## Local preview
 
 ```bash
 python3 -m http.server 8000
-# Visit http://localhost:8000
 ```
 
-Or: `npx serve`, `php -S localhost:8000`, etc.
+Blog links are extensionless (`/blog/slug`), which works on Vercel (`cleanUrls`) but not on this simple server; open the `.html` files directly when previewing locally.
