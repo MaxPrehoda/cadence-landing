@@ -23,21 +23,19 @@ Download the latest `Cadence_<version>_aarch64.dmg` from the [download section](
 
 ## First launch
 
-Cadence is not notarized by Apple yet, so macOS blocks it the first time you open it. To open it anyway:
+Cadence is signed and notarized by Apple, so it opens like any other app: double-click **Cadence** in **Applications**. The first time, macOS asks whether to open an app downloaded from the internet; click **Open**.
 
-1. In Finder, open **Applications**.
-2. Right-click **Cadence** and choose **Open**.
-3. Click **Open** in the dialog.
+If macOS says Cadence is from an unidentified developer or can't be opened, you have v0.4.0 or older. Download the latest version from [GitHub Releases](https://github.com/MaxPrehoda/cadence-landing/releases/latest) instead.
 
-On newer macOS versions the dialog may only offer **Done**. In that case open **System Settings → Privacy & Security**, scroll down, and click **Open Anyway** next to the Cadence message.
+## Updating from v0.4 or earlier
 
-You can also clear the quarantine flag from a terminal:
+Cadence is signed differently from v0.5.0 on, and macOS ties permissions to how an app is signed. If Cadence asks for permissions that System Settings already shows as on, those entries belong to the old version. To clear them:
 
-```sh
-xattr -cr /Applications/Cadence.app
-```
+1. Quit Cadence.
+2. Run `tccutil reset All com.cadence.app` in Terminal.
+3. Reopen Cadence and allow Microphone, Accessibility and Input Monitoring again.
 
-You only need to do this once.
+Later updates keep your permissions.
 
 ## Onboarding
 

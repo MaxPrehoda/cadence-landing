@@ -4,13 +4,11 @@ Most problems come down to a missing permission, the wrong microphone, or the `c
 
 ## macOS says Cadence can't be opened
 
-Cadence is not notarized yet. Right-click **Cadence** in Applications and choose **Open**, or click **Open Anyway** in **System Settings → Privacy & Security**. You can also run:
+Cadence is signed and notarized by Apple from v0.5.0, so this means you have v0.4.0 or older. Download the latest version from [GitHub Releases](https://github.com/MaxPrehoda/cadence-landing/releases/latest).
 
-```sh
-xattr -cr /Applications/Cadence.app
-```
+## Cadence asks for permissions that are already on
 
-See [Installation](#/installation).
+This happens once, after updating from v0.4 or earlier: v0.5.0 is signed differently, and macOS ties permissions to how an app is signed. Quit Cadence, run `tccutil reset All com.cadence.app` in Terminal, then reopen Cadence and allow its permissions again. See [Installation](#/installation).
 
 ## The hotkey does nothing
 

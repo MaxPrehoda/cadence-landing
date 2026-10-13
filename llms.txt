@@ -23,7 +23,7 @@
 
 - macOS 13 (Ventura) or later, Apple Silicon only (no Intel build)
 - The claude CLI installed and logged in for agent features; herdr for agents other than Claude Code
-- Not notarized yet: on first launch, right-click the app and choose Open, or run xattr -cr /Applications/Cadence.app
+- Signed and notarized by Apple from v0.5.0, so it opens normally on first launch
 
 ## Privacy
 
