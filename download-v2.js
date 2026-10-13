@@ -61,4 +61,13 @@ function populateCard(arch, asset, version, releaseDate, releaseUrl) {
     if (notesBtn) notesBtn.href = releaseUrl;
 }
 
+// Count download clicks as a Vercel Web Analytics custom event, so ad
+// spend can be measured against downloads
+document.addEventListener('click', (event) => {
+    const link = event.target.closest('a[id^="download-"]');
+    if (link && window.va) {
+        window.va('event', { name: 'download', data: { arch: link.id.replace('download-', '') } });
+    }
+});
+
 loadDownloadLinks();
