@@ -25,6 +25,21 @@
     postMessage in:  {type: "cadence-embed", action: "replay"} resets the demo.
     Keys are only handled while the embed has focus; it never focuses itself.
 
+  The story
+    The desk also holds two agents' terminals (Claude Code and Codex, drawn
+    by stage.js from the same agent state). Once the stage is on screen it
+    plays three chapters: 1 the Claude agent stops on a question in its
+    terminal, 2 the Inbox opens on it (if nobody touches the demo for 6.5 s
+    the stage presses 1 itself), 3 the answer lands back in the terminal.
+    Touching the demo skips to chapter 2 and hands over the keys. It posts
+      {type: "cadence-embed", event: "chapter", chapter, ms, paused}
+    on every change (chapter 0 after a reset; ms is how long until it moves
+    on by itself, 0 when it waits for the visitor), and takes
+      {type: "cadence-embed", action: "chapter", chapter: 1|2|3}   (1 replays)
+      {type: "cadence-embed", action: "pause" | "play"}
+    The homepage draws the chapter pills and the pause button from these.
+    ?record (the clip recorder) has no terminals and no story.
+
   Rebuild
     embed/build.sh [path/to/voice-flow]    (default /home/user/voice-flow)
     It runs embed/src/build.mjs: vite + the app's Svelte/Tailwind plugins from
@@ -45,7 +60,7 @@
 <title>Cadence, live</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
   :root { --page: #f5f5f2; }
   html, body { margin: 0; height: 100%; overflow: hidden; background: var(--page); }
@@ -105,9 +120,71 @@
   #cursor, #keys { display: none; }
   body.record #cursor { display: block; position: absolute; left: 0; top: 0; z-index: 50; pointer-events: none; width: 22px; height: 32px;
     transform: translate(-100px, -100px); filter: drop-shadow(0 1px 1.5px rgba(0,0,0,0.45)); }
-  body.record #keys { display: flex; position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(8px); z-index: 60; gap: 8px;
+  body.record #keys, #keys.live { display: flex; position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(8px); z-index: 60; gap: 8px;
     opacity: 0; transition: opacity 180ms ease, transform 180ms ease; pointer-events: none; }
-  body.record #keys.on { opacity: 1; transform: translateX(-50%); }
+  body.record #keys.on, #keys.live.on { opacity: 1; transform: translateX(-50%); }
+  /* The live demo's key caption sits under the panel it typed into. */
+  #keys.live { left: 750px; bottom: 26px; }
+  #stage.compact #keys.live { left: 230px; }
+  /* Before the story reaches the Inbox there is nothing to press yet. */
+  body[data-ch="0"] #hint, body[data-ch="1"] #hint { opacity: 0; }
+
+  /* Agents' terminals (drawn by stage.js; stand-ins for Ghostty/Terminal). */
+  .term {
+    position: absolute; z-index: 8; display: flex; flex-direction: column; overflow: hidden; border-radius: 10px;
+    background: rgba(20, 20, 24, 0.94); color: #dcdce2;
+    box-shadow: 0 0 0 0.5px rgba(0,0,0,0.7), inset 0 0 0 0.5px rgba(255,255,255,0.08), 0 20px 48px rgba(10, 20, 50, 0.42);
+    font: 11.5px/1.6 "JetBrains Mono", ui-monospace, Menlo, monospace; letter-spacing: -0.01em;
+    transition: box-shadow .35s ease;
+  }
+  #term-billing { z-index: 9; }
+  body.record .term { display: none; }
+  .term .tb {
+    flex: none; height: 26px; display: flex; align-items: center; gap: 7px; padding: 0 10px;
+    background: rgba(44, 44, 50, 0.96); border-bottom: 1px solid rgba(0,0,0,0.55);
+    font: 500 11.5px/1 "Inter", sans-serif; color: #9c9ca6; letter-spacing: 0;
+  }
+  .term .tb i { width: 11px; height: 11px; border-radius: 50%; flex: none; background: #ff5f57; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,.25); }
+  .term .tb i:nth-child(2) { background: #febc2e; }
+  .term .tb i:nth-child(3) { background: #28c840; }
+  .term .tb b { flex: 1; text-align: center; font-weight: 500; margin-right: 50px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .term .tb .who { color: #e6e6ea; }
+  .term .body { flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: flex-end; gap: 1px; padding: 8px 12px 9px; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 26px); mask-image: linear-gradient(to bottom, transparent 0, #000 26px); }
+  .term .l { white-space: pre-wrap; padding-left: 2ch; text-indent: -2ch; }
+  .term .l.sub { padding-left: 4ch; text-indent: -2ch; }
+  .term .l.u { margin-top: 4px; padding: 1px 6px 1px calc(2ch + 6px); border-radius: 3px; background: rgba(255,255,255,0.07); color: #c8c8d0; }
+  .term .l.b { margin-top: 4px; }
+  .term .l.sub + .l.sub { margin-top: 0; }
+  .term .l.rule { margin-top: 6px; text-indent: 0; padding-left: 0; }
+  .term b { font-weight: 600; color: #f4f4f6; }
+  .term .dim { color: #7d7d88; }
+  .term .ok { color: #4ec36e; }
+  .term .txt { color: #ececf0; }
+  .term .acc { color: #e0896a; }
+  .term .l.spin { margin-top: 6px; }
+  .term .shim { color: #b4b4be; background: linear-gradient(90deg, #8a8a94 0%, #f2f2f5 50%, #8a8a94 100%) 0 0 / 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shim 1.6s linear infinite; }
+  @keyframes shim { to { background-position: -200% 0; } }
+  .term .prompt { margin-top: 6px; padding: 3px 8px; border: 1px solid rgba(255,255,255,0.16); border-radius: 5px; color: #9c9ca6; }
+  .term .cur { display: inline-block; width: 0.6em; height: 1.05em; vertical-align: -0.18em; background: rgba(230,230,235,0.75); animation: blink 1.1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .term .foot { margin-top: 2px; padding-left: 9px; text-indent: 0; font-size: 10.5px; }
+  .term .qbox { margin-top: 7px; padding: 7px 10px 6px; border: 1px solid #6f87c9; border-radius: 6px; }
+  .term .qh { margin-bottom: 3px; }
+  .term .chip { display: inline-block; padding: 0 6px; border-radius: 3px; background: #6f87c9; color: #0d1222; font-weight: 600; }
+  .term .qq { color: #f0f0f3; margin-bottom: 4px; white-space: pre-wrap; }
+  .term .qo { color: #b9b9c2; white-space: pre-wrap; padding-left: 3ch; text-indent: -3ch; }
+  .term .qo.sel { color: #9bb3ff; font-weight: 600; }
+  .term .qf { margin-top: 5px; color: #6d6d78; font-size: 10.5px; }
+  .term .new { animation: line-in .35s ease both; }
+  @keyframes line-in { from { opacity: 0; transform: translateY(4px); } }
+  .term.asking { box-shadow: 0 0 0 1.5px #f2a20c, 0 0 0 6px rgba(242,162,12,0.22), 0 20px 48px rgba(10, 20, 50, 0.42); }
+  .term.asking .tb .who::after { content: " · waiting for you"; color: #f2b544; }
+  #stage.compact .term { font-size: 12.5px; }
+  @media (prefers-reduced-motion: reduce) {
+    .term .new, .term .shim, .term .cur { animation: none; }
+    .term .shim { color: #c8c8d0; background: none; }
+  }
   #keys kbd { min-width: 34px; height: 34px; padding: 0 10px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
     font: 600 17px "Inter", sans-serif; color: #f2f1ef; background: rgba(11,11,12,0.8); border: 1px solid rgba(255,255,255,0.14);
     border-radius: 9px; box-shadow: 0 6px 18px rgba(0,0,0,0.35), inset 0 -2px 0 rgba(255,255,255,0.06); }

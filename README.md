@@ -25,6 +25,8 @@ The pixel art is generated, not drawn: `python3 art/generate.py` (needs Pillow a
 
 The homepage hero is animated: `generate.py` also writes the layers in `art/hero/` (sky, drifting wisps, cloud bank, scene, tree, four foreground sway frames, edge dissolve) plus `meta.json`, and `hero-anim.js` composites them in a 480x270 canvas at 12 fps (toolbar dots on the monitor, typing, steam, birds, a butterfly). It pauses off screen and shows one still frame with reduced motion; `art/hero.png` is the static fallback.
 
+`art/agents/` holds the agent logos for the "Works with" strip, the setup steps and the harbour band. Claude, Codex (OpenAI), Gemini, Cursor and Copilot are tiles built from [Simple Icons](https://simpleicons.org) (CC0); Amp, OpenCode, Grok, Pi and Omp are each project's own site icon. `art/founder.png` is Max's GitHub avatar at its native 23x23 grid (scale it by whole numbers with `image-rendering: pixelated`).
+
 The social card `art/og.png` (1200x630) is a screenshot of `art/og-card.html`. Serve the repo locally, open that page at 1200x630 and screenshot it after editing.
 
 ## iPhone waitlist

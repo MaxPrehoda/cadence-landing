@@ -134,7 +134,7 @@
         @keyframes float { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
 
         /* Intro */
-        .intro { padding: 120px 0 40px; text-align: center; }
+        .intro { padding: 100px 0 40px; text-align: center; }
         h2.two { font-size: clamp(30px, 3.4vw, 42px); font-weight: 400; line-height: 1.14; letter-spacing: -0.005em; color: #3a3a37; }
         h2.two span, h3.two span { color: var(--ink-3); }
         .intro h2 { max-width: 860px; margin: 0 auto 64px; }
@@ -271,6 +271,112 @@
         .links a:hover { color: var(--ink); }
         .copy-small { margin-top: 40px; font-size: 13px; color: var(--ink-3); }
 
+        /* Works with: the agents, right under the hero */
+        .works { padding: 34px 0 0; }
+        .works-in { display: flex; align-items: center; justify-content: center; gap: 14px 26px; flex-wrap: wrap; }
+        .works-label { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+        .logos { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; }
+        .logos li { display: flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--ink-2); white-space: nowrap; }
+        .logos img, .clis img { display: block; width: 22px; height: 22px; border-radius: 6px; box-shadow: 0 1px 2px rgba(0,0,0,.1); }
+        .clis span { display: inline-flex; align-items: center; gap: 8px; }
+        .clis img { width: 18px; height: 18px; border-radius: 5px; }
+
+        /* Demo chapters under the live embed */
+        .story { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 16px; }
+        .st-btn { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line-2); background: var(--card); color: var(--ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+        .st-btn svg { display: block; }
+        .st-btn .play, .story.paused .st-btn .pause { display: none; }
+        .story.paused .st-btn .play { display: block; }
+        .st-pills { list-style: none; display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: #ebebe5; border: 1px solid var(--line-2); }
+        .st-pills button { position: relative; overflow: hidden; display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px 0 6px; border: 0; border-radius: 999px; background: transparent; font: 500 14px/1 var(--sans); color: var(--ink-3); cursor: pointer; transition: background .25s, color .25s; white-space: nowrap; }
+        .st-pills button:hover { color: var(--ink); }
+        .st-pills .n { width: 20px; height: 20px; flex: none; border-radius: 50%; display: grid; place-items: center; font: 500 11px/1 var(--mono); background: rgba(0,0,0,.07); color: var(--ink-2); transition: background .25s, color .25s; }
+        .st-pills button.on { background: #2b2b2a; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+        .st-pills button.on .n { background: rgba(255,255,255,.16); color: #fff; }
+        .st-pills button.done { color: var(--ink-2); }
+        .st-pills button.done .n { background: var(--green); color: #fff; }
+        .st-pills button i { position: absolute; left: 10px; right: 10px; bottom: 3px; height: 2px; border-radius: 2px; transform-origin: 0 50%; transform: scaleX(0); background: rgba(255,255,255,.55); }
+        .st-pills .sm, .st-pills .xs { display: none; }
+        .st-btn:focus-visible, .st-pills button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+        /* Setup in three steps */
+        .setup { padding: 150px 0 0; }
+        .setup h2 { margin-bottom: 44px; }
+        .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .step { border: 1px solid var(--line-2); border-radius: 18px; background: var(--panel); padding: 8px; box-shadow: 0 24px 50px -40px rgba(0,0,0,.3); }
+        .sv { position: relative; height: 236px; border-radius: 12px; overflow: hidden; background: #3e7fd9 center / cover no-repeat; image-rendering: pixelated; isolation: isolate; }
+        .sv::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(10,18,44,.42), rgba(10,18,44,.05) 70%); }
+        .sv-in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 18px; }
+        .glass { background: rgba(14,14,18,.8); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #f2f2f4; box-shadow: 0 14px 30px -10px rgba(0,0,0,.45); }
+        .appicon { display: block; width: 64px; height: 64px; border-radius: 15px; box-shadow: 0 10px 26px -6px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.18); }
+        .appicon.sm { width: 46px; height: 46px; border-radius: 11px; }
+        .perms { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+        .perms span { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px; border-radius: 999px; font-size: 12.5px; }
+        .perms span::before { content: '✓'; color: #4ec36e; font-weight: 600; }
+        .wires { display: block; width: 236px; height: 34px; margin: -8px 0 -10px; color: rgba(255,255,255,.55); }
+        .agentrow { display: flex; gap: 10px; }
+        .agentrow span { position: relative; }
+        .agentrow img { display: block; width: 32px; height: 32px; border-radius: 8px; box-shadow: 0 6px 16px -4px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.16); }
+        .agentrow i { position: absolute; right: -3px; top: -3px; width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(14,14,18,.85); }
+        .found { display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 999px; font-size: 13px; }
+        .found i { width: 7px; height: 7px; border-radius: 50%; }
+        .mcard { width: 100%; max-width: 270px; border-radius: 14px; padding: 12px; font-size: 12.5px; }
+        .mcard .h { display: flex; align-items: center; gap: 7px; font-weight: 600; margin-bottom: 5px; }
+        .mcard .h i { width: 7px; height: 7px; border-radius: 50%; background: var(--amber); }
+        .mcard .h small { margin-left: auto; font-weight: 400; color: #9c9ca6; font-size: 11px; }
+        .mcard p { color: #c9c9d1; margin-bottom: 8px; line-height: 1.35; }
+        .mcard .o { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 8px; background: rgba(255,255,255,.06); margin-top: 4px; color: #d6d6dc; }
+        .mcard .o kbd { font: 600 10.5px/1 var(--mono); padding: 3px 5px; border-radius: 4px; background: rgba(255,255,255,.12); }
+        .mcard .o.on { background: rgba(78,195,110,.16); color: #fff; box-shadow: inset 0 0 0 1px rgba(78,195,110,.55); }
+        .receipt { display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 999px; font-size: 12.5px; }
+        .receipt b { color: #4ec36e; font-weight: 600; }
+        .step-copy { padding: 18px 14px 12px; }
+        .step-copy h3 { display: flex; align-items: center; gap: 10px; font-weight: 500; font-size: 18px; margin-bottom: 8px; }
+        .step-copy h3 small { width: 22px; height: 22px; flex: none; border-radius: 50%; display: grid; place-items: center; font: 500 11px/1 var(--mono); background: #2b2b2a; color: #fff; }
+        .step-copy p { color: var(--ink-2); font-size: 15px; }
+        .step-copy code { font-family: var(--mono); font-size: 13px; background: #ebebe5; border-radius: 4px; padding: 1px 5px; }
+        .setup-cta { display: flex; align-items: center; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 36px; }
+        .setup-cta span { font-size: 14px; color: var(--ink-3); }
+
+        /* Feature points: every one visible, no clicking */
+        .points { list-style: none; border-top: 1px solid var(--line-2); }
+        .points li { display: grid; grid-template-columns: 34px 1fr; padding: 13px 0 14px; border-bottom: 1px solid var(--line-2); }
+        .points small { font-family: var(--mono); font-size: 11px; color: var(--ink-3); padding-top: 4px; }
+        .points b { display: block; font-weight: 500; font-size: 15.5px; color: var(--ink); margin-bottom: 2px; }
+        .points p { color: var(--ink-2); font-size: 15px; }
+
+        /* The small things */
+        .minis { padding-top: 130px; }
+        .minis h3 { margin-bottom: 34px; }
+        .mini-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .mini { background: var(--panel); border: 1px solid var(--line-2); border-radius: 14px; padding: 20px 20px 22px; }
+        .mini .ic { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: #2b2b2a; color: #fff; margin-bottom: 18px; box-shadow: inset 0 1px 0 rgba(255,255,255,.14); }
+        .mini h4 { font-weight: 500; font-size: 16.5px; margin-bottom: 6px; }
+        .mini p { color: var(--ink-2); font-size: 14.5px; }
+
+        /* From the person who built it */
+        .founder { padding: 150px 0 0; }
+        .letter { display: grid; grid-template-columns: 184px 1fr; gap: 52px; align-items: start; margin-top: 44px; padding: 44px; border: 1px solid var(--line-2); border-radius: 20px; background: var(--card); box-shadow: 0 30px 60px -45px rgba(0,0,0,.35); }
+        .me img { display: block; width: 184px; height: 184px; border-radius: 16px; image-rendering: pixelated; box-shadow: 0 0 0 1px rgba(0,0,0,.06); }
+        .me .who { margin-top: 18px; font-weight: 500; font-size: 16px; }
+        .me .who small { display: block; color: var(--ink-3); font-weight: 400; font-size: 14px; margin-top: 2px; }
+        .me .elsewhere { display: flex; gap: 16px; margin-top: 12px; font-size: 14px; }
+        .me .elsewhere a { color: var(--ink-2); text-underline-offset: 3px; }
+        .note p { font-size: 18px; line-height: 1.62; color: #3a3a37; margin-bottom: 18px; max-width: 62ch; }
+        .note a { text-underline-offset: 3px; }
+        .note .sig { font-family: var(--serif); font-size: 44px; line-height: 1; color: var(--ink); margin-top: 6px; }
+
+        /* Questions */
+        .faq { padding: 140px 0 0; }
+        .faq-grid { display: grid; grid-template-columns: 1fr 300px; gap: 56px; align-items: start; margin-top: 44px; }
+        .faq details p { padding: 0 18px 16px; }
+        .faq details p + p { margin-top: -6px; }
+        .faq summary { padding: 15px 18px; font-size: 16px; }
+        .faq code { font-family: var(--mono); font-size: 13px; background: #ebebe5; border-radius: 4px; padding: 1px 5px; }
+        .faq-side { position: sticky; top: 100px; background: var(--panel); border: 1px solid var(--line-2); border-radius: 14px; padding: 22px; color: var(--ink-2); font-size: 15px; }
+        .faq-side p + p { margin-top: 12px; }
+        .faq-side a { color: var(--ink); text-underline-offset: 3px; }
+
         .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
         .reveal.in { opacity: 1; transform: none; }
         @media (prefers-reduced-motion: reduce) {
@@ -290,12 +396,42 @@
             .ctarow { flex-direction: column; gap: 20px; text-align: center; }
             .dl-grid, .iphone-grid { grid-template-columns: 1fr; gap: 48px; }
             .lh-card { max-width: 380px; }
+            .steps { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+            .mini-grid { grid-template-columns: 1fr 1fr; }
+            .letter { grid-template-columns: 1fr; gap: 28px; padding: 32px; }
+            .faq-grid { grid-template-columns: 1fr; gap: 24px; }
+            .faq-side { position: static; }
+        }
+        @media (max-width: 760px) {
+            .st-pills .lg { display: none; }
+            .st-pills .sm { display: inline; }
+            .st-pills button { font-size: 13px; padding-right: 11px; }
         }
         @media (max-width: 600px) {
             .cols3, .ledger, .rcpt, .stats { grid-template-columns: 1fr; }
             .wl { flex-direction: column; } .phone { width: 280px; }
             .hero-copy { padding-top: 112px; }
             .links { gap: 32px; flex-wrap: wrap; }
+            .mini-grid { grid-template-columns: 1fr; }
+            .letter { padding: 24px; }
+            .me img { width: 138px; height: 138px; }
+            .note p { font-size: 17px; }
+            .logos { gap: 10px 16px; }
+            .st-pills button { gap: 6px; padding: 0 9px 0 5px; font-size: 12.5px; }
+        }
+        @media (max-width: 480px) {
+            .story { gap: 6px; }
+            .st-btn { width: 34px; height: 34px; }
+            .st-pills { padding: 3px; gap: 2px; }
+            .st-pills .n { display: none; }
+            .st-pills button { height: 28px; padding: 0 10px; }
+        }
+        @media (max-width: 360px) {
+            .st-pills .sm { display: none; }
+            .st-pills .xs { display: inline; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .st-pills button i { transition: none !important; }
         }
     </style>
 
@@ -341,15 +477,45 @@
     </div>
 </header>
 
+<!-- Works with: the agents people already run -->
+<section class="works" aria-label="Works with">
+    <div class="wrap works-in">
+        <span class="works-label">Works with</span>
+        <ul class="logos">
+            <li><img src="art/agents/claude.svg" alt="" width="22" height="22">Claude Code</li>
+            <li><img src="art/agents/codex.svg" alt="" width="22" height="22">Codex</li>
+            <li><img src="art/agents/gemini.svg" alt="" width="22" height="22">Gemini</li>
+            <li><img src="art/agents/cursor.svg" alt="" width="22" height="22">Cursor</li>
+            <li><img src="art/agents/copilot.svg" alt="" width="22" height="22">Copilot</li>
+            <li><img src="art/agents/opencode.png" alt="" width="22" height="22">OpenCode</li>
+            <li><img src="art/agents/amp.png" alt="" width="22" height="22">Amp</li>
+            <li><img src="art/agents/grok.png" alt="" width="22" height="22">Grok</li>
+            <li><img src="art/agents/pi.svg" alt="" width="22" height="22">Pi</li>
+            <li><img src="art/agents/omp.svg" alt="" width="22" height="22">Omp</li>
+        </ul>
+    </div>
+</section>
+
 <!-- Intro + product mock -->
 <section class="intro" id="try">
     <div class="wrap">
         <div class="eyebrow reveal">Try it</div>
         <h2 class="two reveal">This is the real Inbox.<br><span>Press 1 to answer.</span></h2>
         <div class="live reveal">
-            <iframe id="live" src="embed/" title="Interactive Cadence demo: the real toolbar and Inbox with sample agents" loading="lazy"></iframe>
+            <iframe id="live" src="embed/" title="Interactive Cadence demo: two agents in their terminals, the real toolbar and Inbox with sample agents" loading="lazy"></iframe>
         </div>
-        <p class="live-cap reveal">Cadence's actual interface running in your browser, with sample agents. Click or tap into it, then use <kbd class="k">1</kbd>–<kbd class="k">9</kbd>, <kbd class="k">esc</kbd>, <kbd class="k">J</kbd> <kbd class="k">K</kbd> and <kbd class="k">E</kbd>, or hover the dots.</p>
+        <div class="story reveal" id="story">
+            <button class="st-btn" id="st-pause" type="button" aria-label="Pause the demo" aria-pressed="false">
+                <svg class="pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="2" width="2.6" height="10" rx=".8" fill="currentColor"/><rect x="8.4" y="2" width="2.6" height="10" rx=".8" fill="currentColor"/></svg>
+                <svg class="play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.2v9.6a.6.6 0 0 0 .9.5l7.4-4.8a.6.6 0 0 0 0-1L4.9 1.7a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>
+            </button>
+            <ol class="st-pills" aria-label="Demo chapters">
+                <li><button type="button" data-ch="1"><span class="n">1</span><span class="lg">Agents ask</span><span class="sm">Agents ask</span><span class="xs">Ask</span><i></i></button></li>
+                <li><button type="button" data-ch="2"><span class="n">2</span><span class="lg">You answer in a keystroke</span><span class="sm">You answer</span><span class="xs">Answer</span><i></i></button></li>
+                <li><button type="button" data-ch="3"><span class="n">3</span><span class="lg">It lands back in the terminal</span><span class="sm">It lands back</span><span class="xs">Lands back</span><i></i></button></li>
+            </ol>
+        </div>
+        <p class="live-cap reveal">Cadence's actual interface running in your browser, with sample agents in their terminals. Click or tap into it, then use <kbd class="k">1</kbd>–<kbd class="k">9</kbd>, <kbd class="k">esc</kbd>, <kbd class="k">J</kbd> <kbd class="k">K</kbd> and <kbd class="k">E</kbd>, or hover the dots.</p>
 
         <div class="cols3 reveal">
             <div><b>One inbox.</b> Plan approvals, tool permissions and questions from every agent, as numbered choices you answer with one key.</div>
@@ -359,6 +525,69 @@
         <div class="ctarow reveal">
             <p>Keep the agents you already use. Cadence sits at the edge of your screen and tells you the moment one needs you.</p>
             <a href="#download" class="cta dark">Download for Mac</a>
+        </div>
+    </div>
+</section>
+
+<!-- Setup in three steps -->
+<section class="setup" id="setup">
+    <div class="wrap">
+        <div class="eyebrow reveal">Setup</div>
+        <h2 class="two reveal">Three steps.<br><span>No account, no config files.</span></h2>
+        <div class="steps">
+            <article class="step reveal">
+                <div class="sv" style="background-image:url(art/hero.png); background-size:250% auto; background-position:50% 18%">
+                    <div class="sv-in">
+                        <img class="appicon" src="icon.png" alt="" width="64" height="64">
+                        <div class="perms"><span class="glass">Microphone</span><span class="glass">Accessibility</span><span class="glass">Input Monitoring</span></div>
+                    </div>
+                </div>
+                <div class="step-copy">
+                    <h3><small>1</small>Download and open it</h3>
+                    <p>Drag Cadence to Applications and open it. Allow the microphone, accessibility and input monitoring when macOS asks.</p>
+                </div>
+            </article>
+            <article class="step reveal">
+                <div class="sv" style="background-image:url(art/harbour.png); background-size:210% auto; background-position:52% 60%">
+                    <div class="sv-in">
+                        <img class="appicon sm" src="icon.png" alt="" width="46" height="46">
+                        <svg class="wires" viewBox="0 0 236 34" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M118 0v8c0 10-96 6-96 26M118 8c0 10-48 6-48 26M118 8v26M118 8c0 10 48 6 48 26M118 8c0 10 96 6 96 26"/></svg>
+                        <div class="agentrow">
+                            <span><img src="art/agents/claude.svg" alt="" width="32" height="32"><i style="background:var(--amber)"></i></span>
+                            <span><img src="art/agents/codex.svg" alt="" width="32" height="32"><i style="background:var(--blue)"></i></span>
+                            <span><img src="art/agents/opencode.png" alt="" width="32" height="32"><i style="background:var(--blue)"></i></span>
+                            <span><img src="art/agents/gemini.svg" alt="" width="32" height="32"><i style="background:var(--green)"></i></span>
+                            <span><img src="art/agents/amp.png" alt="" width="32" height="32"><i style="background:var(--blue)"></i></span>
+                        </div>
+                        <div class="found glass"><i style="background:var(--blue)"></i>5 agents <i style="background:var(--amber)"></i>1 needs you</div>
+                    </div>
+                </div>
+                <div class="step-copy">
+                    <h3><small>2</small>Bring the agents you run</h3>
+                    <p>Cadence uses the <code>claude</code> CLI you're already signed into, so there's no API key. Codex, OpenCode, Gemini and the rest join through herdr.</p>
+                </div>
+            </article>
+            <article class="step reveal">
+                <div class="sv" style="background-image:url(art/lighthouse.png); background-size:125% auto; background-position:78% 30%">
+                    <div class="sv-in">
+                        <div class="mcard glass">
+                            <div class="h"><i></i>Billing webhooks<small>1 of 2</small></div>
+                            <p>How should I handle duplicate Stripe retries?</p>
+                            <div class="o on"><kbd>1</kbd>Idempotency key per event</div>
+                            <div class="o"><kbd>2</kbd>Lock the row</div>
+                        </div>
+                        <div class="receipt glass"><b>✓</b>Sent to Billing webhooks</div>
+                    </div>
+                </div>
+                <div class="step-copy">
+                    <h3><small>3</small>Answer your first agent</h3>
+                    <p>Press <kbd class="k">1</kbd> in the Inbox, or double-tap <kbd class="k">⌥</kbd> and say what you need. Cadence sends it to the right agent and tells you where it went.</p>
+                </div>
+            </article>
+        </div>
+        <div class="setup-cta reveal">
+            <a href="#download" class="cta dark">Download for Mac</a>
+            <span>Free · No account · macOS 13+ on Apple Silicon</span>
         </div>
     </div>
 </section>
@@ -376,10 +605,12 @@
                 <div class="eyebrow">1.0 / Toolbar and Inbox</div>
                 <h3 class="two">See every agent<br><span>at a glance</span></h3>
                 <p>A thin toolbar on the edge of your screen shows one dot per agent. Blue is working, amber needs you, green is done. Open the Inbox and answer in a keystroke.</p>
-                <details open><summary><small>1.1</small>Status at a glance</summary><p>Hover the agent pill to peek at every agent's title. Click any agent to jump straight to it.</p></details>
-                <details><summary><small>1.2</small>Numbered answers</summary><p>Questions, plan approvals and Allow/Deny prompts become numbered options. Press <kbd class="k">1</kbd> to <kbd class="k">9</kbd>, or start typing a reply.</p></details>
-                <details><summary><small>1.3</small>Recaps of finished work</summary><p>When an agent finishes, you get a short recap and suggested next steps instead of a wall of output.</p></details>
-                <details><summary><small>1.4</small>Keyboard first</summary><p><kbd class="k">J</kbd> <kbd class="k">K</kbd> to move, <kbd class="k">E</kbd> to dismiss, <kbd class="k">V</kbd> to talk, <kbd class="k">S</kbd> to attach a screenshot. Every answer has a two-second take-back.</p></details>
+                <ul class="points">
+                    <li><small>1.1</small><div><b>Status at a glance</b><p>Hover the agent pill to peek at every agent's title. Click any agent to jump straight to it.</p></div></li>
+                    <li><small>1.2</small><div><b>Numbered answers</b><p>Questions, plan approvals and Allow/Deny prompts become numbered options. Press <kbd class="k">1</kbd> to <kbd class="k">9</kbd>, or start typing a reply.</p></div></li>
+                    <li><small>1.3</small><div><b>Recaps of finished work</b><p>When an agent finishes, you get a short recap and suggested next steps instead of a wall of output.</p></div></li>
+                    <li><small>1.4</small><div><b>Keyboard first</b><p><kbd class="k">J</kbd> <kbd class="k">K</kbd> to move, <kbd class="k">E</kbd> to dismiss, <kbd class="k">V</kbd> to talk, <kbd class="k">S</kbd> to attach a screenshot. Every answer has a two-second take-back.</p></div></li>
+                </ul>
             </div>
             <figure class="clip reveal">
                 <video muted loop playsinline preload="none" poster="media/toolbar-poster.jpg" width="1600" height="1000" aria-label="Recording of the Cadence toolbar: an agent turns amber, then the peek list of agent titles opens">
@@ -395,10 +626,12 @@
                 <div class="eyebrow">2.0 / Talk and Director</div>
                 <h3 class="two">Say it once.<br><span>It finds the right agent.</span></h3>
                 <p>Double-tap <kbd class="k">⌥</kbd> and say what you want, or type it. Cadence knows what each agent is working on, which app you're looking at and which repos you have.</p>
-                <details open><summary><small>2.1</small>Routing</summary><p>Your request goes to the agent already on that work, or Cadence starts a new one in the right folder. It tells you where it went.</p></details>
-                <details><summary><small>2.2</small>The Director</summary><p>An always-on agent that can see every other agent, read their work, message them, start new ones and close finished ones. Ask "what's left before I can ship?"</p></details>
-                <details><summary><small>2.3</small>Titles, not process IDs</summary><p>Every agent gets a short plain-English title, so your list reads like a to-do list.</p></details>
-                <details><summary><small>2.4</small>Sets</summary><p>Put a whole project's agents away as a set. Their windows close, they keep running, and one chip turns amber if anything needs you.</p></details>
+                <ul class="points">
+                    <li><small>2.1</small><div><b>Routing</b><p>Your request goes to the agent already on that work, or Cadence starts a new one in the right folder. It tells you where it went.</p></div></li>
+                    <li><small>2.2</small><div><b>The Director</b><p>An always-on agent that can see every other agent, read their work, message them, start new ones and close finished ones. Ask "what's left before I can ship?"</p></div></li>
+                    <li><small>2.3</small><div><b>Titles, not process IDs</b><p>Every agent gets a short plain-English title, so your list reads like a to-do list.</p></div></li>
+                    <li><small>2.4</small><div><b>Sets</b><p>Put a whole project's agents away as a set. Their windows close, they keep running, and one chip turns amber if anything needs you.</p></div></li>
+                </ul>
             </div>
             <figure class="clip reveal">
                 <video muted loop playsinline preload="none" poster="media/talk-poster.jpg" width="1600" height="1000" aria-label="Recording of Talk: a spoken request is routed to the Billing webhooks agent and a typed one starts a new agent">
@@ -434,9 +667,11 @@
                 <div class="eyebrow">3.0 / Dictation</div>
                 <h3 class="two">Hold ⌥ and talk<br><span>in any app</span></h3>
                 <p>The same key types for you everywhere: Slack, Mail, your editor, a terminal. Speech recognition runs on your Mac, so your audio never leaves it.</p>
-                <details open><summary><small>3.1</small>On-device speech</summary><p>NVIDIA's Parakeet model transcribes while you hold the key, with a second pass to get names right.</p></details>
-                <details><summary><small>3.2</small>Your vocabulary</summary><p>Teach it project names, people and jargon, and set auto-corrections for the words it keeps missing.</p></details>
-                <details><summary><small>3.3</small>Text Polish</summary><p>A small local model cleans up filler words and punctuation, and adjusts tone per app: casual in Slack, formal in email.</p></details>
+                <ul class="points">
+                    <li><small>3.1</small><div><b>On-device speech</b><p>NVIDIA's Parakeet model transcribes while you hold the key, with a second pass to get names right.</p></div></li>
+                    <li><small>3.2</small><div><b>Your vocabulary</b><p>Teach it project names, people and jargon, and set auto-corrections for the words it keeps missing.</p></div></li>
+                    <li><small>3.3</small><div><b>Text Polish</b><p>A small local model cleans up filler words and punctuation, and adjusts tone per app: casual in Slack, formal in email.</p></div></li>
+                </ul>
             </div>
             <div>
                 <figure class="clip reveal">
@@ -452,6 +687,34 @@
                 </div>
             </div>
         </div>
+
+        <!-- 4.0 The small things -->
+        <div class="minis">
+            <div class="eyebrow reveal">4.0 / The small things</div>
+            <h3 class="two reveal">Small things<br><span>you'll use all day</span></h3>
+            <div class="mini-grid reveal">
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></div>
+                    <h4>Take it back</h4>
+                    <p>Pressed the wrong number? Every answer waits two seconds, and <kbd class="k">esc</kbd> takes it back.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6.5 10h.01M10 10h.01M14 10h.01M17.5 10h.01M8 14h8"/></svg></div>
+                    <h4>Keyboard first</h4>
+                    <p><kbd class="k">1</kbd>–<kbd class="k">9</kbd> answer, <kbd class="k">J</kbd> <kbd class="k">K</kbd> move between cards, <kbd class="k">E</kbd> clears one, and Space starts a reply.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M9 12h6M12 9v6"/></svg></div>
+                    <h4>Point at it</h4>
+                    <p>Press <kbd class="k">S</kbd>, drag over part of your screen, and the screenshot goes along with your answer.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></div>
+                    <h4>Next steps</h4>
+                    <p>Finished work arrives with a one-line recap and replies you can send with one key.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -463,7 +726,7 @@
         <div class="tray">
             <div class="tray-in">
                 <div class="clis">
-                    <span class="native">Claude Code</span><span>Codex</span><span>Gemini</span><span>Amp</span><span>Cursor</span><span>Copilot</span><span>OpenCode</span><span>Grok</span><span>Pi</span><span>Omp</span>
+                    <span class="native"><img src="art/agents/claude.svg" alt="" width="18" height="18">Claude Code</span><span><img src="art/agents/codex.svg" alt="" width="18" height="18">Codex</span><span><img src="art/agents/gemini.svg" alt="" width="18" height="18">Gemini</span><span><img src="art/agents/amp.png" alt="" width="18" height="18">Amp</span><span><img src="art/agents/cursor.svg" alt="" width="18" height="18">Cursor</span><span><img src="art/agents/copilot.svg" alt="" width="18" height="18">Copilot</span><span><img src="art/agents/opencode.png" alt="" width="18" height="18">OpenCode</span><span><img src="art/agents/grok.png" alt="" width="18" height="18">Grok</span><span><img src="art/agents/pi.svg" alt="" width="18" height="18">Pi</span><span><img src="art/agents/omp.svg" alt="" width="18" height="18">Omp</span>
                 </div>
                 <p>Claude Code runs inside Cadence with real allow and deny, cost tracking and worktree diffs. Everything else runs in herdr terminals that Cadence watches the same way.</p>
             </div>
@@ -508,6 +771,27 @@
     </div>
 </section>
 
+<!-- From the person who built it -->
+<section class="founder" id="founder">
+    <div class="wrap">
+        <div class="eyebrow reveal">From the founder</div>
+        <h2 class="two reveal">A note from<br><span>the person who built it</span></h2>
+        <div class="letter reveal">
+            <div class="me">
+                <img src="art/founder.png" alt="Max's pixel-art avatar: a character in a dark beanie and a yellow jacket" width="184" height="184">
+                <div class="who">Maxwell Prehoda<small>Founder, Cadence Labs · Eugene, Oregon</small></div>
+                <div class="elsewhere"><a href="https://github.com/MaxPrehoda" rel="me noopener">GitHub</a><a href="https://maxprehoda.info" rel="me noopener">maxprehoda.info</a></div>
+            </div>
+            <div class="note">
+                <p>I'm Max. I built Cadence because running a few coding agents at once had turned my day into checking terminals: one finishes, one wants a yes, and I find out ten minutes later.</p>
+                <p>Before Cadence I founded Tycho, a SaaS tool for sneaker resellers, and shipped it to real, paying customers. Cadence is the tool I wanted on my own desk: every agent's question in one place, answered with one key or a sentence out loud.</p>
+                <p>It's free, it needs no account, and I read every email that comes in at <a href="mailto:support@cadence.app">support@cadence.app</a>.</p>
+                <div class="sig" aria-hidden="true">Max</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Privacy -->
 <section class="privacy" id="privacy">
     <div class="wrap">
@@ -518,6 +802,30 @@
             <div><small>Your Claude login</small><h4>Agents and routing</h4><p>Routing, titles, recaps and the Director use your own Claude Code login. Other agents talk to their own providers, as they already do.</p></div>
             <div><small>Opt in</small><h4>Your API key</h4><p>Cloud Polish and the Intent Engine only run if you add your own Anthropic API key.</p></div>
             <div><small>No account</small><h4>Nothing to sign up for</h4><p>No Cadence account and no subscription. Details in the <a href="/privacy.html">privacy policy</a>.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- Questions -->
+<section class="faq" id="faq">
+    <div class="wrap">
+        <div class="eyebrow reveal">Questions</div>
+        <h2 class="two reveal">What people ask<br><span>before they install</span></h2>
+        <div class="faq-grid">
+            <div class="reveal">
+                <details><summary>Is Cadence another coding agent?</summary><p>No. It sits on top of the agents you already run, like Claude Code and Codex, and keeps them moving: it shows you what they need, sends your answers back, and routes new requests to the right one.</p></details>
+                <details><summary>Does Cadence act on my agents by itself?</summary><p>It never answers for you. Questions, plan approvals and Allow/Deny prompts wait in your Inbox until you answer, and every answer has a two-second take-back. Which tools an agent may use without asking is up to you, the same as in the CLI.</p><p>The Director only starts, messages or closes agents when you ask it to.</p></details>
+                <details><summary>Do my agents have to run in herdr?</summary><p>Not Claude Code: Cadence runs it directly, with real Allow/Deny, cost tracking and worktree diffs. Every other CLI (Codex, OpenCode, Gemini, Amp, Cursor, Copilot, Grok, Pi, Omp) runs in herdr, an open-source terminal workspace, and opens in a Cadence terminal window. Their questions land in the same Inbox.</p></details>
+                <details><summary>What does it cost?</summary><p>Nothing. Cadence is free, with no account and no subscription. Your agents keep using the plans you already pay for: your Claude Code login, or whichever provider each CLI is set up with.</p></details>
+                <details><summary>Can I use it from my phone?</summary><p>Soon. The iPhone app pairs with your Mac over a QR code, and traffic between them is end-to-end encrypted. <a href="#iphone">Join the waitlist</a> and you'll get one email when it's ready.</p></details>
+                <details><summary>What does Cadence send, and where does it go?</summary><p>Speech recognition and Text Polish run on your Mac, and audio is never uploaded. Agents, routing, titles and recaps use your own Claude Code login; other agents talk to their own providers, as they already do. Cloud Polish and the Intent Engine only run if you add your own Anthropic API key. The <a href="/privacy.html">privacy policy</a> has the details.</p></details>
+                <details><summary>Does it work offline?</summary><p>Dictation and Text Polish do, once their models are downloaded. Agents, Talk routing and the Director need a connection, because they talk to Claude or your other agents' providers.</p></details>
+                <details><summary>What do I need?</summary><p>A Mac with Apple Silicon (M1 or newer) on macOS 13 or later. For agents, the <code>claude</code> CLI installed and signed in, plus herdr if you want agents other than Claude Code. Dictation works without either.</p></details>
+            </div>
+            <aside class="faq-side reveal">
+                <p>Something else on your mind? Write to <a href="mailto:support@cadence.app">support@cadence.app</a> and a person answers.</p>
+                <p><a href="/faq.html">Read the full FAQ</a> for install steps, permissions and troubleshooting.</p>
+            </aside>
         </div>
     </div>
 </section>
@@ -608,6 +916,42 @@
 })();
 </script>
 
+
+<script>
+/* Demo chapters: the embed reports where its story is ("chapter" events);
+   the pills jump to a chapter, the button pauses the story. */
+(() => {
+    const frame = document.getElementById('live');
+    const story = document.getElementById('story');
+    if (!frame || !story) return;
+    const pills = [...story.querySelectorAll('[data-ch]')];
+    const pause = document.getElementById('st-pause');
+    const send = (msg) => { try { frame.contentWindow.postMessage({ type: 'cadence-embed', ...msg }, '*'); } catch {} };
+    addEventListener('message', (e) => {
+        const d = e.data;
+        if (e.source !== frame.contentWindow || !d || d.type !== 'cadence-embed' || d.event !== 'chapter') return;
+        for (const b of pills) {
+            const n = Number(b.dataset.ch), on = n === d.chapter;
+            b.classList.toggle('on', on);
+            b.classList.toggle('done', n < d.chapter);
+            if (on) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+            const fill = b.querySelector('i');
+            fill.style.transition = 'none';
+            fill.style.transform = 'scaleX(0)';
+            if (on && d.ms > 0) {
+                void fill.offsetWidth;
+                fill.style.transition = `transform ${d.ms}ms linear`;
+                fill.style.transform = 'scaleX(1)';
+            }
+        }
+        story.classList.toggle('paused', !!d.paused);
+        pause.setAttribute('aria-pressed', d.paused ? 'true' : 'false');
+        pause.setAttribute('aria-label', d.paused ? 'Play the demo' : 'Pause the demo');
+    });
+    for (const b of pills) b.addEventListener('click', () => send({ action: 'chapter', chapter: Number(b.dataset.ch) }));
+    pause.addEventListener('click', () => send({ action: pause.getAttribute('aria-pressed') === 'true' ? 'play' : 'pause' }));
+})();
+</script>
 
 <script>
 /* Clips play only while on screen; reduced motion shows posters with controls. */

@@ -113,8 +113,8 @@
   let S = (B.state = freshState());
   const nat = (id) => S.native.find((a) => a.id === id);
   const her = (pane) => S.herdr.find((a) => a.pane_id === pane);
-  const changed = () => { B.emit("agent-updated", {}); };
-  const herdrChanged = () => B.emit("herdr-agents-changed", S.herdr);
+  const changed = () => { B.emit("agent-updated", {}); renderTerms(); };
+  const herdrChanged = () => { B.emit("herdr-agents-changed", S.herdr); renderTerms(); };
 
   // ── scripted moments (also driven by the footage recorders) ───────
   B.billingAsks = () => {
@@ -375,6 +375,260 @@
   B.startDictation = startDictation;
   B.stopDictation = stopDictation;
 
+  // ── terminals: where the agents actually run ───────────────────────
+  // The live demo opens on the problem: agents in their own terminals, one
+  // of them stopped on a question nobody is looking at. Cadence never draws
+  // these windows (they stand in for Ghostty, Terminal, herdr); what they
+  // show follows the same agent state the real Cadence windows read, so an
+  // answer given in the Inbox lands back in the right terminal.
+  const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const SPIN = ["·", "✢", "✳", "✶", "✻", "✽", "✻", "✶", "✳", "✢"];
+  const RESULT = {
+    "File created.": "Wrote 84 lines to src/webhooks.ts",
+  };
+  const T = (B.term = {});
+  function termReset() {
+    const now = Date.now();
+    T.billing = { title: "claude", path: "~/shop/billing", reveal: 3, since: now - 74_000, count: 0, answered: null };
+    T.flaky = { title: "codex", path: "~/shop/web", since: now - 38_000, count: 0, log: [], seen: new Set(), status: "working" };
+  }
+  termReset();
+  const termEl = (k) => document.getElementById(`term-${k}`);
+
+  function claudeLines() {
+    const a = nat("billing");
+    if (!a) return [];
+    const out = [];
+    for (const raw of S.buffers.billing.slice(0, T.billing.reveal)) {
+      if (raw.startsWith("> ")) {
+        const text = raw.slice(2);
+        const ans = T.billing.answered;
+        if (ans && text === ans.answer) {
+          out.push(`<div class="l b"><span class="ok">⏺</span> User answered Claude's questions:</div>`);
+          out.push(`<div class="l sub"><span class="dim">⎿</span>  · ${esc(ans.question)} <span class="dim">→</span> <b>${esc(text)}</b></div>`);
+        } else out.push(`<div class="l u">&gt; ${esc(text)}</div>`);
+      } else if (raw.startsWith("[tool_use:")) {
+        const m = raw.match(/^\[tool_use:(\w+)\]\s*(.*)$/);
+        let arg = "";
+        try { const j = JSON.parse(m[2]); arg = String(j.file_path ?? j.command ?? j.pattern ?? "").replace(/^.*\/shop\/[\w-]+\//, ""); } catch {}
+        out.push(`<div class="l b"><span class="ok">⏺</span> <b>${esc(m[1] === "Edit" ? "Update" : m[1])}</b>(${esc(arg)})</div>`);
+      } else if (raw.startsWith("[tool_result]")) {
+        const r = raw.slice(14).split("\n")[0];
+        out.push(`<div class="l sub"><span class="dim">⎿  ${esc(RESULT[r] ?? r)}</span></div>`);
+      } else {
+        out.push(`<div class="l b"><span class="txt">⏺</span> ${esc(raw)}</div>`);
+      }
+    }
+    const q = a.pending_approval?.tool_input?.questions?.[0];
+    if (q && T.billing.reveal >= S.buffers.billing.length) {
+      out.push(`<div class="qbox"><div class="qh"><span class="chip">☐ ${esc(q.header ?? "Question")}</span></div>`
+        + `<div class="qq">${esc(q.question)}</div>`
+        + q.options.map((o, i) => `<div class="qo${i ? "" : " sel"}">${i ? "&nbsp;" : "❯"} ${i + 1}. ${esc(o.label)}</div>`).join("")
+        + `<div class="qf">Enter to select · ↑/↓ to navigate · Esc to cancel</div></div>`);
+    } else if (a.pending_approval) {
+      // A permission prompt (Bash and friends) as Claude Code draws it.
+      const cmd = a.pending_approval.tool_input?.command ?? a.pending_approval.summary;
+      out.push(`<div class="qbox"><div class="qq"><b>Bash command</b></div><div class="qq">  ${esc(cmd)}</div>`
+        + `<div class="qq">Do you want to proceed?</div><div class="qo sel">❯ 1. Yes</div><div class="qo">&nbsp; 2. Yes, and don't ask again for this command</div><div class="qo">&nbsp; 3. No, and tell Claude what to do differently</div></div>`);
+    } else {
+      if (a.status === "Running" || a.status === "Streaming") {
+        out.push(`<div class="l spin"><span class="acc g">✻</span> <span class="acc">${esc(a.current_activity ?? "Thinking")}…</span> <span class="dim">(<span class="s" data-since="${T.billing.since}">0s</span> · esc to interrupt)</span></div>`);
+      }
+      out.push(`<div class="prompt">&gt; <span class="cur"></span></div><div class="l dim foot">? for shortcuts</div>`);
+    }
+    return out;
+  }
+
+  function codexLines() {
+    const h = her("w2:p1");
+    if (!h) return [];
+    const st = T.flaky;
+    for (const raw of h.last_lines ?? []) {
+      if (/^✻/.test(raw) || st.seen.has(raw)) continue;
+      st.seen.add(raw);
+      if (raw === "› Find out why the checkout tests flake on CI" || raw === "• Running vitest --repeat 20") continue;
+      if (raw.startsWith("› ")) st.log.push(`<div class="l u">› ${esc(raw.slice(2))}</div>`);
+      else st.log.push(`<div class="l b"><span class="txt">•</span> ${esc(raw.replace(/^[⏺•]\s*/, ""))}</div>`);
+    }
+    if (h.status !== st.status) {
+      if (h.status === "working") st.since = Date.now();
+      else st.log.push(`<div class="l dim rule">─ Worked for ${Math.max(1, Math.round((Date.now() - st.since) / 1000) + 120)}s ─</div>`);
+      st.status = h.status;
+    }
+    const out = [
+      `<div class="l u">› Find out why the checkout tests flake on CI</div>`,
+      `<div class="l b"><span class="txt">•</span> Explored</div>`,
+      `<div class="l sub"><span class="dim">└ Read checkout.test.ts, stripe-mock.ts, vitest.config.ts</span></div>`,
+      `<div class="l b"><span class="txt">•</span> Ran <b>pnpm vitest run checkout --repeat 20</b></div>`,
+      `<div class="l sub"><span class="dim">└ 17 passed · 3 failed (timeout in stripe-mock.ts)</span></div>`,
+      ...st.log,
+    ];
+    if (h.status === "working") out.push(`<div class="l spin"><span class="dim g2">◦</span> <span class="shim">Working</span> <span class="dim">(<span class="s" data-since="${st.since}">0s</span> • esc to interrupt)</span></div>`);
+    out.push(`<div class="prompt">› <span class="cur"></span></div>`);
+    return out;
+  }
+
+  function renderTerms() {
+    for (const [k, lines] of [["billing", claudeLines], ["flaky", codexLines]]) {
+      const box = termEl(k);
+      if (!box) continue;
+      const html = lines();
+      const body = box.querySelector(".body");
+      const prev = T[k].count;
+      body.innerHTML = html.join("");
+      // Only the lines that weren't there before fade in.
+      const kids = body.children;
+      for (let i = Math.min(prev, kids.length); i < kids.length; i++) kids[i].classList.add("new");
+      T[k].count = html.length;
+      box.classList.toggle("asking", k === "billing" && !!nat("billing")?.pending_approval && T.billing.reveal >= S.buffers.billing.length);
+    }
+    tick();
+  }
+  let spinFrame = 0;
+  function tick() {
+    const now = Date.now();
+    document.querySelectorAll(".term .spin .g").forEach((g) => { g.textContent = SPIN[spinFrame % SPIN.length]; });
+    document.querySelectorAll(".term .spin .s").forEach((s) => {
+      const secs = Math.max(0, Math.round((now - Number(s.dataset.since)) / 1000));
+      s.textContent = secs < 60 ? `${secs}s` : `${Math.floor(secs / 60)}m ${secs % 60}s`;
+    });
+  }
+  const REDUCE = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let ticker = null;
+  function runTicker(on) {
+    clearInterval(ticker);
+    ticker = on ? setInterval(() => { spinFrame++; tick(); }, REDUCE ? 1000 : 120) : null;
+  }
+
+  function placeTerms() {
+    const compact = B.desk.w < 700;
+    const at = compact
+      ? { billing: { x: 12, y: 34, w: 428, h: 300 }, flaky: { x: 12, y: 346, w: 428, h: 290 } }
+      : { billing: { x: 26, y: 40, w: 500, h: 318 }, flaky: { x: 96, y: 370, w: 452, h: 226 } };
+    for (const k of ["billing", "flaky"]) {
+      const e = termEl(k);
+      if (!e) continue;
+      const r = at[k];
+      Object.assign(e.style, { left: `${r.x}px`, top: `${r.y}px`, width: `${r.w}px`, height: `${r.h}px` });
+    }
+  }
+  function buildTerms() {
+    if (RECORD || termEl("billing")) return;
+    const stage = document.getElementById("stage");
+    const before = document.querySelector('iframe[name="agents-popover"]');
+    for (const k of ["flaky", "billing"]) {
+      const d = document.createElement("div");
+      d.className = "term";
+      d.id = `term-${k}`;
+      d.setAttribute("aria-hidden", "true");
+      d.innerHTML = `<div class="tb"><i></i><i></i><i></i><b><span class="who">${T[k].title}</span> · ${T[k].path}</b></div><div class="body"></div>`;
+      stage.insertBefore(d, before);
+    }
+    placeTerms();
+  }
+
+  // ── the story: agents ask → you answer in a keystroke → it lands back ──
+  // Plays once when the stage comes on screen. Touching the demo skips to
+  // the Inbox and hands over the keys; nobody touching it sees the whole
+  // thing, with the stage pressing 1 itself. The page around the embed
+  // shows the chapters (postMessage "chapter") and can jump or pause.
+  const AUTO_MS = 6500;
+  const story = { ch: 0, timers: [], visible: false, paused: false, pendingAuto: false };
+  B.story = story;
+  const sLater = (ms, fn) => { const t = later(ms, fn); story.timers.push(t); return t; };
+  function storyClear() { for (const t of story.timers) clearTimeout(t); story.timers = []; }
+  function chapter(n, ms = 0) {
+    story.ch = n;
+    document.body.dataset.ch = String(n);
+    if (window.parent !== window) {
+      try { window.parent.postMessage({ type: "cadence-embed", event: "chapter", chapter: n, ms: story.paused ? 0 : ms, paused: story.paused }, "*"); } catch {}
+    }
+  }
+  function storyStart() {
+    if (RECORD || story.ch !== 0 || story.paused) return;
+    chapter(1, 4800);
+    sLater(1300, () => {
+      const a = nat("billing");
+      T.billing.reveal = 99;
+      if (a && !a.pending_approval) { a.current_activity = "Thinking"; T.billing.since = Date.now() - 2000; }
+      changed();
+    });
+    sLater(2600, () => B.billingAsks());
+    sLater(4800, toInbox);
+  }
+  function toInbox() {
+    if (story.ch >= 2) return;
+    storyClear();
+    T.billing.reveal = 99;
+    if (!nat("billing")?.pending_approval && !T.billing.answered) B.billingAsks();
+    // Docs finishes behind the question, so the Inbox reads "1 of 2" with the
+    // question first (a finished card that is current while the panel mounts
+    // counts as seen and is cleared).
+    if (her("w3:p1")?.status !== "done") B.docsDone(40_000);
+    B.show("agents-popover", true);
+    B.emit("panel-navigate", { view: "inbox", agent_id: null });
+    renderTerms();
+    const auto = !B.engaged && !story.paused;
+    chapter(2, auto ? AUTO_MS : 0);
+    if (auto) sLater(AUTO_MS, autoAnswer);
+  }
+  function pressKey(key) {
+    const w = frames["agents-popover"]?.win;
+    if (!w) return;
+    B.keys([key], 900);
+    (w.document.activeElement ?? w.document.body).dispatchEvent(new w.KeyboardEvent("keydown", { key, code: `Digit${key}`, bubbles: true, cancelable: true }));
+  }
+  function autoAnswer(force = false) {
+    if (story.ch !== 2 || (!force && (B.engaged || story.paused))) return;
+    if (!force && !story.visible) { story.pendingAuto = true; return; }
+    story.pendingAuto = false;
+    pressKey("1");
+  }
+  // resolve_approval for billing: the answer is on its way to the terminal.
+  function landed() {
+    if (RECORD || story.ch >= 3) return;
+    storyClear();
+    chapter(3, 0);
+    if (B.desk.w < 700) {
+      // The compact desktop has no room beside the panel: step it aside so
+      // the terminal shows the answer arriving, then bring it back.
+      B.show("agents-popover", false);
+      sLater(4200, () => { B.show("agents-popover", true); B.emit("panel-navigate", { view: "inbox", agent_id: null }); });
+    }
+    startScenario();
+  }
+  B.goChapter = (n) => {
+    story.paused = false;
+    runTicker(true);
+    if (n <= 1) { reset(); return; }
+    if (story.ch < 2) toInbox();
+    if (n >= 3 && story.ch === 2) pressKey("1");
+    else chapter(story.ch, 0);
+  };
+  B.pauseStory = (on) => {
+    story.paused = on;
+    if (on) storyClear();
+    runTicker(!on);
+    if (!on) {
+      if (story.ch === 0) storyStart();
+      else if (story.ch === 1) { sLater(1200, toInbox); }
+      else if (story.ch === 2 && !B.engaged) { sLater(AUTO_MS, autoAnswer); return chapter(2, AUTO_MS); }
+    }
+    chapter(story.ch, 0);
+  };
+  function watchVisible() {
+    const st = document.getElementById("stage");
+    if (!st || !("IntersectionObserver" in window)) { story.visible = true; return; }
+    new IntersectionObserver((es) => {
+      for (const e of es) {
+        story.visible = e.isIntersecting;
+        if (!story.visible) continue;
+        if (story.ch === 0) sLater(500, storyStart);
+        if (story.pendingAuto) sLater(1500, () => autoAnswer());
+      }
+    }, { threshold: 0.55 }).observe(st);
+  }
+
   // ── windows on the desktop ─────────────────────────────────────────
   const W = (B.win = {
     indicator: { w: 64, h: 380, shown: true },
@@ -408,6 +662,7 @@
     const t = W.talk;
     const tx = t.x ?? (vw - t.w) / 2;
     place("talk", tx, t.y ?? MB + (vh - MB) * 0.42 - t.h / 2, t.w, t.h);
+    placeTerms();
   };
   function place(l, x, y, w, h) {
     const f = el(l);
@@ -522,7 +777,15 @@
         return null;
       }
       case "open_terminal":
-        // No terminal window on this stage: show the agent in the panel's list.
+        if (args?.paneId === "w2:p1" && termEl("flaky")) {
+          // Its terminal is on the desk: bring it to the front.
+          termEl("flaky").style.zIndex = 9;
+          termEl("billing").style.zIndex = 8;
+          termEl("flaky").animate([{ filter: "brightness(1.35)" }, { filter: "none" }], { duration: 500 });
+          if (B.desk.w < 700) B.show("agents-popover", false);
+          return null;
+        }
+        // No terminal window for this agent on the stage: show it in the panel's list.
         B.show("agents-popover", true);
         B.emit("panel-navigate", { view: "agents", agent_id: null });
         return null;
@@ -538,6 +801,7 @@
         const s = S.native.find((x) => x.pending_approval?.request_id === args.requestId);
         if (!s) return false;
         const answer = args.updatedInput?.answers ? Object.values(args.updatedInput.answers)[0] : null;
+        const asked = s.pending_approval.tool_input?.questions?.[0]?.question;
         s.pending_approval = undefined;
         s.message_count += 1;
         s.last_activity = Date.now();
@@ -546,8 +810,17 @@
           s.status = "Running";
           const ans = answer ?? "";
           s.current_activity = /lock/i.test(ans) ? "Locking the row while processing" : /ignore|log/i.test(ans) ? "Logging duplicate events" : /idempot|event.?id|key/i.test(ans) ? "Adding an idempotency key per event" : "Working your answer in";
+          if (asked && answer) T.billing.answered = { answer, question: asked };
+          T.billing.since = Date.now();
           S.buffers.billing.push(`> ${answer}`);
+          // The agent picks the answer up in its terminal and keeps going.
+          const step = (ms, line) => RECORD || later(ms, () => { if (nat("billing")?.status === "Running") { S.buffers.billing.push(line); changed(); } });
+          step(1500, `[tool_use:Edit] {"file_path":"${HOME}/shop/billing/src/webhooks.ts"}`);
+          step(2700, "[tool_result] Updated src/webhooks.ts with 14 additions");
+          step(4300, '[tool_use:Bash] {"command":"pnpm test webhooks"}');
+          step(6400, "[tool_result] 16 passed (4 new)");
           nativeFinish("billing", "Retries are safe now: every Stripe event.id is stored and repeats are skipped, with 4 new tests. Want me to open a PR?", 9000);
+          landed();
         } else if (s.id === "auth") {
           if (args.allow) {
             s.status = "Running";
@@ -678,6 +951,8 @@
       B.engaged = true;
       document.body.classList.add("engaged");
     }
+    // Touching the demo mid-story skips to the Inbox and hands over the keys.
+    if (!RECORD && story.ch < 2) toInbox();
     startScenario();
     if (l !== "indicator") B.emit("indicator-click-outside", null, "indicator");
     // The toolbar never keeps the keyboard: hand it back to the window that had it.
@@ -703,14 +978,23 @@
     timers.clear();
     try { localStorage.removeItem("cadence.seen.v1"); } catch {}
     S = B.state = freshState();
-    if (!RECORD) {
-      B.billingAsks();
-      B.docsDone(40_000);
+    termReset();
+    for (const k of ["billing", "flaky"]) {
+      termEl(k)?.querySelector(".body")?.replaceChildren();
+      if (termEl(k)) termEl(k).style.zIndex = "";
     }
+    story.timers = [];
+    story.ch = 0;
+    story.paused = false;
+    story.pendingAuto = false;
+    // The story opens the panel itself (chapter 2); Replay plays it again
+    // for a visitor who had taken over, until they touch the demo.
+    B.engaged = false;
+    document.body.classList.remove("engaged");
     scenarioStarted = false;
     dictating = null;
     W.talk.shown = false;
-    W["agents-popover"].shown = !RECORD;
+    W["agents-popover"].shown = false;
     W.indicator.shown = !RECORD;
     delete W.indicator.restW;
     for (const k of Object.keys(frames)) delete frames[k];
@@ -719,7 +1003,11 @@
       if (f) f.src = `app/${l}.html`;
     }
     B.layout();
-    if (B.engaged) startScenario();
+    if (RECORD) return;
+    renderTerms();
+    chapter(0);
+    runTicker(true);
+    if (story.visible) sLater(700, storyStart);
   }
   B.reset = reset;
 
@@ -761,8 +1049,11 @@
       return;
     }
     addEventListener("resize", fit);
+    document.getElementById("keys").classList.add("live");
+    buildTerms();
     fit();
     reset();
+    watchVisible();
     document.getElementById("replay").addEventListener("click", (e) => {
       e.stopPropagation();
       reset();
@@ -790,6 +1081,8 @@
       const d = e.data;
       if (!d || d.type !== "cadence-embed") return;
       if (d.action === "replay") reset();
+      if (d.action === "chapter") B.goChapter(Number(d.chapter) || 1);
+      if (d.action === "pause" || d.action === "play") B.pauseStory(d.action === "pause");
     });
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
