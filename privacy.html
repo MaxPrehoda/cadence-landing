@@ -62,7 +62,7 @@
     <main class="legal">
         <p class="eyebrow">Legal</p>
         <h1 class="two">Privacy <span>policy</span></h1>
-        <p class="stamp">Last updated: October 12, 2026</p>
+        <p class="stamp">Last updated: October 13, 2026</p>
         <article class="prose">
             <p>
                 At Cadence, we believe privacy is a fundamental right. This policy explains how we handle your data.
@@ -76,6 +76,7 @@
                     <li><strong>Voice stays local.</strong> Audio capture, speech-to-text, and Text Polish run on your Mac. Your audio is not uploaded.</li>
                     <li><strong>Agent features use your own Claude Code login.</strong> Routing, titles, recaps, the Director, and Claude Code agents send text (and screenshots you attach) to Anthropic through the <code>claude</code> CLI you are signed in to. Other agent CLIs talk to their own providers.</li>
                     <li><strong>Optional features use your own API key.</strong> Cloud Polish and the Intent Engine contact Anthropic only if you add an Anthropic API key and turn them on.</li>
+                    <li><strong>The phone relay can't read your data.</strong> Everything it stores and passes along is end-to-end encrypted. The one exception is an agent you choose to continue in the cloud, which runs in a private sandbox that can read that agent.</li>
                     <li><strong>No Cadence account.</strong> No user profiles, and the app does not send usage analytics to us.</li>
                     <li><strong>Minimal website analytics.</strong> This website uses Vercel Web Analytics (privacy-friendly, no cookies).</li>
                 </ul>
@@ -132,6 +133,23 @@
                 end-to-end encrypted with AES-256-GCM using a key derived from your pairing. The relay only sees ciphertext.
             </p>
 
+            <h3>Continue in the Cloud</h3>
+            <p>
+                So that your phone can keep an agent going while your Mac is asleep, the Mac keeps an end-to-end encrypted
+                copy of each Claude Code agent at the relay while the relay is on: the repository's current commit, uncommitted
+                changes, the conversation, and your Claude Code instructions and memory. Each agent is sealed with its own key
+                derived from your pairing, so the relay stores only ciphertext. You can turn this off in Settings, which deletes
+                those copies.
+            </p>
+            <p>
+                When you tap <strong>Continue in the cloud</strong> on your phone, that one agent's key goes through the relay to
+                a private Vercel Sandbox in the United States, which decrypts that agent and runs it with Claude Code. During the
+                beta, those cloud turns run on Cadence's own Claude Code login, so that conversation reaches Anthropic under
+                Cadence's account. When your Mac takes the agent back, Cadence deletes the sandbox and what the cloud saved; a
+                sandbox your Mac never takes back is deleted after 14 days. A Mac's encrypted copy of an agent is deleted when
+                the agent ends or has been quiet for three days.
+            </p>
+
             <h3>Update Checks</h3>
             <p>
                 The app checks GitHub for new releases so it can offer updates. You can turn automatic checks off in Settings.
@@ -184,7 +202,7 @@
                 <li><strong>Providers of other agent CLIs</strong> you choose to run</li>
                 <li><strong>Hugging Face</strong> (one-time downloads of speech and Text Polish models)</li>
                 <li><strong>GitHub</strong> (app downloads and update checks)</li>
-                <li><strong>Vercel</strong> (website analytics and the optional phone relay)</li>
+                <li><strong>Vercel</strong> (website analytics, the optional phone relay, and sandboxes for agents you continue in the cloud)</li>
             </ul>
             <p>
                 We do NOT use:
@@ -202,11 +220,12 @@
                 locally on your Mac in <code>~/Library/Application Support/com.cadence.app</code>.
             </p>
             <p>
-                <strong>No Cadence Cloud Sync:</strong> We don't sync your data to a Cadence server. Your settings stay on your device.
+                <strong>No Cadence Cloud Sync:</strong> We don't sync your settings to a Cadence server. The only data Cadence keeps
+                off your Mac is the encrypted agent copies described under Continue in the Cloud, and only while the phone relay is on.
             </p>
             <p>
                 <strong>Security:</strong> Cadence acts only with the macOS permissions you grant, and the phone relay is
-                end-to-end encrypted.
+                end-to-end encrypted. A sandbox you continue an agent in can read only that agent.
             </p>
 
             <h2>Your Rights</h2>
@@ -239,7 +258,7 @@
                 Questions about this Privacy Policy? Reach out:
             </p>
             <ul>
-                <li><strong>Email:</strong> <a href="mailto:privacy@cadence.app">privacy@cadence.app</a></li>
+                <li><strong>Email:</strong> <a href="mailto:privacy@cadencevoice.ai">privacy@cadencevoice.ai</a></li>
             </ul>
 
             <div class="closing panel">
@@ -259,7 +278,7 @@
                 <a href="/blog/">Writing</a>
                 <a href="/privacy.html">Privacy Policy</a>
                 <a href="/terms.html">Terms of Service</a>
-                <a href="mailto:support@cadence.app">Support</a>
+                <a href="mailto:support@cadencevoice.ai">Support</a>
             </div>
             <div class="copy">&copy; 2026 Cadence Labs</div>
         </div>

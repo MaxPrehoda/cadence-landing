@@ -2,7 +2,7 @@
 
 This page lists what Cadence keeps on your Mac and what it sends elsewhere. Short version: your voice and your dictation stay on your Mac. Agent features use Claude through your own Claude Code login. A few optional features use your own Anthropic API key.
 
-Cadence has no account, and Cadence does not run its own server that collects your data or usage.
+Cadence has no account and collects no usage data. Its only server is the iPhone relay, which stores and passes along end-to-end encrypted data it can't read, except when you [continue an agent in the cloud](#/cloud).
 
 ## Stays on your Mac
 
@@ -57,6 +57,12 @@ These are off unless you add an Anthropic API key in **Settings → AI**. They u
 
 The iPhone app is [not available yet](#/iphone). It is designed to connect to your Mac directly on the same Wi-Fi, or through a relay that only passes end-to-end encrypted data it cannot read. We will document it in full when it ships.
 
+## Continue in the cloud
+
+While the iPhone relay is on and **Continue agents in the cloud** is on (the default), your Mac keeps an end-to-end encrypted copy of each Claude Code agent at the relay: the repository's current commit, uncommitted changes, the conversation, `~/.claude/CLAUDE.md`, the project's memory folder and a few Claude Code settings. Each agent is sealed with its own key derived from your pairing, so the relay can't read it.
+
+When you tap **Continue in the cloud** on your phone, that one agent's key goes through the relay to a private Vercel Sandbox in San Francisco, which decrypts that agent and runs it with Claude Code. During the beta, cloud turns run on Cadence's own Claude Code login. When the agent comes home, Cadence deletes the sandbox and what the cloud saved. Details are on [Continue in the cloud](#/cloud).
+
 ## Permissions
 
 | Permission | Used for |
@@ -71,4 +77,4 @@ You can turn any of these off in **System Settings → Privacy & Security**. The
 
 ## Questions
 
-Email <privacy@cadence.app>.
+Email <privacy@cadencevoice.ai>.

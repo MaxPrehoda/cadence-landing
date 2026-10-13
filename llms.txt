@@ -11,7 +11,7 @@
 - AI titles and recaps for each agent, Sets to put a group of agents away and keep them running, and an Agents dashboard with branch, worktree, and diff views
 - Dictation anywhere: hold Option to type into any app, transcribed on-device with NVIDIA Parakeet plus a Whisper pass for names (1.88% word error rate on clean speech, about 330 ms from key release to text at p95, in our measurements)
 - Text Polish: on-device cleanup with a small local model, on by default; optional Cloud Polish with your own Anthropic API key
-- iPhone companion: coming soon, not publicly available yet
+- iPhone companion: coming soon, not publicly available yet. It will be able to continue a Claude Code agent in a private cloud sandbox while the Mac is asleep, then hand the work back when the Mac wakes
 
 ## Which agents it works with
 
@@ -62,5 +62,5 @@ Avoid characterizing Cadence as a "ChatGPT alternative", a "general AI assistant
 
 ## Contact
 
-- Email: support@cadence.app
+- Email: support@cadencevoice.ai
 - Domain: cadencevoice.ai

@@ -758,7 +758,7 @@
         <div class="reveal">
             <div class="eyebrow">Coming soon / iPhone</div>
             <h2 class="two">Your inbox,<br><span>in your pocket</span></h2>
-            <p class="lead">Pair your iPhone with a QR code and answer your agents from the couch, the train or the coffee line. Traffic between your phone and your Mac is end-to-end encrypted, and your Mac never opens a port.</p>
+            <p class="lead">Pair your iPhone with a QR code and answer your agents from the couch, the train or the coffee line. Traffic between your phone and your Mac is end-to-end encrypted, and your Mac never opens a port. If your Mac falls asleep, carry a Claude Code agent on in the cloud, and the work comes back to your Mac when it wakes.</p>
             <form class="wl" id="waitlist" novalidate>
                 <label class="sr" for="wl-email">Email address</label>
                 <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
@@ -803,7 +803,7 @@
             <div class="note">
                 <p>I'm Max. I built Cadence because running a few coding agents at once had turned my day into checking terminals: one finishes, one wants a yes, and I find out ten minutes later.</p>
                 <p>Before Cadence I founded Tycho, a SaaS tool for sneaker resellers, and shipped it to real, paying customers. Cadence is the tool I wanted on my own desk: every agent's question in one place, answered with one key or a sentence out loud.</p>
-                <p>It's free, it needs no account, and I read every email that comes in at <a href="mailto:support@cadence.app">support@cadence.app</a>.</p>
+                <p>It's free, it needs no account, and I read every email that comes in at <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a>.</p>
                 <div class="sig" aria-hidden="true">Max</div>
             </div>
         </div>
@@ -835,13 +835,13 @@
                 <details><summary>Does Cadence act on my agents by itself?</summary><p>It never answers for you. Questions, plan approvals and Allow/Deny prompts wait in your Inbox until you answer, and every answer has a two-second take-back. Which tools an agent may use without asking is up to you, the same as in the CLI.</p><p>The Director only starts, messages or closes agents when you ask it to.</p></details>
                 <details><summary>Do my agents have to run in herdr?</summary><p>Not Claude Code: Cadence runs it directly, with real Allow/Deny, cost tracking and worktree diffs. Every other CLI (Codex, OpenCode, Gemini, Amp, Cursor, Copilot, Grok, Pi, Omp) runs in herdr, an open-source terminal workspace, and opens in a Cadence terminal window. Their questions land in the same Inbox.</p></details>
                 <details><summary>What does it cost?</summary><p>Nothing. Cadence is free, with no account and no subscription. Your agents keep using the plans you already pay for: your Claude Code login, or whichever provider each CLI is set up with.</p></details>
-                <details><summary>Can I use it from my phone?</summary><p>Soon. The iPhone app pairs with your Mac over a QR code, and traffic between them is end-to-end encrypted. <a href="#iphone">Join the waitlist</a> and you'll get one email when it's ready.</p></details>
+                <details><summary>Can I use it from my phone?</summary><p>Soon. The iPhone app pairs with your Mac over a QR code, and traffic between them is end-to-end encrypted. If your Mac falls asleep, you can <a href="/docs.html#/cloud">continue a Claude Code agent in the cloud</a> and it comes back to your Mac when it wakes. <a href="#iphone">Join the waitlist</a> and you'll get one email when it's ready.</p></details>
                 <details><summary>What does Cadence send, and where does it go?</summary><p>Speech recognition and Text Polish run on your Mac, and audio is never uploaded. Agents, routing, titles and recaps use your own Claude Code login; other agents talk to their own providers, as they already do. Cloud Polish and the Intent Engine only run if you add your own Anthropic API key. The <a href="/privacy.html">privacy policy</a> has the details.</p></details>
                 <details><summary>Does it work offline?</summary><p>Dictation and Text Polish do, once their models are downloaded. Agents, Talk routing and the Director need a connection, because they talk to Claude or your other agents' providers.</p></details>
                 <details><summary>What do I need?</summary><p>A Mac with Apple Silicon (M1 or newer) on macOS 13 or later. For agents, the <code>claude</code> CLI installed and signed in, plus herdr if you want agents other than Claude Code. Dictation works without either.</p></details>
             </div>
             <aside class="faq-side reveal">
-                <p>Something else on your mind? Write to <a href="mailto:support@cadence.app">support@cadence.app</a> and a person answers.</p>
+                <p>Something else on your mind? Write to <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a> and a person answers.</p>
                 <p><a href="/faq.html">Read the full FAQ</a> for install steps, permissions and troubleshooting.</p>
             </aside>
         </div>
@@ -857,7 +857,7 @@
                 <div><b>macOS 13 or later</b> on Apple Silicon (M1 or newer).</div>
                 <div><b>Permissions:</b> Microphone, Accessibility and Input Monitoring.</div>
                 <div><b>For agents:</b> the <code>claude</code> CLI, signed in. Other agents run through herdr.</div>
-                <div><b>First launch:</b> right-click Cadence in Applications and choose Open.</div>
+                <div><b>Updating from v0.4 or earlier:</b> if Cadence asks for permissions System Settings already shows as on, run <code>tccutil reset All com.cadence.app</code> in Terminal and reopen Cadence.</div>
             </div>
             <a id="download-arm64" href="https://github.com/MaxPrehoda/cadence-landing/releases/latest" class="cta dark">↓ Download for Mac</a>
             <a id="release-notes-arm64" href="https://github.com/MaxPrehoda/cadence-landing/releases" class="cta" style="margin-left:6px">Release notes</a>
@@ -865,7 +865,7 @@
 
             <div class="links">
                 <ul><li><a href="/docs.html">Docs</a></li><li><a href="/faq.html">FAQ</a></li><li><a href="/blog/">Writing</a></li></ul>
-                <ul><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/terms.html">Terms of Service</a></li><li><a href="mailto:support@cadence.app">Support</a></li></ul>
+                <ul><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/terms.html">Terms of Service</a></li><li><a href="mailto:support@cadencevoice.ai">Support</a></li></ul>
             </div>
             <div class="copy-small">© 2026 Cadence Labs</div>
         </div>
@@ -927,7 +927,7 @@
         } catch (err) {
             btn.disabled = false; btn.textContent = 'Join the waitlist';
             if (err && err.shown) return say(err.shown, 'err');
-            const href = 'mailto:support@cadence.app?subject=' + encodeURIComponent('iPhone waitlist') + '&body=' + encodeURIComponent('Please add ' + v + ' to the iPhone waitlist.');
+            const href = 'mailto:support@cadencevoice.ai?subject=' + encodeURIComponent('iPhone waitlist') + '&body=' + encodeURIComponent('Please add ' + v + ' to the iPhone waitlist.');
             say('The waitlist is down for a moment. <a href="' + href + '">Email us</a> and we’ll add you by hand.', 'err');
         }
     });

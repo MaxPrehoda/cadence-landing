@@ -94,4 +94,4 @@ This resets settings and onboarding. Downloaded models are kept.
 
 ## Still stuck
 
-Email <support@cadence.app> with your macOS version, your Cadence version (**Settings → About**) and the relevant part of the log.
+Email <support@cadencevoice.ai> with your macOS version, your Cadence version (**Settings → About**) and the relevant part of the log.

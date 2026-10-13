@@ -75,6 +75,14 @@
             },
             {
                 "@type": "Question",
+                "name": "What happens to my agents when my Mac falls asleep?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "With the iPhone app, you can continue a Claude Code agent in the cloud: a private sandbox picks up its repo and conversation from an end-to-end encrypted copy your Mac keeps at the relay, you keep working with it from your phone, and the work comes back to your Mac when it wakes."
+                }
+            },
+            {
+                "@type": "Question",
                 "name": "What are the system requirements?",
                 "acceptedAnswer": {
                     "@type": "Answer",
@@ -94,7 +102,15 @@
                 "name": "Why does macOS say Cadence is from an unidentified developer?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Cadence is not notarized by Apple yet. On first launch, right-click Cadence in Applications and choose Open, then confirm. Or run xattr -cr /Applications/Cadence.app in Terminal."
+                    "text": "Cadence is signed and notarized by Apple from v0.5.0, so that warning means you have v0.4.0 or older. Download the latest version from the releases page instead."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "I updated Cadence and it asks for permissions that are already on.",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "macOS ties permissions to how an app is signed, and v0.5.0 is signed differently from earlier versions, so the old entries in System Settings no longer apply. Quit Cadence, run tccutil reset All com.cadence.app in Terminal, reopen Cadence and allow it again. Later updates keep your permissions."
                 }
             }
         ]
@@ -443,17 +459,28 @@
                         <summary>Why does macOS say Cadence is from an "unidentified developer"?</summary>
                         <div class="answer prose">
             <p>
-                Cadence isn't notarized by Apple yet. To open it the first time:
+                Cadence is signed and notarized by Apple from v0.5.0, so it opens like any other app.
+                If macOS warns about it, you have v0.4.0 or older. Download the latest version from the
+                <a href="https://github.com/MaxPrehoda/cadence-landing/releases/latest" target="_blank" rel="noopener">releases page</a>
+                instead.
+            </p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>I updated Cadence and it asks for permissions that are already on.</summary>
+                        <div class="answer prose">
+            <p>
+                macOS ties permissions to how an app is signed, and v0.5.0 is signed differently from earlier
+                versions. System Settings can still show Cadence switched on, but those entries belong to the old
+                version and no longer apply. To clear them:
             </p>
             <ul>
-                <li>Right-click Cadence in Applications and choose <strong>Open</strong></li>
-                <li>Click <strong>Open</strong> in the dialog</li>
+                <li>Quit Cadence</li>
+                <li>Run <code>tccutil reset All com.cadence.app</code> in Terminal</li>
+                <li>Reopen Cadence and allow Microphone, Accessibility and Input Monitoring again</li>
             </ul>
             <p>
-                Or run this in Terminal:
-            </p>
-            <p>
-                <code>xattr -cr /Applications/Cadence.app</code>
+                Later updates keep your permissions.
             </p>
                         </div>
                     </details>
@@ -518,6 +545,18 @@
                         </div>
                     </details>
                     <details>
+                        <summary>What happens to my agents when my Mac falls asleep?</summary>
+                        <div class="answer prose">
+            <p>
+                With the iPhone app, you can continue a Claude Code agent in the cloud. Your Mac keeps an end-to-end
+                encrypted copy of each agent at the relay; when you tap <strong>Continue in the cloud</strong>, a private
+                sandbox picks up that agent's repo and conversation, and you keep working with it from your phone. When
+                your Mac wakes, the files, commits and conversation come back to it. See
+                <a href="/docs.html#/cloud">Continue in the cloud</a>.
+            </p>
+                        </div>
+                    </details>
+                    <details>
                         <summary>Where is my data stored?</summary>
                         <div class="answer prose">
             <p>
@@ -547,6 +586,7 @@
             <ul>
                 <li>Check that <strong>Input Monitoring</strong> and <strong>Accessibility</strong> are granted in System Settings</li>
                 <li>Quit and reopen Cadence after granting permissions</li>
+                <li>Already on but still not working after an update? Quit Cadence, run <code>tccutil reset All com.cadence.app</code> in Terminal, then reopen it and allow access again</li>
                 <li>Make sure the speech model finished downloading</li>
             </ul>
                         </div>
@@ -590,7 +630,7 @@
                         <summary>How do I get help?</summary>
                         <div class="answer prose">
             <ul>
-                <li><strong>Email:</strong> <a href="mailto:support@cadence.app">support@cadence.app</a></li>
+                <li><strong>Email:</strong> <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a></li>
                 <li><strong>Documentation:</strong> <a href="/docs.html">cadencevoice.ai/docs</a></li>
             </ul>
                         </div>
@@ -598,7 +638,7 @@
                 </section>
 
                 <div class="faq-more panel">
-                    <p>Still have questions? <a href="mailto:support@cadence.app">Email us</a> or read the <a href="/docs.html">docs</a>.</p>
+                    <p>Still have questions? <a href="mailto:support@cadencevoice.ai">Email us</a> or read the <a href="/docs.html">docs</a>.</p>
                 </div>
             </div>
         </div>
@@ -612,7 +652,7 @@
                 <a href="/blog/">Writing</a>
                 <a href="/privacy.html">Privacy Policy</a>
                 <a href="/terms.html">Terms of Service</a>
-                <a href="mailto:support@cadence.app">Support</a>
+                <a href="mailto:support@cadencevoice.ai">Support</a>
             </div>
             <div class="copy">&copy; 2026 Cadence Labs</div>
         </div>

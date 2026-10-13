@@ -32,7 +32,8 @@
       "title": "More",
       "items": [
         { "id": "voice-commands",  "title": "Voice commands" },
-        { "id": "iphone",          "title": "iPhone (coming soon)" }
+        { "id": "iphone",          "title": "iPhone (coming soon)" },
+        { "id": "cloud",           "title": "Continue in the cloud" }
       ]
     },
     {

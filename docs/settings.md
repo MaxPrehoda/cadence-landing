@@ -80,6 +80,7 @@ Pick the speech model and download others. The default is **Parakeet v2 (English
 | **Chrome DevTools port** | 9222 | For Intent Engine browser actions. |
 | **Slack bot token** | empty | For Intent Engine Slack actions. |
 | **iPhone relay** | Off | For the iPhone app, which is [not available yet](#/iphone). |
+| **Continue agents in the cloud** | On | Under iPhone relay. Keeps an encrypted copy of each Claude Code agent at the relay so the phone can [continue it in the cloud](#/cloud) while this Mac is asleep. Turning it off deletes those copies. |
 
 ## About
 
@@ -144,6 +145,7 @@ Use the app to change them where you can. If you edit the file by hand, quit Cad
 | `cdp_port` | `9222` |
 | `slack_token` | `null` |
 | `relay_enabled` | `false` |
+| `cloud_continue` | `true` |
 | `auto_check_updates` | `true` |
 
 Other files in the same folder hold app state, not settings: `models/` (downloaded models), `recordings/` (if enabled), `sets.json` ([sets](#/sets)), `agent-meta.json` (agent titles and recaps) and `router-memory.json` (your recent Talk requests and where they went).
