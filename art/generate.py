@@ -115,6 +115,11 @@ class Layer:
         self.rgb[m] = other.rgb[m]
         self.a[m] = 255
 
+    def blend(self, other, k=1.0):
+        """Composite a translucent layer (alpha scaled by k)."""
+        a = (other.a.astype(float) / 255 * k)[..., None]
+        self.rgb = (self.rgb * (1 - a) + other.rgb * a).astype(np.uint8)
+
     def image(self, scale=1, alpha=True):
         arr = np.dstack([self.rgb, self.a]) if alpha else self.rgb
         img = Image.fromarray(arr, 'RGBA' if alpha else 'RGB')
@@ -135,6 +140,12 @@ def quantise(lum, n, ys, xs, dither=0.55):
     return np.clip(np.floor(v + (CHECK[ys % 2, xs % 2] - 0.375) * dither), 0, n - 1).astype(int)
 
 
+def hash01(x, y, seed):
+    """Stable per-pixel noise in 0..1 from integer coordinates."""
+    v = np.sin(x * 12.9898 + y * 78.233 + seed * 37.719) * 43758.5453
+    return v - np.floor(v)
+
+
 def box_blur(a, r):
     for axis in (0, 1):
         c = np.cumsum(np.pad(a, [(r + 1, r) if i == axis else (0, 0) for i in (0, 1)], mode='edge'), axis=axis)
@@ -142,8 +153,12 @@ def box_blur(a, r):
     return a
 
 
-def spheres(layer, balls, jag=0.0, flat_base=None, ao=0.35, ambient=0.28, z_bias=None, smooth=0):
-    """Light a cluster of spheres. Returns (mask, lum) over the layer."""
+def spheres(layer, balls, jag=0.0, flat_base=None, ao=0.35, ambient=0.28, z_bias=None, smooth=0, hash_seed=None):
+    """Light a cluster of spheres. Returns (mask, lum) over the layer.
+
+    hash_seed: take the ragged-edge noise from each ball's own pixel offsets
+    instead of the layer's random stream, so a ball moved by whole pixels
+    keeps exactly its shape (the wind frames rely on it)."""
     h, w = layer.h, layer.w
     Z = np.full((h, w), -1e9)
     N = np.zeros((h, w, 3))
@@ -160,7 +175,11 @@ def spheres(layer, balls, jag=0.0, flat_base=None, ao=0.35, ambient=0.28, z_bias
             ang = np.arctan2(dy, dx)
             ph = rng.random() * 6.28
             k = rng.integers(5, 9)
-            rr = r * (1 + jag * (0.55 * np.sin(ang * k + ph) + 0.45 * (rng.random(dx.shape) - 0.5)))
+            if hash_seed is None:
+                noise = rng.random(dx.shape)
+            else:
+                noise = hash01(xs - round(cx), ys - round(cy), hash_seed + i)
+            rr = r * (1 + jag * (0.55 * np.sin(ang * k + ph) + 0.45 * (noise - 0.5)))
         d2 = dx * dx + dy * dy
         inside = d2 < rr * rr
         z = np.sqrt(np.clip(rr * rr - d2, 0, None)) + (z_bias(i, cx, cy, r) if z_bias else r * 0.15)
@@ -228,8 +247,8 @@ def cloud(layer, cx, base, width, height, rmp=CLOUD, puffs=None, seed=0):
     return mask
 
 
-def foliage(layer, balls, rmp=LEAF, jag=0.22, ao=0.4, ambient=0.18, gaps=0.04):
-    mask, lum = spheres(layer, balls, jag=jag, ao=ao, ambient=ambient)
+def foliage(layer, balls, rmp=LEAF, jag=0.22, ao=0.4, ambient=0.18, gaps=0.04, hash_seed=None):
+    mask, lum = spheres(layer, balls, jag=jag, ao=ao, ambient=ambient, hash_seed=hash_seed)
     shade(layer, mask, lum, rmp, dither=0.7)
     # sparse dark leaf gaps inside the lit areas
     g = mask & (layer.rng.random(mask.shape) < gaps) & (lum > 0.45) & (lum < 0.8)
@@ -365,6 +384,102 @@ def path(layer, pts, w0, w1, rmp=PATH):
             layer.px(x, y, rmp[i])
 
 
+def conifer(layer, x, base, h, w, rmp):
+    """A small fir: three stacked tiers, lit from the right, dark outline."""
+    tiers = 3
+    top = base - h
+    for yy in range(int(top), int(base)):
+        t = (yy - top) / h                       # 0 at the tip .. 1 at the base
+        tier = min(tiers - 1, int(t * tiers))
+        local = t * tiers - tier                 # 0..1 inside a tier
+        half = w * (0.3 + 0.7 * (tier + local) / tiers) * (0.5 + 0.5 * local)
+        for xx in range(int(round(x - half)), int(round(x + half)) + 1):
+            u = (xx - x) / max(0.8, half)        # -1 left edge .. 1 right edge
+            lum = 0.42 + 0.34 * u - 0.22 * local + 0.12 * (1 - t)
+            i = int(np.clip(lum * len(rmp) + (CHECK[yy % 2, xx % 2] - 0.375) * 0.7, 0, len(rmp) - 1))
+            if abs(u) > 0.8 and u < 0:
+                i = 0
+            layer.px(xx, yy, rmp[i])
+
+
+WIND_FRAMES = 8
+
+
+def wind_shift(balls, pivot, amp, f, frames=WIND_FRAMES, wave=(0.045, 0.03)):
+    """Leaf clumps in wind frame f: whole-pixel offsets (so each clump keeps
+    its shape) that grow away from the pivot, with a phase that rolls
+    through the crown from right to left like a gust."""
+    px_, py_ = pivot
+    far = max(1.0, max(np.hypot(x - px_, y - py_) for x, y, _ in balls))
+    out = []
+    for x, y, r in balls:
+        w = (np.hypot(x - px_, y - py_) / far) ** 1.2
+        ph = 2 * np.pi * f / frames + x * wave[0] + y * wave[1]
+        out.append((x + round(amp * w * np.sin(ph)), y + round(amp * 0.4 * w * np.sin(ph - 0.9)), r))
+    return out
+
+
+def tree_shade(layer, cx, cy, rx, ry, tint='#123c3a', mask=None):
+    """Darken the grass already drawn under a tree (keeps its texture): a flat
+    ellipse with a dithered rim. Returns the shaded pixels."""
+    d = ((layer.xs - cx) / rx) ** 2 + ((layer.ys - cy) / ry) ** 2
+    rim = (d >= 0.6) & (d < 1) & ((layer.xs + layer.ys) % 2 == 0)
+    core = d < 0.6
+    done = np.zeros(d.shape, bool) if mask is None else mask
+    for m, t in ((core, 0.42), (rim, 0.3)):
+        m = m & (layer.a > 0) & ~done
+        layer.rgb[m] = mix(layer.rgb[m], hexc(tint), t)
+        done = done | m
+    return done
+
+
+def cloud_shadow(seed):
+    """Soft shadows of passing clouds on the ground: flattened blobs (smaller
+    and flatter farther away), solid core and dithered rim, translucent."""
+    L = Layer(W, H, seed)
+    rng = np.random.default_rng(seed)
+    field = np.zeros((H, W))
+    for cx, cy, wdt, flat in [(118, 213, 92, 0.17), (338, 250, 128, 0.24)]:
+        for _ in range(12):
+            ex, ey = cx + rng.uniform(-0.75, 0.75) * wdt, cy + rng.uniform(-0.12, 0.12) * wdt * flat * 2
+            rx = rng.uniform(0.18, 0.4) * wdt
+            field += np.exp(-(((L.xs - ex) / rx) ** 2 + ((L.ys - ey) / (rx * flat * 1.6)) ** 2))
+    field += 0.22 * (value_noise(W, H, 9, rng) - 0.5)     # ragged, cloud-like rim
+    core = field > 0.6
+    rim = (field > 0.32) & ~core & ((L.xs + L.ys) % 2 == 0)
+    m = core | rim
+    L.rgb[m] = hexc('#0b2b40')
+    L.a[m] = 46
+    return L
+
+
+def sun_rays(seed, shift=0.0, sun=(530, -80)):
+    """Shafts of light fanning down-left from the sun beyond the top right
+    corner: a few beams of different widths, two dithered steps of warm
+    light, fading in past the big tree and out before the headline. shift
+    nudges every beam a little (a second set to crossfade with)."""
+    L = Layer(W, H, seed)
+    rng = np.random.default_rng(seed)
+    dx, dy = L.xs - sun[0], L.ys - sun[1]
+    ang, dist = np.arctan2(dy, dx), np.hypot(dx, dy)
+    I = np.zeros((H, W))
+    n = 7
+    for k in range(n):
+        a0 = 2.02 + 0.62 * (k + rng.uniform(0.2, 0.8)) / n
+        wdt, strength, jit = rng.uniform(0.022, 0.06), rng.uniform(0.55, 1.0), rng.uniform(-1, 1)
+        a = a0 + shift * jit
+        u = np.clip(np.abs(ang - a) / wdt, 0, 1)
+        I += strength * (np.cos(u * np.pi) + 1) / 2
+    I *= np.clip((dist - 130) / 80, 0, 1) * np.clip(1 - (dist - 300) / 280, 0, 1)
+    I *= np.clip((L.xs - 190) / 110, 0, 1)
+    I += 0.95 * np.clip(1 - (dist - 70) / 210, 0, 1) ** 2     # warm bloom around the hidden sun
+    lvl = np.clip(np.floor(I * 3.1 + (CHECK[L.ys % 2, L.xs % 2] - 0.375) * 0.9), 0, 3).astype(int)
+    m = lvl > 0
+    L.rgb[m] = hexc('#fff3cf')
+    L.a[m] = np.array([0, 28, 50, 76], np.uint8)[lvl[m]]
+    return L
+
+
 def dissolve_mask(w, h, rows, seed, edge='bottom'):
     """Page-coloured pixels that eat the image edge, as in Cofounder's art."""
     L = Layer(w, h, seed)
@@ -405,23 +520,68 @@ def hero():
         cloud(bank, cx, base, w_, h_, seed=s)
 
     scene = Layer(W, H, 4)
-    # far hills with tree line, hazed toward the sky
-    hill(scene, 176, 5, 120, LEAF_FAR, haze=0.45, haze_to='#90d3f6')
+    # Tree line in two depths. Far: a hazy forest ridge whose top is a fine
+    # fringe of tiny crowns, so it reads as distant woods, not a row of balls.
+    haze = hexc('#90d3f6')
+    ridge = hill(scene, 172, 5, 90, LEAF_FAR, haze=0.42, haze_to='#90d3f6')
     rng = scene.rng
-    far_trees = [(x, 176 + rng.random() * 4 - 2, 3 + rng.random() * 3) for x in range(0, W, 7)]
-    m, lum = spheres(scene, far_trees, jag=0.25, ao=0.2, ambient=0.3)
+    fringe, x = [], -4.0
+    while x < W + 4:
+        fringe.append((x, ridge[int(np.clip(x, 0, W - 1))] + 1.0 + rng.random() * 1.8, 1.8 + rng.random() * 1.8))
+        x += 1.4 + rng.random() * 2.4
+    m, lum = spheres(scene, fringe, jag=0.25, ao=0.12, ambient=0.34)
     idx = quantise(lum, len(LEAF_FAR), scene.ys, scene.xs, 0.6)
-    scene.put_px(m, mix(LEAF_FAR[idx], hexc('#90d3f6'), 0.35))
+    scene.put_px(m, mix(LEAF_FAR[idx], haze, 0.4))
+    # Near: groups of trees with meadow between them. Mostly round broadleaf
+    # crowns of different sizes and heights, some tall poplars, a few firs;
+    # short trunks show under the crowns that stand clear of the field.
+    leaf_mid = mix(LEAF, haze, 0.3)
+    bark_mid = mix(BARK[1], haze, 0.3)
+    trng = np.random.default_rng(17)
+    crowns, firs, trunks = [], [], []
+    x = -10.0
+    while x < W + 12:
+        for _ in range(int(trng.integers(2, 7))):
+            base = 186 + trng.random() * 2.5
+            kind = trng.random()
+            if kind < 0.13:
+                firs.append((x, base, 13 + trng.random() * 8, 3.6 + trng.random() * 1.6))
+                x += 4 + trng.random() * 3
+            elif kind < 0.27:
+                h_ = 15 + trng.random() * 6
+                crowns += canopy(x, base - h_ * 0.58, 2.4, h_ * 0.38, 8, 1.7, 2.7, trng)
+                trunks.append((x, base - h_ * 0.12, base))
+                x += 4 + trng.random() * 3
+            else:
+                rx, ry = 3.8 + trng.random() * 3.6, 2.8 + trng.random() * 2.2
+                cy = base - ry - (1.5 + trng.random() * 4.5)
+                crowns += canopy(x, cy, rx, ry, 9, 2.1, 3.4 + rx * 0.22, trng)
+                trunks.append((x, cy + ry, base))
+                x += rx * 1.05 + trng.random() * 2.5
+        x += 5 + trng.random() * 20
+    for fx, fb, fh, fw in firs:
+        conifer(scene, fx, fb, fh, fw, leaf_mid)
+    for tx, t0, t1 in trunks:
+        scene.rect(round(tx), round(t0), 1, round(t1 - t0) + 1, bark_mid)
+    foliage(scene, crowns, rmp=leaf_mid, jag=0.24, ao=0.34, ambient=0.22, gaps=0.03)
     hill(scene, 188, 4, 90, GRASS[2:], haze=0.18, haze_to='#90d3f6', tex=0.05)
     # mid meadow, bright and yellow-green
     hill(scene, 197, 3, 140, GRASS[3:], tex=0.08, bands=0.08)
     blades(scene, 199, 240, 0.07, GRASS[1:], 1, 3, seed=61, flowers=46)
     path(scene, [(150, 198), (168, 205), (150, 214), (100, 230), (40, 250), (-20, 272)], 5, 120)
+    # Tree shade on the grass, cast down-left (the sun is up to the right).
+    # The crowns themselves are drawn in the wind frames (tree0..7).
+    SHADES = [((60, 202, 32, 4.5), 1.2), ((146, 204, 15, 2.6), 0.8), ((14, 206, 18, 2.6), 0.8), ((408, 236, 58, 7), 1.8)]
+    lit = scene.rgb.copy()
+    shade_px = None
+    for (cx, cy, rx, ry), _ in SHADES:
+        shade_px = tree_shade(scene, cx, cy, rx, ry, mask=shade_px)
+    shaded = scene.rgb.copy()
     # left tree + bushes
     trunk(scene, 70, 166, 200, 4, 8)
-    foliage(scene, canopy(70, 168, 30, 17, 26, 6, 11, np.random.default_rng(21)))
-    foliage(scene, canopy(150, 200, 14, 6, 9, 4, 6, np.random.default_rng(22)))
-    foliage(scene, canopy(15, 202, 18, 7, 10, 4, 7, np.random.default_rng(23)))
+    left_crown = canopy(70, 168, 30, 17, 26, 6, 11, np.random.default_rng(21))
+    bushes = [canopy(150, 200, 14, 6, 9, 4, 6, np.random.default_rng(22)),
+              canopy(15, 202, 18, 7, 10, 4, 7, np.random.default_rng(23))]
 
     # desk setup
     gy = 232
@@ -438,43 +598,75 @@ def hero():
         scene.rect(lx + 3, dtop + 6, 1, gy - dtop - 6, WOOD[1])
         scene.rect(lx, dtop + 6, 1, gy - dtop - 6, WOOD[3])
     scene.rect(dx0 + 9, dtop + 9, dw - 18, 2, WOOD[1])
-    # monitor
+    # monitor: a bezel with soft corners and a chin, lit from the upper right
     mx, my, mw, mh = 280, dtop - 62, 82, 52
-    scene.rect(mx, my, mw, mh, STEEL[1])
-    scene.rect(mx + 1, my + 1, mw - 2, 1, STEEL[4])
-    scene.rect(mx + mw - 2, my + 1, 1, mh - 2, STEEL[3])
-    scene.rect(mx + 1, my + mh - 2, mw - 2, 1, STEEL[0])
-    sx, sy, sw, shh = mx + 3, my + 3, mw - 6, mh - 7
+    chin = 5
+    for y in range(my, my + mh):
+        inset = 1 if y in (my, my + mh - 1) else 0         # knocked-off corners
+        scene.rect(mx + inset, y, mw - 2 * inset, 1, STEEL[1])
+    scene.rect(mx + 1, my, mw - 2, 1, STEEL[3])            # top edge catches the light
+    scene.rect(mx + mw // 2, my, mw // 2 - 1, 1, STEEL[4])
+    scene.rect(mx + mw - 1, my + 1, 1, mh - 2, STEEL[3])   # lit right edge
+    scene.rect(mx, my + 1, 1, mh - 2, STEEL[0])            # shadowed left edge
+    scene.rect(mx + 1, my + mh - chin, mw - 2, chin - 1, STEEL[2])
+    scene.rect(mx + 1, my + mh - chin, mw - 2, 1, STEEL[1])
+    scene.rect(mx + 1, my + mh - 1, mw - 2, 1, STEEL[0])
+    scene.px(mx + mw // 2, my + mh - 3, '#8f8d9c')        # power light
+    sx, sy, sw, shh = mx + 3, my + 3, mw - 6, mh - 3 - chin - 1
+    scene.rect(sx - 1, sy - 1, sw + 2, shh + 2, '#0c0b10')  # screen recess
     for y in range(shh):
-        c = mix(hexc('#2a2933'), hexc('#1f1e27'), y / shh)
+        c = mix(hexc('#2b2a35'), hexc('#1d1c25'), y / shh)
         scene.rect(sx, sy + y, sw, 1, c)
-    scene.rect(sx, sy, sw, 1, '#3a3946')
+    # a window title bar with traffic lights
+    scene.rect(sx, sy, sw, 4, '#34333f')
+    scene.rect(sx, sy + 4, sw, 1, '#18171e')
+    for i, col in enumerate(['#ff5f57', '#febc2e', '#28c840']):
+        scene.px(sx + 3 + i * 3, sy + 1, col); scene.px(sx + 3 + i * 3, sy + 2, col)
+    scene.rect(sx + sw // 2 - 8, sy + 2, 16, 1, '#5d5b6a')
+    # faint glare across the upper right of the glass
+    gl = (scene.xs >= sx) & (scene.xs < sx + sw) & (scene.ys >= sy + 5) & (scene.ys < sy + shh)
+    band = (scene.xs - sx) + (scene.ys - sy) * 1.1
+    glare = gl & (band > sw * 0.7) & (band < sw * 0.7 + 7) & ((scene.xs + scene.ys) % 2 == 0)
+    scene.put_px(glare, np.clip(scene.rgb.astype(int) + 9, 0, 255).astype(np.uint8))
     # terminal text rows (static part; the browser types the last one)
     rows = [(0, 22, '#8b8996'), (1, 46, '#c9c6d2'), (2, 38, '#c9c6d2'), (3, 30, '#f2a20c'), (4, 18, '#22b357')]
     for i, wd, col in rows:
-        scene.rect(sx + 4, sy + 4 + i * 6, wd, 2, col)
-    tb_x, tb_y, tb_h = sx + sw - 9, sy + 3, shh - 6
+        scene.rect(sx + 4, sy + 8 + i * 5, wd, 2, col)
+    tb_x, tb_y, tb_h = sx + sw - 9, sy + 7, shh - 9
     scene.rect(tb_x, tb_y, 6, tb_h, '#111014')
     scene.rect(tb_x + 1, tb_y + 1, 4, 3, '#2c2a33')
-    dots = [(tb_x + 2, tb_y + 7 + i * 6) for i in range(5)]
-    # stand, keyboard, mug, plant, notebook
-    scene.rect(mx + mw // 2 - 4, my + mh, 8, 6, STEEL[2])
-    scene.rect(mx + mw // 2 - 3, my + mh, 2, 6, STEEL[3])
-    scene.rect(mx + mw // 2 - 13, dtop - 2, 26, 2, STEEL[2])
-    scene.rect(mx + mw // 2 - 13, dtop - 2, 26, 1, STEEL[4])
-    scene.rect(300, dtop - 2, 1, 1, STEEL[4])
-    kx = mx + mw // 2 + 16
-    scene.rect(kx, dtop - 2, 22, 2, '#cfcad2')
-    scene.rect(kx, dtop - 2, 22, 1, '#eeeaf0')
-    for k in range(0, 22, 3):
-        scene.px(kx + k + 1, dtop - 1, '#a9a4b0')
+    dots = [(tb_x + 2, tb_y + 6 + i * 5) for i in range(5)]
+    # stand: the neck runs from behind the chin straight into a tapered foot
+    nx = mx + mw // 2 - 3
+    for y in range(my + mh, dtop - 3):
+        scene.rect(nx, y, 6, 1, STEEL[2])
+        scene.px(nx, y, STEEL[1])
+        scene.rect(nx + 3, y, 2, 1, STEEL[3])
+        scene.px(nx + 5, y, STEEL[4])
+    scene.rect(nx, my + mh, 6, 1, STEEL[0])                 # shadow under the chin
+    fx = mx + mw // 2
+    for k, (half, col) in enumerate([(11, STEEL[4]), (13, STEEL[3]), (14, STEEL[2])]):
+        scene.rect(fx - half, dtop - 3 + k, half * 2, 1, col)
+    scene.rect(fx - half, dtop - 1, 2, 1, STEEL[1])
+    scene.rect(nx, dtop - 3, 6, 1, STEEL[3])
+    kx, kw = mx + mw // 2 + 17, 24
+    scene.rect(kx, dtop - 3, kw, 1, '#ece8ef')
+    scene.rect(kx, dtop - 2, kw, 1, '#cfcad2')
+    for k in range(1, kw - 1, 2):
+        scene.px(kx + k, dtop - 2, '#a9a4b0')
+    scene.rect(kx, dtop - 1, kw, 1, '#9b96a5')
+    scene.rect(kx + kw + 3, dtop - 2, 3, 1, '#e4e0e8')       # mouse
+    scene.rect(kx + kw + 3, dtop - 1, 3, 1, '#a9a4b0')
+    px0 = 370                                              # plant pot
+    # contact shadows on the desk top under everything standing on it
+    for x0, x1 in [(fx - 15, fx + 15), (kx - 1, kx + kw + 1), (kx + kw + 2, kx + kw + 7), (261, 271), (px0 - 1, px0 + 11)]:
+        scene.rect(x0, dtop, x1 - x0, 1, WOOD[3])
     scene.rect(262, dtop - 7, 7, 7, '#efe9de')
     scene.rect(262, dtop - 7, 7, 1, '#ffffff')
     scene.rect(267, dtop - 6, 2, 5, '#d8d0c2')
     scene.rect(269, dtop - 5, 2, 1, '#efe9de'); scene.rect(270, dtop - 5, 1, 3, '#efe9de'); scene.rect(269, dtop - 3, 2, 1, '#efe9de')
     scene.rect(263, dtop - 6, 5, 1, '#5a3a24')
     mug_steam = (265, dtop - 9)
-    px0 = 364
     scene.rect(px0, dtop - 9, 10, 9, TERRA[2])
     scene.rect(px0, dtop - 9, 10, 1, TERRA[3])
     scene.rect(px0 + 7, dtop - 8, 3, 8, TERRA[1])
@@ -493,10 +685,35 @@ def hero():
                 scene.px(x + o, y, BARK[2 if o < wdt * 0.5 else 3])
     tree_rng = np.random.default_rng(41)
     crown = canopy(430, 52, 74, 58, 70, 9, 17, tree_rng) + canopy(470, 120, 30, 30, 18, 7, 11, tree_rng)
-    tree = Layer(W, H, 42)
-    foliage(tree, crown)
     # roots/grass around the trunk
     foliage(scene, canopy(446, 236, 22, 5, 12, 3, 6, np.random.default_rng(43)), rmp=GRASS)
+
+    # Wind frames: every crown and bush swaying, and flecks of sun moving
+    # through the shade under them (only on shaded grass nothing else
+    # covered, so they never land on a trunk or the desk).
+    still = shade_px & (scene.rgb == shaded).all(axis=2)
+    frng = np.random.default_rng(44)
+    flecks = []
+    for (cx, cy, rx, ry), amp in SHADES:
+        for _ in range(int(rx * ry * 0.22)):
+            a_, d_ = frng.random() * 6.283, np.sqrt(frng.random()) * 0.8
+            flecks.append((cx + np.cos(a_) * rx * d_, cy + np.sin(a_) * ry * d_, int(frng.integers(1, 4)), int(frng.integers(1, 3)), amp))
+    tree_frames = []
+    for f in range(WIND_FRAMES):
+        T = Layer(W, H, 42)
+        for fx_, fy_, fw, fh, amp in flecks:
+            ph = 2 * np.pi * f / WIND_FRAMES + fx_ * 0.045
+            x0, y0 = int(round(fx_ + amp * np.sin(ph))), int(round(fy_))
+            for yy in range(y0, y0 + fh):
+                for xx in range(x0, x0 + fw):
+                    if 0 <= xx < W and 0 <= yy < H and still[yy, xx]:
+                        T.px(xx, yy, lit[yy, xx])
+        for i, b in enumerate(bushes):
+            pivot = (np.mean([q[0] for q in b]), max(q[1] + q[2] for q in b))
+            foliage(T, wind_shift(b, pivot, 1.0, f), hash_seed=220 + 40 * i)
+        foliage(T, wind_shift(left_crown, (70, 192), 1.5, f), hash_seed=210)
+        foliage(T, wind_shift(crown, (446, 150), 2.3, f), hash_seed=420)
+        tree_frames.append(T)
 
     # foreground: dark leafy band with lit clover clumps (animated sway frames)
     crng = np.random.default_rng(52)
@@ -513,13 +730,16 @@ def hero():
         fg = Layer(W, H, 50)
         band = fg.ys >= edge_line[None, :]
         lum = 0.5 - 0.45 * np.clip((fg.ys - 241) / 30, 0, 1)
+        # the big tree's shade carries on into the foreground
+        under = 0.2 * np.clip((1 - ((fg.xs - 404) / 88) ** 2 - ((fg.ys - 254) / 20) ** 2) * 2, 0, 1)
+        lum = lum - under
         idx = quantise(lum, 4, fg.ys, fg.xs, 0.8)
         fg.put_px(band, GRASS[:4][idx])
         sway = [0, 1.0, 1.8, 1.0][f]
         # tufts breaking the band's top edge
         blades(fg, 238, 247, 0.16, GRASS[:5], 2, 5, sway=sway * 0.5, seed=53, flowers=0, lean_bias=0.5)
         m, lum = spheres(fg, clover_balls, jag=0.12, ao=0.0, ambient=0.15)
-        lum = lum * (0.7 + 0.3 * np.clip((fg.ys - 246) / 30, 0, 1))
+        lum = lum * (0.7 + 0.3 * np.clip((fg.ys - 246) / 30, 0, 1)) - under
         shade(fg, m, lum, GRASS[1:], dither=0.7)
         blades(fg, 252, 274, 0.025, GRASS, 5, 12, sway=sway, seed=54, flowers=22)
         fg_frames.append(fg)
@@ -530,13 +750,18 @@ def hero():
 
     meta = {
         'size': [W, H], 'scale': 4,
-        'dots': dots, 'steam': mug_steam,
-        'type': {'x': sx + 4, 'y': sy + 4 + 5 * 6, 'max': 34, 'color': '#c9c6d2'},
-        'cursor': {'x': sx + 4, 'y': sy + 4 + 5 * 6},
+        'dots': dots, 'steam': mug_steam, 'monitor': [mx, my, mw, mh],
+        'type': {'x': sx + 4, 'y': sy + 8 + 5 * 5, 'max': 34, 'color': '#c9c6d2'},
+        'cursor': {'x': sx + 4, 'y': sy + 8 + 5 * 5},
         'colors': STATUS,
+        'wind': WIND_FRAMES, 'leafbox': [378, 64, 472, 138], 'ground': 241,
     }
-    layers = {'sky': sky_l, 'wisps': wisps, 'bank': bank, 'scene': scene, 'meadow': meadow, 'tree': tree,
-              'fg0': fg_frames[0], 'fg1': fg_frames[1], 'fg2': fg_frames[2], 'fg3': fg_frames[3], 'dissolve': dis}
+    rays = [sun_rays(90), sun_rays(90, shift=0.012)]
+    cshadow = cloud_shadow(91)
+    layers = {'sky': sky_l, 'wisps': wisps, 'bank': bank, 'scene': scene, 'meadow': meadow,
+              **{f'tree{f}': T for f, T in enumerate(tree_frames)}, 'rays0': rays[0], 'rays1': rays[1],
+              'fg0': fg_frames[0], 'fg1': fg_frames[1], 'fg2': fg_frames[2], 'fg3': fg_frames[3],
+              'cshadow': cshadow, 'dissolve': dis}
     for k, L in layers.items():
         L.save(f'hero/{k}.png')
     with open(os.path.join(OUT, 'hero', 'meta.json'), 'w') as f:
@@ -544,11 +769,15 @@ def hero():
 
     # static frame (fallback, OG card, no-JS)
     frame = Layer(W, H, 0, opaque=True)
-    for k in ['sky', 'wisps', 'bank', 'scene', 'meadow', 'tree', 'fg0']:
+    for k in ['sky', 'wisps', 'bank', 'scene', 'meadow']:
         frame.over(layers[k])
+    frame.blend(rays[0], 0.9)
+    frame.over(tree_frames[0])
+    frame.over(fg_frames[0])
+    frame.blend(cshadow)
     for (x, y), c in zip(dots, ['blue', 'amber', 'blue', 'green', 'blue']):
         frame.rect(x, y, 2, 2, STATUS[c])
-    frame.rect(sx + 4, sy + 34, 26, 2, '#c9c6d2')
+    frame.rect(sx + 4, sy + 8 + 5 * 5, 26, 2, '#c9c6d2')
     frame.over(dis)
     frame.save('hero.png', 4, alpha=False)
 
