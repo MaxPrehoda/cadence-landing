@@ -140,81 +140,13 @@
         .intro h2 { max-width: 860px; margin: 0 auto 64px; }
 
         /* Product mock */
-        .mock { border: 1px solid var(--line-2); border-radius: 18px; background: #efefeb; padding: 8px; box-shadow: 0 30px 60px -40px rgba(0,0,0,.25); }
-        .mock-in { display: grid; grid-template-columns: 1.55fr 1fr; gap: 8px; min-height: 520px; }
-        .canvas { position: relative; border-radius: 12px; background-color: #f1f1ed; background-image: radial-gradient(#d6d6cf 1px, transparent 1px); background-size: 16px 16px; overflow: hidden; }
-        .canvas .top { position: absolute; left: 12px; top: 12px; right: 12px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
-        .canvas .tag { background: #fff; border: 1px solid var(--line-2); border-radius: 6px; padding: 4px 8px; color: var(--ink-2); }
-        .canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-        .node { position: absolute; transform: translate(-50%, -50%); background: #fff; border: 1px solid var(--line-2); border-radius: 8px; padding: 8px 12px; font-size: 12.5px; color: var(--ink-2); white-space: nowrap; display: flex; align-items: center; gap: 7px; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
-        .node i { width: 7px; height: 7px; border-radius: 50%; }
-        .node small { font-family: var(--mono); font-size: 10px; color: var(--ink-3); }
-        .node.dir { font-family: var(--serif); font-size: 17px; color: var(--ink); padding: 8px 16px; border-color: #b9b9b1; }
-        .canvas .foot { position: absolute; left: 12px; bottom: 10px; font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); }
-        .side { border-radius: 12px; background: var(--panel); border: 1px solid var(--line); display: flex; flex-direction: column; overflow: hidden; }
-        .tabs { display: flex; gap: 4px; padding: 10px; font-size: 12px; color: var(--ink-2); border-bottom: 1px solid var(--line); }
-        .tabs span { padding: 3px 9px; border-radius: 5px; }
-        .tabs span.on { background: #ececE6; border: 1px solid var(--line-2); color: var(--ink); }
-        .inbox { padding: 12px; display: grid; gap: 10px; flex: 1; align-content: start; }
-        .q { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 12px; font-size: 13px; }
         .q .h { display: flex; align-items: center; gap: 7px; font-weight: 600; margin-bottom: 4px; }
         .q .h i { width: 7px; height: 7px; border-radius: 50%; }
         .q .h small { margin-left: auto; font-weight: 400; color: var(--ink-3); font-size: 11px; }
-        .q p { color: var(--ink-2); margin-bottom: 10px; }
-        .opt { display: flex; gap: 8px; align-items: center; padding: 7px 9px; border: 1px solid var(--line); border-radius: 7px; margin-top: 5px; color: var(--ink); }
-        .opt kbd { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); border: 1px solid var(--line-2); border-radius: 4px; padding: 0 5px; background: var(--panel); }
         .opt.sel { background: #2b2b2a; color: #fff; border-color: #2b2b2a; }
         .opt.sel kbd { background: #444; color: #ddd; border-color: #555; }
-        .sugs { display: flex; gap: 6px; flex-wrap: wrap; }
-        .sugs span { font-size: 12px; padding: 4px 10px; border-radius: 99px; background: #f0f0eb; border: 1px solid var(--line); }
-        .ask { margin: 10px; border: 1px solid var(--line-2); border-radius: 9px; background: #fff; padding: 10px 12px; font-size: 12px; color: var(--ink-3); display: flex; justify-content: space-between; align-items: center; }
-        .ask b { width: 22px; height: 22px; border-radius: 6px; background: #2b2b2a; color: #fff; display: grid; place-items: center; font-size: 12px; font-weight: 500; }
 
 
-        /* Interactive Inbox demo */
-        .node i { background: var(--blue); transition: background .4s, box-shadow .4s; }
-        .node[data-state="needs"] i { background: var(--amber); box-shadow: 0 0 0 4px rgba(242,162,12,.18); }
-        .node[data-state="done"] i { background: var(--green); }
-        .node[data-state="idle"] i { background: #c4c4bc; }
-        .side { text-align: left; }
-        .node[data-state="working"] i { animation: pulse 2.2s ease-in-out infinite; }
-        .node.ping { animation: ping .9s ease; }
-        @keyframes ping { 30% { transform: translate(-50%, -50%) scale(1.08); border-color: #f2a20c; } }
-        .side:focus { outline: none; }
-        .side:focus-visible { box-shadow: 0 0 0 2px var(--blue); }
-        .tabs .try { margin-left: auto; display: flex; align-items: center; gap: 4px; color: var(--ink-3); font-size: 11.5px; }
-        .tabs .try kbd { font-family: var(--mono); font-size: 10px; border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 4px; padding: 0 4px; background: #fff; color: var(--ink-2); }
-        .tabs .try.hide { opacity: 0; transition: opacity .6s; }
-        .q { position: relative; animation: cardIn .35s ease; }
-        @keyframes cardIn { from { opacity: 0; transform: translateY(6px); } }
-        .q .pager { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); margin-left: 8px; font-weight: 400; }
-        .q .kind { margin-left: auto; font-weight: 400; color: var(--ink-3); font-size: 11px; }
-        .q pre { font-family: var(--mono); font-size: 11.5px; background: #f3f3ef; border: 1px solid var(--line); border-radius: 6px; padding: 7px 9px; margin: -2px 0 10px; color: var(--ink); white-space: pre-wrap; }
-        button.opt { width: 100%; font: inherit; text-align: left; background: #fff; cursor: pointer; transition: background .15s, border-color .15s; }
-        button.opt:hover { border-color: #b9b9b1; }
-        button.opt.sel { background: #2b2b2a; color: #fff; border-color: #2b2b2a; }
-        button.opt:disabled { cursor: default; }
-        button.opt:disabled:not(.sel) { opacity: .45; }
-        .sugs button { font: inherit; font-size: 12px; padding: 4px 10px 4px 6px; border-radius: 99px; background: #f0f0eb; border: 1px solid var(--line); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; color: var(--ink); }
-        .sugs button kbd { font-family: var(--mono); font-size: 10px; color: var(--ink-3); background: #fff; border: 1px solid var(--line-2); border-radius: 4px; padding: 0 4px; }
-        .sugs button.sel { background: #2b2b2a; color: #fff; border-color: #2b2b2a; }
-        .sent { position: relative; overflow: hidden; display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 8px 10px; border-radius: 7px; background: #eaf7ef; border: 1px solid #c4e8d1; color: #17703b; font-size: 12.5px; font-weight: 500; }
-        .sent button { margin-left: auto; font: inherit; font-size: 11.5px; font-weight: 400; background: none; border: 0; color: #2f6b45; cursor: pointer; display: flex; gap: 5px; align-items: center; }
-        .sent kbd { font-family: var(--mono); font-size: 10px; border: 1px solid #b5dcc3; border-radius: 4px; padding: 0 4px; background: #fff; }
-        .sent .bar { position: absolute; left: 0; bottom: 0; height: 2px; background: var(--green); width: 0; }
-        .sent.go .bar { width: 100%; transition: width 2s linear; }
-        .cardfoot { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 11.5px; color: var(--ink-3); }
-        .cardfoot button { font: inherit; background: none; border: 0; color: var(--ink-3); cursor: pointer; display: flex; gap: 5px; align-items: center; padding: 0; }
-        .cardfoot button:hover { color: var(--ink); }
-        .cardfoot kbd { font-family: var(--mono); font-size: 10px; border: 1px solid var(--line-2); border-radius: 4px; padding: 0 4px; background: #fff; }
-        .empty { text-align: center; padding: 48px 12px; }
-        .empty .h { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-        .empty .b { font-size: 13px; color: var(--ink-3); margin-bottom: 16px; }
-        .empty button { font: inherit; font-size: 12.5px; padding: 6px 12px; border-radius: 7px; border: 1px solid var(--line-2); background: #fff; cursor: pointer; }
-        .ask input { flex: 1; border: 0; outline: 0; background: transparent; font: inherit; font-size: 12.5px; color: var(--ink); min-width: 0; }
-        .ask button { background: none; border: 0; padding: 0; cursor: pointer; }
-        .ask.flash { border-color: var(--green); transition: border-color .2s; }
-        .demo-cap { margin-top: 14px; font-size: 13.5px; color: var(--ink-3); }
         .cols3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; margin-top: 44px; text-align: left; color: var(--ink-2); font-size: 16px; }
         .cols3 b { color: var(--ink); font-weight: 600; }
         .ctarow { display: flex; justify-content: center; align-items: center; gap: 48px; margin-top: 56px; text-align: left; color: var(--ink-2); }
@@ -239,50 +171,12 @@
         details p { padding: 0 16px 16px 50px; color: var(--ink-2); font-size: 15px; }
         kbd.k { font-family: var(--mono); font-size: 12px; border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: #fff; }
 
-        .board { position: relative; border: 1px solid var(--line-2); border-radius: 16px; background-color: #f1f1ed; background-image: radial-gradient(#d6d6cf 1px, transparent 1px); background-size: 16px 16px; padding: 22px; min-height: 420px; }
-        .board .lbl { font-family: var(--mono); font-size: 11px; color: var(--ink-3); background: #fff; border: 1px solid var(--line-2); border-radius: 6px; padding: 3px 8px; display: inline-block; margin-bottom: 14px; }
 
-        .toolbar-mock { display: grid; grid-template-columns: 1fr 60px; gap: 20px; }
-        .peek { background: #151418; border-radius: 16px; padding: 18px 20px; color: #ecebf0; font-size: 14px; display: grid; gap: 4px; }
-        .peek .r { display: flex; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid #27262c; }
-        .peek .r:last-child { border: 0; }
-        .peek i { width: 9px; height: 9px; border-radius: 50%; }
-        .peek small { margin-left: auto; font-family: var(--mono); font-size: 11px; color: #75737e; }
-        .peek small.need { color: var(--amber); font-family: var(--sans); font-size: 12px; }
         .peek small.done { color: var(--green); font-family: var(--sans); font-size: 12px; }
-        .strip { background: #111014; border-radius: 30px; padding: 12px 0; display: flex; flex-direction: column; align-items: center; gap: 12px; }
-        .strip .inb { width: 30px; height: 30px; border-radius: 9px; background: #2c2a33; position: relative; }
-        .strip .inb::after { content: '2'; position: absolute; right: -5px; top: -5px; width: 16px; height: 16px; border-radius: 50%; background: var(--amber); color: #111; font-size: 10px; font-weight: 700; display: grid; place-items: center; }
-        .strip .dots { background: #1f1e25; border-radius: 16px; padding: 10px 9px; display: grid; gap: 10px; }
-        .strip .dots i { width: 12px; height: 12px; border-radius: 50%; display: block; }
-        .pulse { animation: pulse 2.2s ease-in-out infinite; }
-        .pulse.d2 { animation-delay: .7s; } .pulse.d3 { animation-delay: 1.4s; }
         @keyframes pulse { 50% { opacity: .4; } }
 
-        .talk-mock { display: grid; gap: 14px; }
-        .listen { display: flex; align-items: center; gap: 12px; background: #151418; color: #ecebf0; border-radius: 99px; padding: 12px 20px; width: fit-content; font-size: 14px; }
-        .bars { display: flex; gap: 3px; align-items: center; height: 22px; }
-        .bars span { width: 3px; border-radius: 2px; background: #ecebf0; animation: bar 1s ease-in-out infinite; }
-        .bars span:nth-child(1){height:8px} .bars span:nth-child(2){height:18px;animation-delay:.15s} .bars span:nth-child(3){height:12px;animation-delay:.3s} .bars span:nth-child(4){height:20px;animation-delay:.45s} .bars span:nth-child(5){height:10px;animation-delay:.6s}
         @keyframes bar { 50% { transform: scaleY(.45); } }
-        .said { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; font-size: 17px; color: var(--ink); }
-        .rcpt { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .rcpt div { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; font-size: 13.5px; color: var(--ink-2); }
-        .rcpt b { display: flex; align-items: center; gap: 7px; color: var(--ink); font-size: 14px; margin-bottom: 4px; }
-        .rcpt b i { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
-        .rcpt em { display: block; margin-top: 8px; font-style: normal; font-family: var(--mono); font-size: 11px; color: var(--green); }
 
-        .dict-mock { display: grid; gap: 14px; }
-        .msg { background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
-        .msg .bar { font-size: 12px; font-weight: 600; color: var(--ink-3); padding: 10px 14px; border-bottom: 1px solid var(--line); }
-        .msg .body { padding: 16px 14px; font-size: 16px; }
-        .caret { display: inline-block; width: 2px; height: 18px; background: var(--blue); vertical-align: -3px; animation: pulse 1s steps(1) infinite; }
-        .holdkey { display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--ink-2); }
-        .holdkey kbd { font-family: var(--sans); font-size: 22px; width: 52px; height: 48px; display: grid; place-items: center; background: #fff; border: 1px solid var(--line-2); border-bottom-width: 3px; border-radius: 9px; color: var(--ink); }
-        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-        .stats div { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
-        .stats b { display: block; font-family: var(--mono); font-weight: 500; font-size: 26px; letter-spacing: -0.02em; }
-        .stats span { font-size: 12.5px; color: var(--ink-3); }
 
         /* Harbour band */
         .band { position: relative; margin-top: 160px; }
@@ -299,19 +193,24 @@
 
 
 
-        /* Real app reel */
-        .reel { margin-top: 72px; }
-        .reel-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 10px; }
-        .reel-tabs button { text-align: left; font: inherit; background: var(--panel); border: 1px solid var(--line-2); border-radius: 10px; padding: 12px 14px; cursor: pointer; color: var(--ink-2); display: grid; gap: 2px; transition: background .15s, border-color .15s; }
-        .reel-tabs button small { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
-        .reel-tabs button span { font-size: 13.5px; color: var(--ink-3); }
-        .reel-tabs button { font-weight: 500; font-size: 15.5px; }
-        .reel-tabs button[aria-selected="true"] { background: #fff; border-color: #b9b9b1; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
-        .reel-frame { position: relative; border: 1px solid var(--line-2); border-radius: 18px; background: #efefeb; padding: 8px; box-shadow: 0 30px 60px -40px rgba(0,0,0,.3); }
-        .reel-frame video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 12px; background: #3e7fd9; }
-        .reel-play { position: absolute; right: 20px; bottom: 20px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,.3); background: rgba(16,20,30,.55); color: #fff; font-size: 11px; cursor: pointer; backdrop-filter: blur(6px); }
-        .reel-cap { margin-top: 12px; font-size: 13.5px; color: var(--ink-3); }
-        @media (max-width: 700px) { .reel-tabs button span { display: none; } .reel-tabs button { padding: 10px; } }
+        /* Live embed of the real components */
+        .intro { text-align: left; }
+        .intro h2 { margin: 0 0 40px; max-width: none; }
+        .live { position: relative; border: 1px solid var(--line-2); border-radius: 18px; background: #efefeb; padding: 8px; box-shadow: 0 30px 60px -40px rgba(0,0,0,.3); }
+        .live iframe { display: block; width: 100%; aspect-ratio: 16 / 10; border: 0; border-radius: 12px; background: #1a1a1f; }
+        .live-cap { margin-top: 14px; font-size: 14px; color: var(--ink-3); }
+        /* Recorded clips */
+        .clip { margin: 0; border: 1px solid var(--line-2); border-radius: 16px; background: #efefeb; padding: 6px; box-shadow: 0 24px 50px -36px rgba(0,0,0,.3); }
+        .clip video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; border-radius: 11px; background: #2a2a30; }
+        .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+        .pair p { margin-top: 14px; color: var(--ink-2); font-size: 15.5px; }
+        .pair b { color: var(--ink); font-weight: 600; }
+        .dstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 12px; }
+        .dstats div { background: var(--panel); border: 1px solid var(--line-2); border-radius: 12px; padding: 12px 14px; }
+        .dstats b { display: block; font-family: var(--mono); font-weight: 500; font-size: 22px; }
+        .dstats span { font-size: 12.5px; color: var(--ink-3); }
+        @media (max-width: 600px) { .live iframe { aspect-ratio: 4 / 5; } }
+        @media (max-width: 760px) { .pair { grid-template-columns: 1fr; } .dstats { grid-template-columns: 1fr 1fr 1fr; } .dstats b { font-size: 17px; } }
         /* iPhone waitlist */
         .iphone { padding: 150px 0 0; }
         .iphone-grid { display: grid; grid-template-columns: 1fr 340px; gap: 72px; align-items: center; }
@@ -385,8 +284,6 @@
             .hero > .hero-art { object-position: 12% 100%; }
             .hero::after { content: ''; position: absolute; inset: 0 0 45% 0; z-index: 1; background: linear-gradient(to bottom, rgba(30,80,170,.55), rgba(30,80,170,0)); pointer-events: none; }
             .chip { min-width: 0; }
-            .mock-in { grid-template-columns: 1fr; }
-            .canvas { min-height: 420px; }
             .cols3, .ledger { grid-template-columns: 1fr 1fr; }
             .feat, .feat.flip { grid-template-columns: 1fr; gap: 32px; }
             .feat.flip > .copy { order: 0; }
@@ -399,8 +296,6 @@
             .wl { flex-direction: column; } .phone { width: 280px; }
             .hero-copy { padding-top: 112px; }
             .links { gap: 32px; flex-wrap: wrap; }
-            .node { font-size: 11px; padding: 6px 9px; }
-            .node small { display: none; }
         }
     </style>
 
@@ -435,7 +330,7 @@
         <p>Cadence keeps Claude Code, Codex and the rest moving. Every question and finished task lands in one place. Answer with a keystroke, or just say it.</p>
         <div class="row">
             <a href="#download" class="cta">Download for Mac</a>
-            <a href="#inbox" class="cta glass">See how it works</a>
+            <a href="#try" class="cta glass">Try the Inbox</a>
         </div>
         <div class="fine">Free · No account · macOS 13+ on Apple Silicon</div>
     </div>
@@ -447,39 +342,14 @@
 </header>
 
 <!-- Intro + product mock -->
-<section class="intro">
+<section class="intro" id="try">
     <div class="wrap">
-        <h2 class="two reveal">Cadence is a control layer for your coding agents<br><span>so none of them sit waiting on you</span></h2>
-
-        <div class="mock reveal" id="demo-mock">
-            <div class="mock-in">
-                <div class="canvas" aria-hidden="true">
-                    <div class="top"><span class="tag">~/Developer · 5 agents</span><span>⌥⌥ to talk</span></div>
-                    <svg viewBox="0 0 600 520" preserveAspectRatio="none">
-                        <circle cx="300" cy="275" r="165" fill="none" stroke="#cfcfc7"/>
-                        <g stroke="#bdbdb5" stroke-dasharray="4 5" fill="none">
-                            <path d="M300 275 L300 110"/><path d="M300 275 L148 190"/><path d="M300 275 L452 190"/><path d="M300 275 L160 390"/><path d="M300 275 L440 390"/>
-                        </g>
-                    </svg>
-                    <div class="node" data-agent="auth" style="left:50%;top:21%"><i></i>Auth refactor <small>claude</small></div>
-                    <div class="node" data-agent="billing" style="left:24.5%;top:36.5%"><i></i>Billing webhooks <small>claude</small></div>
-                    <div class="node" data-agent="ci" style="left:75.5%;top:36.5%"><i></i>Flaky CI tests <small>codex</small></div>
-                    <div class="node" data-agent="docs" style="left:26.5%;top:75%"><i></i>Docs site upgrade <small>amp</small></div>
-                    <div class="node" data-agent="onboard" style="left:73.5%;top:75%"><i></i>Onboarding copy <small>gemini</small></div>
-                    <div class="node dir" style="left:50%;top:53%">Director</div>
-                    <div class="foot">blue working · amber needs you · green done</div>
-                </div>
-                <div class="side" id="demo" tabindex="0" aria-label="Interactive Inbox demo. Press 1 to 9 to answer, J and K to move between cards, E to skip, Escape to undo.">
-                    <div class="tabs"><span class="on" id="demo-tab">Inbox</span><span>Agents</span><span>Sets</span><span class="try" id="demo-try">Try it <kbd>1</kbd><kbd>J</kbd><kbd>K</kbd><kbd>E</kbd></span></div>
-                    <div class="inbox" id="demo-card" aria-live="polite"></div>
-                    <form class="ask" id="demo-ask" autocomplete="off">
-                        <input id="demo-input" placeholder="Reply…" aria-label="Type a reply">
-                        <button type="submit" aria-label="Send"><b>↑</b></button>
-                    </form>
-                </div>
-            </div>
+        <div class="eyebrow reveal">Try it</div>
+        <h2 class="two reveal">This is the real Inbox.<br><span>Press 1 to answer.</span></h2>
+        <div class="live reveal">
+            <iframe id="live" src="embed/" title="Interactive Cadence demo: the real toolbar and Inbox with sample agents" loading="lazy"></iframe>
         </div>
-        <p class="demo-cap reveal">This is a working copy of the Inbox. Click an answer or use the keys, the same ones the app uses.</p>
+        <p class="live-cap reveal">Cadence's actual interface running in your browser, with sample agents. Click or tap into it, then use <kbd class="k">1</kbd>–<kbd class="k">9</kbd>, <kbd class="k">esc</kbd>, <kbd class="k">J</kbd> <kbd class="k">K</kbd> and <kbd class="k">E</kbd>, or hover the dots.</p>
 
         <div class="cols3 reveal">
             <div><b>One inbox.</b> Plan approvals, tool permissions and questions from every agent, as numbered choices you answer with one key.</div>
@@ -500,23 +370,6 @@
         <h2 class="two reveal">Keep writing the code.<br><span>Let Cadence keep the agents moving.</span></h2>
         <p class="lead reveal">Five terminals, three of them waiting on a yes, and you find out ten minutes later when you happen to tab back. Cadence watches every agent for you, brings you only what needs a decision, and sends your answer back to the right place.</p>
 
-        <!-- Real app footage -->
-        <div class="reel reveal" id="reel">
-            <div class="reel-tabs" role="tablist" aria-label="App clips">
-                <button role="tab" aria-selected="true" data-clip="toolbar"><small>01</small>Toolbar<span>An agent needs you, peek at every title</span></button>
-                <button role="tab" aria-selected="false" data-clip="inbox"><small>02</small>Inbox<span>Answer with 1, take it back with esc</span></button>
-                <button role="tab" aria-selected="false" data-clip="talk"><small>03</small>Talk<span>Say it once, it goes to the right agent</span></button>
-            </div>
-            <div class="reel-frame">
-                <video id="reel-video" muted loop playsinline preload="metadata" poster="media/toolbar-poster.jpg" width="1600" height="1000" aria-label="The Cadence toolbar on a Mac desktop">
-                    <source src="media/toolbar.webm" type="video/webm">
-                    <source src="media/toolbar.mp4" type="video/mp4">
-                </video>
-                <button class="reel-play" id="reel-play" aria-label="Pause">❚❚</button>
-            </div>
-            <p class="reel-cap">Recorded from Cadence's real interface, with sample agents.</p>
-        </div>
-
         <!-- 1.0 Toolbar + Inbox -->
         <div class="feat" id="inbox">
             <div class="copy reveal">
@@ -528,24 +381,12 @@
                 <details><summary><small>1.3</small>Recaps of finished work</summary><p>When an agent finishes, you get a short recap and suggested next steps instead of a wall of output.</p></details>
                 <details><summary><small>1.4</small>Keyboard first</summary><p><kbd class="k">J</kbd> <kbd class="k">K</kbd> to move, <kbd class="k">E</kbd> to dismiss, <kbd class="k">V</kbd> to talk, <kbd class="k">S</kbd> to attach a screenshot. Every answer has a two-second take-back.</p></details>
             </div>
-            <div class="board reveal" role="img" aria-label="The toolbar strip next to its expanded agent list">
-                <span class="lbl">Toolbar · peek</span>
-                <div class="toolbar-mock">
-                    <div class="peek">
-                        <div class="r"><i class="pulse" style="background:var(--blue)"></i>Auth refactor<small>claude</small></div>
-                        <div class="r"><i style="background:var(--amber)"></i>Billing webhooks<small class="need">needs you</small></div>
-                        <div class="r"><i class="pulse d2" style="background:var(--blue)"></i>Flaky CI tests<small>codex</small></div>
-                        <div class="r"><i style="background:var(--green)"></i>Docs site upgrade<small class="done">done</small></div>
-                        <div class="r"><i class="pulse d3" style="background:var(--blue)"></i>Onboarding copy<small>gemini</small></div>
-                    </div>
-                    <div class="strip">
-                        <div class="inb"></div>
-                        <div class="dots">
-                            <i class="pulse" style="background:var(--blue)"></i><i style="background:var(--amber)"></i><i class="pulse d2" style="background:var(--blue)"></i><i style="background:var(--green)"></i><i class="pulse d3" style="background:var(--blue)"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/toolbar-poster.jpg" width="1600" height="1000" aria-label="Recording of the Cadence toolbar: an agent turns amber, then the peek list of agent titles opens">
+                    <source src="media/toolbar.webm" type="video/webm">
+                    <source src="media/toolbar.mp4" type="video/mp4">
+                </video>
+            </figure>
         </div>
 
         <!-- 2.0 Talk + Director -->
@@ -559,16 +400,31 @@
                 <details><summary><small>2.3</small>Titles, not process IDs</summary><p>Every agent gets a short plain-English title, so your list reads like a to-do list.</p></details>
                 <details><summary><small>2.4</small>Sets</summary><p>Put a whole project's agents away as a set. Their windows close, they keep running, and one chip turns amber if anything needs you.</p></details>
             </div>
-            <div class="board reveal" role="img" aria-label="One spoken request routed to two agents">
-                <span class="lbl">Talk · ⌥⌥</span>
-                <div class="talk-mock">
-                    <div class="listen"><div class="bars"><span></span><span></span><span></span><span></span><span></span></div>Listening…</div>
-                    <div class="said">"Tell the billing one the tests are flaky on CI, and spin up something to fix the nav deprecation in the docs site."</div>
-                    <div class="rcpt">
-                        <div><b><i></i>Billing webhooks</b>"Tests are flaky on CI, take a look."<em>→ sent</em></div>
-                        <div><b><i></i>New agent</b>~/Developer/docs-site<em>→ started</em></div>
-                    </div>
-                </div>
+            <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/talk-poster.jpg" width="1600" height="1000" aria-label="Recording of Talk: a spoken request is routed to the Billing webhooks agent and a typed one starts a new agent">
+                    <source src="media/talk.webm" type="video/webm">
+                    <source src="media/talk.mp4" type="video/mp4">
+                </video>
+            </figure>
+        </div>
+        <div class="pair">
+            <div class="reveal">
+                <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/director-poster.jpg" width="1600" height="1000" aria-label="Recording of the Director answering what is left before shipping">
+                    <source src="media/director.webm" type="video/webm">
+                    <source src="media/director.mp4" type="video/mp4">
+                </video>
+            </figure>
+                <p><b>Director.</b> Ask "what's left before I can ship?" and it answers from every agent's actual work.</p>
+            </div>
+            <div class="reveal">
+                <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/sets-poster.jpg" width="1600" height="1000" aria-label="Recording of putting a group of agents away as a set">
+                    <source src="media/sets.webm" type="video/webm">
+                    <source src="media/sets.mp4" type="video/mp4">
+                </video>
+            </figure>
+                <p><b>Sets.</b> Put a project's agents away. They keep running in one chip that turns amber when something needs you.</p>
             </div>
         </div>
 
@@ -582,16 +438,17 @@
                 <details><summary><small>3.2</small>Your vocabulary</summary><p>Teach it project names, people and jargon, and set auto-corrections for the words it keeps missing.</p></details>
                 <details><summary><small>3.3</small>Text Polish</summary><p>A small local model cleans up filler words and punctuation, and adjusts tone per app: casual in Slack, formal in email.</p></details>
             </div>
-            <div class="board reveal" role="img" aria-label="Holding Option to dictate a Slack message">
-                <span class="lbl">Dictation · hold ⌥</span>
-                <div class="dict-mock">
-                    <div class="holdkey"><kbd>⌥</kbd><div class="bars" style="filter:invert(1)"><span></span><span></span><span></span><span></span><span></span></div>Holding…</div>
-                    <div class="msg"><div class="bar"># eng-team</div><div class="body">Pushed the auth fix, can someone review before standup?<span class="caret"></span></div></div>
-                    <div class="stats">
-                        <div><b>1.9%</b><span>word error rate, clean speech</span></div>
-                        <div><b>~330ms</b><span>from letting go to text</span></div>
-                        <div><b>0</b><span>phantom words from noise</span></div>
-                    </div>
+            <div>
+                <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/dictation-poster.jpg" width="1600" height="1000" aria-label="Recording of dictation: holding Option, the Cadence indicator listens and the words land in the text field">
+                    <source src="media/dictation.webm" type="video/webm">
+                    <source src="media/dictation.mp4" type="video/mp4">
+                </video>
+            </figure>
+                <div class="dstats reveal">
+                    <div><b>1.9%</b><span>word error rate, clean speech</span></div>
+                    <div><b>~330ms</b><span>from letting go to text</span></div>
+                    <div><b>0</b><span>phantom words from noise</span></div>
                 </div>
             </div>
         </div>
@@ -709,151 +566,6 @@
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
-<script>
-/* Interactive Inbox: mirrors the app's AgentsPopover (one card at a time,
-   1-9 answer, J/K move, E skip/clear, Esc take-back within 2 s). */
-(() => {
-    const root = document.getElementById('demo');
-    const cardEl = document.getElementById('demo-card');
-    const tab = document.getElementById('demo-tab');
-    const tryEl = document.getElementById('demo-try');
-    const form = document.getElementById('demo-ask');
-    const input = document.getElementById('demo-input');
-    const mock = document.getElementById('demo-mock');
-    if (!root) return;
-    const UNDO_MS = 2000;
-    const nodes = Object.fromEntries([...document.querySelectorAll('.node[data-agent]')].map(n => [n.dataset.agent, n]));
-    const AG = { auth: 'Auth refactor', billing: 'Billing webhooks', ci: 'Flaky CI tests', docs: 'Docs site upgrade', onboard: 'Onboarding copy' };
-
-    const SCRIPT = {
-        billing: { agent: 'billing', kind: 'question', text: 'Stripe retries can arrive out of order. How should I handle duplicates?',
-                   options: ['Idempotency key per event', 'Lock the row while processing', 'Ignore and log them'] },
-        docs:    { agent: 'docs', kind: 'finished', text: 'Upgraded to Next 15.2, build is green. One deprecation left in the nav.',
-                   suggestions: ['Fix the deprecation', 'Ship it'] },
-        ci:      { agent: 'ci', kind: 'plan', text: 'Plan: quarantine the 2 flaky e2e specs, add one retry to the CI job, open an issue for each.',
-                   options: ['Approve plan', 'Keep retries out, just quarantine'] },
-        auth:    { agent: 'auth', kind: 'permission', text: 'Wants to run a command:', cmd: 'pnpm test src/auth',
-                   options: ['Allow', 'Deny'] },
-        onboard: { agent: 'onboard', kind: 'finished', text: 'Rewrote the 4 onboarding screens. Shorter, and each one names a single action.',
-                   suggestions: ['Open the diff', 'Ship it'] },
-    };
-    const LATER = [['auth', 2600], ['onboard', 6500]];
-    let items, idx, pending, timers = [], touched = false;
-
-    function setNode(id, state) { const n = nodes[id]; if (!n) return; n.dataset.state = state; if (state === 'needs' || state === 'done') { n.classList.remove('ping'); void n.offsetWidth; n.classList.add('ping'); } }
-    function reset() {
-        timers.forEach(clearTimeout); timers = [];
-        pending = null;
-        items = [SCRIPT.billing, SCRIPT.docs, SCRIPT.ci].map(x => ({ ...x }));
-        idx = 0;
-        setNode('auth', 'working'); setNode('onboard', 'working');
-        setNode('billing', 'needs'); setNode('ci', 'needs'); setNode('docs', 'done');
-        render();
-    }
-    function arrive(id) {
-        const it = { ...SCRIPT[id] };
-        items.push(it);
-        setNode(id, it.kind === 'finished' ? 'done' : 'needs');
-        render();
-    }
-    function render() {
-        tab.textContent = items.length ? `Inbox · ${items.length}` : 'Inbox';
-        if (!items.length) {
-            cardEl.innerHTML = `<div class="empty"><div class="h">Nothing needs you.</div><div class="b">Suspiciously quiet. Questions and finished work land here.</div><button type="button" data-act="replay">Replay the demo</button></div>`;
-            input.placeholder = 'Reply…';
-            return;
-        }
-        idx = Math.max(0, Math.min(idx, items.length - 1));
-        const it = items[idx];
-        const color = it.kind === 'finished' ? 'var(--green)' : 'var(--amber)';
-        const kindLabel = { question: 'question', plan: 'plan approval', permission: 'permission', finished: 'done' }[it.kind];
-        const chosen = pending && pending.item === it ? pending.choice : -1;
-        const dis = pending ? 'disabled' : '';
-        let body = `<p>${it.text}</p>`;
-        if (it.cmd) body += `<pre>$ ${it.cmd}</pre>`;
-        if (it.options) body += it.options.map((o, i) => `<button type="button" class="opt${i === chosen ? ' sel' : ''}" data-choice="${i}" ${dis}><kbd>${i + 1}</kbd>${o}</button>`).join('');
-        else body += `<div class="sugs">${it.suggestions.map((o, i) => `<button type="button" class="${i === chosen ? 'sel' : ''}" data-choice="${i}" ${dis}><kbd>${i + 1}</kbd>${o}</button>`).join('')}</div>`;
-        let foot;
-        if (pending && pending.item === it) {
-            foot = `<div class="sent" id="demo-sent">✓ ${it.kind === 'finished' ? 'Reply sent' : 'Answer sent'}<button type="button" data-act="undo"><kbd>esc</kbd> to undo</button><span class="bar"></span></div>`;
-        } else {
-            foot = `<div class="cardfoot"><button type="button" data-act="skip">${it.kind === 'finished' ? 'Clear' : 'Skip'} <kbd>E</kbd></button><span><kbd>J</kbd> <kbd>K</kbd> ${idx + 1} of ${items.length}</span></div>`;
-        }
-        cardEl.innerHTML = `<div class="q"><div class="h"><i style="background:${color}"></i>${AG[it.agent]}<span class="pager">${idx + 1}/${items.length}</span><small class="kind">${kindLabel}</small></div>${body}${foot}</div>`;
-        input.placeholder = `Reply to ${AG[it.agent]}…`;
-        const sent = document.getElementById('demo-sent');
-        if (sent) requestAnimationFrame(() => requestAnimationFrame(() => sent.classList.add('go')));
-    }
-    function firstTouch() {
-        if (touched) return; touched = true;
-        tryEl.classList.add('hide');
-        LATER.forEach(([id, ms]) => timers.push(setTimeout(() => arrive(id), ms)));
-    }
-    function choose(i, label) {
-        const it = items[idx];
-        if (!it || pending) return;
-        const list = it.options || it.suggestions;
-        if (label === undefined && !list[i]) return;
-        firstTouch();
-        pending = { item: it, choice: i, t: setTimeout(commit, UNDO_MS) };
-        render();
-    }
-    function commit() {
-        const p = pending; if (!p) return;
-        pending = null;
-        const at = items.indexOf(p.item);
-        if (at >= 0) items.splice(at, 1);
-        setNode(p.item.agent, 'working');
-        render();
-    }
-    function undo() { if (!pending) return; clearTimeout(pending.t); pending = null; render(); }
-    function skip() {
-        const it = items[idx]; if (!it || pending) return;
-        firstTouch();
-        items.splice(idx, 1);
-        setNode(it.agent, 'idle');
-        render();
-    }
-    function move(d) { if (pending || !items.length) return; firstTouch(); idx = (idx + d + items.length) % items.length; render(); }
-
-    cardEl.addEventListener('click', e => {
-        const b = e.target.closest('button'); if (!b) return;
-        if (b.dataset.choice !== undefined) choose(+b.dataset.choice);
-        else if (b.dataset.act === 'undo') undo();
-        else if (b.dataset.act === 'skip') skip();
-        else if (b.dataset.act === 'replay') { touched = false; tryEl.classList.remove('hide'); reset(); }
-    });
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        const v = input.value.trim(); if (!v || !items.length || pending) return;
-        input.value = ''; input.blur();
-        firstTouch();
-        pending = { item: items[idx], choice: -1, t: setTimeout(commit, UNDO_MS) };
-        form.classList.add('flash'); setTimeout(() => form.classList.remove('flash'), 600);
-        render();
-    });
-
-    // Keys work while the demo is focused, or while it fills most of the
-    // screen, so the page itself never loses J/K/space scrolling elsewhere.
-    let visible = false;
-    new IntersectionObserver(es => es.forEach(e => visible = e.intersectionRatio > 0.6), { threshold: [0, 0.6, 1] }).observe(root);
-    document.addEventListener('keydown', e => {
-        if (e.metaKey || e.ctrlKey || e.altKey) return;
-        const inField = e.target === input;
-        const active = root.contains(document.activeElement) || visible;
-        if (!active) return;
-        if (e.target !== input && e.target.closest && e.target.closest('input, textarea, select')) return;
-        if (e.key === 'Escape') { if (pending) { e.preventDefault(); undo(); } else if (inField) input.blur(); return; }
-        if (inField) return;
-        if (/^[1-9]$/.test(e.key)) { e.preventDefault(); choose(+e.key - 1); }
-        else if (e.key === 'j' || e.key === 'J') { e.preventDefault(); move(1); }
-        else if (e.key === 'k' || e.key === 'K') { e.preventDefault(); move(-1); }
-        else if (e.key === 'e' || e.key === 'E') { e.preventDefault(); skip(); }
-        else if (e.key === ' ' && root.contains(document.activeElement)) { e.preventDefault(); input.focus(); }
-    });
-    reset();
-})();
-</script>
 
 <script>
 /* iPhone waitlist: POST /api/waitlist. If the store isn't connected yet,
@@ -896,34 +608,19 @@
 })();
 </script>
 
+
 <script>
-/* Real-app reel: tabs swap clips; plays only while on screen; no autoplay
-   for people who prefer reduced motion. */
+/* Clips play only while on screen; reduced motion shows posters with controls. */
 (() => {
-    const reel = document.getElementById('reel'); if (!reel) return;
-    const video = document.getElementById('reel-video');
-    const play = document.getElementById('reel-play');
-    const tabs = [...reel.querySelectorAll('[role=tab]')];
-    const labels = { toolbar: 'The Cadence toolbar on a Mac desktop', inbox: 'Answering a question in the Cadence Inbox', talk: 'Talking to Cadence to route requests to agents' };
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let onScreen = false, paused = reduce;
-    const sync = () => {
-        if (onScreen && !paused) video.play().catch(() => {}); else video.pause();
-        play.textContent = paused ? '▶' : '❚❚';
-        play.setAttribute('aria-label', paused ? 'Play' : 'Pause');
-    };
-    tabs.forEach(t => t.addEventListener('click', () => {
-        const c = t.dataset.clip;
-        tabs.forEach(x => x.setAttribute('aria-selected', String(x === t)));
-        video.poster = `media/${c}-poster.jpg`;
-        video.setAttribute('aria-label', labels[c]);
-        video.innerHTML = `<source src="media/${c}.webm" type="video/webm"><source src="media/${c}.mp4" type="video/mp4">`;
-        video.load();
-        if (reduce && paused) return sync();
-        paused = false; sync();
-    }));
-    play.addEventListener('click', () => { paused = !paused; sync(); });
-    new IntersectionObserver(es => es.forEach(e => { onScreen = e.isIntersecting; sync(); }), { threshold: 0.35 }).observe(video);
+    const vids = [...document.querySelectorAll('.clip video')];
+    if (reduce) { vids.forEach(v => v.controls = true); return; }
+    const io = new IntersectionObserver(es => es.forEach(e => {
+        const v = e.target;
+        if (e.isIntersecting) { if (v.preload === 'none') { v.preload = 'auto'; v.load(); } v.play().catch(() => {}); }
+        else v.pause();
+    }), { threshold: 0.4 });
+    vids.forEach(v => io.observe(v));
 })();
 </script>
 <script src="hero-anim.js" defer></script>

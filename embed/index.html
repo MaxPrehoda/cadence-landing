@@ -1,0 +1,144 @@
+<!doctype html>
+<!--
+  Cadence live demo: the REAL app windows, running in the browser.
+
+  What this is
+    A small macOS desktop with Cadence's actual toolbar, Inbox panel and Talk
+    window on it. Each window is an <iframe> of the app's own page, built from
+    the voice-flow source (Svelte 5) into ./app/ — nothing here is redrawn.
+    stage.js stands in for the Rust backend: it holds the scenario's agents,
+    answers every invoke the windows make and sends the events they listen
+    for. app/tauri-shim.js (injected into each built page) forwards a
+    window's __TAURI_INTERNALS__ to it. No network calls besides Google Fonts.
+
+  Embedding (homepage)
+    <iframe src="/embed/" title="Cadence, live" loading="lazy"
+            style="width:100%; aspect-ratio:16/10; border:0"></iframe>
+    Intended aspect ratio: 16:10 (logical desktop 1040x650, scaled to fit with
+    a CSS transform; letterboxed if the frame has another shape). If the frame
+    is under 600px wide and at least ~1:1 tall (e.g. aspect-ratio: 4/5 on
+    phones), it switches to a compact 4:5 desktop (520x650) with just the
+    panel and the toolbar, which reads much larger. On every resize it posts
+      {type: "cadence-embed", event: "layout", aspect, compact, suggestedAspect}
+    to the parent (suggestedAspect is 0.8 under 600px wide, else 1.6), so the
+    page can switch the frame to 4:5 on phones if it wants to.
+    postMessage in:  {type: "cadence-embed", action: "replay"} resets the demo.
+    Keys are only handled while the embed has focus; it never focuses itself.
+
+  Rebuild
+    embed/build.sh [path/to/voice-flow]    (default /home/user/voice-flow)
+    It runs embed/src/build.mjs: vite + the app's Svelte/Tailwind plugins from
+    the voice-flow checkout, base "./", output to embed/app/, then injects
+    tauri-shim.js and the font link. The checkout is not modified.
+
+  Footage
+    The homepage clips in /media are recorded from this same stage
+    (index.html?record: no scaling or demo chrome, a drawn cursor and key
+    captions) by embed/src/footage/clips.mjs; encode.sh loops and encodes.
+-->
+<html lang="en">
+<head>
+<base href="/embed/">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cadence, live</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root { --page: #f5f5f2; }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--page); }
+  body { font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+  #stage {
+    position: absolute; left: 0; top: 0; width: 1040px; height: 650px;
+    transform-origin: 0 0; overflow: hidden; border-radius: 14px;
+    background: #6aa5d8; isolation: isolate;
+  }
+  body.record #stage { border-radius: 0; }
+  #wall {
+    position: absolute; inset: 0;
+    background: url(../art/hero.png) 72% 64% / cover no-repeat;
+    image-rendering: pixelated;
+  }
+  #stage.compact #wall { background-position: 90% 64%; }
+  #wall::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 40%, rgba(0,0,0,0.10) 100%);
+  }
+  #menubar {
+    position: absolute; left: 0; right: 0; top: 0; height: 24px; z-index: 5;
+    display: flex; align-items: center; gap: 18px; padding: 0 14px; box-sizing: border-box;
+    background: rgba(30, 34, 44, 0.34); backdrop-filter: blur(20px) saturate(1.4); -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    color: rgba(255,255,255,0.95); font-size: 13px; font-weight: 500; letter-spacing: -0.005em; white-space: nowrap;
+  }
+  #menubar .app { font-weight: 700; }
+  #menubar .sp { flex: 1; }
+  #menubar svg { display: block; flex: none; }
+  #menubar .r { display: flex; align-items: center; gap: 16px; }
+  #stage.compact #menubar .wide { display: none; }
+  .win { position: absolute; border: 0; background: transparent; color-scheme: normal; z-index: 10; }
+  .win[name="indicator"] { z-index: 12; }
+  .win[name="talk"] { z-index: 14; }
+  .win.hidden { visibility: hidden; pointer-events: none; }
+  #chrome {
+    position: absolute; left: 14px; bottom: 14px; z-index: 20;
+    display: flex; align-items: center; gap: 8px;
+  }
+  #stage.compact #chrome { left: auto; right: 8px; bottom: auto; top: 2px; }
+  #stage.compact #replay { height: 20px; padding: 0 9px; font-size: 11.5px; }
+  #stage.compact #menubar .r { display: none; }
+  #replay, #hint {
+    display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; box-sizing: border-box;
+    border-radius: 999px; font: 500 12.5px/1 "Inter", sans-serif; color: #fff;
+    background: rgba(11, 11, 12, 0.62); border: 1px solid rgba(255,255,255,0.14);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  }
+  #replay { cursor: pointer; transition: background .15s; }
+  #replay:hover { background: rgba(11, 11, 12, 0.82); }
+  #replay:focus-visible { outline: 2px solid #3080ff; outline-offset: 2px; }
+  #hint { color: rgba(255,255,255,0.9); transition: opacity .4s; }
+  #hint kbd { font: 600 11px/1 "Inter", sans-serif; padding: 3px 5px; border-radius: 5px; background: rgba(255,255,255,0.16); }
+  body.engaged #hint { opacity: 0; pointer-events: none; }
+  #stage.compact #hint { display: none; }
+  body.record #chrome { display: none; }
+  #cursor, #keys { display: none; }
+  body.record #cursor { display: block; position: absolute; left: 0; top: 0; z-index: 50; pointer-events: none; width: 22px; height: 32px;
+    transform: translate(-100px, -100px); filter: drop-shadow(0 1px 1.5px rgba(0,0,0,0.45)); }
+  body.record #keys { display: flex; position: absolute; left: 50%; bottom: 30px; transform: translateX(-50%) translateY(8px); z-index: 60; gap: 8px;
+    opacity: 0; transition: opacity 180ms ease, transform 180ms ease; pointer-events: none; }
+  body.record #keys.on { opacity: 1; transform: translateX(-50%); }
+  #keys kbd { min-width: 34px; height: 34px; padding: 0 10px; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center;
+    font: 600 17px "Inter", sans-serif; color: #f2f1ef; background: rgba(11,11,12,0.8); border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 9px; box-shadow: 0 6px 18px rgba(0,0,0,0.35), inset 0 -2px 0 rgba(255,255,255,0.06); }
+  .mock { position: absolute; z-index: 8; display: none; }
+</style>
+<script src="stage.js"></script>
+</head>
+<body>
+  <div id="stage">
+    <div id="wall"></div>
+    <div id="menubar">
+      <svg width="14" height="16" viewBox="0 0 14 16" fill="currentColor" aria-hidden="true"><path d="M11.6 8.5c0-1.9 1.6-2.8 1.6-2.8-.9-1.3-2.3-1.5-2.8-1.5-1.2-.1-2.3.7-2.9.7-.6 0-1.5-.7-2.5-.7C3.7 4.2 2.4 5 1.7 6.3.3 8.8 1.3 12.4 2.7 14.4c.7 1 1.5 2 2.5 2s1.4-.6 2.6-.6c1.2 0 1.5.6 2.6.6 1.1 0 1.7-1 2.4-2 .8-1.1 1.1-2.2 1.1-2.3 0 0-2.3-.9-2.3-3.6zM9.6 2.7c.5-.7.9-1.6.8-2.5-.8 0-1.8.5-2.3 1.2-.5.6-1 1.5-.8 2.4.9.1 1.8-.4 2.3-1.1z" transform="translate(0,-.6) scale(.95)"/></svg>
+      <span class="app" id="appname">Terminal</span>
+      <span class="wide">Shell</span><span class="wide">Edit</span><span class="wide">View</span><span class="wide">Window</span><span class="wide">Help</span>
+      <span class="sp"></span>
+      <span class="r">
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="M1 4.2a11 11 0 0 1 15 0M3.3 6.6a7.6 7.6 0 0 1 10.4 0M5.6 9a4.2 4.2 0 0 1 5.8 0"/><circle cx="8.5" cy="10.8" r=".6" fill="currentColor"/></svg>
+        <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x=".6" y=".6" width="21" height="10.8" rx="3" stroke="currentColor" stroke-opacity=".55" stroke-width="1.1"/><rect x="2.2" y="2.2" width="15" height="7.6" rx="1.6" fill="currentColor"/><path d="M23 4v4" stroke="currentColor" stroke-opacity=".55" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span id="clock" class="wide">Mon Oct 12&nbsp;&nbsp;9:41 AM</span>
+      </span>
+    </div>
+    <div id="mock-editor" class="mock"></div>
+    <iframe class="win" name="agents-popover" title="Cadence panel"></iframe>
+    <iframe class="win hidden" name="talk" title="Cadence Talk"></iframe>
+    <iframe class="win" name="indicator" title="Cadence toolbar"></iframe>
+    <div id="chrome">
+      <button id="replay" type="button" aria-label="Replay the demo"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>Replay</button>
+      <span id="hint">Live demo · press <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> or click</span>
+    </div>
+    <div id="keys"></div>
+    <svg id="cursor" viewBox="0 0 22 32" aria-hidden="true"><path d="M2 1.5v24.2l5.6-5.4 3.7 8.6 3.6-1.5-3.6-8.5h7.8z" fill="#000" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>
+  </div>
+</body>
+</html>
