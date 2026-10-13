@@ -7,21 +7,21 @@
 
     <meta name="description" content="Documentation for Cadence, the macOS app that puts every coding agent in one Inbox. Install guide, toolbar, Inbox, Talk, Director, dictation, settings reference and privacy.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://cadencevoice.ai/docs.html">
+    <link rel="canonical" href="https://www.cadencevoice.ai/docs">
     <meta name="theme-color" content="#f5f5f2">
 
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Cadence">
     <meta property="og:title" content="Cadence Docs">
     <meta property="og:description" content="Documentation for Cadence: every agent, one inbox. A native macOS app for running coding agents, with on-device dictation.">
-    <meta property="og:url" content="https://cadencevoice.ai/docs.html">
-    <meta property="og:image" content="https://cadencevoice.ai/art/og.png">
+    <meta property="og:url" content="https://www.cadencevoice.ai/docs">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cadence Docs">
     <meta name="twitter:description" content="Documentation for Cadence: every agent, one inbox. A native macOS app for running coding agents, with on-device dictation.">
-    <meta name="twitter:image" content="https://cadencevoice.ai/art/og.png">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
 
     <link rel="icon" type="image/png" href="/icon.png">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -32,6 +32,10 @@
     <link rel="stylesheet" href="/site.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
 
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
     <script defer src="/_vercel/insights/script.js"></script>
 
     <style>
@@ -354,8 +358,8 @@
             <a href="/docs.html" aria-current="page">Docs</a>
             <a href="/faq.html">FAQ</a>
             <a href="/blog/">Writing</a>
-            <a href="https://github.com/MaxPrehoda/cadence-landing/releases" target="_blank" rel="noopener">Releases</a>
-            <a class="cta dark" href="/#download">Download</a>
+            <a href="/changelog.html">Changelog</a>
+            <a class="cta dark" href="/download">Download</a>
         </nav>
     </div>
 </header>
@@ -396,7 +400,7 @@
             <a href="/docs.html">Docs</a>
             <a href="/faq.html">FAQ</a>
             <a href="/blog/">Writing</a>
-            <a href="https://github.com/MaxPrehoda/cadence-landing/releases" target="_blank" rel="noopener">Releases</a>
+            <a href="/changelog.html">Changelog</a>
             <a href="/privacy.html">Privacy</a>
             <a href="/terms.html">Terms</a>
         </div>
@@ -443,12 +447,18 @@
         }
     });
 
-    // Rewrite doc-relative links so they go through hash routing.
+    // Each doc has its own URL, /docs/<id> (vercel.json serves this page for
+    // it). A local preview has no rewrites, so it keeps #/<id> routes; old
+    // #/<id> links still work everywhere.
+    const PRETTY = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && location.protocol !== 'file:';
+    const docHref = (id) => PRETTY ? `/docs/${id}` : `#/${id}`;
+
+    // Rewrite doc-relative links so they go to that doc's URL.
     const renderer = new marked.Renderer();
     const baseLink = renderer.link.bind(renderer);
     renderer.link = (href, title, text) => {
         if (typeof href === 'string' && href.startsWith('#/')) {
-            return `<a href="${href}">${text}</a>`;
+            return `<a href="${docHref(href.slice(2))}">${text}</a>`;
         }
         const html = baseLink(href, title, text);
         // open external links in new tab
@@ -460,9 +470,10 @@
     marked.use({ renderer });
 
     function parseRoute() {
-        const h = window.location.hash || '';
-        const m = h.match(/^#\/([\w\-]+)/);
-        return m ? m[1] : (manifest ? manifest.sections[0].items[0].id : 'introduction');
+        const h = (window.location.hash || '').match(/^#\/([\w\-]+)/);
+        const p = window.location.pathname.match(/^\/docs\/([\w\-]+)\/?$/);
+        const id = h ? h[1] : p ? p[1] : null;
+        return id || (manifest ? manifest.sections[0].items[0].id : 'introduction');
     }
 
     function buildToc() {
@@ -482,7 +493,7 @@
                 const li = document.createElement('li');
                 const a = document.createElement('a');
                 a.className = 'toc-link';
-                a.href = `#/${item.id}`;
+                a.href = docHref(item.id);
                 a.textContent = item.title;
                 a.dataset.id = item.id;
                 li.appendChild(a);
@@ -508,7 +519,7 @@
         const prevA = document.createElement('a');
         prevA.className = 'prev';
         if (prev) {
-            prevA.href = `#/${prev.id}`;
+            prevA.href = docHref(prev.id);
             prevA.innerHTML = `<span class="lbl">← Previous</span><span>${prev.title}</span>`;
         } else {
             prevA.className = 'prev empty';
@@ -519,7 +530,7 @@
         const nextA = document.createElement('a');
         nextA.className = 'next';
         if (next) {
-            nextA.href = `#/${next.id}`;
+            nextA.href = docHref(next.id);
             nextA.innerHTML = `<span class="lbl">Next →</span><span>${next.title}</span>`;
         } else {
             nextA.className = 'next empty';
@@ -531,7 +542,7 @@
     async function loadDoc(id) {
         ARTICLE.innerHTML = '<div class="doc-status">Loading…</div>';
         try {
-            const r = await fetch(`docs/${id}.md`, { cache: 'no-cache' });
+            const r = await fetch(`/docs/${id}.md`, { cache: 'no-cache' });
             if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
             const md = await r.text();
             ARTICLE.innerHTML = marked.parse(md);
@@ -549,6 +560,11 @@
             updateFooter(id);
             const item = flat.find(d => d.id === id);
             document.title = item ? `${item.title}. Cadence Docs` : 'Cadence Docs';
+            if (item) {
+                const url = `https://www.cadencevoice.ai/docs/${id}`;
+                document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
+                document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
+            }
             if (MOB_CUR) MOB_CUR.textContent = item ? item.title : 'Contents';
             // close mobile sidebar after navigation
             setMobileOpen(false);
@@ -556,14 +572,30 @@
             window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
         } catch (err) {
             ARTICLE.innerHTML = `<div class="doc-status error">Failed to load doc: ${err.message}</div>
-                <p>If you reached this by link, try the <a href="#/introduction">introduction</a>.</p>`;
+                <p>If you reached this by link, try the <a href="${docHref('introduction')}">introduction</a>.</p>`;
         }
     }
 
     function onHashChange() {
         const id = parseRoute();
+        // An old #/<id> link: show it at the doc's own URL.
+        if (PRETTY && /^#\/[\w\-]+/.test(window.location.hash)) {
+            history.replaceState(null, '', `/docs/${id}`);
+        }
         loadDoc(id);
     }
+
+    // Moving between docs stays on this page.
+    document.addEventListener('click', (e) => {
+        if (!PRETTY || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        const a = e.target.closest('a[href^="/docs/"]');
+        const m = a && a.getAttribute('href').match(/^\/docs\/([\w\-]+)$/);
+        if (!m) return;
+        e.preventDefault();
+        if (location.pathname !== `/docs/${m[1]}`) history.pushState(null, '', `/docs/${m[1]}`);
+        loadDoc(m[1]);
+    });
+    window.addEventListener('popstate', onHashChange);
 
     function applySearch() {
         const q = SEARCH.value.trim().toLowerCase();
@@ -610,7 +642,7 @@
     window.addEventListener('hashchange', onHashChange);
 
     // Boot
-    fetch('docs/index.json', { cache: 'no-cache' })
+    fetch('/docs/index.json', { cache: 'no-cache' })
         .then(r => r.ok ? r.json() : Promise.reject(new Error(r.statusText)))
         .then(json => {
             manifest = json;

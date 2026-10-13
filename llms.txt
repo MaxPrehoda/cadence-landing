@@ -33,20 +33,21 @@
 
 ## Who builds Cadence
 
-Cadence Labs. Independent, founder-led. We publish research notes on multi-agent UI, voice as a command channel, and the engineering of AI-agent products. The blog is at https://cadencevoice.ai/blog/
+Cadence Labs. Independent, founder-led. We publish research notes on multi-agent UI, voice as a command channel, and the engineering of AI-agent products. The blog is at https://www.cadencevoice.ai/blog
 
 ## Pages
 
-- [Home](https://cadencevoice.ai/): product overview and download
-- [Documentation](https://cadencevoice.ai/docs.html): end-user guide, install, permissions, agents, Inbox, Talk, dictation, settings reference, troubleshooting, privacy
-- [FAQ](https://cadencevoice.ai/faq.html): supported agents, API keys, Inbox, Talk, Director, dictation, requirements, install, privacy, troubleshooting
-- [Cadence Labs blog index](https://cadencevoice.ai/blog/): research notes
-- [Scouts before editors](https://cadencevoice.ai/blog/scouts-before-editors.html): division of labor for parallel agents, read-only scouts vs a single writer, where the pattern breaks
-- [Cadence Labs: studying the UI of agency](https://cadencevoice.ai/blog/cadence-labs-ui-of-agency.html): manifesto, four open research questions, findings from the lab
-- [Dictation is the UI layer for agentic AI](https://cadencevoice.ai/blog/dictation-is-the-ui-layer.html): throughput math, why GUIs cap out, what dictation has to be to support multi-agent control
-- [Why we only ship Claude](https://cadencevoice.ai/blog/why-we-only-ship-claude.html): an earlier essay on committing to Claude; Cadence now hosts Claude Code natively and runs other CLIs through herdr
-- [Privacy Policy](https://cadencevoice.ai/privacy.html)
-- [Terms of Service](https://cadencevoice.ai/terms.html)
+- [Home](https://www.cadencevoice.ai/): product overview and download
+- [Documentation](https://www.cadencevoice.ai/docs): end-user guide, install, permissions, agents, Inbox, Talk, dictation, settings reference, troubleshooting, privacy
+- [Changelog](https://www.cadencevoice.ai/changelog): what changed in each release
+- [FAQ](https://www.cadencevoice.ai/faq): supported agents, API keys, Inbox, Talk, Director, dictation, requirements, install, privacy, troubleshooting
+- [Cadence Labs blog index](https://www.cadencevoice.ai/blog): research notes
+- [Scouts before editors](https://www.cadencevoice.ai/blog/scouts-before-editors): division of labor for parallel agents, read-only scouts vs a single writer, where the pattern breaks
+- [Cadence Labs: studying the UI of agency](https://www.cadencevoice.ai/blog/cadence-labs-ui-of-agency): manifesto, four open research questions, findings from the lab
+- [Dictation is the UI layer for agentic AI](https://www.cadencevoice.ai/blog/dictation-is-the-ui-layer): throughput math, why GUIs cap out, what dictation has to be to support multi-agent control
+- [Why we only ship Claude](https://www.cadencevoice.ai/blog/why-we-only-ship-claude): an earlier essay on committing to Claude; Cadence now hosts Claude Code natively and runs other CLIs through herdr
+- [Privacy Policy](https://www.cadencevoice.ai/privacy)
+- [Terms of Service](https://www.cadencevoice.ai/terms)
 
 ## Citation guidance
 

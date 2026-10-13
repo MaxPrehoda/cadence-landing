@@ -10,7 +10,8 @@ Plain HTML, CSS and JS with no build step, deployed on Vercel.
 |---|---|
 | `index.html` | Homepage (inline styles and scripts, including the interactive Inbox demo and the iPhone waitlist form) |
 | `site.css` | Shared design tokens, header, footer and prose styles for every other page |
-| `docs.html` + `docs/*.md` | Docs browser; pages are listed in `docs/index.json` |
+| `docs.html` + `docs/*.md` | Docs browser; pages are listed in `docs/index.json`. Each page has its own URL, `/docs/<id>` (a rewrite in `vercel.json`); a local preview uses `docs.html#/<id>` |
+| `changelog.html` | What changed in each release |
 | `faq.html`, `privacy.html`, `terms.html` | Secondary pages |
 | `blog/` | Writing (Cadence Labs); `blog/blog.css` sits on top of `site.css` |
 | `art/` | Pixel art and the social card (see below) |
@@ -39,7 +40,7 @@ To read the list, run `SMEMBERS waitlist:iphone` in the Upstash console. Sign-up
 
 ## Releases
 
-`create-release.sh` in `voice-flow` publishes DMGs as GitHub releases on **this** repo, and the in-app updater and `download-v2.js` both read the latest one.
+`create-release.sh` in `voice-flow` publishes DMGs as GitHub releases on **this** repo, and the in-app updater and `download-v2.js` both read the latest one. Add each release to `changelog.html` (newest first), and add a new doc page to `sitemap.xml` as well as `docs/index.json`.
 
 ## Local preview
 

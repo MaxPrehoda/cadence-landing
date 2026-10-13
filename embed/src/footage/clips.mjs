@@ -119,7 +119,7 @@ const CLIPS = {
         document.getElementById("appname").textContent = "TextEdit";
         document.getElementById("mock-editor").innerHTML = `
           <div class="tb"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><b>Release notes</b></div>
-          <div class="doc"><h3>Cadence 0.4</h3><p id="para">The Inbox shows one card at a time, and Talk sends what you say to the agent already on that work.<span class="caret"></span></p></div>`;
+          <div class="doc"><h3>Cadence 0.5</h3><p id="para">The Inbox shows one card at a time, and Talk sends what you say to the agent already on that work.<span class="caret"></span></p></div>`;
         let n = 0;
         const lines = [" Dictation runs on your Mac, so nothing you say leaves it.", " Hold Option anywhere and just talk."];
         __bridge.hooks.dictated = () => {

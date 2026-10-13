@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog · Cadence</title>
+    <meta name="description" content="What changed in each Cadence release, from the first dictation build to every agent in one inbox.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.cadencevoice.ai/changelog">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Changelog · Cadence">
+    <meta property="og:description" content="What changed in each Cadence release.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/changelog">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <style>
+        .legal { max-width: 768px; margin: 0 auto; padding: 72px 24px 0; }
+        .legal .stamp { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); margin: 0 0 40px; }
+        .legal .prose ul { padding-left: 22px; }
+        .rel { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 8px; }
+        .rel-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 14px; }
+        .rel-head h2 { margin: 24px 0 4px; }
+        .rel-head time, .rel-head a { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); }
+        .rel-head a { margin-left: auto; }
+        .rel .lede { margin: 12px 0 0; }
+        .rel h3 { font-family: var(--mono); font-size: 12px; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 24px 0 6px; }
+        @media (max-width: 560px) {
+            .legal { padding-top: 48px; }
+            .rel-head a { margin-left: 0; }
+        }
+    </style>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <header class="site-nav">
+        <div class="site-nav-in">
+            <a class="wordmark" href="/">Cadence</a>
+            <nav aria-label="Primary">
+                <a href="/docs.html">Docs</a>
+                <a href="/faq.html">FAQ</a>
+                <a href="/blog/">Writing</a>
+                <a href="/changelog.html" aria-current="page">Changelog</a>
+                <a class="cta dark" href="/download">Download</a>
+            </nav>
+        </div>
+    </header>
+    <main class="legal">
+        <p class="eyebrow">Releases</p>
+        <h1 class="two">What's <span>new</span></h1>
+        <p class="stamp">Every Cadence release, newest first. Downloads are on <a href="https://github.com/MaxPrehoda/cadence-landing/releases" target="_blank" rel="noopener">GitHub Releases</a>.</p>
+        <article class="prose">
+
+            <section class="rel" id="v0.5.1">
+                <div class="rel-head">
+                    <h2>v0.5.1</h2>
+                    <time datetime="2026-10-13">October 13, 2026</time>
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.5.1" target="_blank" rel="noopener">Download</a>
+                </div>
+                <h3>Fixed</h3>
+                <ul>
+                    <li><strong>Agents open in Terminal with any login shell.</strong> With fish or tcsh, starting an agent showed <code>exec: -a: unknown option</code> and its Terminal window never attached. Cadence now runs the attach itself through zsh.</li>
+                </ul>
+            </section>
+
+            <section class="rel" id="v0.5.0">
+                <div class="rel-head">
+                    <h2>v0.5.0</h2>
+                    <time datetime="2026-10-13">October 13, 2026</time>
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.5.0" target="_blank" rel="noopener">Download</a>
+                </div>
+                <p class="lede">Every coding agent, one inbox.</p>
+                <h3>New</h3>
+                <ul>
+                    <li><strong>Talk.</strong> Double-tap <code>⌥</code> and say or type what you need. Cadence sends it to the agent already on that work, starts a new one, or answers through the Director, and shows a receipt of what it did.</li>
+                    <li><strong>Inbox.</strong> Questions and finished work from every agent in one place. Answer with <code>1</code> to <code>9</code>, move with <code>J</code> and <code>K</code>, take an answer back within two seconds, or pick a suggested reply.</li>
+                    <li><strong>Terminal agents.</strong> Claude Code, Codex, OpenCode and other CLIs run in herdr terminals, shown in a real Terminal window. Every agent gets a short title, and a recap when it finishes.</li>
+                    <li><strong>A new toolbar.</strong> One dot per agent: blue is working, amber needs you, green is done. Hover to see what each one is on, and put a group of agents away as a set to reopen later.</li>
+                    <li><strong>Point at it.</strong> The camera button attaches a region of your screen to your next request.</li>
+                    <li><strong>Better dictation.</strong> Parakeet and hybrid transcription, Silero voice detection, better Text Polish and custom vocabulary.</li>
+                </ul>
+                <h3>Changed</h3>
+                <ul>
+                    <li><strong>Signed and notarized by Apple.</strong> Cadence opens like any other app. The new signature means macOS asks for permissions once more after updating; <a href="/docs.html#/installation">Installation</a> explains how to reset them if they look stuck.</li>
+                </ul>
+            </section>
+
+            <section class="rel" id="v0.4.0">
+                <div class="rel-head">
+                    <h2>v0.4.0</h2>
+                    <time datetime="2026-04-28">April 28, 2026</time>
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.4.0" target="_blank" rel="noopener">Download</a>
+                </div>
+                <h3>New</h3>
+                <ul>
+                    <li><strong>Voice-controlled agents.</strong> Start and manage Claude Code agents by voice, with a dashboard of their state and output.</li>
+                    <li><strong>Approvals.</strong> Approve or reject what an agent wants to do by voice, from its card, or from a notification.</li>
+                    <li><strong>Spoken updates.</strong> Progress announcements for each agent, and a per-agent mute.</li>
+                    <li><strong>Wake word</strong> for hands-free use.</li>
+                    <li><strong>More context.</strong> The active app, the clipboard and other context from your Mac go along with a command.</li>
+                    <li><strong>MCP broker</strong> so agents can talk to Cadence.</li>
+                    <li><strong>Notifications</strong> for agent events and approvals.</li>
+                    <li><strong>A redesigned indicator</strong> with a live waveform.</li>
+                </ul>
+            </section>
+
+            <section class="rel" id="v0.3.2">
+                <div class="rel-head">
+                    <h2>v0.3.2</h2>
+                    <time datetime="2026-02-22">February 22, 2026</time>
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.3.2" target="_blank" rel="noopener">Download</a>
+                </div>
+                <h3>New</h3>
+                <ul>
+                    <li><strong>Dictation history.</strong> See, copy and re-type past dictations.</li>
+                    <li><strong>Tone per app</strong> for grammar correction.</li>
+                    <li><strong>Smarter voice commands</strong> that ignore filler like "hey", "please" and "can you".</li>
+                    <li>A redesigned Settings window and better onboarding.</li>
+                </ul>
+                <h3>Fixed</h3>
+                <ul>
+                    <li>Permissions stuck as denied after upgrading from an older version, with a reset in Settings.</li>
+                    <li>More reliable hotkey detection.</li>
+                </ul>
+            </section>
+
+            <section class="rel" id="v0.3.1">
+                <div class="rel-head">
+                    <h2>v0.3.1</h2>
+                    <time datetime="2026-02-19">February 19, 2026</time>
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.3.1" target="_blank" rel="noopener">Download</a>
+                </div>
+                <h3>New</h3>
+                <ul>
+                    <li><strong>Obsidian.</strong> Create, append to and read notes in your vault by voice. Say the vault's name and Cadence finds it.</li>
+                    <li><strong>Conversational commands.</strong> "Hey computer, make me a to-do called clean my room" now does what you meant.</li>
+                </ul>
+                <h3>Changed</h3>
+                <ul>
+                    <li>Apple Silicon only from this release.</li>
+                </ul>
+            </section>
+
+            <section class="rel" id="v0.3.0">
+                <div class="rel-head">
+                    <h2>v0.3.0</h2>
+                    <time datetime="2026-02-17">February 17, 2026</time>
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.3.0" target="_blank" rel="noopener">Download</a>
+                </div>
+                <h3>New</h3>
+                <ul>
+                    <li><strong>Updates from inside the app.</strong> Check in <strong>Settings → About</strong>; Cadence downloads the new version and opens it. It also checks on launch, which you can turn off.</li>
+                </ul>
+                <h3>Fixed</h3>
+                <ul>
+                    <li>The microphone prompt now appears instead of macOS silently denying access, and recording waits until you grant it.</li>
+                </ul>
+            </section>
+
+            <section class="rel" id="v0.2.1">
+                <div class="rel-head">
+                    <h2>v0.2.1</h2>
+                    <time datetime="2026-02-17">February 17, 2026</time>
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.2.1" target="_blank" rel="noopener">Download</a>
+                </div>
+                <h3>Fixed</h3>
+                <ul>
+                    <li>Microphone access silently denied on first launch.</li>
+                    <li>The permission buttons now open the right pane of System Settings.</li>
+                </ul>
+            </section>
+
+            <section class="rel" id="v0.2.0">
+                <div class="rel-head">
+                    <h2>v0.2.0</h2>
+                    <time datetime="2026-02-17">February 17, 2026</time>
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.2.0" target="_blank" rel="noopener">Download</a>
+                </div>
+                <h3>New</h3>
+                <ul>
+                    <li><strong>Permissions in Settings.</strong> Live status for Accessibility, Input Monitoring and Microphone, with buttons that open the right pane of System Settings.</li>
+                    <li>A warning when you start recording without the permissions it needs.</li>
+                    <li>An Intel build alongside Apple Silicon.</li>
+                </ul>
+                <h3>Fixed</h3>
+                <ul>
+                    <li>The "damaged disk image" error when opening the download.</li>
+                </ul>
+            </section>
+
+            <section class="rel" id="v0.1.0">
+                <div class="rel-head">
+                    <h2>v0.1.0</h2>
+                    <time datetime="2026-02-16">February 16, 2026</time>
+                    <a href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/v0.1.0" target="_blank" rel="noopener">Download</a>
+                </div>
+                <p class="lede">The first release: hold a key and talk to type into any app on your Mac, transcribed on your Mac with Whisper, with optional AI cleanup of the text.</p>
+            </section>
+
+        </article>
+    </main>
+
+    <footer class="site-foot">
+        <div class="site-foot-in">
+            <div class="links">
+                <a href="/docs.html">Docs</a>
+                <a href="/faq.html">FAQ</a>
+                <a href="/blog/">Writing</a>
+                <a href="/changelog.html">Changelog</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms of Service</a>
+                <a href="mailto:support@cadencevoice.ai">Support</a>
+            </div>
+            <div class="copy">&copy; 2026 Cadence Labs</div>
+        </div>
+    </footer>
+</body>
+</html>

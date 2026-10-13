@@ -3,6 +3,11 @@
   "cleanUrls": true,
   "trailingSlash": false,
 
+  "rewrites": [
+    { "source": "/download", "destination": "/api/download" },
+    { "source": "/docs/:page([a-z0-9-]+)", "destination": "/docs.html" }
+  ],
+
   "redirects": [
     {
       "source": "/:path*",

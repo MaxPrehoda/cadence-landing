@@ -1,4 +1,4 @@
-# https://cadencevoice.ai/robots.txt
+# https://www.cadencevoice.ai/robots.txt
 # Crawl policy. Cadence Labs
 # Friendly to traditional search engines and to LLM training/retrieval crawlers
 # whose use we want (citation in AI search products).
@@ -75,4 +75,4 @@ Disallow: /api/
 Disallow: /art/og-card.html
 
 # ── Sitemap ──────────────────────────────────────────────
-Sitemap: https://cadencevoice.ai/sitemap.xml
+Sitemap: https://www.cadencevoice.ai/sitemap.xml
