@@ -8,7 +8,10 @@
 // stores them, and the app sends no ID. Custom events from the server need
 // Vercel Pro or Enterprise.
 
-const { track } = require('@vercel/analytics/server');
+// The package's "node" export is ESM, which require() can't load on every
+// Node version Vercel runs, so load it with import() once and reuse it.
+let trackPromise;
+const getTrack = () => (trackPromise ??= import('@vercel/analytics/server').then((m) => m.track));
 
 // event -> allowed property -> allowed values (null = any short token)
 const EVENTS = {
@@ -61,6 +64,7 @@ module.exports = async function handler(req, res) {
     }
 
     try {
+        const track = await getTrack();
         await track(body.name, data, {
             headers: {
                 'user-agent': req.headers['user-agent'] || `Cadence/${data.version}`,
