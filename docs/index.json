@@ -1,48 +1,123 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.3",
   "sections": [
     {
       "title": "Getting started",
       "items": [
-        { "id": "introduction",    "title": "Introduction" },
-        { "id": "installation",    "title": "Installation" },
-        { "id": "quickstart",      "title": "Quickstart" }
+        {
+          "id": "introduction",
+          "title": "Introduction",
+          "seoTitle": "What is Cadence? Every coding agent in one inbox \u00b7 Docs"
+        },
+        {
+          "id": "installation",
+          "title": "Installation",
+          "seoTitle": "Install Cadence on your Mac \u00b7 Cadence Docs",
+          "description": "Install Cadence on a Mac with Apple Silicon: requirements, the DMG or Homebrew cask, first launch, permissions, and signing in to Claude Code."
+        },
+        {
+          "id": "quickstart",
+          "title": "Quickstart",
+          "seoTitle": "Cadence quickstart: set up and run your first agent"
+        }
       ]
     },
     {
       "title": "Agents",
       "items": [
-        { "id": "toolbar",         "title": "Toolbar" },
-        { "id": "inbox",           "title": "Inbox" },
-        { "id": "talk",            "title": "Talk" },
-        { "id": "director",        "title": "Director" },
-        { "id": "agents-and-clis", "title": "Agents and CLIs" },
-        { "id": "sets",            "title": "Sets" }
+        {
+          "id": "toolbar",
+          "title": "Toolbar",
+          "seoTitle": "The toolbar: every agent's status at a glance \u00b7 Cadence Docs"
+        },
+        {
+          "id": "inbox",
+          "title": "Inbox",
+          "seoTitle": "The Inbox: answer every coding agent in one place \u00b7 Docs"
+        },
+        {
+          "id": "talk",
+          "title": "Talk",
+          "seoTitle": "Talk: send requests to the right agent by voice \u00b7 Docs"
+        },
+        {
+          "id": "director",
+          "title": "Director",
+          "seoTitle": "The Director: an agent that manages your agents \u00b7 Docs"
+        },
+        {
+          "id": "agents-and-clis",
+          "title": "Agents and CLIs",
+          "seoTitle": "Claude Code, Codex, Gemini and other CLIs \u00b7 Cadence Docs"
+        },
+        {
+          "id": "sets",
+          "title": "Sets",
+          "seoTitle": "Sets: put a project's agents away \u00b7 Cadence Docs"
+        }
       ]
     },
     {
       "title": "Dictation",
       "items": [
-        { "id": "dictation",       "title": "Dictation" },
-        { "id": "hotkeys",         "title": "Hotkeys" },
-        { "id": "text-polish",     "title": "Text Polish" }
+        {
+          "id": "dictation",
+          "title": "Dictation",
+          "seoTitle": "On-device dictation for Mac \u00b7 Cadence Docs"
+        },
+        {
+          "id": "hotkeys",
+          "title": "Hotkeys",
+          "seoTitle": "Hotkeys and keyboard shortcuts \u00b7 Cadence Docs",
+          "description": "Cadence uses one key for two jobs: hold Option to dictate into any app, double-tap it to talk to your agents. Gestures, timings and how to change the key."
+        },
+        {
+          "id": "text-polish",
+          "title": "Text Polish",
+          "seoTitle": "Text Polish: clean up dictated text \u00b7 Cadence Docs"
+        }
       ]
     },
     {
       "title": "More",
       "items": [
-        { "id": "voice-commands",  "title": "Voice commands" },
-        { "id": "iphone",          "title": "iPhone (coming soon)" },
-        { "id": "cloud",           "title": "Continue in the cloud" }
+        {
+          "id": "voice-commands",
+          "title": "Voice commands",
+          "seoTitle": "Voice commands and wake word \u00b7 Cadence Docs"
+        },
+        {
+          "id": "iphone",
+          "title": "iPhone (coming soon)",
+          "seoTitle": "Cadence for iPhone \u00b7 Cadence Docs"
+        },
+        {
+          "id": "cloud",
+          "title": "Continue in the cloud",
+          "seoTitle": "Continue in the cloud: keep Claude Code going \u00b7 Cadence Docs"
+        }
       ]
     },
     {
       "title": "Reference",
       "items": [
-        { "id": "settings",        "title": "Settings reference" },
-        { "id": "troubleshooting", "title": "Troubleshooting" },
-        { "id": "privacy",         "title": "Privacy" }
+        {
+          "id": "settings",
+          "title": "Settings reference",
+          "seoTitle": "Settings reference \u00b7 Cadence Docs"
+        },
+        {
+          "id": "troubleshooting",
+          "title": "Troubleshooting",
+          "seoTitle": "Troubleshooting Cadence on macOS \u00b7 Cadence Docs"
+        },
+        {
+          "id": "privacy",
+          "title": "Privacy",
+          "seoTitle": "Privacy: what stays on your Mac \u00b7 Cadence Docs"
+        }
       ]
     }
-  ]
+  ],
+  "updated": "2026-10-14"
 }

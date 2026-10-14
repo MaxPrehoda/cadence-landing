@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy · Cadence</title>
-    <meta name="description" content="Cadence privacy policy. Speech is transcribed on-device and your audio never leaves your Mac. Agent features use your own Claude Code login. No Cadence account, no usage tracking.">
+    <title>Privacy policy: what Cadence keeps on your Mac</title>
+    <meta name="description" content="How Cadence handles your data: speech is transcribed on your Mac and audio never leaves it. Agent features use your own Claude Code login. No account.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.cadencevoice.ai/privacy">
     <meta name="theme-color" content="#f5f5f2">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Privacy Policy · Cadence">
-    <meta property="og:description" content="Speech is transcribed on-device and your audio never leaves your Mac. Agent features use your own Claude Code login.">
+    <meta property="og:title" content="Privacy policy: what Cadence keeps on your Mac">
+    <meta property="og:description" content="How Cadence handles your data: speech is transcribed on your Mac and audio never leaves it. Agent features use your own Claude Code login. No account.">
     <meta property="og:url" content="https://www.cadencevoice.ai/privacy">
     <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
     <meta property="og:image:width" content="1200">
@@ -46,6 +46,7 @@
         document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "name": "Privacy policy", "url": "https://www.cadencevoice.ai/privacy", "description": "How Cadence handles your data: speech is transcribed on your Mac and audio never leaves it. Agent features use your own Claude Code login. No account.", "isPartOf": {"@type": "WebSite", "name": "Cadence", "url": "https://www.cadencevoice.ai/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Cadence", "item": "https://www.cadencevoice.ai/"}, {"@type": "ListItem", "position": 2, "name": "Privacy policy", "item": "https://www.cadencevoice.ai/privacy"}]}]}</script>
 </head>
 <body>
     <header class="site-nav">
@@ -63,11 +64,11 @@
     <main class="legal">
         <p class="eyebrow">Legal</p>
         <h1 class="two">Privacy <span>policy</span></h1>
-        <p class="stamp">Last updated: October 13, 2026</p>
+        <p class="stamp">Last updated: October 14, 2026</p>
         <article class="prose">
             <p>
                 At Cadence, we believe privacy is a fundamental right. This policy explains how we handle your data.
-                Short version: your voice stays on your Mac, we don't run accounts or collect usage data, and the agent
+                Short version: your voice stays on your Mac, we don't run accounts, the app sends anonymous usage counts you can turn off, and the agent
                 features talk to AI providers through logins and keys you already control.
             </p>
 
@@ -78,7 +79,8 @@
                     <li><strong>Agent features use your own Claude Code login.</strong> Routing, titles, recaps, the Director, and Claude Code agents send text (and screenshots you attach) to Anthropic through the <code>claude</code> CLI you are signed in to. Other agent CLIs talk to their own providers.</li>
                     <li><strong>Optional features use your own API key.</strong> Cloud Polish and the Intent Engine contact Anthropic only if you add an Anthropic API key and turn them on.</li>
                     <li><strong>The phone relay can't read your data.</strong> Everything it stores and passes along is end-to-end encrypted. The one exception is an agent you choose to continue in the cloud, which runs in a private sandbox that can read that agent.</li>
-                    <li><strong>No Cadence account.</strong> No user profiles, and the app does not send usage analytics to us.</li>
+                    <li><strong>No Cadence account.</strong> No user profiles.</li>
+                    <li><strong>Anonymous usage counts, on by default.</strong> Which features were used and how often, never content and no ID. Turn it off in Settings → Updates.</li>
                     <li><strong>Minimal website analytics.</strong> This website uses Vercel Web Analytics (privacy-friendly, no cookies).</li>
                 </ul>
             </div>
@@ -154,6 +156,22 @@
             <h3>Update Checks</h3>
             <p>
                 The app checks GitHub for new releases so it can offer updates. You can turn automatic checks off in Settings.
+            </p>
+
+            <h3>Anonymous Usage Counts (the App)</h3>
+            <p>
+                To learn whether people actually use Cadence, the app sends a small number of anonymous counts:
+            </p>
+            <ul>
+                <li>Which of these happened: the app was opened (once a day), first launch, finishing onboarding, dictating (at most once an hour), using Talk (once an hour, with the outcome such as "sent" or "started"), answering an Inbox card (once an hour, with the card type such as "plan"), and having agents running (once a day, as a range such as "2-3")</li>
+                <li>The app version</li>
+            </ul>
+            <p>
+                It never sends what you say, type or dictate, file or folder names, agent names, questions or answers, and it
+                has no install ID or account. Counts go to <code>cadencevoice.ai/api/telemetry</code> and are recorded as
+                Vercel Web Analytics events; Vercel counts distinct users with a daily-rotating hash of IP address and
+                browser string and does not store your IP. Nothing is sent until you have seen the notice in onboarding (or
+                the one-time banner after updating). Turn it off any time in <strong>Settings → Updates → Share anonymous usage</strong>.
             </p>
 
             <h3>Website Analytics</h3>
@@ -236,7 +254,7 @@
             <ul>
                 <li><strong>Access</strong> your data (we don't hold personal data on our servers; local data is in the folder above)</li>
                 <li><strong>Delete</strong> your data (uninstall the app and delete its Application Support folder; no Cadence server-side data exists)</li>
-                <li><strong>Opt-out</strong> of analytics (use browser extensions or disable JavaScript on our website)</li>
+                <li><strong>Opt out</strong> of usage counts in the app (Settings → Updates → Share anonymous usage) and of website analytics (browser extensions, or disable JavaScript on our website)</li>
             </ul>
             <p>
                 For data held by Anthropic or other AI providers, use their privacy controls.
@@ -265,7 +283,7 @@
             <div class="closing panel">
                 <p>
                 <strong>Bottom line:</strong> Your voice stays on your Mac. Your agents talk to the AI providers you already
-                use, under your own login. No Cadence account, no tracking.
+                use, under your own login. No Cadence account, and the only usage data is anonymous counts you can switch off.
             </p>
             </div>
         </article>

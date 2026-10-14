@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--DOC:HEAD-->
+    <title>Privacy: what stays on your Mac · Cadence Docs</title>
+
+    <meta name="description" content="This page lists what Cadence keeps on your Mac and what it sends elsewhere. Short version: your voice and your dictation stay on your Mac. Agent features…">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.cadencevoice.ai/docs/privacy">
+    <meta name="theme-color" content="#f5f5f2">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Privacy: what stays on your Mac · Cadence Docs">
+    <meta property="og:description" content="This page lists what Cadence keeps on your Mac and what it sends elsewhere. Short version: your voice and your dictation stay on your Mac. Agent features…">
+    <meta property="og:url" content="https://www.cadencevoice.ai/docs/privacy">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privacy: what stays on your Mac · Cadence Docs">
+    <meta name="twitter:description" content="This page lists what Cadence keeps on your Mac and what it sends elsewhere. Short version: your voice and your dictation stay on your Mac. Agent features…">
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"Privacy","description":"This page lists what Cadence keeps on your Mac and what it sends elsewhere. Short version: your voice and your dictation stay on your Mac. Agent features…","url":"https://www.cadencevoice.ai/docs/privacy","inLanguage":"en","image":"https://www.cadencevoice.ai/art/og.png","dateModified":"2026-10-14","about":{"@type":"SoftwareApplication","name":"Cadence","operatingSystem":"macOS 13+","applicationCategory":"DeveloperApplication"},"publisher":{"@type":"Organization","name":"Cadence Labs","url":"https://www.cadencevoice.ai/"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Cadence","item":"https://www.cadencevoice.ai/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://www.cadencevoice.ai/docs"},{"@type":"ListItem","position":3,"name":"Privacy","item":"https://www.cadencevoice.ai/docs/privacy"}]}]</script>
+    <!--/DOC:HEAD-->
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <style>
+        :root {
+            --nav-h: 69px;
+            --sidebar-w: 248px;
+        }
+
+        /* ---------------- layout ---------------- */
+
+        .layout {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+            gap: 56px;
+        }
+
+        /* ---------------- sidebar ---------------- */
+
+        aside.sidebar {
+            position: sticky;
+            top: var(--nav-h);
+            align-self: start;
+            max-height: calc(100vh - var(--nav-h));
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding: 32px 12px 48px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--line-2) transparent;
+        }
+        aside.sidebar::-webkit-scrollbar { width: 6px; }
+        aside.sidebar::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+
+        .search-wrap { position: relative; margin-bottom: 28px; }
+
+        .search {
+            width: 100%;
+            height: 40px;
+            background: #fff;
+            border: 1px solid var(--line-2);
+            border-radius: 8px;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 14px;
+            padding: 0 36px 0 12px;
+            outline: none;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+            transition: border-color .15s, box-shadow .15s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .search::placeholder { color: var(--ink-3); }
+        .search:focus { border-color: #a9a9a1; box-shadow: 0 0 0 3px rgba(23,23,23,.06); }
+        .search::-webkit-search-cancel-button { display: none; }
+
+        .search-key {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--mono);
+            font-size: 11px;
+            line-height: 1;
+            color: var(--ink-3);
+            background: var(--panel);
+            border: 1px solid var(--line-2);
+            border-radius: 4px;
+            padding: 3px 6px;
+            pointer-events: none;
+        }
+        .search:focus + .search-key, .search:not(:placeholder-shown) + .search-key { display: none; }
+
+        .toc-section { margin-bottom: 24px; }
+
+        .toc-heading {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+            margin: 0 0 8px 10px;
+        }
+
+        .toc-list { list-style: none; margin: 0; padding: 0; }
+
+        .toc-link {
+            display: block;
+            padding: 6px 10px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--ink-2);
+            font-size: 15px;
+            line-height: 1.35;
+            text-decoration: none;
+            transition: background .12s, color .12s;
+        }
+        .toc-link:hover { color: var(--ink); background: rgba(0,0,0,.03); }
+        .toc-link.active {
+            color: var(--ink);
+            font-weight: 500;
+            background: var(--panel);
+            border-color: var(--line-2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        }
+        .toc-link.hidden { display: none; }
+
+        /* ---------------- content ---------------- */
+
+        main.content { min-width: 0; padding: 48px 0 0; }
+        .content-inner { max-width: 720px; }
+
+        .meta-strip { display: flex; align-items: center; gap: 8px; }
+        .meta-strip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; }
+
+        /* markdown h1 picks up the homepage two-tone heading style */
+        article.prose h1 {
+            font-weight: 400;
+            color: #3a3a37;
+            letter-spacing: -0.005em;
+            line-height: 1.12;
+            font-size: clamp(34px, 4.4vw, 46px);
+            margin: 0 0 20px;
+        }
+        article.prose > h1 + p { font-size: 18.5px; color: var(--ink-2); line-height: 1.55; }
+        article.prose h2 { scroll-margin-top: calc(var(--nav-h) + 16px); }
+        article.prose h2:first-of-type { margin-top: 40px; }
+        article.prose h3 { scroll-margin-top: calc(var(--nav-h) + 16px); }
+        article.prose h4 { color: var(--ink); font-weight: 600; font-size: 16px; margin: 24px 0 6px; }
+        article.prose ul, article.prose ol { padding-left: 22px; }
+        article.prose li::marker { color: var(--ink-3); }
+        article.prose li > ul, article.prose li > ol { margin: 4px 0 0; }
+        article.prose em { color: var(--ink); }
+        article.prose a { overflow-wrap: anywhere; }
+
+        /* inline code / kbd */
+        article.prose code { overflow-wrap: anywhere; }
+        article.prose kbd { font-size: .82em; padding: 1px 6px; box-shadow: 0 1px 0 rgba(0,0,0,.04); }
+
+        /* code blocks */
+        article.prose pre {
+            margin: 0 0 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #fff;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        }
+        article.prose pre code, article.prose pre code.hljs {
+            background: none;
+            padding: 0;
+            font-size: inherit;
+            color: var(--ink);
+            overflow-wrap: normal;
+        }
+
+        /* callouts (markdown blockquotes) */
+        article.prose blockquote {
+            margin: 0 0 20px;
+            padding: 14px 18px;
+            background: var(--panel);
+            border: 1px solid var(--line-2);
+            border-left: 3px solid var(--blue);
+            border-radius: 8px;
+            color: var(--ink);
+        }
+        article.prose blockquote p:last-child { margin-bottom: 0; }
+
+        /* tables: wrapped by JS in .table-wrap for horizontal scroll */
+        .table-wrap {
+            margin: 0 0 24px;
+            overflow-x: auto;
+            background: #fff;
+            border: 1px solid var(--line-2);
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        }
+        article.prose .table-wrap table { margin: 0; font-size: 14.5px; }
+        article.prose thead th {
+            background: var(--panel);
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+            border-bottom: 1px solid var(--line-2);
+            white-space: nowrap;
+        }
+        article.prose th, article.prose td { padding: 10px 14px; }
+        article.prose tbody tr:last-child td { border-bottom: 0; }
+        article.prose td code { white-space: nowrap; overflow-wrap: normal; }
+
+        /* ---------------- prev / next ---------------- */
+
+        .doc-footer {
+            margin-top: 64px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .doc-footer a {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 16px 18px;
+            background: var(--panel);
+            border: 1px solid var(--line-2);
+            border-radius: 12px;
+            color: var(--ink);
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: border-color .15s, background .15s, transform .15s;
+        }
+        .doc-footer a:hover { background: #fff; border-color: #bdbdb5; transform: translateY(-1px); }
+        .doc-footer .lbl {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+        }
+        .doc-footer .next { text-align: right; align-items: flex-end; }
+        .doc-footer .empty { visibility: hidden; }
+
+        /* ---------------- status ---------------- */
+
+        .doc-status { font-family: var(--mono); font-size: 13px; color: var(--ink-3); padding: 32px 0; }
+        .doc-status.error { color: #b42318; }
+
+        /* ---------------- mobile ---------------- */
+
+        .mobile-bar { display: none; }
+
+        @media (max-width: 920px) {
+            .layout { display: block; padding: 0 16px; }
+
+            .mobile-bar {
+                display: block;
+                position: sticky;
+                top: var(--nav-h);
+                z-index: 20;
+                margin: 0 -16px;
+                padding: 10px 16px;
+                background: rgba(245,245,242,.92);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--line);
+            }
+            .mobile-toggle {
+                width: 100%;
+                height: 42px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 0 12px;
+                background: #fff;
+                border: 1px solid var(--line-2);
+                border-radius: 8px;
+                box-shadow: 0 1px 2px rgba(0,0,0,.04);
+                font-family: var(--sans);
+                font-size: 15px;
+                color: var(--ink);
+                cursor: pointer;
+                text-align: left;
+            }
+            .mobile-toggle .lbl {
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: .12em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+            }
+            .mobile-toggle .cur { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+            .mobile-toggle .chev { width: 10px; height: 10px; border-right: 1.5px solid var(--ink-2); border-bottom: 1.5px solid var(--ink-2); transform: translateY(-2px) rotate(45deg); transition: transform .15s; }
+            .mobile-toggle[aria-expanded="true"] .chev { transform: translateY(2px) rotate(-135deg); }
+
+            aside.sidebar {
+                display: none;
+                position: fixed;
+                z-index: 25;
+                left: 16px;
+                right: 16px;
+                top: calc(var(--nav-h) + 69px);
+                max-height: calc(100vh - var(--nav-h) - 85px);
+                max-height: calc(100dvh - var(--nav-h) - 85px);
+                padding: 16px 12px 8px;
+                background: var(--page);
+                border: 1px solid var(--line-2);
+                border-radius: 12px;
+                box-shadow: 0 12px 32px rgba(0,0,0,.12);
+            }
+            aside.sidebar.open { display: block; }
+
+            main.content { padding-top: 28px; }
+            .search-key { display: none; }
+            article.prose .table-wrap table { font-size: 14px; }
+            article.prose th, article.prose td { padding: 9px 10px; }
+            article.prose > h1 + p { font-size: 17px; }
+            .doc-footer { grid-template-columns: 1fr; }
+            .doc-footer .next { text-align: left; align-items: flex-start; }
+            .doc-footer .empty { display: none; }
+        }
+
+        @media (max-width: 720px) {
+            .site-nav-in { padding: 0 16px; }
+            .site-foot-in { padding: 32px 16px 48px; }
+            .site-foot { margin-top: 64px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence<small>Docs</small></a>
+        <nav aria-label="Primary">
+            <a href="/docs.html" aria-current="page">Docs</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<div class="layout">
+    <div class="mobile-bar" id="mobile-bar">
+        <button class="mobile-toggle" id="mobile-toggle" aria-controls="sidebar" aria-expanded="false">
+            <span class="lbl">Docs</span>
+            <span class="cur" id="mobile-current">Privacy</span>
+            <span class="chev" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+        <div class="search-wrap">
+            <input type="search" class="search" id="search"
+                   placeholder="Search docs" aria-label="Search documentation"
+                   autocomplete="off" spellcheck="false">
+            <span class="search-key" aria-hidden="true">/</span>
+        </div>
+        <div id="toc"><!--DOC:TOC-->
+            <div class="toc-section"><div class="toc-heading">Getting started</div><ul class="toc-list"><li><a class="toc-link" href="/docs/introduction" data-id="introduction">Introduction</a></li><li><a class="toc-link" href="/docs/installation" data-id="installation">Installation</a></li><li><a class="toc-link" href="/docs/quickstart" data-id="quickstart">Quickstart</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Agents</div><ul class="toc-list"><li><a class="toc-link" href="/docs/toolbar" data-id="toolbar">Toolbar</a></li><li><a class="toc-link" href="/docs/inbox" data-id="inbox">Inbox</a></li><li><a class="toc-link" href="/docs/talk" data-id="talk">Talk</a></li><li><a class="toc-link" href="/docs/director" data-id="director">Director</a></li><li><a class="toc-link" href="/docs/agents-and-clis" data-id="agents-and-clis">Agents and CLIs</a></li><li><a class="toc-link" href="/docs/sets" data-id="sets">Sets</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Dictation</div><ul class="toc-list"><li><a class="toc-link" href="/docs/dictation" data-id="dictation">Dictation</a></li><li><a class="toc-link" href="/docs/hotkeys" data-id="hotkeys">Hotkeys</a></li><li><a class="toc-link" href="/docs/text-polish" data-id="text-polish">Text Polish</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">More</div><ul class="toc-list"><li><a class="toc-link" href="/docs/voice-commands" data-id="voice-commands">Voice commands</a></li><li><a class="toc-link" href="/docs/iphone" data-id="iphone">iPhone (coming soon)</a></li><li><a class="toc-link" href="/docs/cloud" data-id="cloud">Continue in the cloud</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Reference</div><ul class="toc-list"><li><a class="toc-link" href="/docs/settings" data-id="settings">Settings reference</a></li><li><a class="toc-link" href="/docs/troubleshooting" data-id="troubleshooting">Troubleshooting</a></li><li><a class="toc-link active" href="/docs/privacy" data-id="privacy">Privacy</a></li></ul></div><!--/DOC:TOC--></div>
+    </aside>
+
+    <main class="content">
+        <div class="content-inner">
+            <p class="eyebrow meta-strip"><span class="dot" aria-hidden="true"></span>Cadence v<span id="ver">0.5.3</span> · Documentation</p>
+            <article id="article" class="prose" data-doc="privacy"><!--DOC:ARTICLE-->
+<h1>Privacy</h1>
+<p>This page lists what Cadence keeps on your Mac and what it sends elsewhere. Short version: your voice and your dictation stay on your Mac. Agent features use Claude through your own Claude Code login. A few optional features use your own Anthropic API key.</p>
+<p>Cadence has no account. It sends anonymous usage counts, which you can turn off (see <strong>Usage counts</strong> below). Its only other server is the iPhone relay, which stores and passes along end-to-end encrypted data it can&#39;t read, except when you <a href="/docs/cloud">continue an agent in the cloud</a>.</p>
+<h2>Stays on your Mac</h2>
+<ul>
+<li><strong>Microphone audio.</strong> Speech detection (Silero VAD) and transcription (Parakeet, or Whisper if you pick it) run on your Mac. Audio is never uploaded.</li>
+<li><strong>Dictation.</strong> The transcribed text is typed into your app. Your last 50 dictations are kept in your local settings file.</li>
+<li><strong>Text Polish.</strong> The local Qwen 2.5 1.5B model runs on your Mac.</li>
+<li><strong>Voice commands.</strong> Built-in and custom commands are matched locally.</li>
+<li><strong>Spoken updates.</strong> Read aloud with built-in macOS voices.</li>
+<li><strong>Notes, settings, sets and agent titles.</strong> Stored in <code>~/Library/Application Support/com.cadence.app/</code>.</li>
+<li><strong>Saved recordings.</strong> Only if you turn on <strong>Save recordings</strong>, and only in that same folder.</li>
+<li><strong>Worktrees and diffs.</strong> In your own git repositories and <code>~/.cadence/worktrees/</code>.</li>
+</ul>
+<h2>Usage counts</h2>
+<p>So we can tell whether people actually use Cadence, the app sends a few anonymous counts to <code>cadencevoice.ai</code>, recorded as Vercel Web Analytics events:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Event</th>
+<th>How often</th>
+<th>Extra detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>App opened</td>
+<td>once a day</td>
+<td>none</td>
+</tr>
+<tr>
+<td>First launch, onboarding finished</td>
+<td>once</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Dictation used</td>
+<td>at most once an hour</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Talk used</td>
+<td>at most once an hour per outcome</td>
+<td>the outcome, such as <code>sent</code> or <code>started</code></td>
+</tr>
+<tr>
+<td>Inbox card answered</td>
+<td>at most once an hour per type</td>
+<td>the card type, such as <code>plan</code></td>
+</tr>
+<tr>
+<td>Agents running</td>
+<td>once a day</td>
+<td>a range, such as <code>2-3</code></td>
+</tr>
+</tbody></table></div>
+<p>Each event also carries the app version. Cadence never sends what you say, type or dictate, file or folder names, agent names, or questions and answers, and it has no install ID. Vercel counts distinct users with a hash of IP address and browser string that changes daily, and doesn&#39;t store your IP.</p>
+<p>Nothing is sent until you&#39;ve seen the notice in onboarding (or the one-time banner after updating). Turn it off any time in <strong>Settings → Updates → Share anonymous usage</strong>.</p>
+<h2>The microphone</h2>
+<p>So that your first word is not cut off, the microphone stays open while Cadence runs and the last half second of audio is held in memory. That audio is thrown away unless you press the hotkey or start Talk. It is never written to disk unless <strong>Save recordings</strong> is on. macOS shows its microphone indicator while the mic is open.</p>
+<p>With hands-free listening (off by default), everything you say is transcribed on your Mac so Cadence can look for commands. See <a href="/docs/voice-commands">Voice commands</a>.</p>
+<h2>Sent to Claude through your Claude Code login</h2>
+<p>These features call Claude using the <code>claude</code> CLI and the login you already have (or the method you picked in <strong>Settings → Agents → Claude authentication</strong>). They do not need the API key from Settings → AI.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>What is sent</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Agents</strong></td>
+<td>Whatever you send an agent, plus whatever the agent reads in your project while it works.</td>
+</tr>
+<tr>
+<td><strong>Director</strong></td>
+<td>Your messages to it, and what it reads about your agents.</td>
+</tr>
+<tr>
+<td><strong>Talk router</strong></td>
+<td>Your request as text; each agent&#39;s title, recap, folder, last request and latest output; your last few requests; the name of the app and window in front of you; a screenshot of the display under your pointer; folder names from <code>~/Developer</code>.</td>
+</tr>
+<tr>
+<td><strong>Titles and recaps</strong></td>
+<td>Recent output from each agent, to write its title and recap.</td>
+</tr>
+</tbody></table></div>
+<p>Talk sends your words as text after they are transcribed on your Mac. It never sends audio.</p>
+<p>Other CLIs (Codex, OpenCode, Gemini and so on) talk to their own providers under their own accounts, just as they do outside Cadence.</p>
+<h2>Sent to Anthropic only with your API key</h2>
+<p>These are off unless you add an Anthropic API key in <strong>Settings → AI</strong>. They use your key and call Anthropic&#39;s API directly.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>What is sent</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Cloud Polish</strong></td>
+<td>The transcribed text of each dictation (no audio)</td>
+<td>Only if you turn on Cloud Polish</td>
+</tr>
+<tr>
+<td><strong>Intent Engine</strong></td>
+<td>The command you said, the active app and window title, and when relevant your selected text and clipboard</td>
+<td>When a command after the command word is not recognized</td>
+</tr>
+<tr>
+<td><strong>Spoken summaries</strong></td>
+<td>A long agent message, to summarize before reading it aloud</td>
+<td>When spoken updates are on and the message is long</td>
+</tr>
+</tbody></table></div>
+<h2>Other network connections</h2>
+<ul>
+<li><strong>Model downloads</strong> from Hugging Face, when you download a speech or polish model.</li>
+<li><strong>Update check</strong> to GitHub Releases when Cadence launches, unless you turn off <strong>Auto-check on launch</strong>.</li>
+<li><strong>Slack</strong>, only if you add a Slack bot token for the Intent Engine.</li>
+<li><strong>Browser control</strong> connects to Chrome on your own Mac (localhost), only if you set it up.</li>
+</ul>
+<h2>iPhone</h2>
+<p>The iPhone app is <a href="/docs/iphone">not available yet</a>. It is designed to connect to your Mac directly on the same Wi-Fi, or through a relay that only passes end-to-end encrypted data it cannot read. We will document it in full when it ships.</p>
+<h2>Continue in the cloud</h2>
+<p>While the iPhone relay is on and <strong>Continue agents in the cloud</strong> is on (the default), your Mac keeps an end-to-end encrypted copy of each Claude Code agent at the relay: the repository&#39;s current commit, uncommitted changes, the conversation, <code>~/.claude/CLAUDE.md</code>, the project&#39;s memory folder and a few Claude Code settings. Each agent is sealed with its own key derived from your pairing, so the relay can&#39;t read it.</p>
+<p>When you tap <strong>Continue in the cloud</strong> on your phone, that one agent&#39;s key goes through the relay to a private Vercel Sandbox in San Francisco, which decrypts that agent and runs it with Claude Code. During the beta, cloud turns run on Cadence&#39;s own Claude Code login. When the agent comes home, Cadence deletes the sandbox and what the cloud saved. Details are on <a href="/docs/cloud">Continue in the cloud</a>.</p>
+<h2>Permissions</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Permission</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Microphone</strong></td>
+<td>Dictation and Talk</td>
+</tr>
+<tr>
+<td><strong>Accessibility</strong></td>
+<td>Typing text into other apps</td>
+</tr>
+<tr>
+<td><strong>Input Monitoring</strong></td>
+<td>The global hotkey</td>
+</tr>
+<tr>
+<td><strong>Screen Recording</strong></td>
+<td>Screenshots for Talk and region capture, if you use them</td>
+</tr>
+<tr>
+<td><strong>Automation</strong></td>
+<td>Controlling Terminal for sets, and Mail or Messages for the Intent Engine, if you use them</td>
+</tr>
+</tbody></table></div>
+<p>You can turn any of these off in <strong>System Settings → Privacy &amp; Security</strong>. The features that need them stop working, and the rest keep going.</p>
+<h2>Questions</h2>
+<p>Email <a href="mailto:privacy@cadencevoice.ai">privacy@cadencevoice.ai</a>.</p>
+            <!--/DOC:ARTICLE--></article>
+            <nav class="doc-footer" id="doc-footer" aria-label="Previous and next"><!--DOC:FOOT--><a class="prev" href="/docs/troubleshooting"><span class="lbl">← Previous</span><span>Troubleshooting</span></a><a class="next empty" href="#"></a><!--/DOC:FOOT--></nav>
+        </div>
+    </main>
+</div>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/docs.html">Docs</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+<script>
+(() => {
+    const TOC_EL    = document.getElementById('toc');
+    const ARTICLE   = document.getElementById('article');
+    const SEARCH    = document.getElementById('search');
+    const FOOTER    = document.getElementById('doc-footer');
+    const SIDEBAR   = document.getElementById('sidebar');
+    const MOB_TOG   = document.getElementById('mobile-toggle');
+    const VER       = document.getElementById('ver');
+    const MOB_CUR   = document.getElementById('mobile-current');
+
+    function setMobileOpen(open) {
+        SIDEBAR.classList.toggle('open', open);
+        MOB_TOG.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    let manifest = null;
+    let flat     = [];   // flattened ordered list of docs for prev/next
+
+    // marked + highlight setup
+    marked.setOptions({
+        gfm: true,
+        breaks: false,
+        smartypants: false,
+        headerIds: true,
+        mangle: false,
+        highlight(code, lang) {
+            try {
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(code, { language: lang }).value;
+                }
+                return hljs.highlightAuto(code).value;
+            } catch { return code; }
+        }
+    });
+
+    // Each doc has its own URL, /docs/<id> (vercel.json serves this page for
+    // it). A local preview has no rewrites, so it keeps #/<id> routes; old
+    // #/<id> links still work everywhere.
+    const PRETTY = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && location.protocol !== 'file:';
+    const docHref = (id) => PRETTY ? `/docs/${id}` : `#/${id}`;
+
+    // Rewrite doc-relative links so they go to that doc's URL.
+    const renderer = new marked.Renderer();
+    const baseLink = renderer.link.bind(renderer);
+    renderer.link = (href, title, text) => {
+        if (typeof href === 'string' && href.startsWith('#/')) {
+            return `<a href="${docHref(href.slice(2))}">${text}</a>`;
+        }
+        const html = baseLink(href, title, text);
+        // open external links in new tab
+        if (typeof href === 'string' && /^https?:/i.test(href)) {
+            return html.replace('<a ', '<a target="_blank" rel="noopener" ');
+        }
+        return html;
+    };
+    marked.use({ renderer });
+
+    function parseRoute() {
+        const h = (window.location.hash || '').match(/^#\/([\w\-]+)/);
+        const p = window.location.pathname.match(/^\/docs\/([\w\-]+)\/?$/);
+        const id = h ? h[1] : p ? p[1] : null;
+        return id || (manifest ? manifest.sections[0].items[0].id : 'introduction');
+    }
+
+    function buildToc() {
+        TOC_EL.innerHTML = '';
+        flat = [];
+        manifest.sections.forEach(section => {
+            const wrap = document.createElement('div');
+            wrap.className = 'toc-section';
+            const h = document.createElement('div');
+            h.className = 'toc-heading';
+            h.textContent = section.title;
+            wrap.appendChild(h);
+            const ul = document.createElement('ul');
+            ul.className = 'toc-list';
+            section.items.forEach(item => {
+                flat.push(item);
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.className = 'toc-link';
+                a.href = docHref(item.id);
+                a.textContent = item.title;
+                a.dataset.id = item.id;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+            wrap.appendChild(ul);
+            TOC_EL.appendChild(wrap);
+        });
+    }
+
+    function updateActive(id) {
+        document.querySelectorAll('.toc-link').forEach(a => {
+            a.classList.toggle('active', a.dataset.id === id);
+        });
+    }
+
+    function updateFooter(id) {
+        const idx = flat.findIndex(d => d.id === id);
+        FOOTER.innerHTML = '';
+        const prev = idx > 0 ? flat[idx - 1] : null;
+        const next = idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null;
+
+        const prevA = document.createElement('a');
+        prevA.className = 'prev';
+        if (prev) {
+            prevA.href = docHref(prev.id);
+            prevA.innerHTML = `<span class="lbl">← Previous</span><span>${prev.title}</span>`;
+        } else {
+            prevA.className = 'prev empty';
+            prevA.href = '#';
+        }
+        FOOTER.appendChild(prevA);
+
+        const nextA = document.createElement('a');
+        nextA.className = 'next';
+        if (next) {
+            nextA.href = docHref(next.id);
+            nextA.innerHTML = `<span class="lbl">Next →</span><span>${next.title}</span>`;
+        } else {
+            nextA.className = 'next empty';
+            nextA.href = '#';
+        }
+        FOOTER.appendChild(nextA);
+    }
+
+    // Pages are pre-rendered (scripts/build-docs.mjs): on first load the
+    // article is already in the HTML, so only wire it up.
+    let prerendered = ARTICLE.dataset.doc || null;
+
+    async function loadDoc(id) {
+        if (prerendered && prerendered === id) {
+            prerendered = null;
+            ARTICLE.querySelectorAll('pre code').forEach(el => { try { hljs.highlightElement(el); } catch {} });
+            updateActive(id);
+            updateFooter(id);
+            const item = flat.find(d => d.id === id);
+            if (MOB_CUR) MOB_CUR.textContent = item ? item.title : 'Contents';
+            return;
+        }
+        prerendered = null;
+        ARTICLE.innerHTML = '<div class="doc-status">Loading…</div>';
+        try {
+            const r = await fetch(`/docs/${id}.md`, { cache: 'no-cache' });
+            if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+            const md = await r.text();
+            ARTICLE.innerHTML = marked.parse(md);
+            ARTICLE.querySelectorAll('pre code').forEach(el => {
+                try { hljs.highlightElement(el); } catch {}
+            });
+            // wrap tables so wide ones scroll inside a bordered panel
+            ARTICLE.querySelectorAll('table').forEach(t => {
+                const w = document.createElement('div');
+                w.className = 'table-wrap';
+                t.parentNode.insertBefore(w, t);
+                w.appendChild(t);
+            });
+            updateActive(id);
+            updateFooter(id);
+            const item = flat.find(d => d.id === id);
+            document.title = item ? (item.seoTitle || `${item.title} · Cadence Docs`) : 'Cadence Docs';
+            if (item) {
+                const url = `https://www.cadencevoice.ai/docs/${id}`;
+                document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
+                document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
+            }
+            if (MOB_CUR) MOB_CUR.textContent = item ? item.title : 'Contents';
+            // close mobile sidebar after navigation
+            setMobileOpen(false);
+            // scroll to top of article
+            window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+        } catch (err) {
+            ARTICLE.innerHTML = `<div class="doc-status error">Failed to load doc: ${err.message}</div>
+                <p>If you reached this by link, try the <a href="${docHref('introduction')}">introduction</a>.</p>`;
+        }
+    }
+
+    function onHashChange() {
+        const id = parseRoute();
+        // An old #/<id> link: show it at the doc's own URL.
+        if (PRETTY && /^#\/[\w\-]+/.test(window.location.hash)) {
+            history.replaceState(null, '', `/docs/${id}`);
+        }
+        loadDoc(id);
+    }
+
+    // Moving between docs stays on this page.
+    document.addEventListener('click', (e) => {
+        if (!PRETTY || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        const a = e.target.closest('a[href^="/docs/"]');
+        const m = a && a.getAttribute('href').match(/^\/docs\/([\w\-]+)$/);
+        if (!m) return;
+        e.preventDefault();
+        if (location.pathname !== `/docs/${m[1]}`) history.pushState(null, '', `/docs/${m[1]}`);
+        loadDoc(m[1]);
+    });
+    window.addEventListener('popstate', onHashChange);
+
+    function applySearch() {
+        const q = SEARCH.value.trim().toLowerCase();
+        document.querySelectorAll('.toc-link').forEach(a => {
+            if (!q) { a.classList.remove('hidden'); return; }
+            const hit = a.textContent.toLowerCase().includes(q) ||
+                        a.dataset.id.toLowerCase().includes(q);
+            a.classList.toggle('hidden', !hit);
+        });
+        // hide section heading if all its links are hidden
+        document.querySelectorAll('.toc-section').forEach(sec => {
+            const visible = sec.querySelectorAll('.toc-link:not(.hidden)').length;
+            sec.style.display = visible ? '' : 'none';
+        });
+    }
+
+    SEARCH.addEventListener('input', applySearch);
+
+    // '/' to focus search
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== SEARCH &&
+            !e.metaKey && !e.ctrlKey && !e.altKey) {
+            e.preventDefault();
+            SEARCH.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === SEARCH) {
+            SEARCH.value = '';
+            applySearch();
+            SEARCH.blur();
+        }
+    });
+
+    MOB_TOG.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setMobileOpen(!SIDEBAR.classList.contains('open'));
+    });
+    document.addEventListener('click', (e) => {
+        if (SIDEBAR.classList.contains('open') && !SIDEBAR.contains(e.target)) setMobileOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && SIDEBAR.classList.contains('open') && document.activeElement !== SEARCH) setMobileOpen(false);
+    });
+
+    window.addEventListener('hashchange', onHashChange);
+
+    // Boot
+    fetch('/docs/index.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : Promise.reject(new Error(r.statusText)))
+        .then(json => {
+            manifest = json;
+            if (json.version) VER.textContent = json.version;
+            buildToc();
+            onHashChange();
+        })
+        .catch(err => {
+            ARTICLE.innerHTML = `<div class="doc-status error">Failed to load docs index: ${err.message}</div>`;
+        });
+})();
+</script>
+
+</body>
+</html>

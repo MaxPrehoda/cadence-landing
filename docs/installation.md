@@ -21,6 +21,16 @@ Download the latest `Cadence_<version>_aarch64.dmg` from the [download section](
 2. Drag **Cadence** into **Applications**.
 3. Eject the disk image.
 
+## Install with Homebrew
+
+If you use [Homebrew](https://brew.sh), one command installs Cadence and keeps the cask current:
+
+```bash
+brew install --cask maxprehoda/tap/cadence
+```
+
+Cadence also updates itself, so you don't need `brew upgrade` to stay current.
+
 ## First launch
 
 Cadence is signed and notarized by Apple, so it opens like any other app: double-click **Cadence** in **Applications**. The first time, macOS asks whether to open an app downloaded from the internet; click **Open**.
