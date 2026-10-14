@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--DOC:HEAD-->
+    <title>Settings reference · Cadence Docs</title>
+
+    <meta name="description" content="Open Settings from the main window: ⋯ → Open Cadence on the toolbar, then the Settings tab. The sidebar has nine sections.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.cadencevoice.ai/docs/settings">
+    <meta name="theme-color" content="#f5f5f2">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Settings reference · Cadence Docs">
+    <meta property="og:description" content="Open Settings from the main window: ⋯ → Open Cadence on the toolbar, then the Settings tab. The sidebar has nine sections.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/docs/settings">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Settings reference · Cadence Docs">
+    <meta name="twitter:description" content="Open Settings from the main window: ⋯ → Open Cadence on the toolbar, then the Settings tab. The sidebar has nine sections.">
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"Settings reference","description":"Open Settings from the main window: ⋯ → Open Cadence on the toolbar, then the Settings tab. The sidebar has nine sections.","url":"https://www.cadencevoice.ai/docs/settings","inLanguage":"en","image":"https://www.cadencevoice.ai/art/og.png","dateModified":"2026-10-14","about":{"@type":"SoftwareApplication","name":"Cadence","operatingSystem":"macOS 13+","applicationCategory":"DeveloperApplication"},"publisher":{"@type":"Organization","name":"Cadence Labs","url":"https://www.cadencevoice.ai/"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Cadence","item":"https://www.cadencevoice.ai/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://www.cadencevoice.ai/docs"},{"@type":"ListItem","position":3,"name":"Settings reference","item":"https://www.cadencevoice.ai/docs/settings"}]}]</script>
+    <!--/DOC:HEAD-->
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <style>
+        :root {
+            --nav-h: 69px;
+            --sidebar-w: 248px;
+        }
+
+        /* ---------------- layout ---------------- */
+
+        .layout {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+            gap: 56px;
+        }
+
+        /* ---------------- sidebar ---------------- */
+
+        aside.sidebar {
+            position: sticky;
+            top: var(--nav-h);
+            align-self: start;
+            max-height: calc(100vh - var(--nav-h));
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding: 32px 12px 48px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--line-2) transparent;
+        }
+        aside.sidebar::-webkit-scrollbar { width: 6px; }
+        aside.sidebar::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+
+        .search-wrap { position: relative; margin-bottom: 28px; }
+
+        .search {
+            width: 100%;
+            height: 40px;
+            background: #fff;
+            border: 1px solid var(--line-2);
+            border-radius: 8px;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 14px;
+            padding: 0 36px 0 12px;
+            outline: none;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+            transition: border-color .15s, box-shadow .15s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .search::placeholder { color: var(--ink-3); }
+        .search:focus { border-color: #a9a9a1; box-shadow: 0 0 0 3px rgba(23,23,23,.06); }
+        .search::-webkit-search-cancel-button { display: none; }
+
+        .search-key {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--mono);
+            font-size: 11px;
+            line-height: 1;
+            color: var(--ink-3);
+            background: var(--panel);
+            border: 1px solid var(--line-2);
+            border-radius: 4px;
+            padding: 3px 6px;
+            pointer-events: none;
+        }
+        .search:focus + .search-key, .search:not(:placeholder-shown) + .search-key { display: none; }
+
+        .toc-section { margin-bottom: 24px; }
+
+        .toc-heading {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+            margin: 0 0 8px 10px;
+        }
+
+        .toc-list { list-style: none; margin: 0; padding: 0; }
+
+        .toc-link {
+            display: block;
+            padding: 6px 10px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--ink-2);
+            font-size: 15px;
+            line-height: 1.35;
+            text-decoration: none;
+            transition: background .12s, color .12s;
+        }
+        .toc-link:hover { color: var(--ink); background: rgba(0,0,0,.03); }
+        .toc-link.active {
+            color: var(--ink);
+            font-weight: 500;
+            background: var(--panel);
+            border-color: var(--line-2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        }
+        .toc-link.hidden { display: none; }
+
+        /* ---------------- content ---------------- */
+
+        main.content { min-width: 0; padding: 48px 0 0; }
+        .content-inner { max-width: 720px; }
+
+        .meta-strip { display: flex; align-items: center; gap: 8px; }
+        .meta-strip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; }
+
+        /* markdown h1 picks up the homepage two-tone heading style */
+        article.prose h1 {
+            font-weight: 400;
+            color: #3a3a37;
+            letter-spacing: -0.005em;
+            line-height: 1.12;
+            font-size: clamp(34px, 4.4vw, 46px);
+            margin: 0 0 20px;
+        }
+        article.prose > h1 + p { font-size: 18.5px; color: var(--ink-2); line-height: 1.55; }
+        article.prose h2 { scroll-margin-top: calc(var(--nav-h) + 16px); }
+        article.prose h2:first-of-type { margin-top: 40px; }
+        article.prose h3 { scroll-margin-top: calc(var(--nav-h) + 16px); }
+        article.prose h4 { color: var(--ink); font-weight: 600; font-size: 16px; margin: 24px 0 6px; }
+        article.prose ul, article.prose ol { padding-left: 22px; }
+        article.prose li::marker { color: var(--ink-3); }
+        article.prose li > ul, article.prose li > ol { margin: 4px 0 0; }
+        article.prose em { color: var(--ink); }
+        article.prose a { overflow-wrap: anywhere; }
+
+        /* inline code / kbd */
+        article.prose code { overflow-wrap: anywhere; }
+        article.prose kbd { font-size: .82em; padding: 1px 6px; box-shadow: 0 1px 0 rgba(0,0,0,.04); }
+
+        /* code blocks */
+        article.prose pre {
+            margin: 0 0 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #fff;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        }
+        article.prose pre code, article.prose pre code.hljs {
+            background: none;
+            padding: 0;
+            font-size: inherit;
+            color: var(--ink);
+            overflow-wrap: normal;
+        }
+
+        /* callouts (markdown blockquotes) */
+        article.prose blockquote {
+            margin: 0 0 20px;
+            padding: 14px 18px;
+            background: var(--panel);
+            border: 1px solid var(--line-2);
+            border-left: 3px solid var(--blue);
+            border-radius: 8px;
+            color: var(--ink);
+        }
+        article.prose blockquote p:last-child { margin-bottom: 0; }
+
+        /* tables: wrapped by JS in .table-wrap for horizontal scroll */
+        .table-wrap {
+            margin: 0 0 24px;
+            overflow-x: auto;
+            background: #fff;
+            border: 1px solid var(--line-2);
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        }
+        article.prose .table-wrap table { margin: 0; font-size: 14.5px; }
+        article.prose thead th {
+            background: var(--panel);
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+            border-bottom: 1px solid var(--line-2);
+            white-space: nowrap;
+        }
+        article.prose th, article.prose td { padding: 10px 14px; }
+        article.prose tbody tr:last-child td { border-bottom: 0; }
+        article.prose td code { white-space: nowrap; overflow-wrap: normal; }
+
+        /* ---------------- prev / next ---------------- */
+
+        .doc-footer {
+            margin-top: 64px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .doc-footer a {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 16px 18px;
+            background: var(--panel);
+            border: 1px solid var(--line-2);
+            border-radius: 12px;
+            color: var(--ink);
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: border-color .15s, background .15s, transform .15s;
+        }
+        .doc-footer a:hover { background: #fff; border-color: #bdbdb5; transform: translateY(-1px); }
+        .doc-footer .lbl {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+        }
+        .doc-footer .next { text-align: right; align-items: flex-end; }
+        .doc-footer .empty { visibility: hidden; }
+
+        /* ---------------- status ---------------- */
+
+        .doc-status { font-family: var(--mono); font-size: 13px; color: var(--ink-3); padding: 32px 0; }
+        .doc-status.error { color: #b42318; }
+
+        /* ---------------- mobile ---------------- */
+
+        .mobile-bar { display: none; }
+
+        @media (max-width: 920px) {
+            .layout { display: block; padding: 0 16px; }
+
+            .mobile-bar {
+                display: block;
+                position: sticky;
+                top: var(--nav-h);
+                z-index: 20;
+                margin: 0 -16px;
+                padding: 10px 16px;
+                background: rgba(245,245,242,.92);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--line);
+            }
+            .mobile-toggle {
+                width: 100%;
+                height: 42px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 0 12px;
+                background: #fff;
+                border: 1px solid var(--line-2);
+                border-radius: 8px;
+                box-shadow: 0 1px 2px rgba(0,0,0,.04);
+                font-family: var(--sans);
+                font-size: 15px;
+                color: var(--ink);
+                cursor: pointer;
+                text-align: left;
+            }
+            .mobile-toggle .lbl {
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: .12em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+            }
+            .mobile-toggle .cur { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+            .mobile-toggle .chev { width: 10px; height: 10px; border-right: 1.5px solid var(--ink-2); border-bottom: 1.5px solid var(--ink-2); transform: translateY(-2px) rotate(45deg); transition: transform .15s; }
+            .mobile-toggle[aria-expanded="true"] .chev { transform: translateY(2px) rotate(-135deg); }
+
+            aside.sidebar {
+                display: none;
+                position: fixed;
+                z-index: 25;
+                left: 16px;
+                right: 16px;
+                top: calc(var(--nav-h) + 69px);
+                max-height: calc(100vh - var(--nav-h) - 85px);
+                max-height: calc(100dvh - var(--nav-h) - 85px);
+                padding: 16px 12px 8px;
+                background: var(--page);
+                border: 1px solid var(--line-2);
+                border-radius: 12px;
+                box-shadow: 0 12px 32px rgba(0,0,0,.12);
+            }
+            aside.sidebar.open { display: block; }
+
+            main.content { padding-top: 28px; }
+            .search-key { display: none; }
+            article.prose .table-wrap table { font-size: 14px; }
+            article.prose th, article.prose td { padding: 9px 10px; }
+            article.prose > h1 + p { font-size: 17px; }
+            .doc-footer { grid-template-columns: 1fr; }
+            .doc-footer .next { text-align: left; align-items: flex-start; }
+            .doc-footer .empty { display: none; }
+        }
+
+        @media (max-width: 720px) {
+            .site-nav-in { padding: 0 16px; }
+            .site-foot-in { padding: 32px 16px 48px; }
+            .site-foot { margin-top: 64px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence<small>Docs</small></a>
+        <nav aria-label="Primary">
+            <a href="/docs.html" aria-current="page">Docs</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<div class="layout">
+    <div class="mobile-bar" id="mobile-bar">
+        <button class="mobile-toggle" id="mobile-toggle" aria-controls="sidebar" aria-expanded="false">
+            <span class="lbl">Docs</span>
+            <span class="cur" id="mobile-current">Settings reference</span>
+            <span class="chev" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+        <div class="search-wrap">
+            <input type="search" class="search" id="search"
+                   placeholder="Search docs" aria-label="Search documentation"
+                   autocomplete="off" spellcheck="false">
+            <span class="search-key" aria-hidden="true">/</span>
+        </div>
+        <div id="toc"><!--DOC:TOC-->
+            <div class="toc-section"><div class="toc-heading">Getting started</div><ul class="toc-list"><li><a class="toc-link" href="/docs/introduction" data-id="introduction">Introduction</a></li><li><a class="toc-link" href="/docs/installation" data-id="installation">Installation</a></li><li><a class="toc-link" href="/docs/quickstart" data-id="quickstart">Quickstart</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Agents</div><ul class="toc-list"><li><a class="toc-link" href="/docs/toolbar" data-id="toolbar">Toolbar</a></li><li><a class="toc-link" href="/docs/inbox" data-id="inbox">Inbox</a></li><li><a class="toc-link" href="/docs/talk" data-id="talk">Talk</a></li><li><a class="toc-link" href="/docs/director" data-id="director">Director</a></li><li><a class="toc-link" href="/docs/agents-and-clis" data-id="agents-and-clis">Agents and CLIs</a></li><li><a class="toc-link" href="/docs/sets" data-id="sets">Sets</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Dictation</div><ul class="toc-list"><li><a class="toc-link" href="/docs/dictation" data-id="dictation">Dictation</a></li><li><a class="toc-link" href="/docs/hotkeys" data-id="hotkeys">Hotkeys</a></li><li><a class="toc-link" href="/docs/text-polish" data-id="text-polish">Text Polish</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">More</div><ul class="toc-list"><li><a class="toc-link" href="/docs/voice-commands" data-id="voice-commands">Voice commands</a></li><li><a class="toc-link" href="/docs/iphone" data-id="iphone">iPhone (coming soon)</a></li><li><a class="toc-link" href="/docs/cloud" data-id="cloud">Continue in the cloud</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Reference</div><ul class="toc-list"><li><a class="toc-link active" href="/docs/settings" data-id="settings">Settings reference</a></li><li><a class="toc-link" href="/docs/troubleshooting" data-id="troubleshooting">Troubleshooting</a></li><li><a class="toc-link" href="/docs/privacy" data-id="privacy">Privacy</a></li></ul></div><!--/DOC:TOC--></div>
+    </aside>
+
+    <main class="content">
+        <div class="content-inner">
+            <p class="eyebrow meta-strip"><span class="dot" aria-hidden="true"></span>Cadence v<span id="ver">0.5.3</span> · Documentation</p>
+            <article id="article" class="prose" data-doc="settings"><!--DOC:ARTICLE-->
+<h1>Settings reference</h1>
+<p>Open Settings from the main window: <strong>⋯ → Open Cadence</strong> on the toolbar, then the <strong>Settings</strong> tab. The sidebar has nine sections.</p>
+<h2>Permissions</h2>
+<p>Shows whether <strong>Accessibility</strong>, <strong>Input Monitoring</strong> and <strong>Microphone</strong> are granted, with a button to fix each one.</p>
+<p><strong>Reset TCC Permissions</strong> clears every permission decision macOS has cached for Cadence. Use it if permissions stay denied after an upgrade even though System Settings shows them on. Quit and reopen Cadence afterward.</p>
+<h2>Hotkey</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Push-to-Talk Key</strong></td>
+<td><code>⌥</code> Option</td>
+<td>Presets: ⌥ Option, ⌘ Cmd, ⌃ Control, ⌘⌥, ⌃⌥. Or click <strong>Record</strong> and hold up to three modifiers.</td>
+</tr>
+<tr>
+<td>Hold threshold</td>
+<td>200 ms</td>
+<td>Shorter presses count as a tap. Not adjustable.</td>
+</tr>
+<tr>
+<td><strong>Talk to your agents</strong> trigger</td>
+<td>Double-tap of the same key</td>
+<td>Tap window 350 ms. Not adjustable.</td>
+</tr>
+</tbody></table></div>
+<p>See <a href="/docs/hotkeys">Hotkeys</a>.</p>
+<h2>AI</h2>
+<p>These all need your own Anthropic API key. Agents, Talk, titles, recaps and the Director do not use this key; they use your Claude Code login.</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Anthropic API Key</strong></td>
+<td>empty</td>
+<td>From console.anthropic.com.</td>
+</tr>
+<tr>
+<td><strong>Intent Engine</strong></td>
+<td>On (when a key is set)</td>
+<td>Sends unrecognized voice commands to Claude. See <a href="/docs/voice-commands">Voice commands</a>.</td>
+</tr>
+<tr>
+<td><strong>Cloud Polish</strong></td>
+<td>Off</td>
+<td>Polishes dictation with Claude Haiku. See <a href="/docs/text-polish">Text Polish</a>.</td>
+</tr>
+<tr>
+<td><strong>App Tone Profiles</strong></td>
+<td>none</td>
+<td>Casual, Formal, Technical or Raw per app.</td>
+</tr>
+</tbody></table></div>
+<h2>Commands</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Wake Word</strong></td>
+<td><code>computer</code></td>
+<td>The command word that turns a dictation into a command.</td>
+</tr>
+<tr>
+<td><strong>Built-in Commands</strong></td>
+<td></td>
+<td>Read-only list of every built-in command.</td>
+</tr>
+<tr>
+<td><strong>Custom Commands</strong></td>
+<td>none</td>
+<td>Trigger phrase plus Open App, Keyboard Shortcut or Insert Text.</td>
+</tr>
+<tr>
+<td><strong>Custom App Aliases</strong></td>
+<td>none</td>
+<td>Spoken name to real app name.</td>
+</tr>
+<tr>
+<td><strong>App Groups</strong></td>
+<td>none</td>
+<td>One name for several apps.</td>
+</tr>
+<tr>
+<td><strong>Vocabulary</strong></td>
+<td>none</td>
+<td>Names and jargon the speech model should spell your way.</td>
+</tr>
+<tr>
+<td><strong>Auto-Corrections</strong></td>
+<td>none</td>
+<td>Phrase heard to phrase wanted.</td>
+</tr>
+</tbody></table></div>
+<h2>Models</h2>
+<p>Pick the speech model and download others. The default is <strong>Parakeet v2 (English, recommended)</strong>. Changing models needs a restart. See <a href="/docs/dictation">Dictation</a>.</p>
+<h2>Audio</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Input device</strong></td>
+<td>Automatic (system default)</td>
+<td>Follows device changes.</td>
+</tr>
+<tr>
+<td><strong>Prefer the built-in mic over Bluetooth headsets</strong></td>
+<td>On</td>
+<td>Applies when the input is Automatic.</td>
+</tr>
+<tr>
+<td><strong>Speech Detection</strong></td>
+<td>Silero VAD</td>
+<td>Read-only: keeps 500 ms before the key press and up to 600 ms after release.</td>
+</tr>
+<tr>
+<td><strong>Save recordings</strong></td>
+<td>Off</td>
+<td>Keeps the newest 300 dictations as audio and text.</td>
+</tr>
+</tbody></table></div>
+<h2>Agents</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Claude authentication</strong></td>
+<td>Claude subscription</td>
+<td>Also: OAuth token, API key, gateway token, credential script, Bedrock, Vertex AI, Foundry. <strong>Test connection</strong> checks it.</td>
+</tr>
+<tr>
+<td><strong>Binary path</strong></td>
+<td>empty (uses <code>PATH</code>)</td>
+<td>Path to <code>claude</code> if it is not on your <code>PATH</code>.</td>
+</tr>
+<tr>
+<td><strong>Auto-allow read-only tools</strong></td>
+<td>On</td>
+<td>Read, Glob, Grep, WebFetch and WebSearch run without asking.</td>
+</tr>
+<tr>
+<td><strong>Use a git worktree per agent</strong></td>
+<td>On</td>
+<td>Cadence chat agents get their own branch in <code>~/.cadence/worktrees/</code>.</td>
+</tr>
+<tr>
+<td><strong>Fall back to last-addressed agent</strong></td>
+<td>On</td>
+<td>Legacy voice routing for Cadence chat agents. Plain dictation is never sent to an agent either way.</td>
+</tr>
+<tr>
+<td><strong>Auto-open the dashboard</strong></td>
+<td>Off</td>
+<td>Opens the Agents board when the first agent starts.</td>
+</tr>
+<tr>
+<td><strong>Preferred monitor</strong></td>
+<td>Secondary display</td>
+<td>Where the Agents board opens.</td>
+</tr>
+<tr>
+<td><strong>Text-to-speech</strong></td>
+<td>On</td>
+<td>Speak agent completions and approval requests.</td>
+</tr>
+<tr>
+<td><strong>Voice</strong> / <strong>Rate (wpm)</strong></td>
+<td>Samantha / 190</td>
+<td>Any installed macOS voice. <strong>Test</strong> previews it.</td>
+</tr>
+<tr>
+<td><strong>Output device</strong></td>
+<td>System default</td>
+<td>Send spoken updates to a different device.</td>
+</tr>
+<tr>
+<td><strong>Notifications</strong></td>
+<td>On</td>
+<td>macOS notifications on agent events.</td>
+</tr>
+<tr>
+<td><strong>Wake word</strong></td>
+<td>Off</td>
+<td>&quot;Hey Cadence&quot; always-on listening. See <a href="/docs/voice-commands">Voice commands</a>.</td>
+</tr>
+</tbody></table></div>
+<h2>Injection</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Method</td>
+<td>Clipboard + ⌘V</td>
+<td>Read-only. Your clipboard is restored afterward.</td>
+</tr>
+<tr>
+<td><strong>Text Polish</strong></td>
+<td>On</td>
+<td>Needs the Qwen 2.5 1.5B model (about 1.1 GB). See <a href="/docs/text-polish">Text Polish</a>.</td>
+</tr>
+<tr>
+<td><strong>Chrome DevTools port</strong></td>
+<td>9222</td>
+<td>For Intent Engine browser actions.</td>
+</tr>
+<tr>
+<td><strong>Slack bot token</strong></td>
+<td>empty</td>
+<td>For Intent Engine Slack actions.</td>
+</tr>
+<tr>
+<td><strong>iPhone relay</strong></td>
+<td>Off</td>
+<td>For the iPhone app, which is <a href="/docs/iphone">not available yet</a>.</td>
+</tr>
+<tr>
+<td><strong>Continue agents in the cloud</strong></td>
+<td>On</td>
+<td>Under iPhone relay. Keeps an encrypted copy of each Claude Code agent at the relay so the phone can <a href="/docs/cloud">continue it in the cloud</a> while this Mac is asleep. Turning it off deletes those copies.</td>
+</tr>
+</tbody></table></div>
+<h2>About</h2>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Version, Architecture</td>
+<td></td>
+<td>Read-only.</td>
+</tr>
+<tr>
+<td><strong>Replay Setup</strong></td>
+<td></td>
+<td>Runs onboarding again.</td>
+</tr>
+<tr>
+<td><strong>Show floating indicator</strong></td>
+<td>On</td>
+<td>Shows or hides the toolbar.</td>
+</tr>
+<tr>
+<td><strong>Auto-check on launch</strong></td>
+<td>On</td>
+<td>Checks GitHub Releases for a new version.</td>
+</tr>
+</tbody></table></div>
+<h2>Outside the Settings window</h2>
+<p>Some settings live where you use them:</p>
+<ul>
+<li><strong>Toolbar ⋯ menu</strong>: Edge of the screen (default Right), Display, Hide for a while, Hide the toolbar.</li>
+<li><strong>Inbox panel header</strong>: <strong>Ask / Edits / Auto</strong> permission mode (default Ask) and the speaker button for spoken updates.</li>
+</ul>
+<h2>The settings file</h2>
+<p>Settings are stored in:</p>
+<pre><code>~/Library/Application Support/com.cadence.app/settings.json
+</code></pre>
+<p>Use the app to change them where you can. If you edit the file by hand, quit Cadence first and keep a backup. Field names for the settings above:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>hotkey_modifier</code></td>
+<td><code>&quot;option&quot;</code></td>
+</tr>
+<tr>
+<td><code>model_name</code></td>
+<td><code>&quot;parakeet-tdt-0.6b-v2-int8&quot;</code></td>
+</tr>
+<tr>
+<td><code>input_device</code></td>
+<td><code>null</code> (Automatic)</td>
+</tr>
+<tr>
+<td><code>avoid_bluetooth_mic</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>save_recordings</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>custom_vocabulary</code></td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>correction_rules</code></td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>text_polish_enabled</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>polish_use_cloud</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>polish_api_key</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>intent_engine_enabled</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>app_tone_profiles</code></td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>wake_word</code></td>
+<td><code>&quot;computer&quot;</code></td>
+</tr>
+<tr>
+<td><code>wake_word_enabled</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>custom_commands</code></td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>custom_aliases</code></td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>app_groups</code></td>
+<td><code>[]</code></td>
+</tr>
+<tr>
+<td><code>show_indicator</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>indicator_anchor</code></td>
+<td><code>&quot;right&quot;</code></td>
+</tr>
+<tr>
+<td><code>indicator_display</code></td>
+<td><code>&quot;&quot;</code> (picked on first launch)</td>
+</tr>
+<tr>
+<td><code>agent_permission_mode</code></td>
+<td><code>&quot;ask&quot;</code></td>
+</tr>
+<tr>
+<td><code>claude_cli_path</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>agent_auto_allow_reads</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>agents_use_worktree</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>agents_dictation_fallback</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>dashboard_auto_open</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>dashboard_monitor_preference</code></td>
+<td><code>&quot;secondary&quot;</code></td>
+</tr>
+<tr>
+<td><code>tts_enabled</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>tts_voice</code></td>
+<td><code>&quot;Samantha&quot;</code></td>
+</tr>
+<tr>
+<td><code>tts_rate</code></td>
+<td><code>190</code></td>
+</tr>
+<tr>
+<td><code>tts_output_device</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>notification_enabled</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>cdp_port</code></td>
+<td><code>9222</code></td>
+</tr>
+<tr>
+<td><code>slack_token</code></td>
+<td><code>null</code></td>
+</tr>
+<tr>
+<td><code>relay_enabled</code></td>
+<td><code>false</code></td>
+</tr>
+<tr>
+<td><code>cloud_continue</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>auto_check_updates</code></td>
+<td><code>true</code></td>
+</tr>
+</tbody></table></div>
+<p>Other files in the same folder hold app state, not settings: <code>models/</code> (downloaded models), <code>recordings/</code> (if enabled), <code>sets.json</code> (<a href="/docs/sets">sets</a>), <code>agent-meta.json</code> (agent titles and recaps) and <code>router-memory.json</code> (your recent Talk requests and where they went).</p>
+            <!--/DOC:ARTICLE--></article>
+            <nav class="doc-footer" id="doc-footer" aria-label="Previous and next"><!--DOC:FOOT--><a class="prev" href="/docs/cloud"><span class="lbl">← Previous</span><span>Continue in the cloud</span></a><a class="next" href="/docs/troubleshooting"><span class="lbl">Next →</span><span>Troubleshooting</span></a><!--/DOC:FOOT--></nav>
+        </div>
+    </main>
+</div>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/docs.html">Docs</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+<script>
+(() => {
+    const TOC_EL    = document.getElementById('toc');
+    const ARTICLE   = document.getElementById('article');
+    const SEARCH    = document.getElementById('search');
+    const FOOTER    = document.getElementById('doc-footer');
+    const SIDEBAR   = document.getElementById('sidebar');
+    const MOB_TOG   = document.getElementById('mobile-toggle');
+    const VER       = document.getElementById('ver');
+    const MOB_CUR   = document.getElementById('mobile-current');
+
+    function setMobileOpen(open) {
+        SIDEBAR.classList.toggle('open', open);
+        MOB_TOG.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    let manifest = null;
+    let flat     = [];   // flattened ordered list of docs for prev/next
+
+    // marked + highlight setup
+    marked.setOptions({
+        gfm: true,
+        breaks: false,
+        smartypants: false,
+        headerIds: true,
+        mangle: false,
+        highlight(code, lang) {
+            try {
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(code, { language: lang }).value;
+                }
+                return hljs.highlightAuto(code).value;
+            } catch { return code; }
+        }
+    });
+
+    // Each doc has its own URL, /docs/<id> (vercel.json serves this page for
+    // it). A local preview has no rewrites, so it keeps #/<id> routes; old
+    // #/<id> links still work everywhere.
+    const PRETTY = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && location.protocol !== 'file:';
+    const docHref = (id) => PRETTY ? `/docs/${id}` : `#/${id}`;
+
+    // Rewrite doc-relative links so they go to that doc's URL.
+    const renderer = new marked.Renderer();
+    const baseLink = renderer.link.bind(renderer);
+    renderer.link = (href, title, text) => {
+        if (typeof href === 'string' && href.startsWith('#/')) {
+            return `<a href="${docHref(href.slice(2))}">${text}</a>`;
+        }
+        const html = baseLink(href, title, text);
+        // open external links in new tab
+        if (typeof href === 'string' && /^https?:/i.test(href)) {
+            return html.replace('<a ', '<a target="_blank" rel="noopener" ');
+        }
+        return html;
+    };
+    marked.use({ renderer });
+
+    function parseRoute() {
+        const h = (window.location.hash || '').match(/^#\/([\w\-]+)/);
+        const p = window.location.pathname.match(/^\/docs\/([\w\-]+)\/?$/);
+        const id = h ? h[1] : p ? p[1] : null;
+        return id || (manifest ? manifest.sections[0].items[0].id : 'introduction');
+    }
+
+    function buildToc() {
+        TOC_EL.innerHTML = '';
+        flat = [];
+        manifest.sections.forEach(section => {
+            const wrap = document.createElement('div');
+            wrap.className = 'toc-section';
+            const h = document.createElement('div');
+            h.className = 'toc-heading';
+            h.textContent = section.title;
+            wrap.appendChild(h);
+            const ul = document.createElement('ul');
+            ul.className = 'toc-list';
+            section.items.forEach(item => {
+                flat.push(item);
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.className = 'toc-link';
+                a.href = docHref(item.id);
+                a.textContent = item.title;
+                a.dataset.id = item.id;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+            wrap.appendChild(ul);
+            TOC_EL.appendChild(wrap);
+        });
+    }
+
+    function updateActive(id) {
+        document.querySelectorAll('.toc-link').forEach(a => {
+            a.classList.toggle('active', a.dataset.id === id);
+        });
+    }
+
+    function updateFooter(id) {
+        const idx = flat.findIndex(d => d.id === id);
+        FOOTER.innerHTML = '';
+        const prev = idx > 0 ? flat[idx - 1] : null;
+        const next = idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null;
+
+        const prevA = document.createElement('a');
+        prevA.className = 'prev';
+        if (prev) {
+            prevA.href = docHref(prev.id);
+            prevA.innerHTML = `<span class="lbl">← Previous</span><span>${prev.title}</span>`;
+        } else {
+            prevA.className = 'prev empty';
+            prevA.href = '#';
+        }
+        FOOTER.appendChild(prevA);
+
+        const nextA = document.createElement('a');
+        nextA.className = 'next';
+        if (next) {
+            nextA.href = docHref(next.id);
+            nextA.innerHTML = `<span class="lbl">Next →</span><span>${next.title}</span>`;
+        } else {
+            nextA.className = 'next empty';
+            nextA.href = '#';
+        }
+        FOOTER.appendChild(nextA);
+    }
+
+    // Pages are pre-rendered (scripts/build-docs.mjs): on first load the
+    // article is already in the HTML, so only wire it up.
+    let prerendered = ARTICLE.dataset.doc || null;
+
+    async function loadDoc(id) {
+        if (prerendered && prerendered === id) {
+            prerendered = null;
+            ARTICLE.querySelectorAll('pre code').forEach(el => { try { hljs.highlightElement(el); } catch {} });
+            updateActive(id);
+            updateFooter(id);
+            const item = flat.find(d => d.id === id);
+            if (MOB_CUR) MOB_CUR.textContent = item ? item.title : 'Contents';
+            return;
+        }
+        prerendered = null;
+        ARTICLE.innerHTML = '<div class="doc-status">Loading…</div>';
+        try {
+            const r = await fetch(`/docs/${id}.md`, { cache: 'no-cache' });
+            if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+            const md = await r.text();
+            ARTICLE.innerHTML = marked.parse(md);
+            ARTICLE.querySelectorAll('pre code').forEach(el => {
+                try { hljs.highlightElement(el); } catch {}
+            });
+            // wrap tables so wide ones scroll inside a bordered panel
+            ARTICLE.querySelectorAll('table').forEach(t => {
+                const w = document.createElement('div');
+                w.className = 'table-wrap';
+                t.parentNode.insertBefore(w, t);
+                w.appendChild(t);
+            });
+            updateActive(id);
+            updateFooter(id);
+            const item = flat.find(d => d.id === id);
+            document.title = item ? (item.seoTitle || `${item.title} · Cadence Docs`) : 'Cadence Docs';
+            if (item) {
+                const url = `https://www.cadencevoice.ai/docs/${id}`;
+                document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
+                document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
+            }
+            if (MOB_CUR) MOB_CUR.textContent = item ? item.title : 'Contents';
+            // close mobile sidebar after navigation
+            setMobileOpen(false);
+            // scroll to top of article
+            window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+        } catch (err) {
+            ARTICLE.innerHTML = `<div class="doc-status error">Failed to load doc: ${err.message}</div>
+                <p>If you reached this by link, try the <a href="${docHref('introduction')}">introduction</a>.</p>`;
+        }
+    }
+
+    function onHashChange() {
+        const id = parseRoute();
+        // An old #/<id> link: show it at the doc's own URL.
+        if (PRETTY && /^#\/[\w\-]+/.test(window.location.hash)) {
+            history.replaceState(null, '', `/docs/${id}`);
+        }
+        loadDoc(id);
+    }
+
+    // Moving between docs stays on this page.
+    document.addEventListener('click', (e) => {
+        if (!PRETTY || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        const a = e.target.closest('a[href^="/docs/"]');
+        const m = a && a.getAttribute('href').match(/^\/docs\/([\w\-]+)$/);
+        if (!m) return;
+        e.preventDefault();
+        if (location.pathname !== `/docs/${m[1]}`) history.pushState(null, '', `/docs/${m[1]}`);
+        loadDoc(m[1]);
+    });
+    window.addEventListener('popstate', onHashChange);
+
+    function applySearch() {
+        const q = SEARCH.value.trim().toLowerCase();
+        document.querySelectorAll('.toc-link').forEach(a => {
+            if (!q) { a.classList.remove('hidden'); return; }
+            const hit = a.textContent.toLowerCase().includes(q) ||
+                        a.dataset.id.toLowerCase().includes(q);
+            a.classList.toggle('hidden', !hit);
+        });
+        // hide section heading if all its links are hidden
+        document.querySelectorAll('.toc-section').forEach(sec => {
+            const visible = sec.querySelectorAll('.toc-link:not(.hidden)').length;
+            sec.style.display = visible ? '' : 'none';
+        });
+    }
+
+    SEARCH.addEventListener('input', applySearch);
+
+    // '/' to focus search
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== SEARCH &&
+            !e.metaKey && !e.ctrlKey && !e.altKey) {
+            e.preventDefault();
+            SEARCH.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === SEARCH) {
+            SEARCH.value = '';
+            applySearch();
+            SEARCH.blur();
+        }
+    });
+
+    MOB_TOG.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setMobileOpen(!SIDEBAR.classList.contains('open'));
+    });
+    document.addEventListener('click', (e) => {
+        if (SIDEBAR.classList.contains('open') && !SIDEBAR.contains(e.target)) setMobileOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && SIDEBAR.classList.contains('open') && document.activeElement !== SEARCH) setMobileOpen(false);
+    });
+
+    window.addEventListener('hashchange', onHashChange);
+
+    // Boot
+    fetch('/docs/index.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : Promise.reject(new Error(r.statusText)))
+        .then(json => {
+            manifest = json;
+            if (json.version) VER.textContent = json.version;
+            buildToc();
+            onHashChange();
+        })
+        .catch(err => {
+            ARTICLE.innerHTML = `<div class="doc-status error">Failed to load docs index: ${err.message}</div>`;
+        });
+})();
+</script>
+
+</body>
+</html>

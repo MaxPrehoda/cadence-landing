@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--DOC:HEAD-->
+    <title>Claude Code, Codex, Gemini and other CLIs · Cadence Docs</title>
+
+    <meta name="description" content="Cadence works on top of the coding agents you already use. Claude Code runs natively inside Cadence, and other CLIs run in terminals managed by herdr.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.cadencevoice.ai/docs/agents-and-clis">
+    <meta name="theme-color" content="#f5f5f2">
+
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Claude Code, Codex, Gemini and other CLIs · Cadence Docs">
+    <meta property="og:description" content="Cadence works on top of the coding agents you already use. Claude Code runs natively inside Cadence, and other CLIs run in terminals managed by herdr.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/docs/agents-and-clis">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Claude Code, Codex, Gemini and other CLIs · Cadence Docs">
+    <meta name="twitter:description" content="Cadence works on top of the coding agents you already use. Claude Code runs natively inside Cadence, and other CLIs run in terminals managed by herdr.">
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"TechArticle","headline":"Agents and CLIs","description":"Cadence works on top of the coding agents you already use. Claude Code runs natively inside Cadence, and other CLIs run in terminals managed by herdr.","url":"https://www.cadencevoice.ai/docs/agents-and-clis","inLanguage":"en","image":"https://www.cadencevoice.ai/art/og.png","dateModified":"2026-10-14","about":{"@type":"SoftwareApplication","name":"Cadence","operatingSystem":"macOS 13+","applicationCategory":"DeveloperApplication"},"publisher":{"@type":"Organization","name":"Cadence Labs","url":"https://www.cadencevoice.ai/"}},{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Cadence","item":"https://www.cadencevoice.ai/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://www.cadencevoice.ai/docs"},{"@type":"ListItem","position":3,"name":"Agents and CLIs","item":"https://www.cadencevoice.ai/docs/agents-and-clis"}]}]</script>
+    <!--/DOC:HEAD-->
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/styles/github.min.css">
+
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+
+    <style>
+        :root {
+            --nav-h: 69px;
+            --sidebar-w: 248px;
+        }
+
+        /* ---------------- layout ---------------- */
+
+        .layout {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: grid;
+            grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+            gap: 56px;
+        }
+
+        /* ---------------- sidebar ---------------- */
+
+        aside.sidebar {
+            position: sticky;
+            top: var(--nav-h);
+            align-self: start;
+            max-height: calc(100vh - var(--nav-h));
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding: 32px 12px 48px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--line-2) transparent;
+        }
+        aside.sidebar::-webkit-scrollbar { width: 6px; }
+        aside.sidebar::-webkit-scrollbar-thumb { background: var(--line-2); border-radius: 3px; }
+
+        .search-wrap { position: relative; margin-bottom: 28px; }
+
+        .search {
+            width: 100%;
+            height: 40px;
+            background: #fff;
+            border: 1px solid var(--line-2);
+            border-radius: 8px;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 14px;
+            padding: 0 36px 0 12px;
+            outline: none;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+            transition: border-color .15s, box-shadow .15s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        .search::placeholder { color: var(--ink-3); }
+        .search:focus { border-color: #a9a9a1; box-shadow: 0 0 0 3px rgba(23,23,23,.06); }
+        .search::-webkit-search-cancel-button { display: none; }
+
+        .search-key {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--mono);
+            font-size: 11px;
+            line-height: 1;
+            color: var(--ink-3);
+            background: var(--panel);
+            border: 1px solid var(--line-2);
+            border-radius: 4px;
+            padding: 3px 6px;
+            pointer-events: none;
+        }
+        .search:focus + .search-key, .search:not(:placeholder-shown) + .search-key { display: none; }
+
+        .toc-section { margin-bottom: 24px; }
+
+        .toc-heading {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+            margin: 0 0 8px 10px;
+        }
+
+        .toc-list { list-style: none; margin: 0; padding: 0; }
+
+        .toc-link {
+            display: block;
+            padding: 6px 10px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: var(--ink-2);
+            font-size: 15px;
+            line-height: 1.35;
+            text-decoration: none;
+            transition: background .12s, color .12s;
+        }
+        .toc-link:hover { color: var(--ink); background: rgba(0,0,0,.03); }
+        .toc-link.active {
+            color: var(--ink);
+            font-weight: 500;
+            background: var(--panel);
+            border-color: var(--line-2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        }
+        .toc-link.hidden { display: none; }
+
+        /* ---------------- content ---------------- */
+
+        main.content { min-width: 0; padding: 48px 0 0; }
+        .content-inner { max-width: 720px; }
+
+        .meta-strip { display: flex; align-items: center; gap: 8px; }
+        .meta-strip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: inline-block; }
+
+        /* markdown h1 picks up the homepage two-tone heading style */
+        article.prose h1 {
+            font-weight: 400;
+            color: #3a3a37;
+            letter-spacing: -0.005em;
+            line-height: 1.12;
+            font-size: clamp(34px, 4.4vw, 46px);
+            margin: 0 0 20px;
+        }
+        article.prose > h1 + p { font-size: 18.5px; color: var(--ink-2); line-height: 1.55; }
+        article.prose h2 { scroll-margin-top: calc(var(--nav-h) + 16px); }
+        article.prose h2:first-of-type { margin-top: 40px; }
+        article.prose h3 { scroll-margin-top: calc(var(--nav-h) + 16px); }
+        article.prose h4 { color: var(--ink); font-weight: 600; font-size: 16px; margin: 24px 0 6px; }
+        article.prose ul, article.prose ol { padding-left: 22px; }
+        article.prose li::marker { color: var(--ink-3); }
+        article.prose li > ul, article.prose li > ol { margin: 4px 0 0; }
+        article.prose em { color: var(--ink); }
+        article.prose a { overflow-wrap: anywhere; }
+
+        /* inline code / kbd */
+        article.prose code { overflow-wrap: anywhere; }
+        article.prose kbd { font-size: .82em; padding: 1px 6px; box-shadow: 0 1px 0 rgba(0,0,0,.04); }
+
+        /* code blocks */
+        article.prose pre {
+            margin: 0 0 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #fff;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        }
+        article.prose pre code, article.prose pre code.hljs {
+            background: none;
+            padding: 0;
+            font-size: inherit;
+            color: var(--ink);
+            overflow-wrap: normal;
+        }
+
+        /* callouts (markdown blockquotes) */
+        article.prose blockquote {
+            margin: 0 0 20px;
+            padding: 14px 18px;
+            background: var(--panel);
+            border: 1px solid var(--line-2);
+            border-left: 3px solid var(--blue);
+            border-radius: 8px;
+            color: var(--ink);
+        }
+        article.prose blockquote p:last-child { margin-bottom: 0; }
+
+        /* tables: wrapped by JS in .table-wrap for horizontal scroll */
+        .table-wrap {
+            margin: 0 0 24px;
+            overflow-x: auto;
+            background: #fff;
+            border: 1px solid var(--line-2);
+            border-radius: 10px;
+            box-shadow: 0 1px 2px rgba(0,0,0,.04);
+        }
+        article.prose .table-wrap table { margin: 0; font-size: 14.5px; }
+        article.prose thead th {
+            background: var(--panel);
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+            border-bottom: 1px solid var(--line-2);
+            white-space: nowrap;
+        }
+        article.prose th, article.prose td { padding: 10px 14px; }
+        article.prose tbody tr:last-child td { border-bottom: 0; }
+        article.prose td code { white-space: nowrap; overflow-wrap: normal; }
+
+        /* ---------------- prev / next ---------------- */
+
+        .doc-footer {
+            margin-top: 64px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .doc-footer a {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 16px 18px;
+            background: var(--panel);
+            border: 1px solid var(--line-2);
+            border-radius: 12px;
+            color: var(--ink);
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: border-color .15s, background .15s, transform .15s;
+        }
+        .doc-footer a:hover { background: #fff; border-color: #bdbdb5; transform: translateY(-1px); }
+        .doc-footer .lbl {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--ink-3);
+        }
+        .doc-footer .next { text-align: right; align-items: flex-end; }
+        .doc-footer .empty { visibility: hidden; }
+
+        /* ---------------- status ---------------- */
+
+        .doc-status { font-family: var(--mono); font-size: 13px; color: var(--ink-3); padding: 32px 0; }
+        .doc-status.error { color: #b42318; }
+
+        /* ---------------- mobile ---------------- */
+
+        .mobile-bar { display: none; }
+
+        @media (max-width: 920px) {
+            .layout { display: block; padding: 0 16px; }
+
+            .mobile-bar {
+                display: block;
+                position: sticky;
+                top: var(--nav-h);
+                z-index: 20;
+                margin: 0 -16px;
+                padding: 10px 16px;
+                background: rgba(245,245,242,.92);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid var(--line);
+            }
+            .mobile-toggle {
+                width: 100%;
+                height: 42px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 0 12px;
+                background: #fff;
+                border: 1px solid var(--line-2);
+                border-radius: 8px;
+                box-shadow: 0 1px 2px rgba(0,0,0,.04);
+                font-family: var(--sans);
+                font-size: 15px;
+                color: var(--ink);
+                cursor: pointer;
+                text-align: left;
+            }
+            .mobile-toggle .lbl {
+                font-family: var(--mono);
+                font-size: 11px;
+                letter-spacing: .12em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+            }
+            .mobile-toggle .cur { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
+            .mobile-toggle .chev { width: 10px; height: 10px; border-right: 1.5px solid var(--ink-2); border-bottom: 1.5px solid var(--ink-2); transform: translateY(-2px) rotate(45deg); transition: transform .15s; }
+            .mobile-toggle[aria-expanded="true"] .chev { transform: translateY(2px) rotate(-135deg); }
+
+            aside.sidebar {
+                display: none;
+                position: fixed;
+                z-index: 25;
+                left: 16px;
+                right: 16px;
+                top: calc(var(--nav-h) + 69px);
+                max-height: calc(100vh - var(--nav-h) - 85px);
+                max-height: calc(100dvh - var(--nav-h) - 85px);
+                padding: 16px 12px 8px;
+                background: var(--page);
+                border: 1px solid var(--line-2);
+                border-radius: 12px;
+                box-shadow: 0 12px 32px rgba(0,0,0,.12);
+            }
+            aside.sidebar.open { display: block; }
+
+            main.content { padding-top: 28px; }
+            .search-key { display: none; }
+            article.prose .table-wrap table { font-size: 14px; }
+            article.prose th, article.prose td { padding: 9px 10px; }
+            article.prose > h1 + p { font-size: 17px; }
+            .doc-footer { grid-template-columns: 1fr; }
+            .doc-footer .next { text-align: left; align-items: flex-start; }
+            .doc-footer .empty { display: none; }
+        }
+
+        @media (max-width: 720px) {
+            .site-nav-in { padding: 0 16px; }
+            .site-foot-in { padding: 32px 16px 48px; }
+            .site-foot { margin-top: 64px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence<small>Docs</small></a>
+        <nav aria-label="Primary">
+            <a href="/docs.html" aria-current="page">Docs</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<div class="layout">
+    <div class="mobile-bar" id="mobile-bar">
+        <button class="mobile-toggle" id="mobile-toggle" aria-controls="sidebar" aria-expanded="false">
+            <span class="lbl">Docs</span>
+            <span class="cur" id="mobile-current">Agents and CLIs</span>
+            <span class="chev" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+        <div class="search-wrap">
+            <input type="search" class="search" id="search"
+                   placeholder="Search docs" aria-label="Search documentation"
+                   autocomplete="off" spellcheck="false">
+            <span class="search-key" aria-hidden="true">/</span>
+        </div>
+        <div id="toc"><!--DOC:TOC-->
+            <div class="toc-section"><div class="toc-heading">Getting started</div><ul class="toc-list"><li><a class="toc-link" href="/docs/introduction" data-id="introduction">Introduction</a></li><li><a class="toc-link" href="/docs/installation" data-id="installation">Installation</a></li><li><a class="toc-link" href="/docs/quickstart" data-id="quickstart">Quickstart</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Agents</div><ul class="toc-list"><li><a class="toc-link" href="/docs/toolbar" data-id="toolbar">Toolbar</a></li><li><a class="toc-link" href="/docs/inbox" data-id="inbox">Inbox</a></li><li><a class="toc-link" href="/docs/talk" data-id="talk">Talk</a></li><li><a class="toc-link" href="/docs/director" data-id="director">Director</a></li><li><a class="toc-link active" href="/docs/agents-and-clis" data-id="agents-and-clis">Agents and CLIs</a></li><li><a class="toc-link" href="/docs/sets" data-id="sets">Sets</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Dictation</div><ul class="toc-list"><li><a class="toc-link" href="/docs/dictation" data-id="dictation">Dictation</a></li><li><a class="toc-link" href="/docs/hotkeys" data-id="hotkeys">Hotkeys</a></li><li><a class="toc-link" href="/docs/text-polish" data-id="text-polish">Text Polish</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">More</div><ul class="toc-list"><li><a class="toc-link" href="/docs/voice-commands" data-id="voice-commands">Voice commands</a></li><li><a class="toc-link" href="/docs/iphone" data-id="iphone">iPhone (coming soon)</a></li><li><a class="toc-link" href="/docs/cloud" data-id="cloud">Continue in the cloud</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Reference</div><ul class="toc-list"><li><a class="toc-link" href="/docs/settings" data-id="settings">Settings reference</a></li><li><a class="toc-link" href="/docs/troubleshooting" data-id="troubleshooting">Troubleshooting</a></li><li><a class="toc-link" href="/docs/privacy" data-id="privacy">Privacy</a></li></ul></div><!--/DOC:TOC--></div>
+    </aside>
+
+    <main class="content">
+        <div class="content-inner">
+            <p class="eyebrow meta-strip"><span class="dot" aria-hidden="true"></span>Cadence v<span id="ver">0.5.3</span> · Documentation</p>
+            <article id="article" class="prose" data-doc="agents-and-clis"><!--DOC:ARTICLE-->
+<h1>Agents and CLIs</h1>
+<p>Cadence works on top of the coding agents you already use. Claude Code runs natively inside Cadence, and other CLIs run in terminals managed by herdr.</p>
+<h2>Start an agent</h2>
+<p>Open <strong>New agent</strong> from any of these:</p>
+<ul>
+<li>the <strong>+</strong> button in the Inbox panel header, or <code>⌘N</code> while the panel is open</li>
+<li><strong>⋯ → New agent…</strong> on the <a href="/docs/toolbar">toolbar</a></li>
+<li>the empty dot in the agents pill, when you have no agents yet</li>
+</ul>
+<p>Pick a CLI, enter a <strong>Folder</strong>, and optionally a <strong>First message</strong>, then start it.</p>
+<p>You can also start agents by asking <a href="/docs/talk">Talk</a> for new work, or by asking the <a href="/docs/director">Director</a>. The <strong>+</strong> row in the toolbar peek starts another agent of the kind you use in the folder you used last, with no form.</p>
+<h2>Claude Code: two ways to run it</h2>
+<p>When you pick <strong>Claude Code</strong>, choose how it runs:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th></th>
+<th>Terminal (default)</th>
+<th>Cadence chat</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Where it runs</td>
+<td>Claude Code&#39;s own interface in a herdr terminal</td>
+<td>A headless Claude Code session inside Cadence</td>
+</tr>
+<tr>
+<td>Needs herdr</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Opens in</td>
+<td>A Terminal window</td>
+<td>The panel next to the toolbar</td>
+</tr>
+<tr>
+<td>Permission requests</td>
+<td>Shown in the Inbox when Claude Code prints its numbered prompt</td>
+<td>Real Allow/Deny cards, with your reason passed back on Deny</td>
+</tr>
+<tr>
+<td>Git worktree per agent</td>
+<td>No</td>
+<td>Yes, by default</td>
+</tr>
+<tr>
+<td>Diff and history</td>
+<td>In your terminal</td>
+<td><strong>Diff</strong> and <strong>History</strong> tabs on the Agents board</td>
+</tr>
+</tbody></table></div>
+<p><strong>Terminal</strong> feels like the Claude Code you already know. <strong>Cadence chat</strong> gives Cadence the most structure to work with: exact questions and approvals, cost, and a separate worktree so two agents in one repo do not step on each other.</p>
+<h3>Worktrees</h3>
+<p>With <strong>Use a git worktree per agent</strong> on (<strong>Settings → Agents</strong>), each Cadence chat agent started inside a git repo works on its own branch, <code>cadence/&lt;name&gt;-&lt;id&gt;</code>, in <code>~/.cadence/worktrees/</code>. Ending an agent does not delete its branch, so you can review and merge the work afterward.</p>
+<h2>Other CLIs</h2>
+<p>These run in herdr and show up in the toolbar and Inbox like any other agent:</p>
+<ul>
+<li>Codex</li>
+<li>OpenCode</li>
+<li>Pi</li>
+<li>Omp</li>
+<li>Amp</li>
+<li>Grok</li>
+<li>Cursor</li>
+<li>Copilot</li>
+<li>Gemini</li>
+</ul>
+<p>The CLI itself must be installed and signed in on your Mac. Cadence starts it in the folder you choose; it does not manage the CLI&#39;s own account or settings.</p>
+<h2>herdr</h2>
+<p><a target="_blank" rel="noopener" href="https://herdr.dev">herdr</a> is a free terminal runtime. Cadence uses it for terminal agents because it keeps each agent alive after you close its window, lets Cadence read the screen to tell whether an agent is working, waiting or done, and lets Cadence type answers into it.</p>
+<p>If herdr is missing, the New agent view shows the install command:</p>
+<pre><code class="language-sh">curl -fsSL https://herdr.dev/install.sh | sh
+</code></pre>
+<p>Run it, then click <strong>I installed it</strong>. If herdr is installed but not running, click <strong>Start herdr</strong>.</p>
+<p>Because herdr owns the processes, closing a terminal window or quitting Cadence does not stop your terminal agents. To stop one, end it from the toolbar or the Inbox.</p>
+<h2>Claude Code you started yourself</h2>
+<p>Cadence also notices Claude Code sessions you opened in another terminal app. They appear in the agents list, the Director can read them, and Talk can <a href="/docs/talk">move one into herdr</a> so Cadence can send it messages.</p>
+<h2>Titles and recaps</h2>
+<p>Every agent gets a short title of two to five words, like &quot;landing page download button&quot;, written by Claude Haiku from what the agent is doing. Titles lead the toolbar peek, the Inbox, the agents list and the terminal tabs. The agent&#39;s name stays beside it as a handle you can use with Talk.</p>
+<p>If a CLI names its own session (Claude Code sets its terminal title), Cadence uses that name instead.</p>
+<p>When an agent finishes with a long message, Cadence adds a recap of at most 25 words to its Inbox card.</p>
+<h2>Signing in to Claude</h2>
+<p>Cadence uses the same login as the <code>claude</code> CLI. If you can run <code>claude</code> in a terminal, you are set.</p>
+<p>To use a different method, open <strong>Settings → Agents → Claude authentication</strong>:</p>
+<ul>
+<li><strong>Claude subscription (recommended)</strong>: your existing Claude Code login (Pro, Max, Team or Enterprise).</li>
+<li><strong>Long-lived OAuth token</strong>: from <code>claude setup-token</code>.</li>
+<li><strong>Anthropic API key</strong></li>
+<li><strong>Gateway bearer token</strong>: for LiteLLM or another gateway.</li>
+<li><strong>Rotating credential script</strong></li>
+<li><strong>Amazon Bedrock</strong>, <strong>Google Vertex AI</strong>, <strong>Microsoft Foundry</strong></li>
+</ul>
+<p>Click <strong>Test connection</strong> to check it. If the test warns about a stale <code>ANTHROPIC_API_KEY</code>, that variable is overriding your subscription login. Unset it in your shell and try again.</p>
+<p>If <code>claude</code> is not on your <code>PATH</code>, set <strong>Binary path</strong> under <strong>Settings → Agents → Claude CLI</strong>.</p>
+            <!--/DOC:ARTICLE--></article>
+            <nav class="doc-footer" id="doc-footer" aria-label="Previous and next"><!--DOC:FOOT--><a class="prev" href="/docs/director"><span class="lbl">← Previous</span><span>Director</span></a><a class="next" href="/docs/sets"><span class="lbl">Next →</span><span>Sets</span></a><!--/DOC:FOOT--></nav>
+        </div>
+    </main>
+</div>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/docs.html">Docs</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js"></script>
+
+<script>
+(() => {
+    const TOC_EL    = document.getElementById('toc');
+    const ARTICLE   = document.getElementById('article');
+    const SEARCH    = document.getElementById('search');
+    const FOOTER    = document.getElementById('doc-footer');
+    const SIDEBAR   = document.getElementById('sidebar');
+    const MOB_TOG   = document.getElementById('mobile-toggle');
+    const VER       = document.getElementById('ver');
+    const MOB_CUR   = document.getElementById('mobile-current');
+
+    function setMobileOpen(open) {
+        SIDEBAR.classList.toggle('open', open);
+        MOB_TOG.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+
+    let manifest = null;
+    let flat     = [];   // flattened ordered list of docs for prev/next
+
+    // marked + highlight setup
+    marked.setOptions({
+        gfm: true,
+        breaks: false,
+        smartypants: false,
+        headerIds: true,
+        mangle: false,
+        highlight(code, lang) {
+            try {
+                if (lang && hljs.getLanguage(lang)) {
+                    return hljs.highlight(code, { language: lang }).value;
+                }
+                return hljs.highlightAuto(code).value;
+            } catch { return code; }
+        }
+    });
+
+    // Each doc has its own URL, /docs/<id> (vercel.json serves this page for
+    // it). A local preview has no rewrites, so it keeps #/<id> routes; old
+    // #/<id> links still work everywhere.
+    const PRETTY = !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname) && location.protocol !== 'file:';
+    const docHref = (id) => PRETTY ? `/docs/${id}` : `#/${id}`;
+
+    // Rewrite doc-relative links so they go to that doc's URL.
+    const renderer = new marked.Renderer();
+    const baseLink = renderer.link.bind(renderer);
+    renderer.link = (href, title, text) => {
+        if (typeof href === 'string' && href.startsWith('#/')) {
+            return `<a href="${docHref(href.slice(2))}">${text}</a>`;
+        }
+        const html = baseLink(href, title, text);
+        // open external links in new tab
+        if (typeof href === 'string' && /^https?:/i.test(href)) {
+            return html.replace('<a ', '<a target="_blank" rel="noopener" ');
+        }
+        return html;
+    };
+    marked.use({ renderer });
+
+    function parseRoute() {
+        const h = (window.location.hash || '').match(/^#\/([\w\-]+)/);
+        const p = window.location.pathname.match(/^\/docs\/([\w\-]+)\/?$/);
+        const id = h ? h[1] : p ? p[1] : null;
+        return id || (manifest ? manifest.sections[0].items[0].id : 'introduction');
+    }
+
+    function buildToc() {
+        TOC_EL.innerHTML = '';
+        flat = [];
+        manifest.sections.forEach(section => {
+            const wrap = document.createElement('div');
+            wrap.className = 'toc-section';
+            const h = document.createElement('div');
+            h.className = 'toc-heading';
+            h.textContent = section.title;
+            wrap.appendChild(h);
+            const ul = document.createElement('ul');
+            ul.className = 'toc-list';
+            section.items.forEach(item => {
+                flat.push(item);
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.className = 'toc-link';
+                a.href = docHref(item.id);
+                a.textContent = item.title;
+                a.dataset.id = item.id;
+                li.appendChild(a);
+                ul.appendChild(li);
+            });
+            wrap.appendChild(ul);
+            TOC_EL.appendChild(wrap);
+        });
+    }
+
+    function updateActive(id) {
+        document.querySelectorAll('.toc-link').forEach(a => {
+            a.classList.toggle('active', a.dataset.id === id);
+        });
+    }
+
+    function updateFooter(id) {
+        const idx = flat.findIndex(d => d.id === id);
+        FOOTER.innerHTML = '';
+        const prev = idx > 0 ? flat[idx - 1] : null;
+        const next = idx >= 0 && idx < flat.length - 1 ? flat[idx + 1] : null;
+
+        const prevA = document.createElement('a');
+        prevA.className = 'prev';
+        if (prev) {
+            prevA.href = docHref(prev.id);
+            prevA.innerHTML = `<span class="lbl">← Previous</span><span>${prev.title}</span>`;
+        } else {
+            prevA.className = 'prev empty';
+            prevA.href = '#';
+        }
+        FOOTER.appendChild(prevA);
+
+        const nextA = document.createElement('a');
+        nextA.className = 'next';
+        if (next) {
+            nextA.href = docHref(next.id);
+            nextA.innerHTML = `<span class="lbl">Next →</span><span>${next.title}</span>`;
+        } else {
+            nextA.className = 'next empty';
+            nextA.href = '#';
+        }
+        FOOTER.appendChild(nextA);
+    }
+
+    // Pages are pre-rendered (scripts/build-docs.mjs): on first load the
+    // article is already in the HTML, so only wire it up.
+    let prerendered = ARTICLE.dataset.doc || null;
+
+    async function loadDoc(id) {
+        if (prerendered && prerendered === id) {
+            prerendered = null;
+            ARTICLE.querySelectorAll('pre code').forEach(el => { try { hljs.highlightElement(el); } catch {} });
+            updateActive(id);
+            updateFooter(id);
+            const item = flat.find(d => d.id === id);
+            if (MOB_CUR) MOB_CUR.textContent = item ? item.title : 'Contents';
+            return;
+        }
+        prerendered = null;
+        ARTICLE.innerHTML = '<div class="doc-status">Loading…</div>';
+        try {
+            const r = await fetch(`/docs/${id}.md`, { cache: 'no-cache' });
+            if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+            const md = await r.text();
+            ARTICLE.innerHTML = marked.parse(md);
+            ARTICLE.querySelectorAll('pre code').forEach(el => {
+                try { hljs.highlightElement(el); } catch {}
+            });
+            // wrap tables so wide ones scroll inside a bordered panel
+            ARTICLE.querySelectorAll('table').forEach(t => {
+                const w = document.createElement('div');
+                w.className = 'table-wrap';
+                t.parentNode.insertBefore(w, t);
+                w.appendChild(t);
+            });
+            updateActive(id);
+            updateFooter(id);
+            const item = flat.find(d => d.id === id);
+            document.title = item ? (item.seoTitle || `${item.title} · Cadence Docs`) : 'Cadence Docs';
+            if (item) {
+                const url = `https://www.cadencevoice.ai/docs/${id}`;
+                document.querySelector('link[rel="canonical"]')?.setAttribute('href', url);
+                document.querySelector('meta[property="og:url"]')?.setAttribute('content', url);
+            }
+            if (MOB_CUR) MOB_CUR.textContent = item ? item.title : 'Contents';
+            // close mobile sidebar after navigation
+            setMobileOpen(false);
+            // scroll to top of article
+            window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+        } catch (err) {
+            ARTICLE.innerHTML = `<div class="doc-status error">Failed to load doc: ${err.message}</div>
+                <p>If you reached this by link, try the <a href="${docHref('introduction')}">introduction</a>.</p>`;
+        }
+    }
+
+    function onHashChange() {
+        const id = parseRoute();
+        // An old #/<id> link: show it at the doc's own URL.
+        if (PRETTY && /^#\/[\w\-]+/.test(window.location.hash)) {
+            history.replaceState(null, '', `/docs/${id}`);
+        }
+        loadDoc(id);
+    }
+
+    // Moving between docs stays on this page.
+    document.addEventListener('click', (e) => {
+        if (!PRETTY || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        const a = e.target.closest('a[href^="/docs/"]');
+        const m = a && a.getAttribute('href').match(/^\/docs\/([\w\-]+)$/);
+        if (!m) return;
+        e.preventDefault();
+        if (location.pathname !== `/docs/${m[1]}`) history.pushState(null, '', `/docs/${m[1]}`);
+        loadDoc(m[1]);
+    });
+    window.addEventListener('popstate', onHashChange);
+
+    function applySearch() {
+        const q = SEARCH.value.trim().toLowerCase();
+        document.querySelectorAll('.toc-link').forEach(a => {
+            if (!q) { a.classList.remove('hidden'); return; }
+            const hit = a.textContent.toLowerCase().includes(q) ||
+                        a.dataset.id.toLowerCase().includes(q);
+            a.classList.toggle('hidden', !hit);
+        });
+        // hide section heading if all its links are hidden
+        document.querySelectorAll('.toc-section').forEach(sec => {
+            const visible = sec.querySelectorAll('.toc-link:not(.hidden)').length;
+            sec.style.display = visible ? '' : 'none';
+        });
+    }
+
+    SEARCH.addEventListener('input', applySearch);
+
+    // '/' to focus search
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== SEARCH &&
+            !e.metaKey && !e.ctrlKey && !e.altKey) {
+            e.preventDefault();
+            SEARCH.focus();
+        }
+        if (e.key === 'Escape' && document.activeElement === SEARCH) {
+            SEARCH.value = '';
+            applySearch();
+            SEARCH.blur();
+        }
+    });
+
+    MOB_TOG.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setMobileOpen(!SIDEBAR.classList.contains('open'));
+    });
+    document.addEventListener('click', (e) => {
+        if (SIDEBAR.classList.contains('open') && !SIDEBAR.contains(e.target)) setMobileOpen(false);
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && SIDEBAR.classList.contains('open') && document.activeElement !== SEARCH) setMobileOpen(false);
+    });
+
+    window.addEventListener('hashchange', onHashChange);
+
+    // Boot
+    fetch('/docs/index.json', { cache: 'no-cache' })
+        .then(r => r.ok ? r.json() : Promise.reject(new Error(r.statusText)))
+        .then(json => {
+            manifest = json;
+            if (json.version) VER.textContent = json.version;
+            buildToc();
+            onHashChange();
+        })
+        .catch(err => {
+            ARTICLE.innerHTML = `<div class="doc-status error">Failed to load docs index: ${err.message}</div>`;
+        });
+})();
+</script>
+
+</body>
+</html>
