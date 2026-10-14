@@ -21,9 +21,6 @@ const tailwind = (await mod("@tailwindcss/vite/dist/index.mjs")).default;
 const pkg = JSON.parse(fs.readFileSync(path.join(VF, "package.json"), "utf8"));
 
 const PAGES = ["indicator", "agents-popover", "talk"];
-// One cosmetic fix, the same the footage harness applies: at the panel's
-// 420px width the Inbox card's "1 of 2" wraps onto two lines.
-const FIXES = `\n    <style>.card .pos { white-space: nowrap; }</style>`;
 const FONTS = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap";
 
 await build({
@@ -55,7 +52,7 @@ for (const p of PAGES) {
   // Inter and JetBrains Mono are linked here instead.
   html = html.replace(
     "<head>",
-    `<head>\n    <script src="./tauri-shim.js"></script>\n    <link rel="stylesheet" href="${FONTS}">${FIXES}`,
+    `<head>\n    <script src="./tauri-shim.js"></script>\n    <link rel="stylesheet" href="${FONTS}">`,
   );
   fs.writeFileSync(f, html);
 }

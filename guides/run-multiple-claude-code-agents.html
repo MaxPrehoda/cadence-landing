@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Run Multiple Claude Code Agents at Once · Cadence</title>
+    <meta name="description" content="Run several Claude Code sessions in parallel on a Mac: split the work, give each agent a git worktree, use tmux or tabs, and always know which one is waiting.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/guides/run-multiple-claude-code-agents">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="How to Run Multiple Claude Code Agents at Once · Cadence">
+    <meta property="og:description" content="Run several Claude Code sessions in parallel on a Mac: split the work, give each agent a git worktree, use tmux or tabs, and always know which one is waiting.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/guides/run-multiple-claude-code-agents">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Run Multiple Claude Code Agents at Once · Cadence">
+    <meta name="twitter:description" content="Run several Claude Code sessions in parallel on a Mac: split the work, give each agent a git worktree, use tmux or tabs, and always know which one is waiting.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "How to run multiple Claude Code agents at once",
+    "description": "Run several Claude Code sessions in parallel on a Mac: split the work, give each agent a git worktree, use tmux or tabs, and always know which one is waiting.",
+    "image": "https://www.cadencevoice.ai/art/og.png",
+    "datePublished": "2026-10-14",
+    "dateModified": "2026-10-14",
+    "inLanguage": "en-US",
+    "proficiencyLevel": "Beginner",
+    "keywords": "run multiple Claude Code agents, parallel Claude Code sessions, Claude Code git worktree, Claude Code tmux, multiple coding agents",
+    "author": {
+        "@type": "Organization",
+        "name": "Cadence Labs",
+        "url": "https://www.cadencevoice.ai/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cadence",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cadencevoice.ai/icon.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/guides/run-multiple-claude-code-agents"
+    },
+    "isPartOf": {
+        "@type": "CollectionPage",
+        "@id": "https://www.cadencevoice.ai/guides",
+        "name": "Cadence guides"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Cadence",
+            "item": "https://www.cadencevoice.ai/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Guides",
+            "item": "https://www.cadencevoice.ai/guides"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Multiple Claude Code agents",
+            "item": "https://www.cadencevoice.ai/guides/run-multiple-claude-code-agents"
+        }
+    ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "How many Claude Code sessions can I run at once?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Claude Code does not stop you from starting more sessions. The practical limits are your account's usage limits, which every session draws on, your machine's memory when each agent runs builds and tests, and how many results you can review. Most people find a handful of writing agents plus a few read-only ones is the useful range."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do parallel Claude Code sessions share context?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Each session has its own conversation. They do read the same project files, including CLAUDE.md, so instructions you put there apply to all of them."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can two agents work in the same folder?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They can, but they may overwrite each other's edits or break each other's builds. Separate git worktrees avoid that. In Cadence, Cadence chat agents get one automatically."
+            }
+        }
+    ]
+}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/guides/guides.css">
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence</a>
+        <nav aria-label="Primary">
+            <a href="/docs.html">Docs</a>
+            <a href="/guides" aria-current="page">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main class="guide">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/guides">Guides</a><span class="sep">/</span><span>Multiple Claude Code agents</span></nav>
+
+    <h1 class="two guide-title">Run multiple Claude Code agents <span>at once, without losing track</span></h1>
+
+    <p class="guide-dek">Parallel Claude Code sessions are easy to start and hard to keep moving. This guide covers the setup that works: separate tasks, separate worktrees, and one place that tells you which agent is waiting.</p>
+
+    <p class="stamp">Last updated: <time datetime="2026-10-14">October 14, 2026</time> · Cadence Labs</p>
+
+    <div class="answer panel">
+        <p class="eyebrow">Short answer</p>
+        <p>Open one terminal per task and run <code>claude</code> in each. To keep them from editing the same files, give every session its own git worktree. Then add something that tells you when a session stops to ask a question, because a parallel agent that sits waiting for twenty minutes is not running in parallel.</p>
+        <ol>
+            <li>Split the work into tasks that touch different parts of the code.</li>
+            <li>Create a worktree per task: <code>git worktree add ../app-search -b search</code>.</li>
+            <li>Run Claude Code in each worktree, in tabs or a tmux session.</li>
+            <li>Set up notifications, or a tool like Cadence, so you see which one needs you.</li>
+        </ol>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <ol>
+                <li><a href="#split">Split the work first</a></li>
+                <li><a href="#worktrees">Give each agent its own worktree</a></li>
+                <li><a href="#side-by-side">Run the sessions side by side</a></li>
+                <li><a href="#waiting">Know which one is waiting</a></li>
+                <li><a href="#cadence">How Cadence handles it</a></li>
+                <li><a href="#questions">Common questions</a></li>
+        </ol>
+    </nav>
+
+    <article class="guide-body prose">
+
+        <h2 id="split">1. Split the work first</h2>
+        <p>Claude Code has no problem running several times on one Mac. Each session is its own process with its own conversation. The trouble starts when two sessions edit the same file, or when one session's half-finished change breaks the build the other one is testing.</p>
+        <p>Good parallel tasks are ones you could hand to two different people without a meeting: a bug in the API and a layout fix in the settings page, a test suite for one module and a refactor of another. Tasks that need each other's output are better done one after the other.</p>
+        <p>A useful pattern is many readers and one writer. Agents that only investigate (find where something lives, explain a failing test, review a diff) can run in any number, because their output never conflicts. Keep the agents that change code to a few, each on its own area. We wrote more about this in <a href="/blog/scouts-before-editors">Scouts before editors</a>.</p>
+
+        <h2 id="worktrees">2. Give each agent its own worktree</h2>
+        <p>A git worktree is a second checkout of the same repository in another folder, on its own branch. Agents in different worktrees cannot overwrite each other's files, and each branch can be reviewed and merged on its own.</p>
+<pre><code># from your main checkout
+git worktree add ../my-app-search -b search
+git worktree add ../my-app-settings -b settings-dark-mode
+
+# start an agent in each
+cd ../my-app-search &amp;&amp; claude</code></pre>
+        <p>When you are done, merge the branch as usual and remove the folder with <code>git worktree remove ../my-app-search</code>. <code>git worktree list</code> shows what you have.</p>
+        <p>Two things to watch for:</p>
+        <ul>
+            <li><strong>Dependencies.</strong> A new worktree has no <code>node_modules</code>, virtualenv or build output. Install them in each worktree, or tell the agent to.</li>
+            <li><strong>Ports and shared services.</strong> Two dev servers on port 3000 will collide. Give each agent a different port, or have only one of them run the app.</li>
+        </ul>
+
+        <h2 id="side-by-side">3. Run the sessions side by side</h2>
+        <h3>Terminal tabs or windows</h3>
+        <p>The simplest setup is one tab per agent in Terminal, iTerm2 or your editor's terminal. Name each tab after its task so you can find it again. This works well for two or three agents.</p>
+        <h3>tmux</h3>
+        <p>tmux gives you named windows in one session that keep running when you close the terminal:</p>
+<pre><code>tmux new -s agents -n search     # first window
+tmux new-window -t agents -n settings
+# Ctrl-b w lists windows, Ctrl-b d detaches
+tmux attach -t agents            # come back later</code></pre>
+        <p>Run <code>claude</code> in each window from its worktree. With <code>set -g monitor-bell on</code> in <code>~/.tmux.conf</code>, tmux flags a window in the status bar when the program in it rings the terminal bell, which helps with the next step.</p>
+
+        <h2 id="waiting">4. Know which one is waiting</h2>
+        <p>This is where most parallel setups break down. Claude Code stops and waits when it wants permission to run a command, when it asks you a question, when it has a plan for you to approve, and when it finishes. In a single terminal you see that right away. With four tabs, the agent that needs you is usually the one you are not looking at.</p>
+        <p>Your options, from least to most setup:</p>
+        <ul>
+            <li><strong>Check the tabs on a timer.</strong> It works, and it is how most people start. It costs attention every few minutes.</li>
+            <li><strong>Terminal bell plus tmux or tab badges.</strong> Have Claude Code ring the bell when it waits, and let your terminal or tmux mark the window.</li>
+            <li><strong>Claude Code hooks.</strong> A <code>Notification</code> hook and a <code>Stop</code> hook can post a macOS notification naming the project. The <a href="/guides/claude-code-notifications-mac">Claude Code notifications guide</a> has a copy-paste setup.</li>
+        </ul>
+        <p>All three tell you that something is waiting. You still switch to the right tab, read back to see what it asked, and answer there.</p>
+
+        <h2 id="cadence">5. How Cadence handles it</h2>
+        <p><a href="/">Cadence</a> is a free macOS app that puts every coding agent in one Inbox. It starts and tracks the agents for you and collects their questions in one place, so you answer without hunting for the tab.</p>
+        <h3>Start the agents</h3>
+        <ol>
+            <li><a href="/download">Download Cadence</a> and make sure the <code>claude</code> CLI is installed and signed in. Cadence uses that login; there is no separate API key.</li>
+            <li>On the toolbar at the edge of your screen, open <strong>⋯ → New agent…</strong> and pick <strong>Claude Code</strong>.</li>
+            <li>Choose <strong>Terminal</strong> (Claude Code's own interface in a herdr terminal) or <strong>Cadence chat</strong> (runs inside Cadence).</li>
+            <li>Enter the <strong>Folder</strong> and an optional <strong>First message</strong>, then click <strong>Start</strong>.</li>
+        </ol>
+        <p>You can also double-tap <kbd>⌥</kbd> and say what you want. <a href="/docs/talk">Talk</a> sends it to the agent already working in that area, or starts a new one in the right folder.</p>
+        <h3>Worktrees without the bookkeeping</h3>
+        <p>With <strong>Use a git worktree per agent</strong> on (the default, in <strong>Settings → Agents</strong>), each Cadence chat agent started inside a git repo gets its own branch, <code>cadence/&lt;name&gt;-&lt;id&gt;</code>, in <code>~/.cadence/worktrees/</code>. Ending the agent keeps the branch so you can review and merge it. Terminal agents do not get a worktree automatically; point their Folder at a worktree you made with the commands above.</p>
+        <h3>See who is waiting</h3>
+        <p>The <a href="/docs/toolbar">toolbar</a> shows one dot per agent: blue is working, amber needs you, green is done. Each agent gets a short title such as "settings page dark mode", so you can tell them apart. Hold the pointer on the dots for two seconds to see what each one is on.</p>
+        <p>Amber agents land in the <a href="/docs/inbox">Inbox</a> as cards: questions with numbered options, plans to approve, and Allow/Deny permission requests. Press <kbd>1</kbd> to <kbd>9</kbd> to answer, <kbd>J</kbd> and <kbd>K</kbd> to move between cards, and <kbd>Esc</kbd> within two seconds to take an answer back.</p>
+        <h3>When there are too many</h3>
+        <p>The toolbar shows up to eight dots. <a href="/docs/sets">Sets</a> put a group of terminal agents away: their windows close, the agents keep running in herdr, and their questions still reach the Inbox. To ask about all of them at once, say "is anything stuck?" and the <a href="/docs/director">Director</a> answers.</p>
+        <p>Claude Code sessions you started yourself in another terminal show up too. Cadence can read them, and Talk can move one into herdr so Cadence can send it messages.</p>
+
+
+        <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>How many Claude Code sessions can I run at once?</h3>
+            <p>Claude Code does not stop you from starting more sessions. The practical limits are your account's usage limits, which every session draws on, your machine's memory when each agent runs builds and tests, and how many results you can review. Most people find a handful of writing agents plus a few read-only ones is the useful range.</p>
+        </div>
+        <div class="qa">
+            <h3>Do parallel Claude Code sessions share context?</h3>
+            <p>No. Each session has its own conversation. They do read the same project files, including <code>CLAUDE.md</code>, so instructions you put there apply to all of them.</p>
+        </div>
+        <div class="qa">
+            <h3>Can two agents work in the same folder?</h3>
+            <p>They can, but they may overwrite each other's edits or break each other's builds. Separate git worktrees avoid that. In Cadence, Cadence chat agents get one automatically.</p>
+        </div>
+    </article>
+
+    <aside class="try panel" aria-labelledby="try-cadence">
+        <h2 id="try-cadence">Try Cadence</h2>
+        <p>See every Claude Code agent on one toolbar and answer them all from one Inbox. Free, no account. macOS 13 or later on Apple Silicon.</p>
+        <div class="row">
+            <a class="cta dark" href="/download">↓ Download for Mac</a>
+            <code>brew install --cask maxprehoda/tap/cadence</code>
+        </div>
+    </aside>
+
+    <div class="related">
+        <p class="eyebrow">Related guides</p>
+        <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/guides/claude-code-and-codex-together">Use Claude Code and Codex together<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/docs/agents-and-clis">Docs: Agents and CLIs<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+</main>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/">Cadence</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="mailto:support@cadencevoice.ai">Support</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+</body>
+</html>

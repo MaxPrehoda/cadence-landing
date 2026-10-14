@@ -6,6 +6,7 @@
     A small macOS desktop with Cadence's actual toolbar, Inbox panel and Talk
     window on it. Each window is an <iframe> of the app's own page, built from
     the voice-flow source (Svelte 5) into ./app/ — nothing here is redrawn.
+    Built from voice-flow 0.5.3 (401e56d).
     stage.js stands in for the Rust backend: it holds the scenario's agents,
     answers every invoke the windows make and sends the events they listen
     for. app/tauri-shim.js (injected into each built page) forwards a
@@ -175,6 +176,7 @@
   .term .qq { color: #f0f0f3; margin-bottom: 4px; white-space: pre-wrap; }
   .term .qo { color: #b9b9c2; white-space: pre-wrap; padding-left: 3ch; text-indent: -3ch; }
   .term .qo.sel { color: #9bb3ff; font-weight: 600; }
+  .term .qd { color: #7d7d88; white-space: pre-wrap; padding-left: 5ch; }
   .term .qf { margin-top: 5px; color: #6d6d78; font-size: 10.5px; }
   .term .new { animation: line-in .35s ease both; }
   @keyframes line-in { from { opacity: 0; transform: translateY(4px); } }

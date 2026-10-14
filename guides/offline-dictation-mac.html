@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Dictation for Mac: Private, On-Device Speech to Text</title>
+    <meta name="description" content="How to dictate on a Mac without sending audio anywhere: macOS Dictation and Voice Control, on-device speech models, and Cadence&#x27;s hold-to-talk with Parakeet.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/guides/offline-dictation-mac">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Offline Dictation for Mac: Private, On-Device Speech to Text">
+    <meta property="og:description" content="How to dictate on a Mac without sending audio anywhere: macOS Dictation and Voice Control, on-device speech models, and Cadence&#x27;s hold-to-talk with Parakeet.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/guides/offline-dictation-mac">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Offline Dictation for Mac: Private, On-Device Speech to Text">
+    <meta name="twitter:description" content="How to dictate on a Mac without sending audio anywhere: macOS Dictation and Voice Control, on-device speech models, and Cadence&#x27;s hold-to-talk with Parakeet.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Offline dictation for Mac: private, on-device speech to text",
+    "description": "How to dictate on a Mac without sending audio anywhere: macOS Dictation and Voice Control, on-device speech models, and Cadence's hold-to-talk with Parakeet.",
+    "image": "https://www.cadencevoice.ai/art/og.png",
+    "datePublished": "2026-10-14",
+    "dateModified": "2026-10-14",
+    "inLanguage": "en-US",
+    "proficiencyLevel": "Beginner",
+    "keywords": "offline dictation Mac, on-device dictation Mac, private speech to text Mac, Parakeet dictation, dictation for coding, macOS dictation offline",
+    "author": {
+        "@type": "Organization",
+        "name": "Cadence Labs",
+        "url": "https://www.cadencevoice.ai/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cadence",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cadencevoice.ai/icon.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/guides/offline-dictation-mac"
+    },
+    "isPartOf": {
+        "@type": "CollectionPage",
+        "@id": "https://www.cadencevoice.ai/guides",
+        "name": "Cadence guides"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Cadence",
+            "item": "https://www.cadencevoice.ai/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Guides",
+            "item": "https://www.cadencevoice.ai/guides"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Offline dictation for Mac",
+            "item": "https://www.cadencevoice.ai/guides/offline-dictation-mac"
+        }
+    ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Does macOS Dictation work offline?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "On Apple Silicon Macs, Apple processes dictation on device for many languages, so it works offline for those. Turn off Wi-Fi and try it to confirm for your language."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Cadence dictation need an internet connection?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Only to download the speech model the first time. Transcription and the local Text Polish model run on your Mac. Agent features need the network, since they talk to Claude."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Which Macs does Cadence dictation run on?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Macs with Apple Silicon (M1 or newer) on macOS 13 or later. There is no Intel build."
+            }
+        }
+    ]
+}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/guides/guides.css">
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence</a>
+        <nav aria-label="Primary">
+            <a href="/docs.html">Docs</a>
+            <a href="/guides" aria-current="page">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main class="guide">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/guides">Guides</a><span class="sep">/</span><span>Offline dictation for Mac</span></nav>
+
+    <h1 class="two guide-title">Offline dictation for Mac <span>private, on-device, good with code</span></h1>
+
+    <p class="guide-dek">You can dictate on a Mac without your voice leaving the machine. This guide compares the built-in options with apps that run a speech model locally, and covers what matters when you dictate code, names and prompts.</p>
+
+    <p class="stamp">Last updated: <time datetime="2026-10-14">October 14, 2026</time> · Cadence Labs</p>
+
+    <div class="answer panel">
+        <p class="eyebrow">Short answer</p>
+        <p>Turn on <strong>Dictation</strong> in <strong>System Settings → Keyboard</strong>. On Apple Silicon Macs, Apple processes dictation on device for many languages. If you need custom vocabulary, hold-to-talk in any app, or control over which model runs, use an app that runs a speech model such as Whisper or NVIDIA Parakeet on your Mac.</p>
+        <p>To check that dictation is really offline, turn off Wi-Fi and try it.</p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <ol>
+                <li><a href="#builtin">Option 1: macOS Dictation</a></li>
+                <li><a href="#voice-control">Option 2: Voice Control</a></li>
+                <li><a href="#local-models">Option 3: apps with local speech models</a></li>
+                <li><a href="#check">How to check it is offline</a></li>
+                <li><a href="#cadence">Dictation in Cadence</a></li>
+                <li><a href="#questions">Common questions</a></li>
+        </ol>
+    </nav>
+
+    <article class="guide-body prose">
+
+        <h2 id="builtin">Option 1: macOS Dictation</h2>
+        <p>Every Mac has dictation built in.</p>
+        <ol>
+            <li>Open <strong>System Settings → Keyboard</strong> and turn on <strong>Dictation</strong>.</li>
+            <li>Pick a <strong>Shortcut</strong>, for example pressing the Globe key or Control twice.</li>
+            <li>Click into a text field, press the shortcut and speak.</li>
+        </ol>
+        <p>On Apple Silicon, Apple says dictation requests are processed on device for many languages; some languages and features may still use Apple's servers, and Apple documents which in its dictation help. It costs nothing and needs no install.</p>
+        <p>For coding, the gaps are vocabulary and control. There is no list where you teach it your repo names, library names or teammates' names, and you cannot choose the model.</p>
+
+        <h2 id="voice-control">Option 2: Voice Control</h2>
+        <p><strong>System Settings → Accessibility → Voice Control</strong> is Apple's full hands-free control system. It runs on device and has a <strong>Vocabulary</strong> list for custom words. It is built for controlling the whole Mac by voice, so it listens for commands all the time it is on and takes some learning. It is a good fit if you want hands-free use; it is heavy if you only want to dictate a paragraph now and then.</p>
+
+        <h2 id="local-models">Option 3: apps with local speech models</h2>
+        <p>Open speech models now run fast on Apple Silicon. OpenAI's Whisper and NVIDIA's Parakeet are the common ones. Apps built on them download the model once and transcribe on your Mac from then on. When you compare them, look at:</p>
+        <ul>
+            <li><strong>Where it runs.</strong> Local by default, with any cloud step clearly optional.</li>
+            <li><strong>Push-to-talk in any app.</strong> Hold a key, speak, release, and the text lands at the cursor, including in terminals and editors.</li>
+            <li><strong>Custom vocabulary.</strong> A way to add names and jargon so <code>pnpm</code> does not come out as "PNPM" or "p and p.m."</li>
+            <li><strong>Latency.</strong> How long after you let go the text appears. Anything over a second breaks your flow.</li>
+            <li><strong>Silence handling.</strong> Some models invent words when they hear only a fan or keyboard noise.</li>
+            <li><strong>Cleanup.</strong> Punctuation and filler-word removal, ideally local too, with a way to turn it off for terminals.</li>
+        </ul>
+
+        <h2 id="check">How to check it is offline</h2>
+        <p>Turn off Wi-Fi, unplug Ethernet, and dictate a sentence. If text still appears, transcription is local. Then read the app's privacy page for what it sends when you are online; downloading a model or checking for updates needs the network even when transcription does not.</p>
+
+        <h2 id="cadence">Dictation in Cadence</h2>
+        <p><a href="/">Cadence</a> is a free macOS app for running coding agents, with on-device dictation built in. Dictation works without any agent setup.</p>
+        <h3>Set it up</h3>
+        <ol>
+            <li><a href="/download">Download Cadence</a> and grant <strong>Microphone</strong>, <strong>Accessibility</strong> and <strong>Input Monitoring</strong> during onboarding.</li>
+            <li>Choose your hotkey. Option (<kbd>⌥</kbd>) is recommended; change it later in <strong>Settings → Hotkey → Push-to-Talk Key</strong>.</li>
+            <li>Download the speech model when asked: Parakeet v2, about 630 MB. After that, transcription needs no network.</li>
+        </ol>
+        <h3>Use it</h3>
+        <p>Click into any text field, hold <kbd>⌥</kbd>, speak, and let go. The text is pasted at your cursor and your previous clipboard is put back. A quick tap, or a shortcut like <kbd>⌥</kbd><kbd>←</kbd>, types nothing. For long passages, click the mic button on the toolbar to dictate continuously.</p>
+        <p>Cadence keeps the half second before you press the key so your first word is not clipped, finds speech with Silero VAD, and transcribes each piece at the next pause while you are still holding the key. On Cadence's own test set this measured 1.88% word error rate on clean read speech and about 330 ms from release to text at the 95th percentile. For other languages, pick <strong>Parakeet v3 (25 languages)</strong> in <strong>Settings → Models</strong>.</p>
+        <h3>Teach it your words</h3>
+        <p>Add names and jargon in <strong>Settings → Commands → Vocabulary</strong>; the model is primed with them, and your agents' names are added automatically. With a Whisper Large v3 Turbo model downloaded, Cadence double-checks words that might be from your vocabulary. If a phrase is always heard wrong, add a rule in <strong>Settings → Commands → Auto-Corrections</strong>.</p>
+        <h3>Text Polish</h3>
+        <p><a href="/docs/text-polish">Text Polish</a> fixes punctuation, capitalization and filler words with Qwen 2.5 1.5B running on your Mac (a separate download of about 1.1 GB, in <strong>Settings → Injection → Text Polish</strong>). Set a tone per app in <strong>Settings → AI → App Tone Profiles</strong>; use <strong>Raw (no polish)</strong> for terminals. Cloud Polish is optional, off by default, and sends text (never audio) to Anthropic with your own API key.</p>
+        <h3>What stays on your Mac</h3>
+        <p>Audio, transcription and Text Polish run locally, and audio is not uploaded. The microphone stays open while Cadence runs so the first word is not cut off; that half second lives in memory and is thrown away unless you press the hotkey. Details are on the <a href="/docs/privacy">privacy page</a>.</p>
+        <p>The same key also talks to your coding agents: a double-tap of <kbd>⌥</kbd> opens <a href="/docs/talk">Talk</a> instead of dictating. Plain dictation never goes to an agent.</p>
+
+
+        <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>Does macOS Dictation work offline?</h3>
+            <p>On Apple Silicon Macs, Apple processes dictation on device for many languages, so it works offline for those. Turn off Wi-Fi and try it to confirm for your language.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Cadence dictation need an internet connection?</h3>
+            <p>Only to download the speech model the first time. Transcription and the local Text Polish model run on your Mac. Agent features need the network, since they talk to Claude.</p>
+        </div>
+        <div class="qa">
+            <h3>Which Macs does Cadence dictation run on?</h3>
+            <p>Macs with Apple Silicon (M1 or newer) on macOS 13 or later. There is no Intel build.</p>
+        </div>
+    </article>
+
+    <aside class="try panel" aria-labelledby="try-cadence">
+        <h2 id="try-cadence">Try Cadence</h2>
+        <p>Hold ⌥ to dictate into any app, transcribed on your Mac. Free, no account. macOS 13 or later on Apple Silicon.</p>
+        <div class="row">
+            <a class="cta dark" href="/download">↓ Download for Mac</a>
+            <code>brew install --cask maxprehoda/tap/cadence</code>
+        </div>
+    </aside>
+
+    <div class="related">
+        <p class="eyebrow">Related guides</p>
+        <a href="/guides/run-multiple-claude-code-agents">Run multiple Claude Code agents at once<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/docs/dictation">Docs: Dictation<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/docs/text-polish">Docs: Text Polish<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+</main>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/">Cadence</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="mailto:support@cadencevoice.ai">Support</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+</body>
+</html>

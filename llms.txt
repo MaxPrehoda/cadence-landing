@@ -40,6 +40,11 @@ Cadence Labs. Independent, founder-led. We publish research notes on multi-agent
 - [Home](https://www.cadencevoice.ai/): product overview and download
 - [Documentation](https://www.cadencevoice.ai/docs): end-user guide, install, permissions, agents, Inbox, Talk, dictation, settings reference, troubleshooting, privacy
 - [Changelog](https://www.cadencevoice.ai/changelog): what changed in each release
+- [Guides](https://www.cadencevoice.ai/guides): practical how-tos for running coding agents on a Mac, with and without Cadence
+- [Run multiple Claude Code agents at once](https://www.cadencevoice.ai/guides/run-multiple-claude-code-agents): parallel sessions, git worktrees, tmux, knowing which agent is waiting
+- [Claude Code notifications on Mac](https://www.cadencevoice.ai/guides/claude-code-notifications-mac): terminal bell, Notification and Stop hooks with osascript, Cadence toolbar and Inbox
+- [Use Claude Code and Codex together](https://www.cadencevoice.ai/guides/claude-code-and-codex-together): shared AGENTS.md instructions, separate worktrees, herdr, one Inbox for both
+- [Offline dictation for Mac](https://www.cadencevoice.ai/guides/offline-dictation-mac): macOS Dictation and Voice Control vs on-device models, Cadence hold-to-talk with Parakeet
 - [FAQ](https://www.cadencevoice.ai/faq): supported agents, API keys, Inbox, Talk, Director, dictation, requirements, install, privacy, troubleshooting
 - [Cadence Labs blog index](https://www.cadencevoice.ai/blog): research notes
 - [Scouts before editors](https://www.cadencevoice.ai/blog/scouts-before-editors): division of labor for parallel agents, read-only scouts vs a single writer, where the pattern breaks

@@ -29,7 +29,20 @@
   B.later = later;
 
   // ── frames and events ──────────────────────────────────────────────
-  B.attach = (label, win) => { frames[label] = { win, listeners: new Map() }; };
+  B.attach = (label, win) => {
+    frames[label] = { win, listeners: new Map() };
+    // The toolbar folds into a notch when idle (0.5.3). Mid-fold its window
+    // spans the bar plus the app's 16px gap to the edge (INDICATOR_SIDE_CLEARANCE)
+    // and sits flush on it; the stage keeps its toolbar RIGHT px off the edge,
+    // so the bar is padded in by the difference and does not jump as it folds.
+    if (label === "indicator") {
+      const st = win.document.createElement("style");
+      const pad = 16 - RIGHT;
+      st.textContent = `.wrap:is([data-fold="folding"],[data-fold="unfolding"])[data-anchor="right"]{padding-left:${pad}px}`
+        + `.wrap:is([data-fold="folding"],[data-fold="unfolding"])[data-anchor="left"]{padding-right:${pad}px}`;
+      win.document.head.appendChild(st);
+    }
+  };
   B.listen = (label, event, id, fn) => {
     const f = frames[label];
     if (!f || !fn) return;
@@ -129,9 +142,9 @@
         header: "Duplicates", multiSelect: false,
         question: "Stripe retries can arrive out of order. How should I handle duplicates?",
         options: [
-          { label: "Idempotency key per event" },
-          { label: "Lock the row while processing" },
-          { label: "Ignore and log them" },
+          { label: "Idempotency key per event (Recommended)", description: "Store each event.id, skip any already handled" },
+          { label: "Lock the row while processing", description: "Serialize updates per subscription" },
+          { label: "Ignore and log them", description: "Process every delivery, log the repeats" },
         ],
       }] },
     };
@@ -158,7 +171,7 @@
     a.last_assistant_message = "Sessions are on signed cookies now. I'd like to run the auth tests before I touch the login form.";
     a.pending_approval = {
       request_id: "q-auth-1", session_id: "auth", tool_name: "Bash", summary: "pnpm test src/auth",
-      requested_at: Date.now(), tool_input: { command: "pnpm test src/auth" },
+      requested_at: Date.now(), tool_input: { command: "pnpm test src/auth", description: "Run the auth tests" },
     };
     S.buffers.auth.push("[tool_result] The file has been updated.", a.last_assistant_message);
     B.emit("agent-approval-requested", { session_id: "auth" });
@@ -346,6 +359,9 @@
   function startDictation() {
     if (dictating) return;
     dictating = { at: Date.now() };
+    // 0.5.3 folds an idle toolbar even while the mic is live; the stage
+    // counts dictating as using it, so the mic stays on screen.
+    B.emit("probe-toolbar-notch", false, "indicator");
     B.emit("mode-change", "dictation");
     B.emit("recording-toggled", true);
     B.emit("transcription-status", "listening");
@@ -423,7 +439,8 @@
     if (q && T.billing.reveal >= S.buffers.billing.length) {
       out.push(`<div class="qbox"><div class="qh"><span class="chip">☐ ${esc(q.header ?? "Question")}</span></div>`
         + `<div class="qq">${esc(q.question)}</div>`
-        + q.options.map((o, i) => `<div class="qo${i ? "" : " sel"}">${i ? "&nbsp;" : "❯"} ${i + 1}. ${esc(o.label)}</div>`).join("")
+        + q.options.map((o, i) => `<div class="qo${i ? "" : " sel"}">${i ? "&nbsp;" : "❯"} ${i + 1}. ${esc(o.label)}</div>`
+          + (o.description ? `<div class="qd">${esc(o.description)}</div>` : "")).join("")
         + `<div class="qf">Enter to select · ↑/↓ to navigate · Esc to cancel</div></div>`);
     } else if (a.pending_approval) {
       // A permission prompt (Bash and friends) as Claude Code draws it.
@@ -644,7 +661,8 @@
     const ind = W.indicator;
     const anchor = S.anchor;
     const side = anchor === "left" || anchor === "right";
-    const ix = anchor === "right" ? vw - RIGHT - ind.w : anchor === "left" ? RIGHT : (vw - ind.w) / 2;
+    const off = side && ind.flush ? 0 : RIGHT;
+    const ix = anchor === "right" ? vw - off - ind.w : anchor === "left" ? off : (vw - ind.w) / 2;
     const iy = side ? MB + (vh - MB) / 2 - ind.h / 2 : anchor === "top" ? MB + RIGHT : vh - RIGHT - ind.h;
     place("indicator", ix, iy, ind.w, ind.h);
     const pop = W["agents-popover"];
@@ -730,11 +748,14 @@
       case "sets_adopt":
       case "sets_forget":
         return S.sets;
-      case "sets_end_agent": {
-        const id = String(args.id);
-        if (id.startsWith("herdr:")) S.herdr = S.herdr.filter((h) => h.pane_id !== id.slice(6));
-        else S.native = S.native.filter((a) => a.id !== id);
-        for (const x of S.sets.sets) x.members = x.members.filter((m) => m !== id);
+      case "sets_end_agent":
+      case "sets_end_agents": {
+        // End one agent, or End all (0.5.3): every agent the toolbar lists.
+        const ids = (cmd === "sets_end_agents" ? args.ids ?? [] : [args.id]).map(String);
+        const gone = (id) => ids.includes(id);
+        S.herdr = S.herdr.filter((h) => !gone(`herdr:${h.pane_id}`));
+        S.native = S.native.filter((a) => !gone(a.id));
+        for (const x of S.sets.sets) x.members = x.members.filter((m) => !gone(m));
         S.sets.sets = S.sets.sets.filter((x) => x.members.length);
         herdrChanged();
         changed();
@@ -758,6 +779,8 @@
       case "set_indicator_size": {
         W.indicator.w = args.width;
         W.indicator.h = args.height;
+        // Folding into its notch: flush against the edge (0.5.3).
+        W.indicator.flush = !!args.flush;
         W.indicator.restW = Math.min(W.indicator.restW ?? Infinity, args.width);
         B.layout();
         return null;
@@ -796,6 +819,22 @@
         return null;
       case "plugin:window|show":
         if (W[lbl]) B.show(lbl, true);
+        return null;
+      // The toolbar asks whether the panel is open before it folds (0.5.3).
+      case "plugin:window|get_all_windows":
+        return Object.keys(W);
+      case "plugin:window|is_visible":
+        return !!W[args.label]?.shown;
+      // One window telling the others (the Inbox's "inbox-cleared", 0.5.3).
+      case "plugin:event|emit":
+        B.emit(args.event, args.payload);
+        return null;
+      case "plugin:event|emit_to":
+        B.emit(args.event, args.payload, typeof args.target === "string" ? args.target : args.target?.label);
+        return null;
+      // Folded, only the notch takes the mouse; on a stage the frame just stays.
+      case "set_indicator_hit":
+        W.indicator.hit = args.rect ?? null;
         return null;
       case "resolve_approval": {
         const s = S.native.find((x) => x.pending_approval?.request_id === args.requestId);
@@ -875,9 +914,14 @@
         herdrChanged();
         return null;
       }
+      case "herdr_mark_seen": {
+        // herdr keeps "done" until the pane is seen; then it is idle.
+        const h = her(args.paneId);
+        if (h && h.status === "done") { h.status = "idle"; herdrChanged(); }
+        return null;
+      }
       case "herdr_agent_stop":
       case "herdr_agent_kill":
-      case "herdr_mark_seen":
         return null;
       case "talk_start":
         B.show("talk", true);
@@ -976,7 +1020,9 @@
   function reset() {
     for (const t of timers) clearTimeout(t);
     timers.clear();
-    try { localStorage.removeItem("cadence.seen.v1"); } catch {}
+    // What the Inbox read and cleared is kept in localStorage (0.5.3 shares
+    // it between windows); a replay, or a visitor coming back, starts clean.
+    try { localStorage.removeItem("cadence.seen.v1"); localStorage.removeItem("cadence.dismissed.v1"); } catch {}
     S = B.state = freshState();
     termReset();
     for (const k of ["billing", "flaky"]) {
@@ -997,6 +1043,7 @@
     W["agents-popover"].shown = false;
     W.indicator.shown = !RECORD;
     delete W.indicator.restW;
+    W.indicator.flush = false;
     for (const k of Object.keys(frames)) delete frames[k];
     for (const l of ["indicator", "agents-popover", "talk"]) {
       const f = el(l);
