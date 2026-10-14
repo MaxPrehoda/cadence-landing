@@ -2,7 +2,7 @@
 
 This page lists what Cadence keeps on your Mac and what it sends elsewhere. Short version: your voice and your dictation stay on your Mac. Agent features use Claude through your own Claude Code login. A few optional features use your own Anthropic API key.
 
-Cadence has no account and collects no usage data. Its only server is the iPhone relay, which stores and passes along end-to-end encrypted data it can't read, except when you [continue an agent in the cloud](#/cloud).
+Cadence has no account. It sends anonymous usage counts, which you can turn off (see **Usage counts** below). Its only other server is the iPhone relay, which stores and passes along end-to-end encrypted data it can't read, except when you [continue an agent in the cloud](#/cloud).
 
 ## Stays on your Mac
 
@@ -14,6 +14,23 @@ Cadence has no account and collects no usage data. Its only server is the iPhone
 - **Notes, settings, sets and agent titles.** Stored in `~/Library/Application Support/com.cadence.app/`.
 - **Saved recordings.** Only if you turn on **Save recordings**, and only in that same folder.
 - **Worktrees and diffs.** In your own git repositories and `~/.cadence/worktrees/`.
+
+## Usage counts
+
+So we can tell whether people actually use Cadence, the app sends a few anonymous counts to `cadencevoice.ai`, recorded as Vercel Web Analytics events:
+
+| Event | How often | Extra detail |
+|---|---|---|
+| App opened | once a day | none |
+| First launch, onboarding finished | once | none |
+| Dictation used | at most once an hour | none |
+| Talk used | at most once an hour per outcome | the outcome, such as `sent` or `started` |
+| Inbox card answered | at most once an hour per type | the card type, such as `plan` |
+| Agents running | once a day | a range, such as `2-3` |
+
+Each event also carries the app version. Cadence never sends what you say, type or dictate, file or folder names, agent names, or questions and answers, and it has no install ID. Vercel counts distinct users with a hash of IP address and browser string that changes daily, and doesn't store your IP.
+
+Nothing is sent until you've seen the notice in onboarding (or the one-time banner after updating). Turn it off any time in **Settings → Updates → Share anonymous usage**.
 
 ## The microphone
 

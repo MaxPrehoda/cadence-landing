@@ -90,6 +90,7 @@ Pick the speech model and download others. The default is **Parakeet v2 (English
 | **Replay Setup** | | Runs onboarding again. |
 | **Show floating indicator** | On | Shows or hides the toolbar. |
 | **Auto-check on launch** | On | Checks GitHub Releases for a new version. |
+| **Share anonymous usage** | On | Sends anonymous counts of which features were used, never content and no ID. See [Privacy](#/privacy). |
 
 ## Outside the Settings window
 

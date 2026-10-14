@@ -1,0 +1,8 @@
+{
+  "name": "cadence-landing",
+  "private": true,
+  "description": "cadencevoice.ai: static site plus Vercel functions in api/. No build step.",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}

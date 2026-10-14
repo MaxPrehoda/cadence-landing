@@ -397,7 +397,7 @@
             <article id="article" class="prose" data-doc="privacy"><!--DOC:ARTICLE-->
 <h1>Privacy</h1>
 <p>This page lists what Cadence keeps on your Mac and what it sends elsewhere. Short version: your voice and your dictation stay on your Mac. Agent features use Claude through your own Claude Code login. A few optional features use your own Anthropic API key.</p>
-<p>Cadence has no account and collects no usage data. Its only server is the iPhone relay, which stores and passes along end-to-end encrypted data it can&#39;t read, except when you <a href="/docs/cloud">continue an agent in the cloud</a>.</p>
+<p>Cadence has no account. It sends anonymous usage counts, which you can turn off (see <strong>Usage counts</strong> below). Its only other server is the iPhone relay, which stores and passes along end-to-end encrypted data it can&#39;t read, except when you <a href="/docs/cloud">continue an agent in the cloud</a>.</p>
 <h2>Stays on your Mac</h2>
 <ul>
 <li><strong>Microphone audio.</strong> Speech detection (Silero VAD) and transcription (Parakeet, or Whisper if you pick it) run on your Mac. Audio is never uploaded.</li>
@@ -409,6 +409,49 @@
 <li><strong>Saved recordings.</strong> Only if you turn on <strong>Save recordings</strong>, and only in that same folder.</li>
 <li><strong>Worktrees and diffs.</strong> In your own git repositories and <code>~/.cadence/worktrees/</code>.</li>
 </ul>
+<h2>Usage counts</h2>
+<p>So we can tell whether people actually use Cadence, the app sends a few anonymous counts to <code>cadencevoice.ai</code>, recorded as Vercel Web Analytics events:</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>Event</th>
+<th>How often</th>
+<th>Extra detail</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>App opened</td>
+<td>once a day</td>
+<td>none</td>
+</tr>
+<tr>
+<td>First launch, onboarding finished</td>
+<td>once</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Dictation used</td>
+<td>at most once an hour</td>
+<td>none</td>
+</tr>
+<tr>
+<td>Talk used</td>
+<td>at most once an hour per outcome</td>
+<td>the outcome, such as <code>sent</code> or <code>started</code></td>
+</tr>
+<tr>
+<td>Inbox card answered</td>
+<td>at most once an hour per type</td>
+<td>the card type, such as <code>plan</code></td>
+</tr>
+<tr>
+<td>Agents running</td>
+<td>once a day</td>
+<td>a range, such as <code>2-3</code></td>
+</tr>
+</tbody></table></div>
+<p>Each event also carries the app version. Cadence never sends what you say, type or dictate, file or folder names, agent names, or questions and answers, and it has no install ID. Vercel counts distinct users with a hash of IP address and browser string that changes daily, and doesn&#39;t store your IP.</p>
+<p>Nothing is sent until you&#39;ve seen the notice in onboarding (or the one-time banner after updating). Turn it off any time in <strong>Settings → Updates → Share anonymous usage</strong>.</p>
 <h2>The microphone</h2>
 <p>So that your first word is not cut off, the microphone stays open while Cadence runs and the last half second of audio is held in memory. That audio is thrown away unless you press the hotkey or start Talk. It is never written to disk unless <strong>Save recordings</strong> is on. macOS shows its microphone indicator while the mic is open.</p>
 <p>With hands-free listening (off by default), everything you say is transcribed on your Mac so Cadence can look for commands. See <a href="/docs/voice-commands">Voice commands</a>.</p>

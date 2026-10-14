@@ -29,7 +29,7 @@
 
 - Audio, dictation, and Text Polish run on-device; audio is not uploaded
 - Agent features talk to Claude through the user's own Claude Code login; other CLIs talk to their own providers
-- No Cadence account; the app does not send usage analytics to Cadence
+- No Cadence account; the app sends anonymous usage counts (no content, no ID), which users can turn off in Settings
 
 ## Who builds Cadence
 
