@@ -40,7 +40,27 @@ To read the list, run `SMEMBERS waitlist:iphone` in the Upstash console. Sign-up
 
 ## Releases
 
-`create-release.sh` in `voice-flow` publishes DMGs as GitHub releases on **this** repo, and the in-app updater and `download-v2.js` both read the latest one. Add each release to `changelog.html` (newest first), and add a new doc page to `sitemap.xml` as well as `docs/index.json`.
+`create-release.sh` in `voice-flow` publishes DMGs as GitHub releases on **this** repo, and the in-app updater and `download-v2.js` both read the latest one.
+
+Release notes on the site are automatic. Publishing (or editing) a release runs `.github/workflows/release-notes.yml`, which runs `scripts/release-notes.mjs` and pushes the result to `main`: a post at `/blog/releases/cadence-X-Y-Z` in `blog/releases/`, an entry at the top of `changelog.html`, the three latest releases on the Writing index, and sitemap entries. The workflow then waits until the post is live and fails (GitHub emails you) if it isn't. Never edit the generated files or the regions between `<!--RELEASES-->` markers; edit the release on GitHub and the workflow redoes them. Write each release body in this shape:
+
+```markdown
+## Cadence v0.5.5
+Optional one-line lede, used as the post's subtitle.
+
+### New
+- **Bold lead.** What it does for the user.
+
+### Changed
+- …
+
+### Fixed
+- …
+```
+
+Only New, Changed and Fixed reach the site (What's New, Improved and Bug Fixes count too); Installation, Upgrading and Requirements stay on GitHub. Without a lede, the first item's bold lead is the subtitle. Releases up to v0.5.1 are hand-written in `changelog.html` below the marker and have no post.
+
+Add a new doc page to `sitemap.xml` as well as `docs/index.json`.
 
 ## Local preview
 

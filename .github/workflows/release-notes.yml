@@ -1,0 +1,75 @@
+# Every GitHub release on this repo becomes release notes on the site: a post
+# at /blog/releases/cadence-X-Y-Z, an entry on /changelog, the Writing index
+# and the sitemap (scripts/release-notes.mjs). The push to main deploys through
+# Vercel, and the last step waits until the post is live. Run it by hand from
+# the Actions tab to resync everything.
+name: Release notes
+
+on:
+  release:
+    types: [published, edited, deleted]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-notes
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.event_name == 'workflow_dispatch' || !github.event.release.draft
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate release notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm i --no-save --no-package-lock marked@12.0.0
+          node scripts/release-notes.mjs
+
+      - name: Commit and push
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          git add blog changelog.html sitemap.xml
+          if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Release notes${TAG:+ for $TAG}"
+          for attempt in 1 2 3; do
+            git push origin HEAD:main && exit 0
+            git pull --rebase origin main
+          done
+          exit 1
+
+      - name: Wait for the post to go live
+        if: github.event.action != 'deleted'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.event.release.tag_name }}
+        run: |
+          tag="${TAG:-$(gh release view -R "$GITHUB_REPOSITORY" --json tagName -q .tagName)}"
+          slug="cadence-$(printf '%s' "${tag#v}" | sed -E 's/[^0-9A-Za-z]+/-/g' | tr 'A-Z' 'a-z')"
+          file="blog/releases/$slug.html"
+          if [ ! -f "$file" ]; then echo "No generated post for $tag (pre-release or hand-written)."; exit 0; fi
+          url="https://www.cadencevoice.ai/blog/releases/$slug"
+          for attempt in $(seq 1 40); do
+            if curl -fsS "$url" -o "$RUNNER_TEMP/live.html" 2>/dev/null && cmp -s "$RUNNER_TEMP/live.html" "$file"; then
+              echo "Live: $url"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "::error::$url still doesn't show the new post after 10 minutes. Check the deployment at https://vercel.com/defy/cadence-landing"
+          exit 1
