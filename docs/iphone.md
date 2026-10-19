@@ -1,21 +1,31 @@
 # iPhone
 
-An iPhone companion app for Cadence is in the works. It is **not available yet**, so there is nothing to install today.
+The Cadence iPhone app is in a **private beta on TestFlight** (version 0.4.0, iOS 17 or later). It takes your Inbox with you: see what your agents are doing, answer their questions and reply to finished work from your phone while your Mac does the work. [Join the waitlist](/#iphone) to hear when the beta opens up.
 
-## What it is for
+## Pair your phone
 
-The plan is to take your Inbox with you: see what your agents are doing, answer their questions, and reply to finished work from your phone while your Mac does the work.
+1. On the Mac, open **⋯ → Take Cadence with you…** on the toolbar, or the phone button in the Inbox panel header. A QR code appears.
+2. Scan it with the iPhone's camera or from the app. The code works once and expires after 10 minutes.
+3. That's it. Your phone gets its own key, and the Mac lists it under **Settings → iPhone relay → Paired phones**.
 
-If your Mac falls asleep or goes offline, you can [continue an agent in the cloud](#/cloud) from your phone, and Cadence hands the work back to your Mac when it wakes.
+Traffic between your phone and your Mac is end-to-end encrypted. On the same Wi-Fi the phone talks to your Mac directly; away from home it goes through Cadence's relay, which only carries sealed messages it can't read. Your Mac never opens a port.
 
-## What you will see in the Mac app
+To stop a phone reaching your Mac, press **Remove** next to it in Paired phones, or **Unpair** in the phone's Settings.
 
-The Mac app already has pairing built in, ahead of the phone app:
+## What you can do from the phone
 
-- **⋯ → Take Cadence with you…** on the toolbar, and the phone button in the Inbox panel header, open a pairing screen with a QR code.
-- **Settings → Injection → Integrations → iPhone relay** is a switch for the local connection the phone app will use. It is off by default.
-- **Continue agents in the cloud**, under the relay switch, keeps an encrypted copy of each Claude Code agent at the relay for [continuing in the cloud](#/cloud). It is on by default, and does nothing while the relay is off.
+- **Home** opens on what needs you: questions waiting for an answer, then finished work, then what's still working. Tap an option to answer. Every answer waits two seconds, so **Undo** takes it back.
+- **Agents** lists every agent by what it's working on, grouped by machine when you run [agents on a server](/guides/coding-agents-on-a-server). Open one to read its thread, see its changes file by file, or reply with text, voice or a picture.
+- **Talk**: say or type one request and Cadence sends it to the agent already on that work, starts a new one, or asks the Director. The receipt names the agent it went to.
+- **Widgets and Siri**: a Home Screen widget and Lock Screen widgets show what's waiting. Say "Talk to Cadence", or use the Talk control in Control Center, on the Lock Screen or on the Action Button.
+- **Notifications** carry the agent's real options as buttons. Answering from the Lock Screen asks for Face ID, and when previews are hidden the Lock Screen shows only that an agent needs you.
+- **Dictation** and the Cadence keyboard type anywhere on the phone.
 
-You can leave both alone until the iPhone app is released.
+## Continue in the cloud
 
-We will announce the iPhone app on this site when it is ready.
+For TestFlight testers there's a preview of [continuing an agent in the cloud](#/cloud) when your Mac falls asleep. It appears only on Macs paired with a TestFlight build of the app.
+
+## Requirements
+
+- Cadence for Mac 0.5.7 or later (earlier versions pair, but without per-phone keys or Unpair)
+- An iPhone on iOS 17 or later, with a TestFlight invite

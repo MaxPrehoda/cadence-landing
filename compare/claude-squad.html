@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadence vs Claude Squad: Mac App or Terminal UI</title>
+    <meta name="description" content="Cadence vs Claude Squad, compared honestly: an open-source tmux and worktree TUI against a free native Mac app with one Inbox, voice and an iPhone app.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/compare/claude-squad">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Cadence vs Claude Squad: Mac App or Terminal UI">
+    <meta property="og:description" content="Cadence vs Claude Squad, compared honestly: an open-source tmux and worktree TUI against a free native Mac app with one Inbox, voice and an iPhone app.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/compare/claude-squad">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cadence vs Claude Squad: Mac App or Terminal UI">
+    <meta name="twitter:description" content="Cadence vs Claude Squad, compared honestly: an open-source tmux and worktree TUI against a free native Mac app with one Inbox, voice and an iPhone app.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Cadence vs Claude Squad",
+    "description": "Cadence vs Claude Squad, compared honestly: an open-source tmux and worktree TUI against a free native Mac app with one Inbox, voice and an iPhone app.",
+    "image": "https://www.cadencevoice.ai/art/og.png",
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19",
+    "inLanguage": "en-US",
+    "proficiencyLevel": "Beginner",
+    "keywords": "Cadence vs Claude Squad, Claude Squad alternative, claude-squad Mac, Claude Squad tmux worktrees, manage multiple Claude Code agents",
+    "author": {
+        "@type": "Organization",
+        "name": "Cadence Labs",
+        "url": "https://www.cadencevoice.ai/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cadence",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cadencevoice.ai/icon.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/compare/claude-squad"
+    },
+    "isPartOf": {
+        "@type": "CollectionPage",
+        "@id": "https://www.cadencevoice.ai/compare",
+        "name": "Cadence comparisons"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Cadence",
+            "item": "https://www.cadencevoice.ai/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Compare",
+            "item": "https://www.cadencevoice.ai/compare"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Cadence vs Claude Squad",
+            "item": "https://www.cadencevoice.ai/compare/claude-squad"
+        }
+    ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is Claude Squad free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Claude Squad is free and open source under the AGPL-3.0 license. Cadence is also free, with no account, but its source is not published."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Claude Squad work with Codex and Gemini?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Claude Code is the default, and the -p flag runs any other terminal agent, for example cs -p \"codex\" or cs -p \"gemini\"."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Claude Squad have a phone app or notifications?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Its README mentions neither. You check sessions in its terminal list. Cadence has a status toolbar, macOS notifications, and an iPhone app in a private TestFlight beta."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can Cadence give each agent its own git worktree like Claude Squad?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For Claude Code in Cadence chat mode, yes: each agent gets its own branch in ~/.cadence/worktrees/. For terminal agents, make a worktree yourself and pick it as the agent's folder."
+            }
+        }
+    ]
+}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/guides/guides.css">
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence</a>
+        <nav aria-label="Primary">
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main class="guide">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/compare">Compare</a><span class="sep">/</span><span>Cadence vs Claude Squad</span></nav>
+
+    <h1 class="two guide-title">Cadence vs Claude Squad <span>a terminal UI or a Mac inbox</span></h1>
+
+    <p class="guide-dek">Claude Squad and Cadence both help you run several coding agents at once. One lives in your terminal and gives every agent its own worktree. The other lives on the edge of your Mac's screen and brings you what the agents ask.</p>
+
+    <p class="stamp">Updated <time datetime="2026-10-19">October 19, 2026</time> · Cadence Labs</p>
+
+    <div class="answer panel">
+        <p class="eyebrow">Short answer</p>
+        <p>Pick <strong>Claude Squad</strong> if you live in the terminal, want something open source, or work on Linux: it runs each agent in its own tmux session and git worktree, and you review, commit and push from one keyboard-driven list. Pick <strong>Cadence</strong> if you want a native Mac app that tells you the moment any agent needs you and lets you answer from one Inbox, by keyboard, by voice or from your iPhone.</p>
+        <p>Both are free. Claude Squad runs on macOS and Linux. Cadence runs on macOS 13 or later with Apple Silicon only.</p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <ol>
+            <li><a href="#table">Side by side</a></li>
+            <li><a href="#squad">What Claude Squad does well</a></li>
+            <li><a href="#cadence">What Cadence does differently</a></li>
+            <li><a href="#pick">Which one to pick</a></li>
+            <li><a href="#both">Using both</a></li>
+            <li><a href="#questions">Common questions</a></li>
+        </ol>
+    </nav>
+
+    <article class="guide-body prose">
+        <h2 id="table">Side by side</h2>
+        <!-- Sources, checked 2026-10-19:
+             Claude Squad: https://github.com/smtg-ai/claude-squad (README: tmux + worktrees + TUI, keys, -p, -y, install) ; https://raw.githubusercontent.com/smtg-ai/claude-squad/main/README.md ; https://raw.githubusercontent.com/smtg-ai/claude-squad/main/install.sh (Windows: points to WSL for tmux) ; https://api.github.com/repos/smtg-ai/claude-squad (AGPL-3.0, 8,628 stars) ; https://github.com/smtg-ai/claude-squad/releases (v1.0.20, 2026-08-20)
+             Cadence: /docs/agents-and-clis, /docs/inbox, /faq.html, /blog/releases/cadence-0-5-7 -->
+        <table>
+            <thead>
+                <tr><th scope="col"></th><th scope="col">Cadence</th><th scope="col">Claude Squad</th></tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">What it is</th><td>A native Mac app: a status toolbar and one Inbox over your agents</td><td>A terminal app (TUI) that runs each agent in its own tmux session and git worktree</td></tr>
+                <tr><th scope="row">Platform</th><td>macOS 13 or later, Apple Silicon only</td><td>macOS and Linux. Windows builds exist, but it needs tmux, and its installer points Windows users to WSL</td></tr>
+                <tr><th scope="row">Price</th><td>Free</td><td>Free</td></tr>
+                <tr><th scope="row">Source code</th><td>Closed</td><td>Open source, AGPL-3.0 (about 8.6k GitHub stars)</td></tr>
+                <tr><th scope="row">Install</th><td>DMG or <code>brew install --cask maxprehoda/tap/cadence</code></td><td><code>brew install claude-squad</code> or an install script. Needs tmux and the GitHub CLI</td></tr>
+                <tr><th scope="row">Agents</th><td>Claude Code hosted natively; Codex, OpenCode, Pi, Omp, Amp, Grok, Cursor, Copilot, Gemini and Aider through herdr</td><td>Claude Code by default; Codex, Gemini, Aider, OpenCode, Amp or any CLI with <code>-p</code></td></tr>
+                <tr><th scope="row">Worktrees</th><td>Automatic for Claude Code in Cadence chat mode. Terminal agents use the folder you choose</td><td>Automatic for every session</td></tr>
+                <tr><th scope="row">Review and ship</th><td>Diff and History tabs for Cadence chat agents</td><td>Diff preview per session; <kbd>s</kbd> commits and pushes the branch to GitHub</td></tr>
+                <tr><th scope="row">Knowing who is waiting</th><td>Toolbar dots over every app; questions collected in one Inbox</td><td>Its session list, inside the terminal</td></tr>
+                <tr><th scope="row">Answering</th><td><kbd>1</kbd> to <kbd>9</kbd> in the Inbox, typed or spoken, with a two-second undo</td><td>Attach to the session and answer in the agent's own interface. Optional auto-accept (<code>-y</code>, experimental, Claude Code and Aider)</td></tr>
+                <tr><th scope="row">Voice</th><td>Talk routes spoken requests; hold <kbd>⌥</kbd> to dictate anywhere. On-device speech</td><td>None</td></tr>
+                <tr><th scope="row">Phone</th><td>iPhone app in a private TestFlight beta</td><td>None mentioned in its README</td></tr>
+                <tr><th scope="row">Linux servers</th><td>Agents on servers over SSH through herdr, next to the ones on your Mac</td><td>Runs on the server itself; use it over SSH</td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="squad">What Claude Squad does well</h2>
+        <p><a href="https://github.com/smtg-ai/claude-squad" rel="noopener">Claude Squad</a> is a small, focused terminal app. Run <code>cs</code> in a repository and you get a list of sessions. Each one is an agent in its own tmux session, working on its own git worktree and branch, so agents never edit each other's files.</p>
+        <ul>
+            <li><strong>Everything from the keyboard.</strong> <kbd>n</kbd> starts a session, <kbd>N</kbd> starts one with a prompt, <kbd>Enter</kbd> attaches, <kbd>Ctrl</kbd>+<kbd>Q</kbd> detaches, <kbd>Tab</kbd> switches between the agent's output and its diff, and <kbd>D</kbd> ends a session.</li>
+            <li><strong>Review, then ship.</strong> <kbd>s</kbd> commits the session's changes and pushes the branch to GitHub. <kbd>c</kbd> commits and pauses a session so you can check out its branch; <kbd>r</kbd> resumes it.</li>
+            <li><strong>Any terminal agent.</strong> Claude Code is the default, and <code>cs -p "codex"</code>, <code>cs -p "gemini"</code> or <code>cs -p "aider ..."</code> run others. Profiles live in <code>~/.claude-squad/config.json</code>.</li>
+            <li><strong>Background work.</strong> With the experimental <code>-y</code> flag, sessions accept Claude Code's and Aider's prompts on their own.</li>
+            <li><strong>Open source and portable.</strong> It is AGPL-3.0, runs anywhere tmux does, including over SSH on a server, and costs nothing.</li>
+        </ul>
+
+        <h2 id="cadence">What Cadence does differently</h2>
+        <p><a href="/">Cadence</a> starts from a different question: not "where does each agent work?" but "which agent needs me right now?"</p>
+        <ul>
+            <li><strong>A toolbar instead of a list you have to open.</strong> One dot per agent sits on the edge of your screen over every app: blue working, amber needs you, green done. You see an agent waiting without switching to a terminal.</li>
+            <li><strong>One Inbox for every question.</strong> Questions, plan approvals and Allow/Deny requests arrive as cards with numbered options. Press <kbd>1</kbd> to <kbd>9</kbd> to answer, and <kbd>Esc</kbd> within two seconds to take it back. Finished work arrives with a short recap.</li>
+            <li><strong>Claude Code hosted natively.</strong> In Cadence chat mode, Claude Code's permission requests become real Allow/Deny cards, you see cost, and each agent gets its own worktree with Diff and History tabs. Codex, OpenCode, Gemini, Amp, Cursor, Copilot, Grok, Pi, Omp and Aider run in herdr terminals and land in the same Inbox.</li>
+            <li><strong>Voice.</strong> Double-tap <kbd>⌥</kbd> and say what you want; <a href="/docs/talk">Talk</a> sends it to the agent already on that work or starts a new one in the right folder. Hold <kbd>⌥</kbd> to dictate into any app, transcribed on your Mac.</li>
+            <li><strong>Your phone and your servers.</strong> The iPhone app, in a private TestFlight beta, answers agents from Home, widgets or Siri over an end-to-end encrypted pairing. Since 0.5.7, agents on Linux servers over SSH show up next to the ones on your Mac.</li>
+        </ul>
+        <p>What Cadence does not do: run on Linux or Intel Macs, publish its source, or give terminal agents a worktree automatically. Only Cadence chat agents get one; for terminal agents you point the Folder at a worktree you made.</p>
+
+        <h2 id="pick">Which one to pick</h2>
+        <h3>Claude Squad is the better pick if</h3>
+        <ul>
+            <li>you work in the terminal all day, often over SSH, and want a keyboard-only tool;</li>
+            <li>you want every agent isolated in its own worktree automatically, whichever CLI it is;</li>
+            <li>you want open-source software you can read and change;</li>
+            <li>you work on Linux or an Intel Mac.</li>
+        </ul>
+        <h3>Cadence is the better pick if</h3>
+        <ul>
+            <li>you run agents in several terminal windows, tabs or apps and keep missing the one that is waiting;</li>
+            <li>you want to answer approvals and questions without switching windows, or from your phone;</li>
+            <li>you want to talk to your agents, or dictate, without sending audio off your Mac;</li>
+            <li>you use Claude Code most and want its real Allow/Deny requests, cost and worktree diffs in one place.</li>
+        </ul>
+
+        <h2 id="both">Using both</h2>
+        <p>They can share a Mac, but they do not plug into each other. Claude Squad runs its agents in its own tmux sessions. Cadence answers agents in <a href="/guides/herdr-mac-app">herdr</a> and its own chats. It also notices Claude Code sessions running in other terminals, so it may list Claude Squad's Claude Code agents, but it cannot type into them there. If you like Claude Squad's worktree handling and want Cadence's Inbox, the closest setup is to make worktrees yourself (<code>git worktree add ../app-search -b search</code>) and start an agent in each from Cadence's <strong>New agent</strong> view. Our guide to <a href="/guides/run-multiple-claude-code-agents">running multiple Claude Code agents</a> walks through it.</p>
+
+        <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>Is Claude Squad free?</h3>
+            <p>Yes. Claude Squad is free and open source under the AGPL-3.0 license. Cadence is also free, with no account, but its source is not published.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Claude Squad work with Codex and Gemini?</h3>
+            <p>Yes. Claude Code is the default, and the <code>-p</code> flag runs any other terminal agent, for example <code>cs -p "codex"</code> or <code>cs -p "gemini"</code>.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Claude Squad have a phone app or notifications?</h3>
+            <p>Its README mentions neither. You check sessions in its terminal list. Cadence has a status toolbar, macOS notifications, and an iPhone app in a private TestFlight beta.</p>
+        </div>
+        <div class="qa">
+            <h3>Can Cadence give each agent its own git worktree like Claude Squad?</h3>
+            <p>For Claude Code in Cadence chat mode, yes: each agent gets its own branch in <code>~/.cadence/worktrees/</code>. For terminal agents, make a worktree yourself and pick it as the agent's folder.</p>
+        </div>
+    </article>
+
+    <aside class="try panel" aria-labelledby="try-cadence">
+        <h2 id="try-cadence">Try Cadence</h2>
+        <p>Watch every agent from one toolbar and answer them from one Inbox. Free, no account. macOS 13 or later on Apple Silicon.</p>
+        <div class="row">
+            <a class="cta dark" href="/download">↓ Download for Mac</a>
+            <code>brew install --cask maxprehoda/tap/cadence</code>
+        </div>
+    </aside>
+
+    <div class="related">
+        <p class="eyebrow">More comparisons</p>
+        <a href="/compare/conductor">Cadence vs Conductor<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/compare/one">Cadence vs One (getone.one)<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/guides/best-tools-parallel-coding-agents">Best tools to run parallel coding agents in 2026<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+</main>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/">Cadence</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="mailto:support@cadencevoice.ai">Support</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+</body>
+</html>

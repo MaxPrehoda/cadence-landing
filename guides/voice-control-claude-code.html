@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Control for Claude Code: Talk to It and Dictate on a Mac</title>
+    <meta name="description" content="How to talk to Claude Code on a Mac: the built-in /voice dictation, macOS Dictation, local Whisper, and Cadence's on-device dictation and Talk for many agents.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/guides/voice-control-claude-code">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Voice Control for Claude Code: Talk to It and Dictate on a Mac">
+    <meta property="og:description" content="How to talk to Claude Code on a Mac: the built-in /voice dictation, macOS Dictation, local Whisper, and Cadence's on-device dictation and Talk for many agents.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/guides/voice-control-claude-code">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Voice Control for Claude Code: Talk to It and Dictate on a Mac">
+    <meta name="twitter:description" content="How to talk to Claude Code on a Mac: the built-in /voice dictation, macOS Dictation, local Whisper, and Cadence's on-device dictation and Talk for many agents.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Voice control for Claude Code: talk to it and dictate on a Mac",
+    "description": "How to talk to Claude Code on a Mac: the built-in /voice dictation, macOS Dictation, local Whisper, and Cadence's on-device dictation and Talk for many agents.",
+    "image": "https://www.cadencevoice.ai/art/og.png",
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19",
+    "inLanguage": "en-US",
+    "proficiencyLevel": "Beginner",
+    "keywords": "voice control Claude Code, talk to Claude Code, dictate to Claude Code on Mac, Claude Code voice mode, Claude Code /voice, voice coding Mac, Whisper dictation Claude Code, speech to text coding agent",
+    "author": {
+        "@type": "Organization",
+        "name": "Cadence Labs",
+        "url": "https://www.cadencevoice.ai/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cadence",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cadencevoice.ai/icon.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/guides/voice-control-claude-code"
+    },
+    "isPartOf": {
+        "@type": "CollectionPage",
+        "@id": "https://www.cadencevoice.ai/guides",
+        "name": "Cadence guides"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Cadence",
+            "item": "https://www.cadencevoice.ai/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Guides",
+            "item": "https://www.cadencevoice.ai/guides"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Voice control for Claude Code",
+            "item": "https://www.cadencevoice.ai/guides/voice-control-claude-code"
+        }
+    ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Does Claude Code have a voice mode?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, for dictation. Run /voice, then hold Space and speak, and your words appear in the prompt. Claude still replies in text. It needs a claude.ai account login."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is Claude Code's voice dictation processed on device?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Claude Code streams the audio to Anthropic's servers for transcription. For transcription on your Mac, use macOS Dictation where Keyboard settings say it is processed on your device, a local Whisper or Parakeet app, or Cadence."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I approve Claude Code permission prompts by voice?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not with /voice, which only fills the prompt. In Cadence, double-tap ⌥ and say \"approve\" or \"deny\", optionally with the agent's name and a reason, such as \"deny backend, use yarn instead\"."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does voice dictation work in Claude Code over SSH?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Claude Code's /voice needs a microphone on the machine it runs on, so it does not work in an SSH session. Dictation that runs on your Mac, such as macOS Dictation or Cadence, types into whatever terminal window has focus, including one connected over SSH."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I dictate to Claude Code in other languages?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Claude Code's /voice follows the language setting and supports 20 languages. In Cadence, pick Parakeet v3 (25 languages) in Settings → Models."
+            }
+        }
+    ]
+}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/guides/guides.css">
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence</a>
+        <nav aria-label="Primary">
+            <a href="/docs.html">Docs</a>
+            <a href="/guides" aria-current="page">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main class="guide">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/guides">Guides</a><span class="sep">/</span><span>Voice control for Claude Code</span></nav>
+
+    <h1 class="two guide-title">Voice control for Claude Code <span>talk to it and dictate to it on a Mac</span></h1>
+
+    <p class="guide-dek">Speaking a prompt is often faster than typing it, especially the long ones that explain what you want and why. Here are the ways to talk to Claude Code on a Mac, where each one sends your voice, and how to go from dictating text to directing agents by voice.</p>
+
+    <p class="stamp">Last updated: <time datetime="2026-10-19">October 19, 2026</time> · Cadence Labs</p>
+
+    <div class="answer panel">
+        <p class="eyebrow">Short answer</p>
+        <p>Claude Code has dictation built in. Run <code>/voice</code> in a session, then hold <kbd>Space</kbd>, speak and let go. Your words appear in the prompt, and you press Return to send. It streams audio to Anthropic for transcription and needs a claude.ai login.</p>
+        <p>For transcription on your Mac, or dictation that works in every app, use macOS Dictation or a local Whisper or Parakeet tool. To speak to several agents at once and have each request reach the right one, Cadence's Talk does that: double-tap <kbd>⌥</kbd> and say what you want.</p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <ol>
+                <li><a href="#two-jobs">Dictating a prompt vs directing agents</a></li>
+                <li><a href="#voice">Option 1: Claude Code's built-in /voice</a></li>
+                <li><a href="#macos">Option 2: macOS Dictation in the terminal</a></li>
+                <li><a href="#whisper">Option 3: Whisper on your Mac</a></li>
+                <li><a href="#cadence">Option 4: Cadence, hold ⌥ to dictate, double-tap to talk</a></li>
+                <li><a href="#compare">Compare the options</a></li>
+                <li><a href="#tips">Tips for speaking prompts</a></li>
+                <li><a href="#questions">Common questions</a></li>
+        </ol>
+    </nav>
+
+    <article class="guide-body prose">
+
+        <h2 id="two-jobs">Dictating a prompt vs directing agents</h2>
+        <p>"Voice control for Claude Code" can mean two different jobs:</p>
+        <ul>
+            <li><strong>Dictation.</strong> Your speech becomes text in the prompt, and you press Return. Every option on this page does this.</li>
+            <li><strong>Directing.</strong> You say "tell the API agent to add pagination" or "approve", and it reaches the right session without you finding the terminal first. That needs something that knows which agents are running. Of the options here, only Cadence does it.</li>
+        </ul>
+        <p>If you run one session at a time, dictation is all you need. With several, the slow part is no longer typing. It is finding the right window.</p>
+
+        <h2 id="voice">Option 1: Claude Code's built-in /voice</h2>
+        <p>Claude Code has had voice dictation since v2.1.69. Anthropic documents it in <a href="https://code.claude.com/docs/en/voice-dictation" rel="noopener">Voice dictation</a>.</p>
+        <ol>
+            <li>In a session, run <code>/voice</code>. The first time, macOS asks to let your terminal app use the microphone.</li>
+            <li>Hold <kbd>Space</kbd>, speak, and let go. The text appears dimmed while you talk and lands at the cursor. Press Return to send it.</li>
+            <li>Prefer not to hold a key? <code>/voice tap</code> switches to tap mode: tap <kbd>Space</kbd> to start and tap again to send. <code>/voice off</code> turns it off.</li>
+        </ol>
+        <p>Hold mode detects a held key through key repeat, so there is a short warm-up. A modifier combination starts recording at once. Rebind the key in <code>~/.claude/keybindings.json</code>:</p>
+<pre><code>{
+  "bindings": [
+    { "context": "Chat", "bindings": { "meta+k": "voice:pushToTalk" } }
+  ]
+}</code></pre>
+        <p>Dictation follows the <code>language</code> setting in <code>/config</code> and supports 20 languages. It is tuned for coding terms, and your project and git branch names are added as hints. Set <code>"autoSubmit": true</code> in the <code>voice</code> settings to send on release.</p>
+        <p>What to know before you rely on it:</p>
+        <ul>
+            <li>Audio streams to Anthropic's servers for transcription. It is not processed locally. Transcription does not count against your usage limits.</li>
+            <li>It needs a claude.ai account login. It is not available with an API key, Amazon Bedrock, Google Cloud or Microsoft Foundry.</li>
+            <li>It needs a microphone on the machine running Claude Code, so it does not work over SSH or in cloud sessions.</li>
+            <li>It fills one session's prompt. It does not answer permission prompts by voice or choose between sessions.</li>
+        </ul>
+
+        <h2 id="macos">Option 2: macOS Dictation in the terminal</h2>
+        <p>macOS Dictation types into any text field, including Terminal, iTerm2, Ghostty and the VS Code terminal. It works with Claude Code and every other CLI, and with a session connected over SSH, because the typing happens on your Mac.</p>
+        <ol>
+            <li>Open <strong>System Settings → Keyboard</strong>, go to <strong>Dictation</strong> and turn it on.</li>
+            <li>Pick a shortcut, or use the Microphone key if your keyboard has one.</li>
+            <li>Click into the Claude Code prompt, press the shortcut, speak, and press it again to stop.</li>
+        </ol>
+        <p>It adds commas, periods and question marks as you talk, has no length limit, and stops after 30 seconds of silence. Keyboard settings tell you whether dictation for your language is processed on your device. Apple covers the details in <a href="https://support.apple.com/guide/mac-help/use-dictation-mh40584/mac" rel="noopener">Use Dictation on Mac</a>.</p>
+        <p>The gaps for coding: there is no custom word list, so repo names, library names and flags often come out wrong, and automatic punctuation can add a period you did not want. Read the prompt before you press Return.</p>
+
+        <h2 id="whisper">Option 3: Whisper on your Mac</h2>
+        <p>OpenAI's Whisper and NVIDIA's Parakeet are open speech models that run well on Apple Silicon. Many Mac dictation apps are built on them. After a one-time model download they transcribe on your Mac, and the better ones add push-to-talk in any app and a custom word list. The <a href="/guides/offline-dictation-mac">offline dictation guide</a> lists what to look for.</p>
+        <p>To try a local model with only open-source tools, build <a href="https://github.com/ggml-org/whisper.cpp" rel="noopener">whisper.cpp</a> and transcribe a recording:</p>
+<pre><code>brew install cmake sox
+git clone https://github.com/ggml-org/whisper.cpp.git
+cd whisper.cpp
+sh ./models/download-ggml-model.sh base.en
+cmake -B build &amp;&amp; cmake --build build -j --config Release
+
+# record (Ctrl-C to stop), transcribe, copy to the clipboard
+rec -c 1 -r 16000 -b 16 /tmp/prompt.wav
+./build/bin/whisper-cli -m models/ggml-base.en.bin -f /tmp/prompt.wav -nt -np | pbcopy</code></pre>
+        <p>Then paste into Claude Code with <kbd>⌘</kbd><kbd>V</kbd>. It shows how quick local models are, but a record-then-paste loop is clumsy for daily use. An app with a hotkey removes those steps.</p>
+
+        <h2 id="cadence">Option 4: Cadence, hold ⌥ to dictate, double-tap to talk</h2>
+        <p><a href="/">Cadence</a> is a free Mac app for running coding agents, with on-device dictation built in. One key does both jobs.</p>
+        <h3>Hold ⌥ to dictate into Claude Code</h3>
+        <p>Hold <kbd>⌥</kbd>, speak, and let go. Your words start appearing at the cursor about a second in, and when you let go Cadence swaps in the polished version. It works in native apps, browsers, Electron apps and terminals, so it types straight into the Claude Code prompt. Transcription runs on your Mac with NVIDIA Parakeet. On Cadence's own test set it measured 1.88% word error rate on clean read speech and about 330 ms from release to text at the 95th percentile.</p>
+        <ul>
+            <li>Add repo names, libraries and teammates to <strong>Settings → Commands → Vocabulary</strong>. Your agents' names are added automatically.</li>
+            <li>Give your terminal the <strong>Raw (no polish)</strong> tone in <strong>Settings → AI → App Tone Profiles</strong> so Cadence types exactly what you said.</li>
+            <li>A quick tap of <kbd>⌥</kbd>, or a shortcut like <kbd>⌥</kbd><kbd>←</kbd>, types nothing.</li>
+        </ul>
+        <h3>Double-tap ⌥ to talk to your agents</h3>
+        <p>Double-tap <kbd>⌥</kbd> and a pill appears. Say or type the request, then tap <kbd>⌥</kbd> or press Return. Cadence's router runs on Claude Haiku through your own <code>claude</code> login and picks one of four outcomes:</p>
+        <ul>
+            <li><strong>Send</strong> to the agent already on that work. A follow-up like "also make it blue" goes where your last request went.</li>
+            <li><strong>Start</strong> a new agent in the right folder for new work.</li>
+            <li><strong>Ask</strong> the <a href="/docs/director">Director</a>, for questions like "is anything stuck?".</li>
+            <li><strong>Clarify</strong> when two agents fit equally well, with numbered options in the Inbox.</li>
+        </ul>
+        <p>You get a receipt such as "Sent to claude-2, the landing page thread". Some phrases skip the router: name the agent ("tell backend to add pagination"), answer one that is waiting ("approve", or "deny backend, use yarn instead"), or check on them ("status", "stop backend"). Talk works with Claude Code and with the other CLIs Cadence runs in herdr, such as Codex and Gemini.</p>
+        <p>Talk sends your words as text after they are transcribed on your Mac, never audio. To decide, the router also sees your agents' titles and recent output, the app in front of you and a screenshot of the display under your pointer, so "fix this" can mean what is on screen. The <a href="/docs/privacy">privacy page</a> lists exactly what goes where.</p>
+        <h3>Answer and listen by voice</h3>
+        <p>In the <a href="/docs/inbox">Inbox</a>, press <kbd>V</kbd> to speak a reply to the card in front of you. With <strong>Settings → Agents → Text-to-speech</strong> on, Cadence reads agent completions and approval requests aloud. Cadence's iPhone app, in a private TestFlight beta, adds Talk from Siri, Shortcuts and Control Center; see <a href="/guides/claude-code-on-iphone">Claude Code on iPhone</a>.</p>
+
+        <h2 id="compare">Compare the options</h2>
+        <table>
+            <thead>
+                <tr><th></th><th>Claude Code /voice</th><th>macOS Dictation</th><th>Local Whisper tool</th><th>Cadence</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Transcribed</td><td>On Anthropic's servers</td><td>On device for many languages (check Keyboard settings)</td><td>On your Mac</td><td>On your Mac</td></tr>
+                <tr><td>Types into</td><td>The Claude Code prompt</td><td>Any app</td><td>Depends on the tool</td><td>Any app</td></tr>
+                <tr><td>Custom words</td><td>Project and branch names, automatic</td><td>No</td><td>Some tools</td><td>Vocabulary list</td></tr>
+                <tr><td>Routes requests and approvals</td><td>No</td><td>No</td><td>No</td><td>Yes, with Talk</td></tr>
+                <tr><td>Needs</td><td>A claude.ai login</td><td>Nothing</td><td>An app or a build</td><td>Apple Silicon, macOS 13 or later</td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="tips">Tips for speaking prompts to a coding agent</h2>
+        <ul>
+            <li><strong>Name things.</strong> Say "the settings page in src/routes/settings", not "that page".</li>
+            <li><strong>Say what not to touch.</strong> "Don't change the migrations" saves a review round.</li>
+            <li><strong>Say how to check.</strong> "Run the tests before you say you're done."</li>
+            <li><strong>Talk first, then edit.</strong> Long spoken prompts are fine. Fix names and numbers before you press Return.</li>
+            <li><strong>Type the exact bits.</strong> Commands, flags, IDs and URLs are faster to type or paste than to spell out.</li>
+        </ul>
+
+
+        <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>Does Claude Code have a voice mode?</h3>
+            <p>Yes, for dictation. Run <code>/voice</code>, then hold <kbd>Space</kbd> and speak, and your words appear in the prompt. Claude still replies in text. It needs a claude.ai account login.</p>
+        </div>
+        <div class="qa">
+            <h3>Is Claude Code's voice dictation processed on device?</h3>
+            <p>No. Claude Code streams the audio to Anthropic's servers for transcription. For transcription on your Mac, use macOS Dictation where Keyboard settings say it is processed on your device, a local Whisper or Parakeet app, or Cadence.</p>
+        </div>
+        <div class="qa">
+            <h3>Can I approve Claude Code permission prompts by voice?</h3>
+            <p>Not with <code>/voice</code>, which only fills the prompt. In Cadence, double-tap <kbd>⌥</kbd> and say "approve" or "deny", optionally with the agent's name and a reason, such as "deny backend, use yarn instead".</p>
+        </div>
+        <div class="qa">
+            <h3>Does voice dictation work in Claude Code over SSH?</h3>
+            <p>Claude Code's <code>/voice</code> needs a microphone on the machine it runs on, so it does not work in an SSH session. Dictation that runs on your Mac, such as macOS Dictation or Cadence, types into whatever terminal window has focus, including one connected over SSH.</p>
+        </div>
+        <div class="qa">
+            <h3>Can I dictate to Claude Code in other languages?</h3>
+            <p>Yes. Claude Code's <code>/voice</code> follows the <code>language</code> setting and supports 20 languages. In Cadence, pick <strong>Parakeet v3 (25 languages)</strong> in <strong>Settings → Models</strong>.</p>
+        </div>
+    </article>
+
+    <aside class="try panel" aria-labelledby="try-cadence">
+        <h2 id="try-cadence">Try Cadence</h2>
+        <p>Hold ⌥ to dictate into any app on your Mac, or double-tap it to send a request to the right agent. Free, no account. macOS 13 or later on Apple Silicon.</p>
+        <div class="row">
+            <a class="cta dark" href="/download">↓ Download for Mac</a>
+            <code>brew install --cask maxprehoda/tap/cadence</code>
+        </div>
+    </aside>
+
+    <div class="related">
+        <p class="eyebrow">Related guides</p>
+        <div class="related-grid">
+            <a href="/guides/run-multiple-claude-code-agents">Run multiple Claude Code agents at once<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-on-iphone">Claude Code on iPhone<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/coding-agents-on-a-server">Run Claude Code on a remote server<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-and-codex-together">Use Claude Code and Codex together<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/offline-dictation-mac">Offline dictation on a Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/best-tools-parallel-coding-agents">Best tools to run parallel coding agents<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/codex-notifications-mac">Codex notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/herdr-mac-app">A Mac app for herdr<span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <a href="/docs/talk">Docs: Talk<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+</main>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/">Cadence</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/compare">Compare</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="mailto:support@cadencevoice.ai">Support</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+</body>
+</html>

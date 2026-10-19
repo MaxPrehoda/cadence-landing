@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How to Use Claude Code and Codex Together on a Mac</title>
-    <meta name="description" content="Run Claude Code and Codex side by side: shared instructions in AGENTS.md, separate worktrees, tmux or herdr, and one Inbox for both agents with Cadence.">
+    <title>How to Use Claude Code and Codex Together on One Project</title>
+    <meta name="description" content="Use Claude Code and the Codex CLI on one codebase: one AGENTS.md for both, a worktree each, OpenAI's Codex plugin for Claude Code, and one Inbox for both.">
     <meta name="author" content="Cadence Labs">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://www.cadencevoice.ai/guides/claude-code-and-codex-together">
     <meta name="theme-color" content="#f5f5f2">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Cadence">
-    <meta property="og:title" content="How to Use Claude Code and Codex Together on a Mac">
-    <meta property="og:description" content="Run Claude Code and Codex side by side: shared instructions in AGENTS.md, separate worktrees, tmux or herdr, and one Inbox for both agents with Cadence.">
+    <meta property="og:title" content="How to Use Claude Code and Codex Together on One Project">
+    <meta property="og:description" content="Use Claude Code and the Codex CLI on one codebase: one AGENTS.md for both, a worktree each, OpenAI's Codex plugin for Claude Code, and one Inbox for both.">
     <meta property="og:url" content="https://www.cadencevoice.ai/guides/claude-code-and-codex-together">
     <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="How to Use Claude Code and Codex Together on a Mac">
-    <meta name="twitter:description" content="Run Claude Code and Codex side by side: shared instructions in AGENTS.md, separate worktrees, tmux or herdr, and one Inbox for both agents with Cadence.">
+    <meta name="twitter:title" content="How to Use Claude Code and Codex Together on One Project">
+    <meta name="twitter:description" content="Use Claude Code and the Codex CLI on one codebase: one AGENTS.md for both, a worktree each, OpenAI's Codex plugin for Claude Code, and one Inbox for both.">
     <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
     <link rel="icon" type="image/png" href="/icon.png">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -27,14 +27,14 @@
 {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "How to use Claude Code and Codex together",
-    "description": "Run Claude Code and Codex side by side: shared instructions in AGENTS.md, separate worktrees, tmux or herdr, and one Inbox for both agents with Cadence.",
+    "headline": "How to use Claude Code and Codex together on one project",
+    "description": "Use Claude Code and the Codex CLI on one codebase: one AGENTS.md for both, a worktree each, OpenAI's Codex plugin for Claude Code, and one Inbox for both.",
     "image": "https://www.cadencevoice.ai/art/og.png",
     "datePublished": "2026-10-14",
-    "dateModified": "2026-10-14",
+    "dateModified": "2026-10-19",
     "inLanguage": "en-US",
     "proficiencyLevel": "Beginner",
-    "keywords": "use Claude Code and Codex together, Claude Code and Codex CLI, multiple coding agents, AGENTS.md CLAUDE.md, herdr, CLI agents side by side",
+    "keywords": "use Claude Code and Codex together, Claude Code and Codex CLI, codex-plugin-cc, Codex plugin for Claude Code, Claude Code vs Codex, AGENTS.md CLAUDE.md, herdr, multiple coding agents",
     "author": {
         "@type": "Organization",
         "name": "Cadence Labs",
@@ -92,6 +92,14 @@
     "mainEntity": [
         {
             "@type": "Question",
+            "name": "Can Claude Code call Codex directly?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, with OpenAI's Codex plugin for Claude Code (codex-plugin-cc). It adds commands such as /codex:review and /codex:rescue that run your installed Codex CLI from inside a Claude Code session, using your existing Codex login."
+            }
+        },
+        {
+            "@type": "Question",
             "name": "Does Cadence need an OpenAI key to run Codex?",
             "acceptedAnswer": {
                 "@type": "Answer",
@@ -146,16 +154,16 @@
 <main class="guide">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/guides">Guides</a><span class="sep">/</span><span>Claude Code and Codex together</span></nav>
 
-    <h1 class="two guide-title">Use Claude Code and Codex together <span>on one project, side by side</span></h1>
+    <h1 class="two guide-title">Use Claude Code and Codex together <span>on one codebase, without collisions</span></h1>
 
     <p class="guide-dek">Plenty of developers keep more than one coding agent around. Here is how to run Claude Code and Codex on the same codebase without them tripping over each other, and how to keep track of both.</p>
 
-    <p class="stamp">Last updated: <time datetime="2026-10-14">October 14, 2026</time> · Cadence Labs</p>
+    <p class="stamp">Last updated: <time datetime="2026-10-19">October 19, 2026</time> · Cadence Labs</p>
 
     <div class="answer panel">
         <p class="eyebrow">Short answer</p>
         <p>Install and sign in to both CLIs, then give them the same project instructions: write them in <code>AGENTS.md</code>, which Codex reads, and import that file from <code>CLAUDE.md</code> with a line that says <code>@AGENTS.md</code>. Give each agent its own task and its own git worktree, and run them side by side in tabs, tmux, or a terminal runtime like herdr.</p>
-        <p>Cadence runs Claude Code natively and Codex through herdr, and puts both agents' questions in one Inbox.</p>
+        <p>To have Claude Code hand work to Codex without leaving the session, install OpenAI's Codex plugin for Claude Code and use <code>/codex:review</code> or <code>/codex:rescue</code>. Cadence runs Claude Code natively and Codex through herdr, and puts both agents' questions in one Inbox.</p>
     </div>
 
     <nav class="toc" aria-label="On this page">
@@ -166,6 +174,7 @@
                 <li><a href="#instructions">Share one set of project instructions</a></li>
                 <li><a href="#split">Split the work</a></li>
                 <li><a href="#run">Run them side by side</a></li>
+                <li><a href="#plugin">Or call Codex from inside Claude Code</a></li>
                 <li><a href="#cadence">Both agents in one Inbox with Cadence</a></li>
                 <li><a href="#questions">Common questions</a></li>
         </ol>
@@ -209,8 +218,21 @@ tmux split-window -h -t work    # run codex in the new pane</code></pre>
 <pre><code>curl -fsSL https://herdr.dev/install.sh | sh</code></pre>
         <p>Cadence uses herdr for every agent that is not Claude Code.</p>
 
+        <h2 id="plugin">Or call Codex from inside Claude Code</h2>
+        <p>OpenAI publishes an official plugin, <a href="https://github.com/openai/codex-plugin-cc" rel="noopener">codex-plugin-cc</a>, that lets a Claude Code session hand work to your installed Codex CLI. It reuses your Codex login and needs Node.js 18.18 or later. In Claude Code:</p>
+<pre><code>/plugin marketplace add openai/codex-plugin-cc
+/plugin install codex@openai-codex
+/reload-plugins
+/codex:setup</code></pre>
+        <ul>
+            <li><code>/codex:review</code> runs a read-only Codex review of your current changes, or of a branch with <code>--base &lt;ref&gt;</code>.</li>
+            <li><code>/codex:adversarial-review</code> asks Codex to challenge the design choices and assumptions.</li>
+            <li><code>/codex:rescue</code> hands a task to Codex, such as investigating a bug or trying a fix, optionally in the background. <code>/codex:status</code>, <code>/codex:result</code> and <code>/codex:cancel</code> track those jobs.</li>
+        </ul>
+        <p>This is the writer-and-reviewer pattern in one window: Claude Code writes, Codex reviews. It fits short handoffs. For two agents doing longer, separate work, run them side by side as above.</p>
+
         <h2 id="cadence">Both agents in one Inbox with Cadence</h2>
-        <p><a href="/">Cadence</a> is a free macOS app that puts every coding agent in one Inbox. Claude Code is hosted natively. Codex, OpenCode, Pi, Omp, Amp, Grok, Cursor, Copilot and Gemini run through herdr.</p>
+        <p><a href="/">Cadence</a> is a free macOS app that puts every coding agent in one Inbox. Claude Code is hosted natively. Codex, OpenCode, Gemini, Amp, Pi, Cursor, Copilot, Grok, Aider and other CLIs run in herdr terminals.</p>
         <h3>Start both agents</h3>
         <ol>
             <li><a href="/download">Download Cadence</a>. The <code>claude</code> CLI should be installed and signed in, and so should <code>codex</code>.</li>
@@ -218,14 +240,18 @@ tmux split-window -h -t work    # run codex in the new pane</code></pre>
             <li>Enter the <strong>Folder</strong> (for example the worktree you made for it) and a <strong>First message</strong>, then start it.</li>
             <li>Do the same with <strong>Claude Code</strong>, choosing <strong>Terminal</strong> or <strong>Cadence chat</strong>.</li>
         </ol>
-        <p>With <a href="/docs/talk">Talk</a>, double-tap <kbd>⌥</kbd> and say "start a Codex agent in the api folder". New agents use Claude Code unless you name another CLI.</p>
+        <p>With <a href="/docs/talk">Talk</a>, double-tap <kbd>⌥</kbd> and say "start a Codex agent in the api folder". New agents use Claude Code unless you name another CLI. Codex you start yourself can join too: turn on <strong>Settings → Agents → Your own terminals</strong> and <code>codex</code> typed in Ghostty, iTerm, Terminal or your editor runs through Cadence.</p>
         <h3>What you get for each</h3>
         <p>Both agents show up as dots on the <a href="/docs/toolbar">toolbar</a> (blue working, amber needs you, green done), with a short title written from what each is doing. Codex questions land in the <a href="/docs/inbox">Inbox</a> the same way Claude Code's do when the CLI prints numbered options, and you answer with <kbd>1</kbd> to <kbd>9</kbd>.</p>
-        <p>Claude Code gets more, because Cadence hosts it directly. In Cadence chat mode you get real Allow/Deny cards with your reason passed back on Deny, a git worktree per agent by default, and Diff and History tabs on the Agents board. Other CLIs keep their own interface in a Terminal window.</p>
-        <p>The <a href="/docs/director">Director</a> can read and message agents in herdr by name, so "what is the Codex agent doing?" works across both. Each CLI talks to its own provider under its own account; Cadence does not route that traffic through its servers.</p>
+        <p>Claude Code gets more, because Cadence hosts it directly. In Cadence chat mode you get real Allow/Deny cards with your reason passed back on Deny, a git worktree per agent by default, and Diff and History tabs on the Agents board. Other CLIs keep their own interface, in Terminal, iTerm or Ghostty.</p>
+        <p>The <a href="/docs/director">Director</a> can read and message agents in herdr by name, so "what is the Codex agent doing?" works across both. Each CLI talks to its own provider under its own account; Cadence does not route that traffic through its servers. Codex or Claude Code running on a Linux server can show up next to them too; see <a href="/guides/coding-agents-on-a-server">Run Claude Code on a remote server</a>.</p>
 
 
         <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>Can Claude Code call Codex directly?</h3>
+            <p>Yes, with OpenAI's Codex plugin for Claude Code (codex-plugin-cc). It adds commands such as <code>/codex:review</code> and <code>/codex:rescue</code> that run your installed Codex CLI from inside a Claude Code session, using your existing Codex login.</p>
+        </div>
         <div class="qa">
             <h3>Does Cadence need an OpenAI key to run Codex?</h3>
             <p>No. Codex uses its own sign-in, exactly as it does in a normal terminal. Cadence starts it in the folder you choose and does not manage its account or settings.</p>
@@ -251,8 +277,17 @@ tmux split-window -h -t work    # run codex in the new pane</code></pre>
 
     <div class="related">
         <p class="eyebrow">Related guides</p>
-        <a href="/guides/run-multiple-claude-code-agents">Run multiple Claude Code agents at once<span class="arrow" aria-hidden="true">→</span></a>
-        <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+        <div class="related-grid">
+            <a href="/guides/run-multiple-claude-code-agents">Run multiple Claude Code agents at once<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-on-iphone">Claude Code on iPhone<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/voice-control-claude-code">Voice control for Claude Code<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/coding-agents-on-a-server">Run Claude Code on a remote server<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/offline-dictation-mac">Offline dictation on a Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/best-tools-parallel-coding-agents">Best tools to run parallel coding agents<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/codex-notifications-mac">Codex notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/herdr-mac-app">A Mac app for herdr<span class="arrow" aria-hidden="true">→</span></a>
+        </div>
         <a href="/docs/agents-and-clis">Docs: Agents and CLIs<span class="arrow" aria-hidden="true">→</span></a>
     </div>
 </main>
@@ -263,6 +298,7 @@ tmux split-window -h -t work    # run codex in the new pane</code></pre>
             <a href="/">Cadence</a>
             <a href="/docs.html">Docs</a>
             <a href="/guides">Guides</a>
+            <a href="/compare">Compare</a>
             <a href="/faq.html">FAQ</a>
             <a href="/blog/">Writing</a>
             <a href="/changelog.html">Changelog</a>

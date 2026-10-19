@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Claude Code on a Remote Server, Managed From Your Mac</title>
+    <meta name="description" content="Run Claude Code on a Linux VPS: install and sign in over SSH, keep agents running in tmux or herdr, and watch them from your Mac with herdr or Cadence.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/guides/coding-agents-on-a-server">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Run Claude Code on a Remote Server, Managed From Your Mac">
+    <meta property="og:description" content="Run Claude Code on a Linux VPS: install and sign in over SSH, keep agents running in tmux or herdr, and watch them from your Mac with herdr or Cadence.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/guides/coding-agents-on-a-server">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Run Claude Code on a Remote Server, Managed From Your Mac">
+    <meta name="twitter:description" content="Run Claude Code on a Linux VPS: install and sign in over SSH, keep agents running in tmux or herdr, and watch them from your Mac with herdr or Cadence.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Run Claude Code on a remote server, managed from your Mac",
+    "description": "Run Claude Code on a Linux VPS: install and sign in over SSH, keep agents running in tmux or herdr, and watch them from your Mac with herdr or Cadence.",
+    "image": "https://www.cadencevoice.ai/art/og.png",
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19",
+    "inLanguage": "en-US",
+    "proficiencyLevel": "Intermediate",
+    "keywords": "run Claude Code on a remote server, Claude Code VPS, manage Claude Code on a VPS from Mac, Claude Code SSH, Claude Code tmux server, herdr remote machine, herdr machine add, coding agents on a server",
+    "author": {
+        "@type": "Organization",
+        "name": "Cadence Labs",
+        "url": "https://www.cadencevoice.ai/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cadence",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cadencevoice.ai/icon.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/guides/coding-agents-on-a-server"
+    },
+    "isPartOf": {
+        "@type": "CollectionPage",
+        "@id": "https://www.cadencevoice.ai/guides",
+        "name": "Cadence guides"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Cadence",
+            "item": "https://www.cadencevoice.ai/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Guides",
+            "item": "https://www.cadencevoice.ai/guides"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Claude Code on a remote server",
+            "item": "https://www.cadencevoice.ai/guides/coding-agents-on-a-server"
+        }
+    ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Can Claude Code run on a VPS?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Claude Code supports Ubuntu 20.04 or later, Debian 10 or later and Alpine Linux 3.19 or later, with 4 GB of RAM or more on x64 or ARM64. Install it with the native installer and sign in over SSH by copying the login URL to a browser on another device."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I log in to Claude Code on a server without a browser?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Run claude, press c to copy the login URL, open it on your Mac or phone and sign in, then paste the code back at the Paste code here if prompted line. For scripts, claude setup-token makes a one-year token you set as CLAUDE_CODE_OAUTH_TOKEN."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Claude Code keep running after I disconnect from SSH?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not on its own. A session started in a plain SSH shell ends when the connection drops. Start it inside tmux, screen or herdr, detach, and it keeps working until you come back."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is a herdr machine?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A saved SSH connection from herdr on your computer to herdr on another box, added with herdr machine add. The remote workspaces and agents show next to your local ones, and they keep running on the box if the connection drops."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can Cadence start agents on my server?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not in 0.5.7. You start and end them on the server inside herdr. Cadence shows them on the toolbar and in the Inbox, and you answer and message them from your Mac or from the iPhone beta."
+            }
+        }
+    ]
+}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/guides/guides.css">
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence</a>
+        <nav aria-label="Primary">
+            <a href="/docs.html">Docs</a>
+            <a href="/guides" aria-current="page">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main class="guide">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/guides">Guides</a><span class="sep">/</span><span>Claude Code on a remote server</span></nav>
+
+    <h1 class="two guide-title">Run Claude Code on a remote server <span>and manage it from your Mac</span></h1>
+
+    <p class="guide-dek">A server keeps agents working when your laptop is closed, gives them more CPU, and keeps them away from your personal files. This guide covers the whole setup: SSH, install and sign-in, keeping sessions alive, and seeing what the server's agents need from your Mac.</p>
+
+    <p class="stamp">Last updated: <time datetime="2026-10-19">October 19, 2026</time> · Cadence Labs</p>
+
+    <div class="answer panel">
+        <p class="eyebrow">Short answer</p>
+        <p>SSH into the server, install Claude Code with <code>curl -fsSL https://claude.ai/install.sh | bash</code>, run <code>claude</code> once to sign in, and start your sessions inside tmux so they survive a dropped connection.</p>
+        <p>To see the server's agents from your Mac, run them in herdr and connect the server with <code>herdr machine add</code>. Or add it in Cadence 0.5.7 under <strong>Settings → Agents → Other machines</strong>, which puts its agents on your toolbar and in your Inbox next to the ones on your Mac.</p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <ol>
+                <li><a href="#why">Why run coding agents on a server</a></li>
+                <li><a href="#ssh">Set up SSH from your Mac</a></li>
+                <li><a href="#install">Install and sign in to Claude Code</a></li>
+                <li><a href="#tmux">Keep sessions running with tmux</a></li>
+                <li><a href="#herdr">Use herdr and connect the server as a machine</a></li>
+                <li><a href="#waiting">Know when a server agent needs you</a></li>
+                <li><a href="#cadence">Cadence 0.5.7: agents on other machines</a></li>
+                <li><a href="#security">Security basics</a></li>
+                <li><a href="#questions">Common questions</a></li>
+        </ol>
+    </nav>
+
+    <article class="guide-body prose">
+
+        <h2 id="why">Why run coding agents on a server</h2>
+        <ul>
+            <li>They keep going when your laptop is closed, asleep or offline.</li>
+            <li>Builds and test runs use the server's CPU and memory, not your laptop's.</li>
+            <li>An agent on a separate box can only touch what is on that box.</li>
+            <li>Linux toolchains, containers and services run where they will be deployed.</li>
+        </ul>
+        <p>The cost is distance. Every session is one SSH hop away, and the usual signs that an agent is waiting, a bell or a banner, do not reach your Mac on their own. Most of this guide is about closing that gap.</p>
+        <p>Any Linux VPS or spare machine works. Claude Code supports Ubuntu 20.04 or later, Debian 10 or later and Alpine Linux 3.19 or later, with 4 GB of RAM or more on x64 or ARM64 (<a href="https://code.claude.com/docs/en/setup" rel="noopener">system requirements</a>).</p>
+
+        <h2 id="ssh">1. Set up SSH from your Mac</h2>
+        <p>Use key-based login and give the server a short name. On your Mac:</p>
+<pre><code># make a key if you don't have one
+ssh-keygen -t ed25519
+
+# copy it to the server
+ssh-copy-id you@203.0.113.7</code></pre>
+        <p>Then add a host alias to <code>~/.ssh/config</code>:</p>
+<pre><code>Host devbox
+    HostName 203.0.113.7
+    User you</code></pre>
+        <p>Now <code>ssh devbox</code> logs you in. herdr and Cadence both accept this alias.</p>
+
+        <h2 id="install">2. Install and sign in to Claude Code</h2>
+        <p>On the server:</p>
+<pre><code>curl -fsSL https://claude.ai/install.sh | bash
+claude --version</code></pre>
+        <p>Clone your project and run <code>claude</code> in it. The first run asks you to sign in. With no browser on the server, press <kbd>c</kbd> to copy the login URL, open it on your Mac, sign in, and paste the code back at the <code>Paste code here if prompted</code> line. On Linux the login is stored in <code>~/.claude/.credentials.json</code>, readable only by your user (<a href="https://code.claude.com/docs/en/authentication" rel="noopener">authentication</a>).</p>
+        <p>For a box that only runs scripts, <code>claude setup-token</code> on your Mac prints a one-year token you can set as <code>CLAUDE_CODE_OAUTH_TOKEN</code> on the server. That token can only make model requests, so it cannot start Remote Control sessions.</p>
+        <p>Sessions on the server draw on the same plan as your Mac sessions when you sign in with the same account. The server also needs its own git access to push branches. A deploy key or a token scoped to one repository is safer than copying your personal key there.</p>
+
+        <h2 id="tmux">3. Keep sessions running with tmux</h2>
+        <p>A plain <code>ssh devbox</code> followed by <code>claude</code> ends when the connection drops. Start agents inside tmux instead:</p>
+<pre><code>ssh devbox
+tmux new -s agents       # first window: run claude
+# Ctrl-b c   new window for a second agent
+# Ctrl-b w   list windows
+# Ctrl-b d   detach; everything keeps running
+
+tmux attach -t agents    # later, from any machine</code></pre>
+        <p>Install tmux with the package manager (<code>sudo apt install tmux</code> on Debian and Ubuntu). If a session did end, <code>claude --continue</code> in the same folder picks up the most recent conversation. For two agents in one repository, give each its own worktree with <code>claude --worktree &lt;name&gt;</code>, as the <a href="/guides/run-multiple-claude-code-agents">multiple agents guide</a> explains.</p>
+
+        <h2 id="herdr">4. Use herdr and connect the server as a machine</h2>
+        <p><a href="https://herdr.dev" rel="noopener">herdr</a> is a free, open-source terminal runtime built for coding agents. Like tmux, it keeps sessions running after you detach. It also reads each pane and marks the agent in it as working, blocked or idle. On the server:</p>
+<pre><code>curl -fsSL https://herdr.dev/install.sh | sh
+herdr                  # starts or attaches to the default session
+# Ctrl-b v   split right, then run claude or codex in the new pane
+# Ctrl-b q   detach; the server and its agents keep running</code></pre>
+        <p>herdr on your Mac can show that server next to your local agents. Check that <code>ssh devbox</code> works, then on your Mac:</p>
+<pre><code>herdr machine add devbox --label "Build box"
+herdr machine list</code></pre>
+        <p>Each machine keeps its own herdr server, so a lost connection or a sleeping laptop does not stop the agents on it. herdr reconnects on its own and shows the server's last known state dimmed until it does. To disconnect, run <code>herdr machine remove &lt;profile-id&gt;</code> with the id from <code>herdr machine list</code>. Details are in herdr's <a href="https://herdr.dev/docs/connecting-machines/" rel="noopener">connecting machines</a> docs.</p>
+
+        <h2 id="waiting">5. Know when a server agent needs you</h2>
+        <p>Hooks that post macOS notifications do nothing on a server, because it has no desktop. These do work:</p>
+        <ul>
+            <li><strong>A push hook.</strong> The ntfy script in <a href="/guides/claude-code-on-iphone#push">Claude Code on iPhone</a> runs unchanged on Linux and sends to your phone or the ntfy web app.</li>
+            <li><strong>Terminal notifications over SSH.</strong> In Ghostty, Kitty and iTerm2, Claude Code's built-in desktop notification travels back over SSH to your Mac (iTerm2 needs one alert setting turned on). Inside tmux, add <code>set -g allow-passthrough on</code> to <code>~/.tmux.conf</code> so it gets through. The <a href="/guides/claude-code-notifications-mac">notifications guide</a> covers the settings.</li>
+            <li><strong>Remote Control.</strong> Start <code>claude --remote-control</code> inside tmux on the server and the session appears in the Claude app and at claude.ai/code. Anthropic's docs recommend tmux or screen for exactly this case. It needs a claude.ai login, not a setup token.</li>
+            <li><strong>herdr's state marks</strong>, if you keep herdr open on your Mac with the machine connected.</li>
+        </ul>
+
+        <h2 id="cadence">6. Cadence 0.5.7: agents on other machines</h2>
+        <p><a href="/">Cadence</a> is a free Mac app that puts every coding agent in one Inbox. Since version 0.5.7 that includes agents on your Linux servers, which Cadence reaches through herdr over your Mac's own SSH.</p>
+        <ol>
+            <li>In Cadence, open <strong>Settings → Agents → Other machines</strong> and copy the command it shows. It already contains your Mac's SSH public key:
+<pre><code>curl -fsSL https://cadencevoice.ai/machine.sh | sh -s -- ssh-ed25519 AAAA...</code></pre></li>
+            <li>Run it on the server. It installs herdr unless it is already there and adds your Mac's public key to <code>~/.ssh/authorized_keys</code>, marked <code>cadence</code>. That is all it does. Nothing on the server connects to Cadence, its relay or your phone, and no token or password is involved. You can read the <a href="/machine.sh">script</a> before you run it.</li>
+            <li>Back in Cadence, add the server by its SSH address, such as <code>you@203.0.113.7</code> or an alias like <code>devbox</code>, with an optional name.</li>
+            <li>On the server, start agents inside herdr: run <code>herdr</code>, then <code>claude</code> or <code>codex</code> in a pane.</li>
+        </ol>
+        <p>The server's agents then get dots on the <a href="/docs/toolbar">toolbar</a>, cards in the <a href="/docs/inbox">Inbox</a> and rows in the panel, labeled with the server's name. You answer their questions and send them messages from your Mac, or from your iPhone if you are in the <a href="/guides/claude-code-on-iphone#cadence">iPhone beta</a>.</p>
+        <p>Good to know:</p>
+        <ul>
+            <li>Starting and ending agents on a server still happens on the server.</li>
+            <li>If your Mac has no SSH key in <code>~/.ssh</code>, <code>ssh you@server</code> has to work from Terminal some other way, such as through a key agent.</li>
+            <li>If the server is new to your Mac, run <code>ssh</code> to it once in Terminal and accept its host key. Settings tells you when that is needed.</li>
+            <li>Removing the server in Settings leaves its agents running there.</li>
+            <li>Your phone reaches server agents through your Mac, so Cadence has to be running on an awake Mac for that.</li>
+        </ul>
+
+        <h2 id="security">Security basics</h2>
+        <ul>
+            <li>Run agents as a normal user, not root.</li>
+            <li>Keep SSH key-only, and limit who can reach it, for example with a firewall or a VPN.</li>
+            <li>Give the server only the credentials the work needs: a repository-scoped deploy key, not your personal key or cloud admin keys.</li>
+            <li>Remember that anything on the box is in reach of the agent, including <code>.env</code> files.</li>
+            <li>Use <code>--dangerously-skip-permissions</code> only on a disposable machine with nothing to lose.</li>
+        </ul>
+
+
+        <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>Can Claude Code run on a VPS?</h3>
+            <p>Yes. Claude Code supports Ubuntu 20.04 or later, Debian 10 or later and Alpine Linux 3.19 or later, with 4 GB of RAM or more on x64 or ARM64. Install it with the native installer and sign in over SSH by copying the login URL to a browser on another device.</p>
+        </div>
+        <div class="qa">
+            <h3>How do I log in to Claude Code on a server without a browser?</h3>
+            <p>Run <code>claude</code>, press <kbd>c</kbd> to copy the login URL, open it on your Mac or phone and sign in, then paste the code back at the <code>Paste code here if prompted</code> line. For scripts, <code>claude setup-token</code> makes a one-year token you set as <code>CLAUDE_CODE_OAUTH_TOKEN</code>.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Claude Code keep running after I disconnect from SSH?</h3>
+            <p>Not on its own. A session started in a plain SSH shell ends when the connection drops. Start it inside tmux, screen or herdr, detach, and it keeps working until you come back.</p>
+        </div>
+        <div class="qa">
+            <h3>What is a herdr machine?</h3>
+            <p>A saved SSH connection from herdr on your computer to herdr on another box, added with <code>herdr machine add</code>. The remote workspaces and agents show next to your local ones, and they keep running on the box if the connection drops.</p>
+        </div>
+        <div class="qa">
+            <h3>Can Cadence start agents on my server?</h3>
+            <p>Not in 0.5.7. You start and end them on the server inside herdr. Cadence shows them on the toolbar and in the Inbox, and you answer and message them from your Mac or from the iPhone beta.</p>
+        </div>
+    </article>
+
+    <aside class="try panel" aria-labelledby="try-cadence">
+        <h2 id="try-cadence">Try Cadence</h2>
+        <p>See the agents on your servers next to the ones on your Mac, and answer all of them from one Inbox. Free, no account. macOS 13 or later on Apple Silicon.</p>
+        <div class="row">
+            <a class="cta dark" href="/download">↓ Download for Mac</a>
+            <code>brew install --cask maxprehoda/tap/cadence</code>
+        </div>
+    </aside>
+
+    <div class="related">
+        <p class="eyebrow">Related guides</p>
+        <div class="related-grid">
+            <a href="/guides/run-multiple-claude-code-agents">Run multiple Claude Code agents at once<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-on-iphone">Claude Code on iPhone<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/voice-control-claude-code">Voice control for Claude Code<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-and-codex-together">Use Claude Code and Codex together<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/offline-dictation-mac">Offline dictation on a Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/best-tools-parallel-coding-agents">Best tools to run parallel coding agents<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/codex-notifications-mac">Codex notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/herdr-mac-app">A Mac app for herdr<span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+        <a href="/docs/agents-and-clis">Docs: Agents and CLIs<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+</main>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/">Cadence</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/compare">Compare</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="mailto:support@cadencevoice.ai">Support</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+</body>
+</html>

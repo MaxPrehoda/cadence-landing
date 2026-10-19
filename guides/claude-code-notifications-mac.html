@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Claude Code Notifications on Mac: Know When It Needs You</title>
-    <meta name="description" content="Get a Mac notification when Claude Code needs input or finishes: the terminal bell, a hooks setup you can copy, and how Cadence collects every waiting agent.">
+    <title>Claude Code Notifications on Mac: When It Needs Input or Is Done</title>
+    <meta name="description" content="Mac notifications when Claude Code needs input or finishes: built-in alerts in Ghostty, Kitty and iTerm2, Apple Terminal's bell, copy-paste hooks, and Cadence.">
     <meta name="author" content="Cadence Labs">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://www.cadencevoice.ai/guides/claude-code-notifications-mac">
     <meta name="theme-color" content="#f5f5f2">
     <meta property="og:type" content="article">
     <meta property="og:site_name" content="Cadence">
-    <meta property="og:title" content="Claude Code Notifications on Mac: Know When It Needs You">
-    <meta property="og:description" content="Get a Mac notification when Claude Code needs input or finishes: the terminal bell, a hooks setup you can copy, and how Cadence collects every waiting agent.">
+    <meta property="og:title" content="Claude Code Notifications on Mac: When It Needs Input or Is Done">
+    <meta property="og:description" content="Mac notifications when Claude Code needs input or finishes: built-in alerts in Ghostty, Kitty and iTerm2, Apple Terminal's bell, copy-paste hooks, and Cadence.">
     <meta property="og:url" content="https://www.cadencevoice.ai/guides/claude-code-notifications-mac">
     <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Claude Code Notifications on Mac: Know When It Needs You">
-    <meta name="twitter:description" content="Get a Mac notification when Claude Code needs input or finishes: the terminal bell, a hooks setup you can copy, and how Cadence collects every waiting agent.">
+    <meta name="twitter:title" content="Claude Code Notifications on Mac: When It Needs Input or Is Done">
+    <meta name="twitter:description" content="Mac notifications when Claude Code needs input or finishes: built-in alerts in Ghostty, Kitty and iTerm2, Apple Terminal's bell, copy-paste hooks, and Cadence.">
     <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
     <link rel="icon" type="image/png" href="/icon.png">
     <link rel="apple-touch-icon" href="/icon.png">
@@ -27,14 +27,14 @@
 {
     "@context": "https://schema.org",
     "@type": "TechArticle",
-    "headline": "Claude Code notifications on Mac: know when it needs input or is done",
-    "description": "Get a Mac notification when Claude Code needs input or finishes: the terminal bell, a hooks setup you can copy, and how Cadence collects every waiting agent.",
+    "headline": "Claude Code notifications on Mac: when it needs input or is done",
+    "description": "Mac notifications when Claude Code needs input or finishes: built-in alerts in Ghostty, Kitty and iTerm2, Apple Terminal's bell, copy-paste hooks, and Cadence.",
     "image": "https://www.cadencevoice.ai/art/og.png",
     "datePublished": "2026-10-14",
-    "dateModified": "2026-10-14",
+    "dateModified": "2026-10-19",
     "inLanguage": "en-US",
     "proficiencyLevel": "Beginner",
-    "keywords": "Claude Code notifications Mac, Claude Code hooks notification, Claude Code needs input, Claude Code done notification, osascript display notification",
+    "keywords": "Claude Code notifications Mac, Claude Code notify when done, Claude Code needs input notification, preferredNotifChannel, Claude Code terminal bell, Claude Code Apple Terminal notification, Claude Code hooks notification, osascript display notification",
     "author": {
         "@type": "Organization",
         "name": "Cadence Labs",
@@ -92,6 +92,14 @@
     "mainEntity": [
         {
             "@type": "Question",
+            "name": "Does Claude Code send notifications in Apple Terminal?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not desktop notifications. Claude Code sends those only in Ghostty, Kitty and iTerm2. In Apple Terminal, set preferredNotifChannel to terminal_bell in ~/.claude/settings.json and make sure the bell is on in Terminal's profile, or add a Notification hook that runs osascript."
+            }
+        },
+        {
+            "@type": "Question",
             "name": "Why does my Claude Code hook not show a notification?",
             "acceptedAnswer": {
                 "@type": "Answer",
@@ -103,7 +111,15 @@
             "name": "Can Claude Code notify me when it is done?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. A Stop hook runs each time Claude Code finishes responding. Point it at the same script as the Notification hook, as shown above."
+                "text": "Yes. The built-in notification fires when Claude finishes or pauses for a permission prompt while you appear to be away from the terminal. For a notification after every response, add a Stop hook pointing at the same script as the Notification hook."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I get Claude Code notifications on my phone?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. With Remote Control and the Claude app, turn on Push when actions required in /config. On any plan, a Notification hook can send a push through ntfy or Pushover."
             }
         },
         {
@@ -111,7 +127,7 @@
             "name": "Does Cadence change my Claude Code settings?",
             "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "No. Cadence passes its hook to the Claude Code sessions it starts with the --settings flag. Your own ~/.claude/settings.json and its hooks keep working."
+                "text": "No. Cadence passes its hook to the Claude Code sessions it starts with the --settings flag. Your own ~/.claude/settings.json and its hooks keep working. The optional Your own terminals switch adds one line to ~/.zshrc, and you can turn it off any time."
             }
         }
     ]
@@ -146,26 +162,28 @@
 <main class="guide">
     <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/guides">Guides</a><span class="sep">/</span><span>Claude Code notifications</span></nav>
 
-    <h1 class="two guide-title">Claude Code notifications on Mac <span>know when it needs you</span></h1>
+    <h1 class="two guide-title">Claude Code notifications on Mac <span>when it needs input, and when it's done</span></h1>
 
-    <p class="guide-dek">Claude Code pauses whenever it needs a permission, an answer or a plan approval, and when it is done. Here is how to find out on a Mac without watching the terminal.</p>
+    <p class="guide-dek">Claude Code pauses whenever it needs a permission, an answer or a plan approval, and when it finishes. Here is how to find out on a Mac without watching the terminal, and which setup works in which terminal.</p>
 
-    <p class="stamp">Last updated: <time datetime="2026-10-14">October 14, 2026</time> · Cadence Labs</p>
+    <p class="stamp">Last updated: <time datetime="2026-10-19">October 19, 2026</time> · Cadence Labs</p>
 
     <div class="answer panel">
         <p class="eyebrow">Short answer</p>
-        <p>Add two hooks to <code>~/.claude/settings.json</code>: a <code>Notification</code> hook, which runs when Claude Code needs your permission or has been waiting for input, and a <code>Stop</code> hook, which runs when it finishes a response. Have each one run <code>osascript</code> to post a macOS notification. The setup is below.</p>
-        <p>If you run several agents, a notification only tells you that one is waiting. Cadence shows every agent's state on a toolbar and lets you answer from one Inbox.</p>
+        <p>In Ghostty, Kitty and iTerm2, Claude Code already posts a macOS notification when it finishes or stops for a permission prompt while you are away from the window. In Apple Terminal and most other terminals it does not. There, add <code>"preferredNotifChannel": "terminal_bell"</code> to <code>~/.claude/settings.json</code> to ring the bell, or add a <code>Notification</code> hook and a <code>Stop</code> hook that run <code>osascript</code> to post a real notification in any terminal. Both setups are below.</p>
+        <p>With several agents, a notification only says that one is waiting. Cadence shows every agent's state on a toolbar and lets you answer from one Inbox.</p>
     </div>
 
     <nav class="toc" aria-label="On this page">
         <p class="eyebrow">On this page</p>
         <ol>
                 <li><a href="#when">When Claude Code waits for you</a></li>
-                <li><a href="#bell">Option 1: the terminal bell</a></li>
+                <li><a href="#terminals">What works in your terminal</a></li>
+                <li><a href="#builtin">Option 1: built-in notifications and the bell</a></li>
                 <li><a href="#hooks">Option 2: hooks and macOS notifications</a></li>
                 <li><a href="#limits">Where notifications fall short</a></li>
-                <li><a href="#cadence">Option 3: Cadence&#x27;s toolbar and Inbox</a></li>
+                <li><a href="#phone">Option 3: notifications on your phone</a></li>
+                <li><a href="#cadence">Option 4: Cadence's toolbar and Inbox</a></li>
                 <li><a href="#questions">Common questions</a></li>
         </ol>
     </nav>
@@ -182,13 +200,32 @@
         </ul>
         <p>In each case nothing happens until you answer. A long task that stopped on a permission prompt two minutes in is the most common way to lose an afternoon.</p>
 
-        <h2 id="bell">Option 1: the terminal bell</h2>
-        <p>Claude Code can ring the terminal bell or send a terminal notification when it is waiting. Look for the notification setting in <code>/config</code> inside Claude Code; the available channels depend on your version and terminal.</p>
-        <p>What the bell does is up to your terminal. Terminal.app and iTerm2 can play a sound, flash the window, or badge and bounce the Dock icon when a bell rings in the background; look in the profile settings. In tmux, <code>set -g monitor-bell on</code> marks the window that rang.</p>
-        <p>The bell needs no scripts, but it is easy to miss and it does not say which project it came from.</p>
+        <h2 id="terminals">What works in your terminal</h2>
+        <table>
+            <thead>
+                <tr><th>Terminal</th><th>Built-in notification</th><th>What to do</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Ghostty, Kitty</td><td>Yes</td><td>Nothing. Allow notifications for the app in System Settings.</td></tr>
+                <tr><td>iTerm2</td><td>Yes</td><td>If no banner appears, and for sessions over SSH, turn on escape-sequence alerts (below).</td></tr>
+                <tr><td>Apple Terminal</td><td>No</td><td>Set <code>preferredNotifChannel</code> to <code>"terminal_bell"</code>, or use the hook in Option 2.</td></tr>
+                <tr><td>Warp, VS Code terminal, others</td><td>No</td><td>Same as Apple Terminal: the bell setting or a hook.</td></tr>
+                <tr><td>Inside tmux</td><td>Blocked by default</td><td>Add <code>set -g allow-passthrough on</code> to <code>~/.tmux.conf</code>.</td></tr>
+            </tbody>
+        </table>
+        <p>A <code>Notification</code> hook works in every terminal, because the hook posts the notification itself. Anthropic covers the built-in behavior in <a href="https://code.claude.com/docs/en/terminal-config" rel="noopener">Configure your terminal</a>.</p>
+
+        <h2 id="builtin">Option 1: built-in notifications and the bell</h2>
+        <p>Claude Code fires its notification when it finishes a task or pauses for a permission prompt and you appear to be away from the terminal. In Ghostty, Kitty and iTerm2 that becomes a macOS banner with no setup. The notification also travels back over SSH, so a session on a server can alert you on your Mac. Ghostty and Kitty forward it as is. In iTerm2, if banners do not appear, and for sessions over SSH, open <strong>Settings → Profiles → Terminal</strong>, check <strong>Notification Center Alerts</strong>, click <strong>Filter Alerts</strong> and enable <strong>Send escape sequence-generated alerts</strong>.</p>
+        <p>Everywhere else, tell Claude Code to ring the terminal bell instead:</p>
+<pre><code>{
+  "preferredNotifChannel": "terminal_bell"
+}</code></pre>
+        <p>Add that to <code>~/.claude/settings.json</code>. What the bell does is up to the terminal. In Apple Terminal, check <strong>Settings → Profiles → Advanced</strong>: if you accepted Claude Code's first-run terminal setup, it turned <strong>Audible bell</strong> off there, so turn it back on, or use the visual bell and Dock options in the same section. In tmux, <code>set -g monitor-bell on</code> marks the window that rang.</p>
+        <p>The bell needs no scripts, but it is easy to miss and does not say which project it came from.</p>
 
         <h2 id="hooks">Option 2: hooks and macOS notifications</h2>
-        <p>Hooks are shell commands Claude Code runs at fixed points. Two of them cover what you want:</p>
+        <p>Hooks are shell commands Claude Code runs at fixed points. They run alongside the built-in notification and work in any terminal, including Apple Terminal. Two of them cover what you want:</p>
         <ul>
             <li><code>Notification</code> runs when Claude Code needs permission to use a tool, or when your input has been idle for a while.</li>
             <li><code>Stop</code> runs when Claude Code finishes responding.</li>
@@ -215,18 +252,22 @@ osascript -e 'on run argv' \
     ]
   }
 }</code></pre>
+        <p>To be told only about permission requests, set the <code>Notification</code> matcher to <code>"permission_prompt"</code> and drop the <code>Stop</code> entry.</p>
         <h3>Step 3: test it</h3>
         <p>Start a new Claude Code session, since sessions load hooks when they start. Run <code>/hooks</code> to check that both are listed, then ask for something that needs a permission. If no banner appears, open <strong>System Settings → Notifications</strong>: notifications from <code>osascript</code> are listed under Script Editor, and a Focus mode can hide them.</p>
 
         <h2 id="limits">Where notifications fall short</h2>
-        <p>Hooks are a real improvement for one or two sessions. With more, a few gaps show up:</p>
+        <p>Notifications are a real improvement for one or two sessions. With more, a few gaps show up:</p>
         <ul>
             <li>A banner says something is waiting, but you still find the right tab and scroll back to see the question.</li>
             <li>Banners pile up in Notification Center with no sense of which ones you already handled.</li>
-            <li>Nothing shows the overall state: which agents are working, which are done, which are stuck.</li>
+            <li>Nothing shows the overall state: which agents are working, which are done, which are stuck. Claude Code's agent view does this for background sessions; the <a href="/guides/run-multiple-claude-code-agents">multiple agents guide</a> covers it.</li>
         </ul>
 
-        <h2 id="cadence">Option 3: Cadence's toolbar and Inbox</h2>
+        <h2 id="phone">Option 3: notifications on your phone</h2>
+        <p>If you leave the desk, a Mac banner does not help. With Anthropic's Remote Control and the Claude app, run <code>/config</code> and turn on <strong>Push when actions required</strong> to get a push for permission prompts and questions, which you can then answer from the phone. On any plan, the same hook events can send a push through ntfy or Pushover. <a href="/guides/claude-code-on-iphone">Claude Code on iPhone</a> has both setups.</p>
+
+        <h2 id="cadence">Option 4: Cadence's toolbar and Inbox</h2>
         <p><a href="/">Cadence</a> is a free macOS app that watches your coding agents and collects what they need from you.</p>
         <h3>Set it up</h3>
         <ol>
@@ -234,8 +275,9 @@ osascript -e 'on run argv' \
             <li>Start Claude Code from <strong>⋯ → New agent…</strong> on the toolbar, or double-tap <kbd>⌥</kbd> and ask for the work with <a href="/docs/talk">Talk</a>.</li>
         </ol>
         <p>For Claude Code agents it starts in a terminal, Cadence adds its own hook through Claude Code's <code>--settings</code> flag, so your <code>~/.claude/settings.json</code> stays as it is. The hook records Claude's exact question or permission request, so the Inbox shows the full text instead of what fit on screen.</p>
+        <p>Claude Code you started yourself in Terminal or iTerm shows up too, after a thin divider on the toolbar. Click its dot to jump to that tab; its Inbox card offers <strong>Answer in Terminal</strong>. Turn on <strong>Settings → Agents → Your own terminals</strong> and <code>claude</code> typed in any terminal runs through Cadence, so you can answer it right in the Inbox.</p>
         <h3>See state at a glance</h3>
-        <p>The <a href="/docs/toolbar">toolbar</a> on the edge of your screen has one dot per agent: blue working, amber needs you, green done. The Inbox button shows how many agents are waiting. Since v0.5.3, when nothing needs you the toolbar folds into a small notch that shows only the dots, and it opens again when something lands in the Inbox.</p>
+        <p>The <a href="/docs/toolbar">toolbar</a> on the edge of your screen has one dot per agent: blue working, amber needs you, green done. The Inbox button shows how many agents are waiting. When nothing needs you, the toolbar folds into a small notch that shows only the dots, and it opens again when something lands in the Inbox.</p>
         <h3>Answer without switching windows</h3>
         <p>The <a href="/docs/inbox">Inbox</a> lists every waiting card: questions with numbered options, plans with <strong>Approve the plan</strong> or <strong>Keep planning</strong>, and permission requests with <strong>Allow</strong> or <strong>Deny</strong>. Press <kbd>1</kbd> to <kbd>9</kbd> to answer, <kbd>Space</kbd> to type, or <kbd>V</kbd> to speak. A typed "no, use yarn instead" on a permission card denies it and passes your reason to the agent. Finished work arrives as a card with a short recap.</p>
         <h3>Sound and banners</h3>
@@ -244,16 +286,24 @@ osascript -e 'on run argv' \
 
         <h2 id="questions">Common questions</h2>
         <div class="qa">
+            <h3>Does Claude Code send notifications in Apple Terminal?</h3>
+            <p>Not desktop notifications. Claude Code sends those only in Ghostty, Kitty and iTerm2. In Apple Terminal, set <code>preferredNotifChannel</code> to <code>terminal_bell</code> in <code>~/.claude/settings.json</code> and make sure the bell is on in Terminal's profile, or add a <code>Notification</code> hook that runs <code>osascript</code>.</p>
+        </div>
+        <div class="qa">
             <h3>Why does my Claude Code hook not show a notification?</h3>
             <p>Check three things: the script is executable, you started a new session after editing settings, and macOS allows notifications from Script Editor, which is where <code>osascript</code> notifications come from. Focus modes can also hide them.</p>
         </div>
         <div class="qa">
             <h3>Can Claude Code notify me when it is done?</h3>
-            <p>Yes. A <code>Stop</code> hook runs each time Claude Code finishes responding. Point it at the same script as the <code>Notification</code> hook, as shown above.</p>
+            <p>Yes. The built-in notification fires when Claude finishes or pauses for a permission prompt while you appear to be away from the terminal. For a notification after every response, add a <code>Stop</code> hook pointing at the same script as the <code>Notification</code> hook.</p>
+        </div>
+        <div class="qa">
+            <h3>Can I get Claude Code notifications on my phone?</h3>
+            <p>Yes. With Remote Control and the Claude app, turn on <strong>Push when actions required</strong> in <code>/config</code>. On any plan, a <code>Notification</code> hook can send a push through ntfy or Pushover.</p>
         </div>
         <div class="qa">
             <h3>Does Cadence change my Claude Code settings?</h3>
-            <p>No. Cadence passes its hook to the Claude Code sessions it starts with the <code>--settings</code> flag. Your own <code>~/.claude/settings.json</code> and its hooks keep working.</p>
+            <p>No. Cadence passes its hook to the Claude Code sessions it starts with the <code>--settings</code> flag. Your own <code>~/.claude/settings.json</code> and its hooks keep working. The optional <strong>Your own terminals</strong> switch adds one line to <code>~/.zshrc</code>, and you can turn it off any time.</p>
         </div>
     </article>
 
@@ -268,8 +318,17 @@ osascript -e 'on run argv' \
 
     <div class="related">
         <p class="eyebrow">Related guides</p>
-        <a href="/guides/run-multiple-claude-code-agents">Run multiple Claude Code agents at once<span class="arrow" aria-hidden="true">→</span></a>
-        <a href="/guides/claude-code-and-codex-together">Use Claude Code and Codex together<span class="arrow" aria-hidden="true">→</span></a>
+        <div class="related-grid">
+            <a href="/guides/run-multiple-claude-code-agents">Run multiple Claude Code agents at once<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-on-iphone">Claude Code on iPhone<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/voice-control-claude-code">Voice control for Claude Code<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/coding-agents-on-a-server">Run Claude Code on a remote server<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-and-codex-together">Use Claude Code and Codex together<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/offline-dictation-mac">Offline dictation on a Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/best-tools-parallel-coding-agents">Best tools to run parallel coding agents<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/codex-notifications-mac">Codex notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/herdr-mac-app">A Mac app for herdr<span class="arrow" aria-hidden="true">→</span></a>
+        </div>
         <a href="/docs/inbox">Docs: Inbox<span class="arrow" aria-hidden="true">→</span></a>
     </div>
 </main>
@@ -280,6 +339,7 @@ osascript -e 'on run argv' \
             <a href="/">Cadence</a>
             <a href="/docs.html">Docs</a>
             <a href="/guides">Guides</a>
+            <a href="/compare">Compare</a>
             <a href="/faq.html">FAQ</a>
             <a href="/blog/">Writing</a>
             <a href="/changelog.html">Changelog</a>

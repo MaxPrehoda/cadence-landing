@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadence vs Conductor: Agent Inbox or Worktree Workspaces</title>
+    <meta name="description" content="Cadence vs Conductor, compared honestly: Conductor runs agents in worktree workspaces with review and merge; Cadence is a free inbox over the agents you already run. When each fits.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/compare/conductor">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Cadence vs Conductor: Agent Inbox or Worktree Workspaces">
+    <meta property="og:description" content="Cadence vs Conductor, compared honestly: Conductor runs agents in worktree workspaces with review and merge; Cadence is a free inbox over the agents you already run. When each fits.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/compare/conductor">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cadence vs Conductor: Agent Inbox or Worktree Workspaces">
+    <meta name="twitter:description" content="Cadence vs Conductor, compared honestly: Conductor runs agents in worktree workspaces with review and merge; Cadence is a free inbox over the agents you already run. When each fits.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Cadence vs Conductor",
+    "description": "Cadence vs Conductor, compared honestly: Conductor runs agents in worktree workspaces with review and merge; Cadence is a free inbox over the agents you already run. When each fits.",
+    "image": "https://www.cadencevoice.ai/art/og.png",
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19",
+    "inLanguage": "en-US",
+    "proficiencyLevel": "Beginner",
+    "keywords": "Cadence vs Conductor, Conductor alternative, conductor.build alternative, Conductor Mac app coding agents, Conductor pricing, parallel Claude Code agents Mac",
+    "author": {
+        "@type": "Organization",
+        "name": "Cadence Labs",
+        "url": "https://www.cadencevoice.ai/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cadence",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cadencevoice.ai/icon.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/compare/conductor"
+    },
+    "isPartOf": {
+        "@type": "CollectionPage",
+        "@id": "https://www.cadencevoice.ai/compare",
+        "name": "Cadence comparisons"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Cadence",
+            "item": "https://www.cadencevoice.ai/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Compare",
+            "item": "https://www.cadencevoice.ai/compare"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Cadence vs Conductor",
+            "item": "https://www.cadencevoice.ai/compare/conductor"
+        }
+    ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is Cadence a Conductor alternative?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For some people. If you want worktree workspaces with built-in review and merge, Conductor is the better fit. If you want to keep your agents in terminals and answer all of them from one Inbox, Cadence fits better, and it is free with no account."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Conductor work with Codex and Cursor?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Conductor runs Claude Code, Codex, OpenCode and Cursor. Other CLIs, such as Amp, Pi, Copilot and Gemini, run in its experimental terminal mode."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Cadence create git worktrees like Conductor?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Only for Claude Code in Cadence chat mode, where each agent gets a branch named cadence/<name>-<id> in ~/.cadence/worktrees/. For terminal agents, create a worktree yourself and choose it as the agent's folder."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is Conductor free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Conductor's Free plan runs parallel agents in local workspaces with your own subscriptions and keys. Cloud workspaces, the mobile app and collaboration are part of Pro at $50 a month; Teams is $60 per user a month."
+            }
+        }
+    ]
+}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/guides/guides.css">
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence</a>
+        <nav aria-label="Primary">
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main class="guide">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/compare">Compare</a><span class="sep">/</span><span>Cadence vs Conductor</span></nav>
+
+    <h1 class="two guide-title">Cadence vs Conductor <span>an inbox or a workspace manager</span></h1>
+
+    <p class="guide-dek">Conductor and Cadence both help you run several coding agents on a Mac, but they start from different places. Conductor manages where each agent works. Cadence manages what each agent needs from you.</p>
+
+    <p class="stamp">Updated <time datetime="2026-10-19">October 19, 2026</time> · Cadence Labs</p>
+
+    <div class="answer panel">
+        <p class="eyebrow">Short answer</p>
+        <p>Conductor and Cadence solve different problems. <strong>Conductor</strong> is a workspace manager: every task gets its own git worktree and branch, an agent (Claude Code, Codex, Cursor or OpenCode) works in it, and you review the diff, open a pull request and merge from the same app. <strong>Cadence</strong> does not create workspaces. It sits over the agents you already run in terminals, shows which one needs you, and lets you answer all of them from one Inbox, by keyboard, voice or phone.</p>
+        <p>Pick Conductor if your bottleneck is keeping parallel changes apart and reviewing them. Pick Cadence if it is noticing which agent is waiting and answering it quickly. Both have a free tier that uses your own agent subscriptions.</p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <ol>
+            <li><a href="#table">Side by side</a></li>
+            <li><a href="#conductor">What Conductor does well</a></li>
+            <li><a href="#cadence">What Cadence does differently</a></li>
+            <li><a href="#pick">Which one to pick</a></li>
+            <li><a href="#both">Using both</a></li>
+            <li><a href="#questions">Common questions</a></li>
+        </ol>
+    </nav>
+
+    <article class="guide-body prose">
+        <h2 id="table">Side by side</h2>
+        <!-- Sources, checked 2026-10-19:
+             Conductor: https://www.conductor.build/ (v0.91.0) ; https://www.conductor.build/docs ; https://www.conductor.build/docs/concepts/workspaces-and-branches ; https://www.conductor.build/docs/reference/big-terminal-mode ; https://www.conductor.build/docs/reference/harnesses ; https://www.conductor.build/docs/installation ; https://www.conductor.build/docs/faq ; https://www.conductor.build/pricing ; https://www.conductor.build/docs/reference/privacy ; https://www.conductor.build/docs/cloud/getting-started ; https://www.conductor.build/changelog/0.90.0-conductor-for-ios ; https://www.conductor.build/changelog/0.91.0-a-mostly-boring-update ; https://apps.apple.com/us/app/conductor-build/id6791228564 ; https://formulae.brew.sh/cask/conductor (Apple Silicon and Intel builds) ; https://www.conductor.build/terms (proprietary)
+             Not verified: Conductor's minimum macOS version; whether its iPhone app can control local (non-cloud) workspaces.
+             Cadence: /docs/agents-and-clis, /docs/inbox, /docs/talk, /docs/iphone, /blog/releases/cadence-0-5-7 -->
+        <table>
+            <thead>
+                <tr><th scope="col"></th><th scope="col">Cadence</th><th scope="col">Conductor</th></tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row">What it is</th><td>A toolbar and Inbox over the coding agents you run</td><td>A workspace manager: one worktree, branch and agent chat per task, with review and merge</td></tr>
+                <tr><th scope="row">Mac</th><td>macOS 13 or later, Apple Silicon only</td><td>macOS, Apple Silicon or Intel. No Windows or Linux yet</td></tr>
+                <tr><th scope="row">Price</th><td>Free</td><td>Free for local workspaces. Pro $50 a month (cloud workspaces, mobile app, collaboration). Teams $60 per user a month. Enterprise on request</td></tr>
+                <tr><th scope="row">Sign-in</th><td>None</td><td>GitHub (through <code>gh</code>) plus at least one agent provider</td></tr>
+                <tr><th scope="row">Agents</th><td>Claude Code hosted natively; Codex, OpenCode, Pi, Omp, Amp, Grok, Cursor, Copilot, Gemini and Aider through herdr</td><td>Claude Code, Codex, OpenCode and Cursor. Amp, Pi, Copilot, Gemini and other CLIs in an experimental terminal mode</td></tr>
+                <tr><th scope="row">Worktrees</th><td>Automatic for Claude Code in Cadence chat mode. Terminal agents use the folder you choose</td><td>Automatic for every workspace</td></tr>
+                <tr><th scope="row">Review and merge</th><td>Diff and History tabs for Cadence chat agents. You merge with your own git tools</td><td>Diff review, pull requests, merge and archive built in</td></tr>
+                <tr><th scope="row">Questions and approvals</th><td>One Inbox for every agent: <kbd>1</kbd> to <kbd>9</kbd>, typed or spoken replies, two-second undo</td><td>In each workspace's chat, with desktop notifications</td></tr>
+                <tr><th scope="row">Voice</th><td>Talk routes spoken requests to the right agent; hold <kbd>⌥</kbd> to dictate into any app. On-device speech</td><td>Experimental voice mode, transcribed on the Mac on macOS 26</td></tr>
+                <tr><th scope="row">Phone</th><td>iPhone app in a private TestFlight beta, for the agents on your Mac</td><td>iPhone app on the App Store (iOS 26 or later), for cloud workspaces, included with Pro</td></tr>
+                <tr><th scope="row">Cloud</th><td>None (a continue-in-the-cloud preview is limited to TestFlight testers)</td><td>Cloud workspaces on Pro: agents keep working after you close the app</td></tr>
+                <tr><th scope="row">Your own servers</th><td>Linux servers over SSH through herdr (since 0.5.7)</td><td>Not covered in its docs</td></tr>
+                <tr><th scope="row">Source code</th><td>Closed</td><td>Closed</td></tr>
+            </tbody>
+        </table>
+
+        <h2 id="conductor">What Conductor does well</h2>
+        <p><a href="https://www.conductor.build" rel="noopener">Conductor</a>, from Melty Labs, is built around one idea: every task is a workspace. When you create one, Conductor makes a git worktree on a new branch, so agents working on different tasks never touch each other's files. You chat with the agent in that workspace, review its diff, open a pull request and merge, all in one window. When you are done, you archive the workspace.</p>
+        <p>It bundles Claude Code, Codex and OpenCode and runs Cursor through Cursor Agent, using your own logins or API keys. Pro adds cloud workspaces that keep running after you close the app, an iPhone app for them, and multiplayer for up to five Pro users.</p>
+        <p>If you want a guided flow from "new task" to "merged PR", with isolation you never have to think about, Conductor is a strong choice, and Cadence does not try to replace it.</p>
+
+        <h2 id="cadence">What Cadence does differently</h2>
+        <p><a href="/">Cadence</a> leaves your workflow where it is. You keep running agents in terminals, in folders and branches you pick, and Cadence watches all of them:</p>
+        <ul>
+            <li><strong>A toolbar over every app.</strong> One dot per agent on the edge of your screen: blue working, amber needs you, green done. You see a waiting agent without opening a window.</li>
+            <li><strong>One Inbox across agents and CLIs.</strong> Questions, plan approvals and Allow/Deny requests from Claude Code, Codex and the rest arrive as cards with numbered options. Press <kbd>1</kbd> to <kbd>9</kbd>, and <kbd>Esc</kbd> within two seconds to take it back.</li>
+            <li><strong>Voice.</strong> Double-tap <kbd>⌥</kbd> and say "tell the billing agent to add retries"; <a href="/docs/talk">Talk</a> finds the agent already on that work or starts one in the right folder. Hold <kbd>⌥</kbd> to dictate into any app. Speech is transcribed on your Mac.</li>
+            <li><strong>The Director.</strong> A Claude session that sees every agent and answers "what is left before I can ship?"</li>
+            <li><strong>More CLIs.</strong> Through <a href="/guides/herdr-mac-app">herdr</a>, Cadence also covers Pi, Omp, Amp, Grok, Copilot, Gemini and Aider, and since 0.5.7 agents on your Linux servers.</li>
+            <li><strong>Free, no account.</strong> No GitHub sign-in, no Cadence account, no paid tier.</li>
+        </ul>
+        <p>What it does not do: give every agent a worktree automatically (only Claude Code in Cadence chat mode gets one), open pull requests, or run agents in the cloud.</p>
+
+        <h2 id="pick">Which one to pick</h2>
+        <h3>Conductor is the better pick if</h3>
+        <ul>
+            <li>you want each task isolated in its own worktree and branch without setting it up yourself, for every agent;</li>
+            <li>you review and merge agent work as pull requests and want that in the same app;</li>
+            <li>you want agents in the cloud that keep going after you close the app, or a shared workspace for a team;</li>
+            <li>you use an Intel Mac.</li>
+        </ul>
+        <h3>Cadence is the better pick if</h3>
+        <ul>
+            <li>you already run agents in terminals and want to keep doing that;</li>
+            <li>you run many agents and the cost is the minutes each one sits waiting before you notice;</li>
+            <li>you want to answer by voice, or from your iPhone, without opening each agent;</li>
+            <li>you mix several CLIs, or run agents on your own Linux servers;</li>
+            <li>you do not want to sign in to anything.</li>
+        </ul>
+
+        <h2 id="both">Using both</h2>
+        <p>They can share a Mac. One way to divide the work: Conductor for feature work that should end as a reviewed pull request, and terminals with Cadence for quick fixes, investigations and agents on other CLIs. Neither app needs the other, and both use your own agent subscriptions.</p>
+
+        <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>Is Cadence a Conductor alternative?</h3>
+            <p>For some people. If you want worktree workspaces with built-in review and merge, Conductor is the better fit. If you want to keep your agents in terminals and answer all of them from one Inbox, Cadence fits better, and it is free with no account.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Conductor work with Codex and Cursor?</h3>
+            <p>Yes. Conductor runs Claude Code, Codex, OpenCode and Cursor. Other CLIs, such as Amp, Pi, Copilot and Gemini, run in its experimental terminal mode.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Cadence create git worktrees like Conductor?</h3>
+            <p>Only for Claude Code in Cadence chat mode, where each agent gets a branch named <code>cadence/&lt;name&gt;-&lt;id&gt;</code> in <code>~/.cadence/worktrees/</code>. For terminal agents, create a worktree yourself and choose it as the agent's folder.</p>
+        </div>
+        <div class="qa">
+            <h3>Is Conductor free?</h3>
+            <p>Conductor's Free plan runs parallel agents in local workspaces with your own subscriptions and keys. Cloud workspaces, the mobile app and collaboration are part of Pro at $50 a month; Teams is $60 per user a month.</p>
+        </div>
+    </article>
+
+    <aside class="try panel" aria-labelledby="try-cadence">
+        <h2 id="try-cadence">Try Cadence</h2>
+        <p>Keep your agents in the terminals you use and answer all of them from one Inbox. Free, no account. macOS 13 or later on Apple Silicon.</p>
+        <div class="row">
+            <a class="cta dark" href="/download">↓ Download for Mac</a>
+            <code>brew install --cask maxprehoda/tap/cadence</code>
+        </div>
+    </aside>
+
+    <div class="related">
+        <p class="eyebrow">More comparisons</p>
+        <a href="/compare/one">Cadence vs One (getone.one)<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/compare/claude-squad">Cadence vs Claude Squad<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/guides/best-tools-parallel-coding-agents">Best tools to run parallel coding agents in 2026<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+</main>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/">Cadence</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="mailto:support@cadencevoice.ai">Support</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+</body>
+</html>

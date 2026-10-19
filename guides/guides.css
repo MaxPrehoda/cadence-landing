@@ -60,6 +60,8 @@
 .related a { display: flex; align-items: center; gap: 12px; padding: 14px 18px; margin-bottom: 10px; background: var(--panel); border: 1px solid var(--line-2); border-radius: 12px; color: var(--ink); font-size: 16px; font-weight: 500; text-decoration: none; }
 .related a:hover { background: var(--card); border-color: #c4c4bc; color: var(--ink); }
 .related a .arrow { margin-left: auto; font-family: var(--mono); color: var(--ink-3); }
+.related-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 10px; }
+.related-grid a { margin-bottom: 0; font-size: 15.5px; }
 
 /* ─── Hub ─── */
 .hub { max-width: 920px; margin: 0 auto; padding: 88px 24px 0; }
@@ -88,6 +90,7 @@
     .hub-sub { font-size: 17px; }
     .guide-row { grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 18px 16px; }
     .guide-row .arrow { display: none; }
+    .related-grid { grid-template-columns: minmax(0, 1fr); }
     .site-nav-in { padding: 0 16px; }
     .site-foot-in { padding-left: 16px; padding-right: 16px; }
 }

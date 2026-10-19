@@ -2,7 +2,7 @@
 
 When your Mac falls asleep, loses its connection or shuts down, the agents on it stop where they are. Continue in the cloud lets you pick a Claude Code agent up in a private cloud sandbox, keep working with it from your phone, and hand the work back to your Mac when it wakes.
 
-It is part of the [iPhone app](#/iphone), which is not available yet.
+It is part of the [iPhone app](#/iphone), and for now it's a preview for TestFlight testers: the option appears only on Macs paired with a TestFlight build of the app.
 
 ## How it works
 
@@ -41,4 +41,4 @@ If the branch moved on your Mac while the agent was in the cloud (for example, y
 
 ## Turning it off
 
-**Settings → Injection → Integrations → iPhone relay → Continue agents in the cloud** is on by default whenever the relay is on. Turn it off and Cadence deletes every agent copy it keeps at the relay. The phone still reaches your Mac while it is awake.
+**Settings → Injection → Integrations → iPhone relay → Continue agents in the cloud** appears once a TestFlight build of the iPhone app is paired. It's off for new installs. Turn it off and Cadence deletes every agent copy it keeps at the relay. The phone still reaches your Mac while it is awake.

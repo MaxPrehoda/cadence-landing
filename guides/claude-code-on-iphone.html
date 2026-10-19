@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code on iPhone: Approve and Answer It From Your Phone</title>
+    <meta name="description" content="Use Claude Code from an iPhone: Anthropic's Remote Control, push alerts with ntfy or Pushover, open-source apps like Happy, SSH with tmux, and Cadence's beta.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/guides/claude-code-on-iphone">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Claude Code on iPhone: Approve and Answer It From Your Phone">
+    <meta property="og:description" content="Use Claude Code from an iPhone: Anthropic's Remote Control, push alerts with ntfy or Pushover, open-source apps like Happy, SSH with tmux, and Cadence's beta.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/guides/claude-code-on-iphone">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Claude Code on iPhone: Approve and Answer It From Your Phone">
+    <meta name="twitter:description" content="Use Claude Code from an iPhone: Anthropic's Remote Control, push alerts with ntfy or Pushover, open-source apps like Happy, SSH with tmux, and Cadence's beta.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Claude Code on iPhone: approve and answer it from your phone",
+    "description": "Use Claude Code from an iPhone: Anthropic's Remote Control, push alerts with ntfy or Pushover, open-source apps like Happy, SSH with tmux, and Cadence's beta.",
+    "image": "https://www.cadencevoice.ai/art/og.png",
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19",
+    "inLanguage": "en-US",
+    "proficiencyLevel": "Beginner",
+    "keywords": "Claude Code on iPhone, Claude Code iPhone app, approve Claude Code permissions from phone, answer Claude Code from phone, Claude Code Remote Control, Claude Code mobile, Claude Code push notification phone, ntfy Claude Code hook, Codex on iPhone, Happy Claude Code app",
+    "author": {
+        "@type": "Organization",
+        "name": "Cadence Labs",
+        "url": "https://www.cadencevoice.ai/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cadence",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cadencevoice.ai/icon.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/guides/claude-code-on-iphone"
+    },
+    "isPartOf": {
+        "@type": "CollectionPage",
+        "@id": "https://www.cadencevoice.ai/guides",
+        "name": "Cadence guides"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Cadence",
+            "item": "https://www.cadencevoice.ai/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Guides",
+            "item": "https://www.cadencevoice.ai/guides"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Claude Code on iPhone",
+            "item": "https://www.cadencevoice.ai/guides/claude-code-on-iphone"
+        }
+    ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is there a Claude Code app for iPhone?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not a separate one. Claude Code sessions live in the Code tab of the Claude app for iOS and Android. That covers cloud sessions and Remote Control sessions running on your own computer."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I approve Claude Code permission prompts from my phone?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, with Remote Control. Permission prompts and questions show up in the Claude app and stay open until you answer them. Turn on Push when actions required in /config to get a push for each one. Cadence's iPhone beta also puts every waiting agent on its Home screen, including Claude Code's Allow and Deny requests."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does my computer need to stay on?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For Remote Control, SSH and Cadence, yes, because the agent runs there. Cloud sessions run on Anthropic's infrastructure and keep going with your laptop closed, but they work from a GitHub repository, not your local folder."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Remote Control work with an API key?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. It needs a claude.ai login on a Pro, Max, Team or Enterprise plan. It is also not available through Amazon Bedrock, Google Cloud, Microsoft Foundry, or an ANTHROPIC_BASE_URL that points at a gateway."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I control Codex from my iPhone?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. OpenAI's remote connections pair the ChatGPT phone app with the ChatGPT desktop app on your Mac or PC, and setup starts in the desktop app rather than the Codex CLI. Open-source clients like Happy also wrap Codex, and Cadence's iPhone beta shows Codex agents that run in herdr."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How do I get Cadence's iPhone app?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It is in a private TestFlight beta. Join the iPhone waitlist on the Cadence home page to ask for an invite. The Mac app is a free download with no account."
+            }
+        }
+    ]
+}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/guides/guides.css">
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence</a>
+        <nav aria-label="Primary">
+            <a href="/docs.html">Docs</a>
+            <a href="/guides" aria-current="page">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main class="guide">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/guides">Guides</a><span class="sep">/</span><span>Claude Code on iPhone</span></nav>
+
+    <h1 class="two guide-title">Claude Code on iPhone <span>approve, answer and steer it from your phone</span></h1>
+
+    <p class="guide-dek">Claude Code runs on your computer, not your phone. You can still watch it, answer its questions and approve its commands from an iPhone. Here is every way to do that, what each one needs, and where each one falls short.</p>
+
+    <p class="stamp">Last updated: <time datetime="2026-10-19">October 19, 2026</time> · Cadence Labs</p>
+
+    <div class="answer panel">
+        <p class="eyebrow">Short answer</p>
+        <p>Use Anthropic's Remote Control. In your project folder, run <code>claude --remote-control</code>, or type <code>/rc</code> in a session that is already open. Then open the Claude app on your iPhone, tap <strong>Code</strong> and pick the session. You can send messages and answer permission prompts from there. Your computer still does the work, so it has to stay on with Claude Code running. It needs a Pro, Max, Team or Enterprise plan.</p>
+        <ul>
+            <li>Only want to know when it is waiting? A hook that sends a push through ntfy or Pushover is enough.</li>
+            <li>Running several agents, or CLIs besides Claude Code? Use an open-source client such as Happy, an SSH app with tmux, or Cadence's iPhone app, which is in a private TestFlight beta.</li>
+        </ul>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <ol>
+                <li><a href="#what">What you can do from a phone</a></li>
+                <li><a href="#remote-control">Option 1: Remote Control in the Claude app</a></li>
+                <li><a href="#push">Option 2: push alerts with a hook</a></li>
+                <li><a href="#open-source">Option 3: open-source phone clients</a></li>
+                <li><a href="#ssh">Option 4: SSH and tmux from your phone</a></li>
+                <li><a href="#cadence">Option 5: Cadence's iPhone app (beta)</a></li>
+                <li><a href="#compare">Which one to use</a></li>
+                <li><a href="#awake">Keep your Mac awake</a></li>
+                <li><a href="#questions">Common questions</a></li>
+        </ol>
+    </nav>
+
+    <article class="guide-body prose">
+
+        <h2 id="what">What you can do with Claude Code from a phone</h2>
+        <p>There is no Claude Code that runs on iOS. It runs on your Mac, a Linux server or a cloud machine, and the phone connects to it. From the phone you usually want one of three things:</p>
+        <ul>
+            <li><strong>Know when it stops for you:</strong> a permission prompt, a question, a plan to approve, or the end of a task.</li>
+            <li><strong>Answer it:</strong> Allow or Deny a command, pick an option, or send the next instruction.</li>
+            <li><strong>Start new work</strong> while you are away from the desk.</li>
+        </ul>
+
+        <h2 id="remote-control">Option 1: Remote Control in the Claude app</h2>
+        <p>Remote Control is Anthropic's own way to drive a local Claude Code session from the Claude app or from claude.ai/code. Claude keeps running on your machine with your files, tools and MCP servers; the phone is a window into that session. See Anthropic's <a href="https://code.claude.com/docs/en/remote-control" rel="noopener">Remote Control</a> and <a href="https://code.claude.com/docs/en/mobile" rel="noopener">Claude Code on mobile</a>.</p>
+        <h3>What you need</h3>
+        <ul>
+            <li>A Pro, Max, Team or Enterprise plan, signed in with <code>/login</code>. API keys, Amazon Bedrock, Google Cloud, Microsoft Foundry and gateways set through <code>ANTHROPIC_BASE_URL</code> are not supported. On Team and Enterprise, an Owner turns it on in the Claude Code admin settings first.</li>
+            <li>The Claude app on your iPhone, signed in to the same account. <code>/mobile</code> in Claude Code shows a QR code for the App Store page.</li>
+        </ul>
+        <h3>Set it up</h3>
+        <ol>
+            <li>Start a session with Remote Control on, in your project folder:
+<pre><code>cd ~/Developer/my-app
+claude --remote-control "my-app"</code></pre>
+            In a session that is already running, type <code>/remote-control</code> (or <code>/rc</code>) instead. It keeps the conversation so far.</li>
+            <li>On your iPhone, open the Claude app, tap <strong>Code</strong> and pick the session. Or run <code>/remote-control</code> again in the terminal to show a QR code and scan it.</li>
+            <li>Turn on pushes: run <code>/config</code> and enable <strong>Push when actions required</strong> for permission prompts and questions, and <strong>Push when Claude decides</strong> for finished tasks.</li>
+        </ol>
+        <p>Server mode, <code>claude remote-control</code> without the dashes, serves several sessions from one terminal and shows a QR code when you press the space bar. <strong>Enable Remote Control for all sessions</strong> in <code>/config</code> makes every interactive session reachable.</p>
+        <p>From the phone you can send messages, answer permission prompts and questions (they stay open until you do), attach photos and files, and see a diff of your changes. Some commands, such as <code>/plugin</code> and <code>/resume</code>, only work in the terminal, and Bypass permissions mode is not offered.</p>
+        <h3>The trade-offs</h3>
+        <ul>
+            <li>The computer has to stay on and the <code>claude</code> process has to keep running. If your laptop sleeps, the session reconnects when it wakes, but no work happens in between.</li>
+            <li>Each session is its own entry in the app, so with five sessions you open each one to see which is waiting, unless a push tells you.</li>
+            <li>It covers Claude Code only.</li>
+            <li>While connected, the transcript is stored on Anthropic's servers to keep devices in sync. Your machine makes outbound HTTPS requests only.</li>
+        </ul>
+        <p>If your computer will be off, use Anthropic's cloud sessions instead: from the same Code tab, pick a GitHub repository and branch and describe the task, and it runs on Anthropic's infrastructure.</p>
+        <p class="note"><strong>Using Codex too?</strong> OpenAI's equivalent pairs the ChatGPT phone app with the ChatGPT desktop app on your Mac or PC: <strong>Settings → Connections → Control this Mac or PC</strong>, then scan the QR code. You can start and steer Codex tasks and approve commands. Setup starts in the desktop app, not the Codex CLI. See OpenAI's <a href="https://learn.chatgpt.com/docs/remote-connections" rel="noopener">remote connections</a> docs.</p>
+
+        <h2 id="push">Option 2: push alerts with a hook</h2>
+        <p>If you mainly want to know when to walk back to your desk, a Claude Code hook can send a push to your phone. It works on any plan, including API keys, and on any machine with <code>curl</code>. It is one-way: you still answer at the keyboard or over SSH.</p>
+        <h3>With ntfy</h3>
+        <p><a href="https://ntfy.sh" rel="noopener">ntfy</a> is free and needs no account. Install the ntfy app on your iPhone and subscribe to a topic name that is hard to guess, because anyone who knows the topic can read it. <code>openssl rand -hex 12</code> makes a good one. Save this as <code>~/.claude/hooks/phone.sh</code> and run <code>chmod +x</code> on it. It needs <code>jq</code>.</p>
+<pre><code>#!/bin/sh
+# Push Claude Code events to your phone with ntfy.
+topic="claude-3f9a1c7e5b2d04a8"   # your own topic
+input=$(cat)
+msg=$(printf '%s' "$input" | jq -r '.message // "Finished"')
+dir=$(basename "$(printf '%s' "$input" | jq -r '.cwd // "."')")
+curl -s -H "Title: Claude Code: $dir" -d "$msg" "https://ntfy.sh/$topic" &gt;/dev/null</code></pre>
+        <p>Register it in <code>~/.claude/settings.json</code> for the <code>Notification</code> event, which fires on permission requests and idle prompts, and the <code>Stop</code> event, which fires when Claude finishes:</p>
+<pre><code>{
+  "hooks": {
+    "Notification": [
+      { "matcher": "", "hooks": [ { "type": "command", "command": "~/.claude/hooks/phone.sh" } ] }
+    ],
+    "Stop": [
+      { "matcher": "", "hooks": [ { "type": "command", "command": "~/.claude/hooks/phone.sh" } ] }
+    ]
+  }
+}</code></pre>
+        <p>Start a new session so the hooks load. For pushes on permission requests only, set the <code>Notification</code> matcher to <code>"permission_prompt"</code> and drop the <code>Stop</code> entry.</p>
+        <h3>With Pushover</h3>
+        <p><a href="https://pushover.net/api" rel="noopener">Pushover</a> is a paid app with a simple API. Replace the last line of the script with:</p>
+<pre><code>curl -s https://api.pushover.net/1/messages.json \
+  --form-string "token=YOUR_APP_TOKEN" \
+  --form-string "user=YOUR_USER_KEY" \
+  --form-string "title=Claude Code: $dir" \
+  --form-string "message=$msg" &gt;/dev/null</code></pre>
+        <p>The same two hook events drive desktop banners too. The <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac</a> guide has that version.</p>
+        <h3>Chat apps through Channels</h3>
+        <p>Anthropic's <a href="https://code.claude.com/docs/en/channels" rel="noopener">Channels</a>, a research preview, connect a running session to Telegram, Discord or iMessage, so you can message Claude from your phone and get the reply in the same chat. Channels with permission relay can forward Allow and Deny prompts too.</p>
+
+        <h2 id="open-source">Option 3: open-source phone clients (Happy, Happier)</h2>
+        <p>Community projects wrap the CLI on your computer and mirror the session to a phone app. Both of these are MIT-licensed and have iOS and Android apps in the stores:</p>
+        <ul>
+            <li><a href="https://github.com/slopus/happy" rel="noopener">Happy</a>: install with <code>npm install -g happy</code>, then start <code>happy claude</code> (or <code>happy codex</code>) instead of <code>claude</code>. It says traffic between your devices is end-to-end encrypted.</li>
+            <li><a href="https://happier.dev" rel="noopener">Happier</a>: lists built-in support for Claude Code, Codex, OpenCode, Cursor, Gemini, Copilot, Pi, Grok and others.</li>
+        </ul>
+        <p>The appeal is one app for more than one CLI. The cost is that you start each agent through their wrapper and trust a third party's relay and app with your sessions, so read their code and docs first.</p>
+
+        <h2 id="ssh">Option 4: SSH and tmux from your phone</h2>
+        <p>The oldest route still works for every CLI. Run your agents inside tmux on the Mac, then attach from an SSH app on the iPhone such as Blink Shell or Termius.</p>
+        <ol>
+            <li>On the Mac, turn on <strong>System Settings → General → Sharing → Remote Login</strong>.</li>
+            <li>Install tmux (<code>brew install tmux</code>) and start your agents inside it:
+<pre><code>tmux new -s agents     # run claude here
+# Ctrl-b c opens another window, Ctrl-b d detaches</code></pre></li>
+            <li>From the phone, connect and attach:
+<pre><code>ssh you@your-mac.local
+tmux attach -t agents</code></pre></li>
+        </ol>
+        <p><code>your-mac.local</code> works on the same Wi-Fi. Away from home, use a private route such as a VPN like Tailscale rather than exposing SSH to the internet. You get full control with any CLI and no third party, at the cost of a desktop terminal on a phone keyboard. Add a push hook from Option 2 so you know which window is waiting.</p>
+
+        <h2 id="cadence">Option 5: Cadence's iPhone app (beta)</h2>
+        <p><a href="/">Cadence</a> is a free Mac app that puts every coding agent in one Inbox: Claude Code (hosted natively), Codex, Gemini and other CLIs in herdr terminals, and, since 0.5.7, agents on your Linux servers. Its iPhone app takes that Inbox with you. It is in a private TestFlight beta (version 0.4.0); to ask for an invite, <a href="/#iphone">join the iPhone waitlist</a>. What the beta does:</p>
+        <ul>
+            <li><strong>Home opens on what needs you:</strong> questions, plan approvals and Allow/Deny requests from every agent, in one list.</li>
+            <li><strong>One-tap answers with a two-second undo</strong>, the same take-back the Mac <a href="/docs/inbox">Inbox</a> has.</li>
+            <li><strong>Talk from Siri, Shortcuts, Control Center, the Action Button and widgets.</strong> Cadence sends your request to the agent already on that work, or starts one, like double-tapping <kbd>⌥</kbd> on the Mac (see the <a href="/guides/voice-control-claude-code">voice control guide</a>).</li>
+            <li><strong>Pairing by QR code</strong> from <strong>⋯ → Take Cadence with you…</strong> on the Mac toolbar, with one key per phone. The Mac lists every paired phone and <strong>Remove</strong> signs one out at once; <strong>Settings → Unpair</strong> on the phone does the same.</li>
+            <li><strong>End-to-end encryption.</strong> On the same Wi-Fi the phone talks to your Mac directly; elsewhere through a relay that only passes data encrypted with AES-256-GCM. Your Mac dials out and opens no ports.</li>
+        </ul>
+        <p>The limits, plainly: the app is invite-only for now, it needs Cadence on an Apple Silicon Mac with macOS 13 or later, and the Mac has to be awake, because the agents run there. Testers can try a preview of Continue in the cloud, which moves a Claude Code agent to a private cloud sandbox while the Mac sleeps; it is off for new installs. Claude Code you start yourself can come along too: with <strong>Settings → Agents → Your own terminals</strong> on, <code>claude</code> typed in any terminal runs through Cadence and reaches the phone.</p>
+
+        <h2 id="compare">Which one to use</h2>
+        <table>
+            <thead>
+                <tr><th>Option</th><th>Answer prompts</th><th>Other CLIs</th><th>What you need</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Remote Control</td><td>Yes</td><td>No (Codex has its own)</td><td>Pro, Max, Team or Enterprise; the Claude app</td><td>Available</td></tr>
+                <tr><td>Push hook</td><td>No, alerts only</td><td>Via each CLI's own notify setting</td><td>ntfy or Pushover; a script</td><td>Available</td></tr>
+                <tr><td>Happy, Happier</td><td>Yes</td><td>Yes</td><td>Their CLI wrapper and app</td><td>Available, third party</td></tr>
+                <tr><td>SSH + tmux</td><td>Yes, in the terminal</td><td>Yes</td><td>An SSH app and a private route home</td><td>Available</td></tr>
+                <tr><td>Cadence</td><td>Yes, one list for every agent</td><td>Yes, through herdr</td><td>Cadence on a Mac; a TestFlight invite</td><td>Private beta</td></tr>
+            </tbody>
+        </table>
+        <p>For one Claude Code session, Remote Control is the simplest. For alerts on any plan, use a push hook. For several agents or CLIs answered from one list, that is the gap Cadence's app fills, once you have an invite.</p>
+
+        <h2 id="awake">Keep your Mac awake</h2>
+        <p>Every option except cloud sessions stops when the Mac sleeps. To keep it awake while an agent works, start the session through <code>caffeinate</code>:</p>
+<pre><code>caffeinate -i claude --remote-control "my-app"</code></pre>
+        <p><code>caffeinate -i</code> blocks idle sleep until the command exits; a MacBook with its lid closed still sleeps unless it is plugged in with an external display. Cadence's toolbar <strong>⋯</strong> menu can keep the Mac awake: on, for an hour, or until no agent is working. For agents that never depend on your laptop, see <a href="/guides/coding-agents-on-a-server">Run Claude Code on a remote server</a>.</p>
+
+
+        <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>Is there a Claude Code app for iPhone?</h3>
+            <p>Not a separate one. Claude Code sessions live in the Code tab of the Claude app for iOS and Android. That covers cloud sessions and Remote Control sessions running on your own computer.</p>
+        </div>
+        <div class="qa">
+            <h3>Can I approve Claude Code permission prompts from my phone?</h3>
+            <p>Yes, with Remote Control. Permission prompts and questions show up in the Claude app and stay open until you answer them. Turn on <strong>Push when actions required</strong> in <code>/config</code> to get a push for each one. Cadence's iPhone beta also puts every waiting agent on its Home screen, including Claude Code's Allow and Deny requests.</p>
+        </div>
+        <div class="qa">
+            <h3>Does my computer need to stay on?</h3>
+            <p>For Remote Control, SSH and Cadence, yes, because the agent runs there. Cloud sessions run on Anthropic's infrastructure and keep going with your laptop closed, but they work from a GitHub repository, not your local folder.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Remote Control work with an API key?</h3>
+            <p>No. It needs a claude.ai login on a Pro, Max, Team or Enterprise plan. It is also not available through Amazon Bedrock, Google Cloud, Microsoft Foundry, or an <code>ANTHROPIC_BASE_URL</code> that points at a gateway.</p>
+        </div>
+        <div class="qa">
+            <h3>Can I control Codex from my iPhone?</h3>
+            <p>Yes. OpenAI's remote connections pair the ChatGPT phone app with the ChatGPT desktop app on your Mac or PC, and setup starts in the desktop app rather than the Codex CLI. Open-source clients like Happy also wrap Codex, and Cadence's iPhone beta shows Codex agents that run in herdr.</p>
+        </div>
+        <div class="qa">
+            <h3>How do I get Cadence's iPhone app?</h3>
+            <p>It is in a private TestFlight beta. <a href="/#iphone">Join the iPhone waitlist</a> on the Cadence home page to ask for an invite. The Mac app is a free download with no account.</p>
+        </div>
+    </article>
+
+    <aside class="try panel" aria-labelledby="try-cadence">
+        <h2 id="try-cadence">Try Cadence</h2>
+        <p>Answer every coding agent from one Inbox on your Mac, and from your iPhone if you join the beta. Free, no account. macOS 13 or later on Apple Silicon.</p>
+        <div class="row">
+            <a class="cta dark" href="/download">↓ Download for Mac</a>
+            <a class="cta" href="/#iphone">Join the iPhone waitlist</a>
+        </div>
+    </aside>
+
+    <div class="related">
+        <p class="eyebrow">Related guides</p>
+        <div class="related-grid">
+            <a href="/guides/run-multiple-claude-code-agents">Run multiple Claude Code agents at once<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/voice-control-claude-code">Voice control for Claude Code<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/coding-agents-on-a-server">Run Claude Code on a remote server<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/claude-code-and-codex-together">Use Claude Code and Codex together<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/offline-dictation-mac">Offline dictation on a Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/best-tools-parallel-coding-agents">Best tools to run parallel coding agents<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/codex-notifications-mac">Codex notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+            <a href="/guides/herdr-mac-app">A Mac app for herdr<span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+    </div>
+</main>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/">Cadence</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/compare">Compare</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="mailto:support@cadencevoice.ai">Support</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -116,31 +116,49 @@
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/guides</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-10-19</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/guides/run-multiple-claude-code-agents</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-10-19</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/guides/claude-code-notifications-mac</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-10-19</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/guides/claude-code-and-codex-together</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-10-19</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/guides/offline-dictation-mac</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/guides/claude-code-on-iphone</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/guides/voice-control-claude-code</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/guides/coding-agents-on-a-server</loc>
+        <lastmod>2026-10-19</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -241,5 +259,47 @@
         <lastmod>2026-10-14</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/compare</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/compare/one</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/compare/conductor</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/compare/claude-squad</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/guides/best-tools-parallel-coding-agents</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/guides/codex-notifications-mac</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/guides/herdr-mac-app</loc>
+        <lastmod>2026-10-19</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
 </urlset>

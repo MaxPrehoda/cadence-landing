@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Mac App for herdr: Toolbar, Inbox and Phone</title>
+    <meta name="description" content="What herdr is, how to run coding agents in it from the terminal, and how Cadence gives herdr a native Mac front end: a status toolbar, one Inbox, your iPhone and your servers.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/guides/herdr-mac-app">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="A Mac App for herdr: Toolbar, Inbox and Phone">
+    <meta property="og:description" content="What herdr is, how to run coding agents in it from the terminal, and how Cadence gives herdr a native Mac front end: a status toolbar, one Inbox, your iPhone and your servers.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/guides/herdr-mac-app">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="A Mac App for herdr: Toolbar, Inbox and Phone">
+    <meta name="twitter:description" content="What herdr is, how to run coding agents in it from the terminal, and how Cadence gives herdr a native Mac front end: a status toolbar, one Inbox, your iPhone and your servers.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "A Mac app for herdr",
+    "description": "What herdr is, how to run coding agents in it from the terminal, and how Cadence gives herdr a native Mac front end: a status toolbar, one Inbox, your iPhone and your servers.",
+    "image": "https://www.cadencevoice.ai/art/og.png",
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19",
+    "inLanguage": "en-US",
+    "proficiencyLevel": "Beginner",
+    "keywords": "herdr Mac app, herdr GUI, herdr terminal multiplexer, herdr coding agents, herdr.dev, herdr agent list, herdr Codex, herdr front end",
+    "author": {
+        "@type": "Organization",
+        "name": "Cadence Labs",
+        "url": "https://www.cadencevoice.ai/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cadence",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cadencevoice.ai/icon.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/guides/herdr-mac-app"
+    },
+    "isPartOf": {
+        "@type": "CollectionPage",
+        "@id": "https://www.cadencevoice.ai/guides",
+        "name": "Cadence guides"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Cadence",
+            "item": "https://www.cadencevoice.ai/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Guides",
+            "item": "https://www.cadencevoice.ai/guides"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "A Mac app for herdr",
+            "item": "https://www.cadencevoice.ai/guides/herdr-mac-app"
+        }
+    ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is herdr free and open source?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. herdr is open source under the Apache-2.0 license and free to use. Its maker has announced a hosted Herdr Cloud for connecting machines without SSH, which is not available yet."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is there an official herdr Mac app?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. herdr is a terminal app with a socket API. Community apps such as herdrm and Herdr UI give it a native window, and Cadence uses it as the runtime for its terminal agents."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Cadence replace herdr?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Cadence runs on top of herdr. herdr keeps the agents' terminals alive and detects their state; Cadence watches that state, collects questions in one Inbox and sends your answers back. You can keep using herdr in the terminal at the same time."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do agents stop if I quit Cadence?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. The herdr server owns the processes, so closing a terminal window or quitting Cadence leaves your agents running. End an agent from the toolbar, the Inbox, or herdr itself."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Cadence need herdr for Claude Code?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Claude Code can run inside Cadence in Cadence chat mode without herdr, with real Allow/Deny cards, cost and a git worktree per agent. herdr is needed for Claude Code in Terminal mode and for every other CLI."
+            }
+        }
+    ]
+}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/guides/guides.css">
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence</a>
+        <nav aria-label="Primary">
+            <a href="/docs.html">Docs</a>
+            <a href="/guides" aria-current="page">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main class="guide">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/guides">Guides</a><span class="sep">/</span><span>A Mac app for herdr</span></nav>
+
+    <h1 class="two guide-title">A Mac app for herdr <span>your agents' terminals, with a native front end</span></h1>
+
+    <p class="guide-dek">herdr keeps your coding agents running in terminals it manages and knows when each one is working, blocked or done. Here is how to use it from the terminal, and how Cadence puts the same agents on a Mac toolbar, in one Inbox and on your phone.</p>
+
+    <p class="stamp">Updated <time datetime="2026-10-19">October 19, 2026</time> · Cadence Labs</p>
+
+    <div class="answer panel">
+        <p class="eyebrow">Short answer</p>
+        <p>herdr is a terminal workspace manager for AI coding agents. It runs your agents in persistent workspaces, tabs and panes, recognizes which agent is in each pane, and tracks whether it is working, blocked on a question, or done. You use it as a full-screen terminal app (<code>herdr</code>) and script it with commands like <code>herdr agent list</code>.</p>
+        <p>herdr has no official Mac app, but several apps sit on top of it. Community clients such as herdrm and Herdr UI show your workspaces and terminals in a native window. <a href="/">Cadence</a>, a free macOS app, takes a different angle: it puts each herdr agent on a screen-edge toolbar, collects their questions in one Inbox you answer with <kbd>1</kbd> to <kbd>9</kbd> or your voice, and adds your iPhone and your Linux servers.</p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <ol>
+            <li><a href="#what">What herdr is</a></li>
+            <li><a href="#install">Install herdr</a></li>
+            <li><a href="#terminal">Use herdr from the terminal</a></li>
+            <li><a href="#gaps">What the terminal leaves to you</a></li>
+            <li><a href="#apps">Mac apps that work with herdr</a></li>
+            <li><a href="#cadence">Cadence: a Mac front end for herdr</a></li>
+            <li><a href="#servers">Agents on your servers</a></li>
+            <li><a href="#questions">Common questions</a></li>
+        </ol>
+    </nav>
+
+    <article class="guide-body prose">
+        <h2 id="what">What herdr is</h2>
+        <!-- Sources, checked 2026-10-19: herdr 0.9.3 run locally (`herdr --help`, `herdr agent`, `herdr --skill`); https://herdr.dev ; https://herdr.dev/docs/concepts/ ; https://herdr.dev/docs/install/ ; https://herdr.dev/docs/quick-start/ ; https://herdr.dev/docs/agents/ ; https://herdr.dev/docs/connecting-machines/ ; https://herdr.dev/docs/socket-api/ ; https://github.com/herdrdev/herdr (Apache-2.0, v0.9.5 released 2026-10-14) ; https://herdr.dev/cloud/ -->
+        <p><a href="https://herdr.dev" rel="noopener">herdr</a> describes itself as a "terminal workspace manager for AI coding agents". It is a single binary: a background server owns real terminals, and the full-screen terminal app is a client that attaches to it. It works like tmux, with workspaces, tabs, panes and a <kbd>ctrl</kbd>+<kbd>b</kbd> prefix, plus one thing tmux does not have: it knows which coding agent runs in each pane and what state it is in. It runs agents unmodified; it does not wrap them.</p>
+        <p>herdr is free and open source under the Apache-2.0 license, and is built by Herdr, Inc.</p>
+        <p>Four ideas cover most of it:</p>
+        <ul>
+            <li><strong>A persistent session.</strong> A herdr server owns the terminals. Close the window and the agents keep running; run <code>herdr</code> again to attach.</li>
+            <li><strong>Workspaces, tabs and panes.</strong> The same layout ideas as tmux, with IDs like <code>w1</code>, <code>w1:t1</code> and <code>w1:p1</code>.</li>
+            <li><strong>Agent detection.</strong> herdr recognizes the coding agent running in a pane and reports one of five states: <code>idle</code>, <code>working</code>, <code>blocked</code> (an approval or question is on screen), <code>done</code> or <code>unknown</code>.</li>
+            <li><strong>A command line and socket API.</strong> Most <code>herdr</code> subcommands talk to the running server and return JSON, so scripts and other apps can read panes and send input.</li>
+        </ul>
+        <p>herdr's site says it detects 22 agent CLIs out of the box, including Claude Code, Codex, Copilot CLI, Cursor Agent, OpenCode, Pi, Omp, Droid, Grok CLI, Amp and Gemini CLI. Most are recognized by reading the bottom of the pane's screen; a few report their own state through an integration.</p>
+
+        <h2 id="install">Install herdr</h2>
+        <p>Use the install script from herdr's site, or Homebrew:</p>
+<pre><code>curl -fsSL https://herdr.dev/install.sh | sh
+# or
+brew install herdr
+
+herdr --version</code></pre>
+        <p>herdr has builds for macOS on Apple Silicon and Intel, Linux on x86_64 and arm64, and Windows in beta. If you used the install script, <code>herdr update</code> installs new versions.</p>
+
+        <h2 id="terminal">Use herdr from the terminal</h2>
+        <h3>Open the workspace and start agents</h3>
+        <p>Run <code>herdr</code> to launch the session, or attach to it if it is already running. Split panes, open tabs, and start <code>claude</code>, <code>codex</code> or another CLI in a pane as you would in any terminal. herdr notices the agent and labels the pane.</p>
+        <p>Named sessions keep projects apart: <code>herdr --session api</code> opens or creates one, <code>herdr session list</code> shows them, and <code>herdr session attach api</code> brings one back.</p>
+        <h3>Check on agents without switching panes</h3>
+        <p>From any terminal, the <code>agent</code> commands work on the running session:</p>
+<pre><code>herdr agent list                         # every agent, its pane and its state
+herdr agent read reviewer --lines 80     # recent output from one agent
+herdr agent prompt reviewer "Run the tests and report failures." --wait
+herdr agent wait reviewer --until blocked --timeout 600000
+herdr agent attach reviewer              # open its terminal here</code></pre>
+        <p>Targets are an agent's name or the pane ID it runs in. <code>herdr agent rename</code> gives an agent a name, and <code>herdr agent start reviewer --kind codex --pane w1:p2</code> starts a supported agent in an empty shell pane with that name. <code>agent prompt</code> refuses to type into an agent that is <code>blocked</code> on an approval, so a script cannot answer a permission prompt by accident.</p>
+        <h3>Worktrees and other machines</h3>
+        <p><code>herdr worktree create</code> makes a git worktree and opens it as its own workspace, so two agents in one repo can work on separate branches. <code>herdr machine add</code> saves an SSH machine and prepares its herdr server; after that, <code>herdr --machine &lt;name&gt; agent list</code> runs the same commands there, and <code>herdr --remote &lt;ssh-target&gt;</code> attaches to a remote session.</p>
+
+        <h2 id="gaps">What the terminal leaves to you</h2>
+        <p>herdr knows each agent's state, but you still have to look. With the workspace in one window and your editor or browser in front, a <code>blocked</code> agent waits until you happen to check. Answering means attaching to the right pane, reading back to find the question, and typing the answer in that agent's own format. herdr has no official phone client.</p>
+        <p>That is the part a front end can do: watch the server for you, bring each question to one place, and send your answer into the right pane.</p>
+
+        <h2 id="apps">Mac apps that work with herdr</h2>
+        <!-- Sources, checked 2026-10-19: https://github.com/missuo/herdrm (README: macOS 14+, notifications, Ghostty terminal; LICENSE.md PolyForm Noncommercial 1.0.0) ; https://github.com/penso/herdr-gpui (Apache-2.0; macOS, Linux, Windows) ; https://github.com/kosumic/whip (AGPL-3.0; says it is not developed or endorsed by the Herdr project) ; herdr's own list of clients is not official -->
+        <p>None of these are made by the herdr project. They all talk to the same herdr server, so your agents keep running whichever one you open.</p>
+        <table>
+            <thead>
+                <tr><th scope="col">App</th><th scope="col">What it is</th><th scope="col">Platforms</th><th scope="col">License</th></tr>
+            </thead>
+            <tbody>
+                <tr><th scope="row"><a href="https://github.com/missuo/herdrm" rel="noopener">herdrm</a></th><td>A native macOS console: sidebar of agents, live terminals, search, and a notification when an agent finishes or needs input</td><td>macOS 14 or later</td><td>PolyForm Noncommercial 1.0.0 (source available)</td></tr>
+                <tr><th scope="row"><a href="https://github.com/penso/herdr-gpui" rel="noopener">Herdr UI</a> (herdr-gpui)</th><td>A native client for terminal sessions, workspaces, worktrees and agent activity</td><td>macOS, Linux, Windows</td><td>Apache-2.0</td></tr>
+                <tr><th scope="row"><a href="/">Cadence</a></th><td>A screen-edge toolbar and one Inbox for every agent, with voice, an iPhone app and Linux servers</td><td>macOS 13 or later, Apple Silicon</td><td>Free, closed source</td></tr>
+            </tbody>
+        </table>
+        <p>herdrm and Herdr UI are the closer match if you want herdr's own workspaces, tabs and panes in a Mac window. Cadence is the closer match if you want to stop watching panes at all and answer agents from wherever you are. On the phone, community apps such as <a href="https://github.com/kosumic/whip" rel="noopener">Whip</a> connect to herdr over SSH.</p>
+
+        <h2 id="cadence">Cadence: a Mac front end for herdr</h2>
+        <p><a href="/">Cadence</a> is a free macOS app that talks to herdr over its socket API. It uses herdr for every agent that is not Claude Code, and for Claude Code too when you pick the Terminal mode. Because it reads the same server, agents you start in herdr yourself show up next to the ones Cadence starts.</p>
+        <h3>Set it up</h3>
+        <ol>
+            <li><a href="/download">Download Cadence</a> (macOS 13 or later, Apple Silicon). There is no account.</li>
+            <li>Open <strong>⋯ → New agent…</strong> on the toolbar. If herdr is missing, the view shows the install command; run it and click <strong>I installed it</strong>. If herdr is installed but its server is not running, click <strong>Start herdr</strong>.</li>
+            <li>Pick a CLI (Codex, OpenCode, Pi, Omp, Amp, Grok, Cursor, Copilot, Gemini, or Claude Code in Terminal mode), a <strong>Folder</strong> and an optional <strong>First message</strong>, and start it.</li>
+        </ol>
+        <p>Each agent opens in a terminal window attached to its herdr pane. Pick Terminal, iTerm or Ghostty in <strong>Settings → Agents → Open Cadence's agents in</strong>. Closing the window or quitting Cadence leaves the agent running in herdr.</p>
+        <h3>A toolbar instead of a pane list</h3>
+        <p>The <a href="/docs/toolbar">toolbar</a> on the edge of your screen shows one dot per agent: blue working, amber needs you, green done. It stays above other windows on every Space, so you see a blocked agent without opening herdr. Every agent gets a short title written from what it is doing, like "settings page dark mode", instead of a pane ID.</p>
+        <h3>One Inbox for every question</h3>
+        <p>When a herdr agent prints numbered options or a yes/no question, it lands in the <a href="/docs/inbox">Inbox</a> as a card. Press <kbd>1</kbd> to <kbd>9</kbd> to pick, <kbd>Space</kbd> to type, or <kbd>V</kbd> to speak, and Cadence types the answer into that pane. <kbd>Esc</kbd> takes an answer back within two seconds. Finished work arrives as a card with a short recap.</p>
+        <h3>Talk and the Director</h3>
+        <p>Double-tap <kbd>⌥</kbd> and say "tell the Codex agent to add pagination" or "start a Codex agent in the api folder". <a href="/docs/talk">Talk</a> sends it to the agent already on that work or starts a new one in herdr. The <a href="/docs/director">Director</a> can read herdr agents by name, message them and close them, so "is anything stuck?" covers all of them.</p>
+        <h3>Your phone</h3>
+        <p>The Cadence iPhone app, in a private TestFlight beta, shows the same agents and answers them from the app, a widget or Siri. It pairs with your Mac by QR code, and traffic between them is end-to-end encrypted. Your herdr agents reach the phone through your Mac.</p>
+
+        <h2 id="servers">Agents on your servers</h2>
+        <p>Since Cadence 0.5.7, agents running in herdr on a Linux server show up on the toolbar, in the Inbox and on your phone under the server's name, and you answer them the same way.</p>
+        <ol>
+            <li>Open <strong>Settings → Agents → Other machines</strong> and copy the command it shows.</li>
+            <li>Run it on the server. It installs herdr and, if your Mac has an SSH key, lets your Mac sign in with it. It does nothing else.</li>
+            <li>Back in Cadence, enter the server's SSH address, like <code>you@203.0.113.7</code>, and click <strong>Add</strong>.</li>
+        </ol>
+        <p>Cadence connects through herdr's own saved SSH machines, over your Mac's OpenSSH and your own keys. Nothing on the server talks to Cadence or your phone. Start the agents on the server inside herdr (run <code>herdr</code>, then <code>claude</code> or <code>codex</code> in a pane); starting and ending agents on a server still happens on the server. The guide to <a href="/guides/coding-agents-on-a-server">coding agents on a server</a> covers the server side step by step.</p>
+
+        <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>Is herdr free and open source?</h3>
+            <p>Yes. herdr is open source under the Apache-2.0 license and free to use. Its maker has announced a hosted Herdr Cloud for connecting machines without SSH, which is not available yet.</p>
+        </div>
+        <div class="qa">
+            <h3>Is there an official herdr Mac app?</h3>
+            <p>No. herdr is a terminal app with a socket API. Community apps such as herdrm and Herdr UI give it a native window, and Cadence uses it as the runtime for its terminal agents.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Cadence replace herdr?</h3>
+            <p>No. Cadence runs on top of herdr. herdr keeps the agents' terminals alive and detects their state; Cadence watches that state, collects questions in one Inbox and sends your answers back. You can keep using <code>herdr</code> in the terminal at the same time.</p>
+        </div>
+        <div class="qa">
+            <h3>Do agents stop if I quit Cadence?</h3>
+            <p>No. The herdr server owns the processes, so closing a terminal window or quitting Cadence leaves your agents running. End an agent from the toolbar, the Inbox, or herdr itself.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Cadence need herdr for Claude Code?</h3>
+            <p>No. Claude Code can run inside Cadence in Cadence chat mode without herdr, with real Allow/Deny cards, cost and a git worktree per agent. herdr is needed for Claude Code in Terminal mode and for every other CLI.</p>
+        </div>
+    </article>
+
+    <aside class="try panel" aria-labelledby="try-cadence">
+        <h2 id="try-cadence">Try Cadence</h2>
+        <p>A native Mac front end for the agents you run in herdr: toolbar, Inbox, voice and your phone. Free, no account. macOS 13 or later on Apple Silicon.</p>
+        <div class="row">
+            <a class="cta dark" href="/download">↓ Download for Mac</a>
+            <code>brew install --cask maxprehoda/tap/cadence</code>
+        </div>
+    </aside>
+
+    <div class="related">
+        <p class="eyebrow">Related guides</p>
+        <a href="/guides/claude-code-and-codex-together">Use Claude Code and Codex together<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/guides/best-tools-parallel-coding-agents">Best tools to run parallel coding agents in 2026<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/docs/agents-and-clis">Docs: Agents and CLIs<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+</main>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/">Cadence</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/compare">Compare</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="mailto:support@cadencevoice.ai">Support</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+</body>
+</html>

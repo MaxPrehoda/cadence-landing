@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codex Notifications on Mac: Know When Codex CLI Needs You</title>
+    <meta name="description" content="Get a Mac notification when Codex CLI needs approval or finishes: the built-in tui.notifications settings, a notify script, a PermissionRequest hook, and Cadence&#x27;s Inbox.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/guides/codex-notifications-mac">
+    <meta name="theme-color" content="#f5f5f2">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Codex Notifications on Mac: Know When Codex CLI Needs You">
+    <meta property="og:description" content="Get a Mac notification when Codex CLI needs approval or finishes: the built-in tui.notifications settings, a notify script, a PermissionRequest hook, and Cadence&#x27;s Inbox.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/guides/codex-notifications-mac">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Codex Notifications on Mac: Know When Codex CLI Needs You">
+    <meta name="twitter:description" content="Get a Mac notification when Codex CLI needs approval or finishes: the built-in tui.notifications settings, a notify script, a PermissionRequest hook, and Cadence&#x27;s Inbox.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Codex notifications on Mac: know when Codex CLI needs approval or is done",
+    "description": "Get a Mac notification when Codex CLI needs approval or finishes: the built-in tui.notifications settings, a notify script, a PermissionRequest hook, and Cadence's Inbox.",
+    "image": "https://www.cadencevoice.ai/art/og.png",
+    "datePublished": "2026-10-19",
+    "dateModified": "2026-10-19",
+    "inLanguage": "en-US",
+    "proficiencyLevel": "Beginner",
+    "keywords": "Codex notifications Mac, Codex CLI notify, codex config.toml notify, Codex approval notification, tui.notifications, Codex PermissionRequest hook, Codex done notification",
+    "author": {
+        "@type": "Organization",
+        "name": "Cadence Labs",
+        "url": "https://www.cadencevoice.ai/"
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Cadence",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cadencevoice.ai/icon.png"
+        }
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/guides/codex-notifications-mac"
+    },
+    "isPartOf": {
+        "@type": "CollectionPage",
+        "@id": "https://www.cadencevoice.ai/guides",
+        "name": "Cadence guides"
+    }
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Cadence",
+            "item": "https://www.cadencevoice.ai/"
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Guides",
+            "item": "https://www.cadencevoice.ai/guides"
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Codex notifications",
+            "item": "https://www.cadencevoice.ai/guides/codex-notifications-mac"
+        }
+    ]
+}
+    </script>
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Why do I get no Codex notification in Terminal.app?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Terminal.app does not show OSC 9 notifications, so Codex falls back to the bell, and by default only when the window is not focused. Turn on the bell's visual or Dock options in Terminal's profile settings, or use the notify script above for a real banner."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does the Codex notify setting fire for approval requests?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. notify currently runs only for agent-turn-complete. For approvals, use the built-in approval-requested notification in [tui] notifications, or a PermissionRequest hook as shown above."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Why does my Codex hook not run?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Codex skips new or changed hooks until you trust them. Run /hooks in Codex and trust it. Also check that hooks are not turned off with hooks = false under [features], and that the script works when you pipe a sample JSON object into it."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Does Cadence change my Codex config?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Cadence starts Codex in a herdr terminal and reads its screen to tell when it is waiting. It does not edit ~/.codex/config.toml or hooks.json, and Codex keeps using its own sign-in."
+            }
+        }
+    ]
+}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="stylesheet" href="/guides/guides.css">
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<header class="site-nav">
+    <div class="site-nav-in">
+        <a class="wordmark" href="/">Cadence</a>
+        <nav aria-label="Primary">
+            <a href="/docs.html">Docs</a>
+            <a href="/guides" aria-current="page">Guides</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a class="cta dark" href="/download">Download</a>
+        </nav>
+    </div>
+</header>
+
+<main class="guide">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Cadence</a><span class="sep">/</span><a href="/guides">Guides</a><span class="sep">/</span><span>Codex notifications</span></nav>
+
+    <h1 class="two guide-title">Codex notifications on Mac <span>know when Codex CLI needs you</span></h1>
+
+    <p class="guide-dek">Codex CLI pauses when it needs an approval and when it finishes a turn. Here is how to find out on a Mac without watching the terminal, from the settings it already has to a banner for every approval.</p>
+
+    <p class="stamp">Updated <time datetime="2026-10-19">October 19, 2026</time> · Cadence Labs</p>
+
+    <div class="answer panel">
+        <p class="eyebrow">Short answer</p>
+        <p>Codex CLI already notifies you. Its <code>[tui] notifications</code> setting is on by default and fires when a turn finishes (<code>agent-turn-complete</code>) or Codex asks for approval (<code>approval-requested</code>), but only while the terminal is not focused. In iTerm2 or Ghostty that shows up as a macOS notification; in Terminal.app it is a bell.</p>
+        <p>For a real macOS banner in any terminal, point the <code>notify</code> setting in <code>~/.codex/config.toml</code> at a small script (it runs when a turn finishes), and add a <code>PermissionRequest</code> hook for approvals. Both setups are below. If you run several agents, Cadence shows every one on a toolbar and lets you answer Codex from one Inbox.</p>
+    </div>
+
+    <nav class="toc" aria-label="On this page">
+        <p class="eyebrow">On this page</p>
+        <ol>
+            <li><a href="#when">When Codex waits for you</a></li>
+            <li><a href="#builtin">Option 1: Codex's built-in notifications</a></li>
+            <li><a href="#notify">Option 2: a notify script for a macOS banner</a></li>
+            <li><a href="#hooks">Option 3: a hook for approval requests</a></li>
+            <li><a href="#limits">Where notifications fall short</a></li>
+            <li><a href="#cadence">Option 4: Cadence's toolbar and Inbox</a></li>
+            <li><a href="#questions">Common questions</a></li>
+        </ol>
+    </nav>
+
+    <article class="guide-body prose">
+        <h2 id="when">When Codex waits for you</h2>
+        <!-- Sources, checked 2026-10-19:
+             https://learn.chatgpt.com/docs/config-file/config-advanced.md (Notifications; notify vs tui.notifications)
+             https://learn.chatgpt.com/docs/config-file/config-reference.md (tui.notifications, tui.notification_method, tui.notification_condition, notify)
+             https://learn.chatgpt.com/docs/config-file/config-sample.md (defaults)
+             https://learn.chatgpt.com/docs/hooks.md (hook locations, trust, PermissionRequest, common fields)
+             https://learn.chatgpt.com/docs/agent-approvals-security.md (approval_policy)
+             developers.openai.com/codex now redirects to learn.chatgpt.com/docs -->
+        <p>Codex CLI stops and waits in two situations:</p>
+        <ul>
+            <li><strong>An approval.</strong> With the default <code>approval_policy = "on-request"</code>, Codex asks before it runs a command outside its sandbox, reaches the network, or does anything else your settings do not allow yet.</li>
+            <li><strong>The end of a turn.</strong> It finished what you asked, or it has a question, and waits for your next message.</li>
+        </ul>
+        <p>Nothing happens until you answer. An agent that stopped on an approval a minute into a long task is still waiting an hour later.</p>
+
+        <h2 id="builtin">Option 1: Codex's built-in notifications</h2>
+        <p>Codex's terminal interface has notifications built in. They are on by default, so you may only need to check how your terminal shows them. These are the settings, with their defaults:</p>
+<pre><code># ~/.codex/config.toml
+[tui]
+notifications = true                 # or a list: ["agent-turn-complete", "approval-requested"]
+notification_method = "auto"         # auto | osc9 | bel
+notification_condition = "unfocused" # unfocused | always</code></pre>
+        <ul>
+            <li><code>notifications</code> turns them on or off, or limits them to the event types you list.</li>
+            <li><code>notification_method</code> picks how they are sent. In <code>auto</code> mode Codex uses an OSC 9 escape sequence when the terminal seems to support it, which terminals such as iTerm2 and Ghostty show as a macOS notification, and falls back to the terminal bell otherwise.</li>
+            <li><code>notification_condition</code> decides whether they fire only when the terminal window is not focused (the default) or always.</li>
+        </ul>
+        <p>In Terminal.app you get the bell. Terminal can play a sound, or badge and bounce the Dock icon, when a bell rings in a background tab; look in its profile settings under <strong>Advanced</strong>. In tmux, <code>set -g monitor-bell on</code> marks the window that rang.</p>
+
+        <h2 id="notify">Option 2: a notify script for a macOS banner</h2>
+        <p>The <code>notify</code> setting runs a program of your choice when Codex emits an event. Today the only event is <code>agent-turn-complete</code>, so this covers "Codex is done", not approvals. Codex passes the event as a single JSON argument with fields such as <code>type</code>, <code>cwd</code>, <code>input-messages</code> and <code>last-assistant-message</code>.</p>
+        <h3>Step 1: write the script</h3>
+        <p>Save this as <code>~/.codex/notify.sh</code>. It posts a notification titled with the project folder and Codex's last message. It uses <code>jq</code> (<code>brew install jq</code>).</p>
+<pre><code>#!/bin/sh
+# Codex passes the event as one JSON argument.
+[ "$(printf '%s' "$1" | jq -r '.type')" = "agent-turn-complete" ] || exit 0
+msg=$(printf '%s' "$1" | jq -r '(."last-assistant-message" // "Turn complete")[0:200]')
+dir=$(basename "$(printf '%s' "$1" | jq -r '.cwd // "."')")
+osascript -e 'on run argv' \
+  -e 'display notification (item 1 of argv) with title (item 2 of argv) sound name "Glass"' \
+  -e 'end run' "$msg" "Codex: $dir"</code></pre>
+        <p>Make it executable with <code>chmod +x ~/.codex/notify.sh</code>. Passing the text to <code>osascript</code> as arguments keeps quotes in Codex's message from breaking the command.</p>
+        <h3>Step 2: point Codex at it</h3>
+        <p>Add this line to <code>~/.codex/config.toml</code>, using the full path to your home folder:</p>
+<pre><code>notify = ["/Users/you/.codex/notify.sh"]</code></pre>
+        <p><code>notify</code> is a top-level key, so put it above the first <code>[section]</code> header in the file. A line placed under <code>[tui]</code> belongs to <code>[tui]</code> and does nothing.</p>
+        <h3>Step 3: test it</h3>
+        <p>Start a new Codex session, ask for something small, and switch to another app. When the turn ends, a banner should appear. If it does not, open <strong>System Settings → Notifications</strong>: notifications from <code>osascript</code> are listed under Script Editor, and a Focus mode can hide them.</p>
+
+        <h2 id="hooks">Option 3: a hook for approval requests</h2>
+        <p>Codex also has hooks: commands it runs at fixed points, configured in <code>~/.codex/hooks.json</code> or inline in <code>config.toml</code>. They are on by default. The <code>PermissionRequest</code> hook runs when Codex is about to ask for approval, which is the event <code>notify</code> does not cover.</p>
+        <p>Save this as <code>~/.codex/hooks/approval.sh</code>. It reads the request from standard input and posts a banner. It prints nothing, so Codex goes on to show its normal approval prompt.</p>
+<pre><code>#!/bin/sh
+# Codex sends the approval request as JSON on standard input.
+input=$(cat)
+what=$(printf '%s' "$input" | jq -r \
+  '(.tool_input.description // .tool_input.command // .tool_name // "Approval needed") | tostring | .[0:200]')
+dir=$(basename "$(printf '%s' "$input" | jq -r '.cwd // "."')")
+osascript -e 'on run argv' \
+  -e 'display notification (item 1 of argv) with title (item 2 of argv) sound name "Glass"' \
+  -e 'end run' "$what" "Codex needs approval: $dir" &gt;/dev/null</code></pre>
+        <p>Then register it in <code>~/.codex/hooks.json</code>:</p>
+<pre><code>{
+  "hooks": {
+    "PermissionRequest": [
+      {
+        "hooks": [
+          { "type": "command", "command": "/bin/sh ~/.codex/hooks/approval.sh" }
+        ]
+      }
+    ]
+  }
+}</code></pre>
+        <p>Codex runs a new or changed hook only after you review and trust it. Start Codex, type <code>/hooks</code>, and trust the hook. A hook that prints an <code>allow</code> or <code>deny</code> decision would answer the request itself; this one only notifies, so you still decide.</p>
+
+        <h2 id="limits">Where notifications fall short</h2>
+        <p>Banners are enough for one or two sessions. With more, the same gaps show up as with any agent:</p>
+        <ul>
+            <li>A banner says something is waiting, but you still find the right terminal tab and scroll back to read the request.</li>
+            <li>Banners pile up in Notification Center with no record of which ones you already handled.</li>
+            <li>Nothing shows the overall state: which agents are working, which are done, which are stuck.</li>
+            <li>If you also run Claude Code, it needs its own hooks in its own format. Our <a href="/guides/claude-code-notifications-mac">Claude Code notifications guide</a> covers that side.</li>
+        </ul>
+
+        <h2 id="cadence">Option 4: Cadence's toolbar and Inbox</h2>
+        <p><a href="/">Cadence</a> is a free macOS app that watches your coding agents and collects what they need from you. It runs Codex in <a href="/guides/herdr-mac-app">herdr</a>, a terminal runtime that knows when an agent is working, waiting or done, so you need no notify script and no terminal setting.</p>
+        <h3>Set it up</h3>
+        <ol>
+            <li><a href="/download">Download Cadence</a>. Install <code>codex</code> and sign in once in a normal terminal; Cadence starts it under your own OpenAI sign-in.</li>
+            <li>Open <strong>⋯ → New agent…</strong> on the toolbar and pick <strong>Codex</strong>. If herdr is missing, the view shows the install command; run it and click <strong>I installed it</strong>.</li>
+            <li>Enter the <strong>Folder</strong> and an optional <strong>First message</strong>, then start it. Or double-tap <kbd>⌥</kbd> and say "start a Codex agent in the api folder".</li>
+        </ol>
+        <p>Since 0.5.6 you can also keep typing <code>codex</code> in your own terminal. Turn on <strong>Settings → Agents → Your own terminals</strong>, and <code>codex</code> started in Ghostty, iTerm, Terminal or your editor runs through Cadence. The terminal looks and works the same. It adds one line to <code>~/.zshrc</code>, and you can turn it off any time.</p>
+        <h3>See state at a glance</h3>
+        <p>The <a href="/docs/toolbar">toolbar</a> on the edge of your screen has one dot per agent: blue working, amber needs you, green done. Codex sits next to Claude Code and any other CLI you run, each with a short title written from what it is doing.</p>
+        <h3>Answer without switching windows</h3>
+        <p>When Codex asks for approval or prints numbered options, the question lands in the <a href="/docs/inbox">Inbox</a>. Press <kbd>1</kbd> to <kbd>9</kbd> to answer, <kbd>Space</kbd> to type, or <kbd>V</kbd> to speak, and Cadence types your answer into Codex's terminal. <kbd>Esc</kbd> takes it back within two seconds. Finished turns arrive as cards with a short recap.</p>
+        <h3>Sound, banners and your phone</h3>
+        <p>In <strong>Settings → Agents</strong>, <strong>Text-to-speech</strong> reads completions and approval requests aloud, and <strong>Notifications</strong> turns macOS banners for agent events on or off. The <a href="/guides/claude-code-on-iphone">iPhone app</a>, in a private TestFlight beta, shows the same cards and puts an agent's options on its notifications as buttons.</p>
+
+        <h2 id="questions">Common questions</h2>
+        <div class="qa">
+            <h3>Why do I get no Codex notification in Terminal.app?</h3>
+            <p>Terminal.app does not show OSC 9 notifications, so Codex falls back to the bell, and by default only when the window is not focused. Turn on the bell's visual or Dock options in Terminal's profile settings, or use the <code>notify</code> script above for a real banner.</p>
+        </div>
+        <div class="qa">
+            <h3>Does the Codex notify setting fire for approval requests?</h3>
+            <p>No. <code>notify</code> currently runs only for <code>agent-turn-complete</code>. For approvals, use the built-in <code>approval-requested</code> notification in <code>[tui] notifications</code>, or a <code>PermissionRequest</code> hook as shown above.</p>
+        </div>
+        <div class="qa">
+            <h3>Why does my Codex hook not run?</h3>
+            <p>Codex skips new or changed hooks until you trust them. Run <code>/hooks</code> in Codex and trust it. Also check that hooks are not turned off with <code>hooks = false</code> under <code>[features]</code>, and that the script works when you pipe a sample JSON object into it.</p>
+        </div>
+        <div class="qa">
+            <h3>Does Cadence change my Codex config?</h3>
+            <p>No. Cadence starts Codex in a herdr terminal and reads its screen to tell when it is waiting. It does not edit <code>~/.codex/config.toml</code> or <code>hooks.json</code>, and Codex keeps using its own sign-in.</p>
+        </div>
+    </article>
+
+    <aside class="try panel" aria-labelledby="try-cadence">
+        <h2 id="try-cadence">Try Cadence</h2>
+        <p>Watch Codex, Claude Code and your other agents from one toolbar and answer them from one Inbox. Free, no account. macOS 13 or later on Apple Silicon.</p>
+        <div class="row">
+            <a class="cta dark" href="/download">↓ Download for Mac</a>
+            <code>brew install --cask maxprehoda/tap/cadence</code>
+        </div>
+    </aside>
+
+    <div class="related">
+        <p class="eyebrow">Related guides</p>
+        <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/guides/claude-code-and-codex-together">Use Claude Code and Codex together<span class="arrow" aria-hidden="true">→</span></a>
+        <a href="/guides/herdr-mac-app">A Mac app for herdr<span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+</main>
+
+<footer class="site-foot">
+    <div class="site-foot-in">
+        <div class="links">
+            <a href="/">Cadence</a>
+            <a href="/docs.html">Docs</a>
+            <a href="/guides">Guides</a>
+            <a href="/compare">Compare</a>
+            <a href="/faq.html">FAQ</a>
+            <a href="/blog/">Writing</a>
+            <a href="/changelog.html">Changelog</a>
+            <a href="/privacy.html">Privacy</a>
+            <a href="/terms.html">Terms</a>
+            <a href="mailto:support@cadencevoice.ai">Support</a>
+        </div>
+        <div class="copy">© 2026 Cadence Labs</div>
+    </div>
+</footer>
+
+</body>
+</html>
