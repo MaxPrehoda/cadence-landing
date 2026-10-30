@@ -4,7 +4,7 @@ Cadence is a native macOS app that sits between you and your coding agents, so y
 
 Every question and finished task lands in one Inbox. Answer in a keystroke, or just talk.
 
-Cadence is free. There is no account and no subscription.
+Cadence is free at your desk, with no account. [Cadence Pro](/pricing) adds what works while you're away: answering for you, away mode, long runs, its own ideas and the iPhone app.
 
 ## What it does
 

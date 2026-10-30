@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadence pricing: free while you're watching, Pro when you're not</title>
+
+    <meta name="description" content="Cadence is free for dictation, every agent and the Inbox. Cadence Pro lets it work while you're away: answering for you, away mode, long runs and your iPhone. $20 a month, $200 a year, or $249 once for the first 100.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/pricing">
+    <meta name="theme-color" content="#f5f5f2">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Cadence pricing: free while you're watching, Pro when you're not">
+    <meta property="og:description" content="Free for dictation, every agent and the Inbox. Pro lets Cadence work while you're away. $20 a month, $200 a year, or $249 once for the first 100.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/pricing">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cadence pricing: free while you're watching, Pro when you're not">
+    <meta name="twitter:description" content="Free for dictation, every agent and the Inbox. Pro lets Cadence work while you're away. $20 a month, $200 a year, or $249 once for the first 100.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "Cadence Pro",
+        "description": "Cadence working while you're not watching: answering the decisions you hand over, away mode, long runs, its own long-job ideas, and the iPhone app.",
+        "brand": { "@type": "Brand", "name": "Cadence" },
+        "offers": [
+            { "@type": "Offer", "name": "Monthly", "price": "20.00", "priceCurrency": "USD", "url": "https://www.cadencevoice.ai/pricing" },
+            { "@type": "Offer", "name": "Yearly", "price": "200.00", "priceCurrency": "USD", "url": "https://www.cadencevoice.ai/pricing" },
+            { "@type": "Offer", "name": "Founding member (lifetime)", "price": "249.00", "priceCurrency": "USD", "url": "https://www.cadencevoice.ai/pricing" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <style>
+        .pricing { max-width: 1120px; margin: 0 auto; padding: 72px 24px 0; }
+        .p-head { max-width: 720px; margin-bottom: 48px; }
+        .p-head .lede { color: var(--ink-2); font-size: 18px; margin: 0; }
+        .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 20px; align-items: stretch; }
+        .tier { padding: 28px; display: flex; flex-direction: column; }
+        .tier.pro { background: var(--card); border-color: #2b2b2a; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 12px 32px rgba(0,0,0,.06); }
+        .tier h2 { font-weight: 500; font-size: 26px; margin: 0 0 4px; color: var(--ink); }
+        .tier .sub { color: var(--ink-3); font-size: 15px; margin: 0 0 20px; }
+        .tier .price { font-size: 40px; font-weight: 500; letter-spacing: -0.02em; color: var(--ink); margin: 0 0 4px; }
+        .tier .price small { font-size: 16px; color: var(--ink-3); font-weight: 400; letter-spacing: 0; }
+        .tier ul { list-style: none; margin: 20px 0 24px; padding: 0; display: flex; flex-direction: column; gap: 10px; color: var(--ink-2); font-size: 15.5px; }
+        .tier li { padding-left: 26px; position: relative; line-height: 1.45; }
+        .tier li::before { content: ""; position: absolute; left: 2px; top: 6px; width: 12px; height: 7px; border-left: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: rotate(-45deg); }
+        .tier li strong { color: var(--ink); font-weight: 600; }
+        .tier .spacer { flex: 1; }
+        .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+        .plan { display: flex; flex-direction: column; gap: 2px; padding: 14px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--panel); color: var(--ink); text-decoration: none; transition: border-color .15s ease, transform .15s ease, background .15s ease; }
+        .plan:hover { border-color: #2b2b2a; background: #fff; color: var(--ink); transform: translateY(-1px); }
+        .plan.best { border-color: #2b2b2a; background: #fff; }
+        .plan .name { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+        .plan .amt { font-size: 26px; font-weight: 500; letter-spacing: -0.01em; }
+        .plan .amt small { font-size: 14px; color: var(--ink-3); font-weight: 400; }
+        .plan .pnote { font-size: 13px; color: var(--ink-3); line-height: 1.35; }
+        .plan .go { margin-top: 10px; font-size: 14px; font-weight: 600; }
+        .plan.soldout { opacity: .5; pointer-events: none; }
+        .fine { color: var(--ink-3); font-size: 14px; margin: 14px 0 0; }
+        .banner { margin: 0 0 24px; }
+        .faq-lite { max-width: 760px; margin: 72px 0 0; }
+        .faq-lite h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin: 28px 0 6px; }
+        .faq-lite p { color: var(--ink-2); margin: 0; }
+        @media (max-width: 860px) {
+            .split { grid-template-columns: minmax(0, 1fr); }
+            .plans { grid-template-columns: minmax(0, 1fr); }
+        }
+    </style>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('a[href="/download"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } });
+            const plan = e.target.closest('a[data-plan]');
+            if (plan) window.va('event', { name: 'checkout_start', data: { plan: plan.dataset.plan } });
+        });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <header class="site-nav">
+        <div class="site-nav-in">
+            <a class="wordmark" href="/">Cadence</a>
+            <nav aria-label="Primary">
+                <a href="/docs.html">Docs</a>
+                <a href="/pricing" aria-current="page">Pricing</a>
+                <a href="/faq.html">FAQ</a>
+                <a href="/blog/">Writing</a>
+                <a class="cta dark" href="/download">Download</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pricing">
+        <div class="p-head">
+            <p class="eyebrow">Pricing</p>
+            <h1 class="two">Free while you're watching. <span>Pro when you're not.</span></h1>
+            <p class="lede">Everything you do at your desk is free, with every agent you run. Pro is Cadence carrying the work while you're away from it.</p>
+        </div>
+
+        <div class="note banner" id="msg" hidden></div>
+
+        <div class="split">
+            <section class="panel tier" aria-labelledby="free-h">
+                <h2 id="free-h">Free</h2>
+                <p class="sub">At your desk</p>
+                <p class="price">$0</p>
+                <ul>
+                    <li><strong>Dictation</strong> into any app, on your Mac</li>
+                    <li><strong>Every agent</strong>, no limit: Claude Code, Codex and the rest in one Inbox</li>
+                    <li><strong>Talk</strong> to your agents and arrange your windows by voice</li>
+                    <li><strong>Your judgment</strong>: Cadence learns how you decide and suggests the answer</li>
+                </ul>
+                <div class="spacer"></div>
+                <a class="cta" href="/download">Download for Mac</a>
+                <p class="fine">macOS 13 or later on Apple Silicon. No account.</p>
+            </section>
+
+            <section class="panel tier pro" aria-labelledby="pro-h">
+                <h2 id="pro-h">Pro</h2>
+                <p class="sub">When you're not there</p>
+                <ul>
+                    <li><strong>Cadence answers for you</strong> in the kinds of decision you hand over, only where your past answers agree</li>
+                    <li><strong>Away mode</strong>: it starts your plan for the day and keeps your agents going for hours</li>
+                    <li><strong>Its own ideas</strong>: long jobs toward your goals, read from the repo, ready for your yes</li>
+                    <li><strong>Your iPhone</strong>: the Inbox and your agents on your phone, on your Wi-Fi or anywhere</li>
+                </ul>
+                <div class="spacer"></div>
+                <div class="plans">
+                    <a class="plan" href="/api/checkout?plan=monthly" data-plan="monthly" rel="nofollow">
+                        <span class="name">Monthly</span>
+                        <span class="amt">$20 <small>/ month</small></span>
+                        <span class="pnote">Cancel any time</span>
+                        <span class="go">Get Pro →</span>
+                    </a>
+                    <a class="plan best" href="/api/checkout?plan=yearly" data-plan="yearly" rel="nofollow">
+                        <span class="name">Yearly</span>
+                        <span class="amt">$200 <small>/ year</small></span>
+                        <span class="pnote">Two months free</span>
+                        <span class="go">Get Pro →</span>
+                    </a>
+                    <a class="plan" id="founding" href="/api/checkout?plan=lifetime" data-plan="lifetime" rel="nofollow">
+                        <span class="name">Founding</span>
+                        <span class="amt">$249 <small>once</small></span>
+                        <span class="pnote">First 100, Pro for good</span>
+                        <span class="go">Get Pro →</span>
+                    </a>
+                </div>
+                <p class="fine">Checkout by Stripe. You get a license key; Cadence turns Pro on by itself if you bought from the app.</p>
+            </section>
+        </div>
+
+        <section class="faq-lite" aria-label="Pricing questions">
+            <h3>Do I need an account?</h3>
+            <p>No. Pro is a license key. Buy from Cadence's Settings → Pro and it turns on by itself; bought here, paste the key there.</p>
+            <h3>What do my agents cost?</h3>
+            <p>Agents use your own Claude Code plan, or whichever provider each CLI is set up with. Cadence Pro doesn't change that.</p>
+            <h3>What happens if I stop paying?</h3>
+            <p>Cadence goes back to Free: it keeps learning and suggesting, and asks you every time. What it learned stays on your Mac, so Pro picks up where it left off.</p>
+            <h3>How do I cancel or get an invoice?</h3>
+            <p>Settings → Pro → Manage billing opens Stripe's billing portal. Every invoice shows your license key. Lost it? Email <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a>.</p>
+        </section>
+    </main>
+
+    <footer class="site-foot">
+        <div class="site-foot-in">
+            <div class="links">
+                <a href="/docs.html">Docs</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/faq.html">FAQ</a>
+                <a href="/blog/">Writing</a>
+                <a href="/changelog.html">Changelog</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms of Service</a>
+                <a href="mailto:support@cadencevoice.ai">Support</a>
+            </div>
+            <div class="copy">&copy; 2026 Cadence Labs</div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var q = new URLSearchParams(location.search);
+            var msg = document.getElementById('msg');
+            var say = function (t) { msg.textContent = t; msg.hidden = false; };
+            if (q.has('soldout')) {
+                say('All 100 founding seats are taken. Monthly and yearly are still open.');
+                document.getElementById('founding').classList.add('soldout');
+            } else if (q.get('checkout') === 'error') {
+                say("Checkout didn't open. Try again in a minute, or email support@cadencevoice.ai.");
+            } else if (q.has('portal')) {
+                say("We couldn't open billing for that license. Email support@cadencevoice.ai and we'll sort it out.");
+            }
+        })();
+    </script>
+</body>
+</html>

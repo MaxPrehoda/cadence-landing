@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Cadence Pro</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#f5f5f2">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <style>
+        .welcome { max-width: 680px; margin: 0 auto; padding: 80px 24px 0; }
+        .keybox { margin: 28px 0 8px; padding: 18px 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .key { font-family: var(--mono); font-size: 22px; letter-spacing: .04em; color: var(--ink); flex: 1; min-width: 0; user-select: all; overflow-wrap: anywhere; }
+        .steps { color: var(--ink-2); padding-left: 20px; margin: 28px 0 0; }
+        .steps li { margin: 8px 0; }
+        .muted { color: var(--ink-3); font-size: 15px; }
+        button.cta { font-family: var(--sans); cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header class="site-nav">
+        <div class="site-nav-in">
+            <a class="wordmark" href="/">Cadence</a>
+            <nav aria-label="Primary">
+                <a href="/docs.html">Docs</a>
+                <a href="/pricing">Pricing</a>
+                <a class="cta dark" href="/download">Download</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="welcome">
+        <p class="eyebrow">Cadence Pro</p>
+        <h1 class="two" id="title">Finishing up <span>your purchase…</span></h1>
+        <p class="muted" id="lede">This takes a few seconds.</p>
+
+        <div id="ready" hidden>
+            <div class="panel keybox">
+                <span class="key" id="key"></span>
+                <button class="cta" id="copy" type="button">Copy</button>
+            </div>
+            <p class="muted" id="who"></p>
+            <ol class="steps">
+                <li><strong>Bought from Cadence?</strong> Pro is already on. Look at Settings → Pro.</li>
+                <li>Otherwise open Cadence, go to <strong>Settings → Pro</strong>, choose <em>I have a license key</em> and paste it.</li>
+                <li>Keep the key: it's on every invoice in the billing portal too.</li>
+            </ol>
+            <p style="margin-top: 28px;"><a class="cta dark" href="/download">Download Cadence</a></p>
+        </div>
+
+        <div class="note" id="trouble" hidden>
+            We couldn't find a finished purchase for this page yet. If you were charged, email
+            <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a> and we'll send your key.
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            var id = new URLSearchParams(location.search).get('session_id') || '';
+            var $ = function (x) { return document.getElementById(x); };
+            var tries = 0;
+            function fail() {
+                $('title').innerHTML = 'Almost <span>there</span>';
+                $('lede').hidden = true;
+                $('trouble').hidden = false;
+            }
+            function poll() {
+                tries++;
+                fetch('/api/license?session_id=' + encodeURIComponent(id), { cache: 'no-store' })
+                    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+                    .then(function (d) {
+                        // Keep the session id out of history once the key is shown.
+                        history.replaceState(null, '', '/pro/welcome');
+                        $('title').innerHTML = 'Welcome to <span>Cadence Pro</span>';
+                        $('lede').textContent = d.plan === 'lifetime'
+                            ? "You're one of the founding members. Thank you. Here's your license key:"
+                            : "Thank you. Here's your license key:";
+                        $('key').textContent = d.key;
+                        if (d.email) $('who').textContent = 'Bought as ' + d.email + '.';
+                        $('ready').hidden = false;
+                    })
+                    .catch(function () { if (tries < 8) setTimeout(poll, 1500); else fail(); });
+            }
+            $('copy').addEventListener('click', function () {
+                navigator.clipboard.writeText($('key').textContent).then(function () {
+                    $('copy').textContent = 'Copied';
+                    setTimeout(function () { $('copy').textContent = 'Copy'; }, 1600);
+                });
+            });
+            if (/^cs_(test|live)_/.test(id)) poll(); else fail();
+        })();
+    </script>
+</body>
+</html>
