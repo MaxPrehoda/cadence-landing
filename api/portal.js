@@ -23,8 +23,10 @@ module.exports = async function handler(req, res) {
     try {
         const lic = await getLicense(key);
         if (!lic || !lic.customer) return res.status(404).json({ error: 'unknown_key' });
+        // Cadence's own portal settings, not Spore's default on the shared account.
         const session = await stripe('POST', 'billing_portal/sessions', {
             customer: lic.customer,
+            configuration: process.env.CADENCE_PORTAL_CONFIG || undefined,
             return_url: `${SITE}/pricing`,
         });
         return res.status(200).json({ url: session.url });
