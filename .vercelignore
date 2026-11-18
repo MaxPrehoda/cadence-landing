@@ -3,4 +3,5 @@ art/generate.py
 .preview/
 scripts/
 node_modules/
+tests/
 launch/

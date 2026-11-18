@@ -2,6 +2,9 @@
   "name": "cadence-landing",
   "private": true,
   "description": "cadencevoice.ai: static site plus Vercel functions in api/. No build step.",
+  "scripts": {
+    "test:billing": "node --test tests/billing.test.mjs"
+  },
   "dependencies": {
     "@vercel/analytics": "^2.0.1"
   }

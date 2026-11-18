@@ -45,17 +45,41 @@
                 <button class="cta" id="copy" type="button">Copy</button>
             </div>
             <p class="muted" id="who"></p>
+            <div class="note" id="app-ask" hidden>
+                A copy of Cadence is waiting to turn Pro on with this purchase, from a different network address
+                than this browser. Did you start this purchase from Cadence on your own Mac? If someone sent you
+                the link, leave this alone and paste the key yourself.
+                <p style="margin: 12px 0 0;"><button class="cta" id="app-yes" type="button">Yes, turn Pro on in my Cadence</button></p>
+            </div>
+            <p class="muted" id="app-done" hidden>Done. Cadence switches to Pro within a few seconds.</p>
             <ol class="steps">
                 <li><strong>Bought from Cadence?</strong> Pro is already on. Look at Settings → Pro.</li>
                 <li>Otherwise open Cadence, go to <strong>Settings → Pro</strong>, choose <em>I have a license key</em> and paste it.</li>
-                <li>Keep the key: it's on every invoice in the billing portal too.</li>
+                <li id="iphone-step" hidden><strong>iPhone app.</strong> Pro includes the Cadence iPhone app, in beta on TestFlight. <a id="iphone-link" href="/docs/iphone" rel="noopener">Get the iPhone app</a> (open the link on your iPhone), then pair it with your Mac by scanning the QR code Cadence shows.</li>
+                <li id="keep">Keep the key somewhere safe: it's how you turn Pro on, on any of your Macs.</li>
             </ol>
             <p style="margin-top: 28px;"><a class="cta dark" href="/download">Download Cadence</a></p>
         </div>
 
+        <div class="note" id="processing" hidden>
+            Your bank payment is on its way, and banks take a few working days.
+            <span id="proc-mail">As soon as it clears we'll email your license key to the address you gave at
+            checkout. Nothing to do until then.</span>
+            <span id="proc-page" hidden>Bookmark this page: once the payment clears, your license key appears
+            here, for two weeks.</span>
+            Questions: <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a>.
+        </div>
+
+        <div class="note" id="gone" hidden>
+            This page shows a license key right after checkout, and for a day afterwards. If Pro is already on in Cadence
+            (Settings → Pro), there's nothing more to do. Need the key again?
+            <a href="/pricing#lost-key">Here's how to get it</a>.
+        </div>
+
         <div class="note" id="trouble" hidden>
-            We couldn't find a finished purchase for this page yet. If you were charged, email
-            <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a> and we'll send your key.
+            We couldn't find a finished purchase for this page yet. If you paid, your key is safe: reload this page
+            in a minute, or email <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a> and we'll send
+            it. If you didn't finish checkout, nothing was charged; <a href="/pricing">go back to pricing</a>.
         </div>
     </main>
 
@@ -69,30 +93,91 @@
                 $('lede').hidden = true;
                 $('trouble').hidden = false;
             }
+            function processing(d) {
+                if (!d.will_email) { $('proc-mail').hidden = true; $('proc-page').hidden = false; }
+                $('title').innerHTML = 'Thank you. <span>Your payment is processing.</span>';
+                $('lede').hidden = true;
+                $('processing').hidden = false;
+            }
+            function show(d) {
+                // Keep the session id out of history once the key is shown.
+                history.replaceState(null, '', '/pro/welcome');
+                $('title').innerHTML = 'Welcome to <span>Cadence Pro</span>';
+                $('lede').textContent = d.plan === 'lifetime'
+                    ? "You're one of the founding members. Thank you. Here's your license key:"
+                    : "Thank you. Here's your license key:";
+                $('key').textContent = d.key;
+                if (d.email) $('who').textContent = 'Bought as ' + d.email + '.' + (d.emailed ? " We've emailed the key there too." : '');
+                if (d.emailed) $('keep').textContent = "Keep the email we just sent you: the key in it is how you turn Pro on, on any of your Macs.";
+                if (/^https:\/\//.test(d.iphone_url || '')) {
+                    $('iphone-link').href = d.iphone_url;
+                    $('iphone-step').hidden = false;
+                }
+                $('ready').hidden = false;
+                app(d);
+            }
+            // bought from the app: has it picked the key up?
+            var appTries = 0;
+            function app(d) {
+                if (d.app === 'ask') { $('app-ask').hidden = false; return; }
+                if (d.app !== 'waiting' || appTries++ >= 6) return;
+                setTimeout(function () {
+                    fetch('/api/license?session_id=' + encodeURIComponent(id), { cache: 'no-store' })
+                        .then(function (r) { return r.ok ? r.json() : null; })
+                        .then(function (n) { if (n) app(n); })
+                        .catch(function () {});
+                }, 4000);
+            }
+            $('app-yes').addEventListener('click', function () {
+                var b = $('app-yes');
+                b.disabled = true;
+                fetch('/api/license', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ session_id: id, release_to_app: true })
+                })
+                    .then(function (r) { if (!r.ok) throw 0; $('app-ask').hidden = true; $('app-done').hidden = false; })
+                    .catch(function () { b.disabled = false; b.textContent = "That didn't work. Try again, or paste the key"; });
+            });
+            function gone() {
+                $('title').innerHTML = 'Cadence <span>Pro</span>';
+                $('lede').hidden = true;
+                $('gone').hidden = false;
+            }
+            function again() { if (tries < 12) setTimeout(poll, 1500); else fail(); }
             function poll() {
                 tries++;
                 fetch('/api/license?session_id=' + encodeURIComponent(id), { cache: 'no-store' })
-                    .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-                    .then(function (d) {
-                        // Keep the session id out of history once the key is shown.
-                        history.replaceState(null, '', '/pro/welcome');
-                        $('title').innerHTML = 'Welcome to <span>Cadence Pro</span>';
-                        $('lede').textContent = d.plan === 'lifetime'
-                            ? "You're one of the founding members. Thank you. Here's your license key:"
-                            : "Thank you. Here's your license key:";
-                        $('key').textContent = d.key;
-                        if (d.email) $('who').textContent = 'Bought as ' + d.email + '.';
-                        $('ready').hidden = false;
+                    .then(function (r) {
+                        if (r.status === 202) { return r.json().then(processing, function () { processing({ will_email: true }); }).then(function () { return null; }); }
+                        if (r.status === 410) { gone(); return null; }
+                        if (!r.ok) { again(); return null; }
+                        return r.json();
                     })
-                    .catch(function () { if (tries < 8) setTimeout(poll, 1500); else fail(); });
+                    .then(function (d) { if (d && d.key) show(d); })
+                    .catch(again);
+            }
+            function copied() {
+                $('copy').textContent = 'Copied';
+                setTimeout(function () { $('copy').textContent = 'Copy'; }, 1600);
             }
             $('copy').addEventListener('click', function () {
-                navigator.clipboard.writeText($('key').textContent).then(function () {
-                    $('copy').textContent = 'Copied';
-                    setTimeout(function () { $('copy').textContent = 'Copy'; }, 1600);
-                });
+                var key = $('key').textContent;
+                var select = function () {
+                    // No clipboard access (older browser, permission off): select it for ⌘C.
+                    var r = document.createRange();
+                    r.selectNodeContents($('key'));
+                    var sel = getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(r);
+                    $('copy').textContent = 'Press ⌘C';
+                    setTimeout(function () { $('copy').textContent = 'Copy'; }, 2400);
+                };
+                if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(key).then(copied, select);
+                else select();
             });
-            if (/^cs_(test|live)_/.test(id)) poll(); else fail();
+            if (/^cs_(test|live)_/.test(id)) poll();
+            else gone(); // reloaded or opened without a purchase behind it
         })();
     </script>
 </body>

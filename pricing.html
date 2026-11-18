@@ -77,6 +77,13 @@
         .faq-lite { max-width: 760px; margin: 72px 0 0; }
         .faq-lite h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin: 28px 0 6px; }
         .faq-lite p { color: var(--ink-2); margin: 0; }
+        .resend-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+        .resend input[type="email"] { flex: 1; min-width: 220px; font: inherit; font-size: 16px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line-2); background: #fff; color: var(--ink); }
+        .resend input[type="email"]:focus-visible { outline: 2px solid #2b2b2a; outline-offset: 1px; }
+        .resend button.cta { font-family: var(--sans); cursor: pointer; }
+        .resend button[disabled] { opacity: .6; cursor: default; }
+        .resend .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+        .plan.going { opacity: .6; pointer-events: none; }
         @media (max-width: 860px) {
             .split { grid-template-columns: minmax(0, 1fr); }
             .plans { grid-template-columns: minmax(0, 1fr); }
@@ -174,7 +181,18 @@
             <h3>What happens if I stop paying?</h3>
             <p>Cadence goes back to Free: it keeps learning and suggesting, and asks you every time. What it learned stays on your Mac, so Pro picks up where it left off.</p>
             <h3>How do I cancel or get an invoice?</h3>
-            <p>Settings → Pro → Manage billing opens Stripe's billing portal. Every invoice shows your license key. Lost it? <a href="https://billing.stripe.com/p/login/3cI3cufpn5ZHes46OwenS00" rel="nofollow">Sign in to billing</a> with your email to see your invoices, or email <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a>.</p>
+            <p>Settings → Pro → Manage billing opens Stripe's billing portal, where you can cancel, change your card or plan and download invoices. No key to hand? <a href="https://billing.stripe.com/p/login/3cI3cufpn5ZHes46OwenS00" rel="nofollow">Sign in to billing</a> with the email you bought with.</p>
+            <h3 id="lost-key">I lost my license key</h3>
+            <p id="lost-plain">Email <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a> from the address you bought with and we'll send it to you.</p>
+            <form class="resend" id="resend" hidden novalidate>
+                <p><label for="resend-email">Enter the email you bought with and we'll send your key to it.</label></p>
+                <div class="resend-row">
+                    <input type="email" id="resend-email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required aria-describedby="resend-msg">
+                    <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+                    <button class="cta" type="submit" id="resend-go">Send my key</button>
+                </div>
+                <p class="fine" id="resend-msg" role="status" aria-live="polite"></p>
+            </form>
         </section>
     </main>
 
@@ -202,11 +220,71 @@
             if (q.has('soldout')) {
                 say('All 100 founding seats are taken. Monthly and yearly are still open.');
                 document.getElementById('founding').classList.add('soldout');
+            } else if (q.get('founding') === 'busy') {
+                say('The last founding seats are in other people\'s checkouts right now. If one comes back it will be here in about half an hour. Monthly and yearly are open.');
+            } else if (q.get('checkout') === 'slow') {
+                say('Too many checkouts were opened from here in a few minutes. Wait ten minutes and try again, or email support@cadencevoice.ai.');
             } else if (q.get('checkout') === 'error') {
                 say("Checkout didn't open. Try again in a minute, or email support@cadencevoice.ai.");
             } else if (q.has('portal')) {
                 say("We couldn't open billing for that license. Email support@cadencevoice.ai and we'll sort it out.");
             }
+            // A message from an earlier try shouldn't come back on reload.
+            if (!msg.hidden && history.replaceState) history.replaceState(null, '', location.pathname + location.hash);
+
+            // One Checkout per click: a double click would open two.
+            document.querySelectorAll('a[data-plan]').forEach(function (a) {
+                a.addEventListener('click', function (e) {
+                    if (a.classList.contains('going')) { e.preventDefault(); return; }
+                    a.classList.add('going');
+                    a.setAttribute('aria-disabled', 'true');
+                });
+            });
+            // Coming back with the Back button brings the page back as it was left.
+            window.addEventListener('pageshow', function () {
+                document.querySelectorAll('a.going').forEach(function (a) {
+                    a.classList.remove('going');
+                    a.removeAttribute('aria-disabled');
+                });
+            });
+
+            // "Send my key again": shown only when the site can send email.
+            var form = document.getElementById('resend');
+            var out = document.getElementById('resend-msg');
+            var go = document.getElementById('resend-go');
+            var support = 'Email support@cadencevoice.ai from the address you bought with and we\'ll send it.';
+            fetch('/api/resend-key', { cache: 'no-store' })
+                .then(function (r) { return r.ok ? r.json() : {}; })
+                .then(function (d) {
+                    if (!d.enabled) return;
+                    form.hidden = false;
+                    document.getElementById('lost-plain').hidden = true;
+                })
+                .catch(function () {});
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (go.disabled) return;
+                var email = form.email.value.trim();
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+                    out.textContent = 'That doesn\'t look like an email address.';
+                    form.email.focus();
+                    return;
+                }
+                go.disabled = true;
+                out.textContent = 'Sending…';
+                fetch('/api/resend-key', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, company: form.company.value })
+                }).then(function (r) {
+                    if (r.ok) out.textContent = 'If a license was bought with ' + email + ', its key is on the way. Check your spam folder too. Nothing after a few minutes? ' + support;
+                    else if (r.status === 429) out.textContent = 'That\'s a lot of tries. Wait an hour, or: ' + support;
+                    else if (r.status === 422) out.textContent = 'That doesn\'t look like an email address.';
+                    else out.textContent = 'We couldn\'t send email just now. ' + support;
+                }).catch(function () {
+                    out.textContent = 'We couldn\'t reach the server. Check your connection and try again. ' + support;
+                }).then(function () { go.disabled = false; });
+            });
         })();
     </script>
 </body>

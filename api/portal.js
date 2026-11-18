@@ -1,8 +1,8 @@
 // POST /api/portal  { key }  ->  { url } of a Stripe billing portal session for that license
 //
-// Cancel, change card, switch monthly/yearly and see invoices (each one
-// carries the license key). Founding seats have no subscription but still
-// get their receipts there. POST so the key never sits in a URL.
+// Cancel, change card, switch monthly/yearly and see invoices. Founding
+// seats have no subscription but still get their receipts there. POST so
+// the key never sits in a URL.
 
 const { SITE, stripe, getLicense, normalizeKey, readJson } = require('./_billing');
 

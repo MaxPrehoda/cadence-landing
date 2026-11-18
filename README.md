@@ -51,6 +51,23 @@ A middle state, an untested preview download, is in `launch/windows-preview/`: `
 
 The launch copy is written but unpublished, in `launch/windows/`. `node scripts/windows-launch.mjs status` shows what is ready; it only publishes what the Windows team's parity matrix marks as run on Windows. Read `launch/windows/README.md` before touching it, and run `status` after changing any page's copy so the kit stays in step.
 
+## Cadence Pro billing
+
+`api/checkout.js`, `api/stripe-webhook.js`, `api/license.js`, `api/portal.js` and `api/resend-key.js`, with the shared logic in `api/_billing.js` and email in `api/_email.js`. `npm run test:billing` runs the whole purchase flow against in-memory Stripe, Upstash and email (no network).
+
+Optional settings, all off until set in the Vercel project's environment:
+
+| Variable | What it turns on |
+|---|---|
+| `RESEND_API_KEY`, or `MAILGUN_API_KEY` + `MAILGUN_DOMAIN` (`MAILGUN_REGION=eu` for the EU host) | The purchase email with the license key, and "I lost my license key" on `/pricing` |
+| `CADENCE_EMAIL_FROM` | The From address (default `Cadence <support@cadencevoice.ai>`); its domain must be verified with the provider |
+| `CADENCE_TESTFLIGHT_URL` | The iPhone app step on the welcome page, in the email and in the app |
+| `CADENCE_MAX_DEVICES` | How many Macs one key works on at once (unset: no limit) |
+| `CADENCE_STRIPE_TAX=1` | Stripe Tax on Checkout (set Stripe Tax up in the Dashboard first) |
+| `CADENCE_STRIPE_API_VERSION` | Stripe API version for creating Checkouts; `2026-10-28.endive` or later prints the key on a subscription's first invoice |
+
+The Stripe webhook endpoint must be sent: `checkout.session.completed`, `checkout.session.async_payment_succeeded`, `checkout.session.async_payment_failed`, `checkout.session.expired`, `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, `customer.subscription.paused`, `customer.subscription.resumed`, `charge.refunded`, `charge.dispute.created`, `charge.dispute.closed`.
+
 ## Releases
 
 `create-release.sh` in `voice-flow` publishes DMGs as GitHub releases on **this** repo, and the in-app updater and `download-v2.js` both read the latest one.
