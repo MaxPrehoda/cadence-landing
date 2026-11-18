@@ -114,8 +114,45 @@
         .nav.solid .pillgroup a + a::before { background: var(--line-2); }
         .nav.solid .cta.navcta { background: #2b2b2a; color: #fff; }
 
+        /* Small-screen menu */
+        .menu { display: none; position: relative; border: 0; background: none; margin: 0; border-radius: 0; }
+        .menu summary { list-style: none; width: 40px; height: 40px; padding: 0; border-radius: 9px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; cursor: pointer; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.22); backdrop-filter: blur(12px); }
+        .menu summary::-webkit-details-marker { display: none; }
+        .menu summary::marker { content: ''; }
+        .menu summary::after, .menu summary::before { content: none !important; }
+        .menu summary span { display: block; width: 16px; height: 2px; border-radius: 1px; background: #fff; transition: transform .2s, opacity .2s; }
+        .menu[open] summary span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .menu[open] summary span:nth-child(2) { opacity: 0; }
+        .menu[open] summary span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+        .nav.solid .menu summary { background: #fff; border-color: var(--line-2); }
+        .nav.solid .menu summary span { background: var(--ink); }
+        .menu-panel { position: absolute; right: 0; top: 50px; width: min(280px, calc(100vw - 32px)); padding: 8px; border-radius: 14px; background: rgba(250,250,247,.97); border: 1px solid var(--line-2); box-shadow: 0 24px 50px -20px rgba(10,30,70,.45); backdrop-filter: blur(14px); display: grid; grid-template-columns: 1fr 1fr; gap: 2px; animation: menu-in .18s ease-out both; }
+        .menu-panel a { display: flex; align-items: center; height: 46px; padding: 0 14px; border-radius: 9px; font-size: 16px; font-weight: 500; color: var(--ink); text-decoration: none; }
+        .menu-panel a:active { background: #ebebe5; }
+        @keyframes menu-in { from { opacity: 0; transform: translateY(-6px) scale(.98); } }
+        @media (max-width: 960px) { .menu { display: block; } }
+
+        /* Phones and tablets get "Email me the Mac link" instead of a download. */
+        .hand { display: none !important; }
+        [data-device=handheld] .hand { display: flex !important; }
+        [data-device=handheld] p.hand, [data-device=handheld] div.fine.hand { display: block !important; }
+        [data-device=handheld] .desk { display: none !important; }
+        .ml { gap: 8px; max-width: 460px; position: relative; }
+        .ml .hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        .ml input[type=email] { flex: 1; min-width: 0; height: 48px; padding: 0 14px; border: 1px solid rgba(255,255,255,.55); border-radius: 10px; background: rgba(255,255,255,.96); font: inherit; font-size: 16px; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.12); }
+        .ml input[type=email]:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,.45); }
+        .ml input[aria-invalid=true] { box-shadow: 0 0 0 3px rgba(255,120,110,.8); }
+        .ml .cta { height: 48px; padding: 0 13px; border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 15px; background: #1c1c1b; color: #fff; border-color: #000; white-space: nowrap; flex: none; }
+        .ml.done { display: none !important; }
+        .hero .ml-msg { margin: 10px 0 14px; font-size: 14px; line-height: 1.4; opacity: .95; max-width: 460px; }
+        .hero .ml-msg.ok { font-size: 16px; font-weight: 500; padding: 12px 14px; border-radius: 10px; background: rgba(16,60,40,.55); border: 1px solid rgba(160,240,190,.5); backdrop-filter: blur(8px); text-shadow: none; }
+        .hero .ml-msg.err { color: #ffe1dc; }
+        .hero .ml-msg a { color: #fff; }
+        .hero .row .cta { border-width: 1px; font-family: inherit; cursor: pointer; }
+        @media (max-width: 345px) { .ml { flex-direction: column; } .ml .cta { justify-content: center; } }
+
         /* Hero */
-        .hero { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; background: #3e7fd9; }
+        .hero { position: relative; min-height: 100vh; min-height: 100svh; overflow: hidden; background: #1a78d8; }
         .hero > .hero-art { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 100%; }
         canvas.px { image-rendering: pixelated; image-rendering: crisp-edges; }
         #hero-canvas { opacity: 0; }
@@ -146,6 +183,9 @@
         .chips .chip.enter { animation: chip-in .5s cubic-bezier(.2,.8,.2,1) both, float 6s ease-in-out infinite; animation-delay: 0s, -2s; }
         .chips .chip.leave { animation: chip-out .32s ease both; pointer-events: none; }
         .chips.tight .chip .sub { display: none; }
+        /* Tall screens: hero-anim.js stacks the chips between the copy and the monitor. */
+        .chips.stacked { justify-items: stretch; gap: 8px; }
+        .chips.stacked .chip { min-width: 0; height: 38px; padding: 0 13px; font-size: 12.5px; background: rgba(16,36,70,.62); }
         @keyframes float { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
         @keyframes ping { from { box-shadow: 0 0 0 0 currentColor; opacity: .9; } to { box-shadow: 0 0 0 9px currentColor; opacity: 0; } }
         @keyframes chip-in { from { opacity: 0; transform: translateY(14px) scale(.96); } }
@@ -198,8 +238,9 @@
 
         /* Harbour band */
         .band { position: relative; margin-top: 160px; }
-        .band > img { display: block; width: 100%; height: auto; min-height: 560px; object-fit: cover; object-position: 50% 50%; }
-        .band-in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 24px; text-align: center; }
+        .band > img { display: block; width: 100%; height: auto; min-height: 780px; object-fit: cover; object-position: 50% 50%; }
+        /* heading and tray sit up in the sky so the horizon, the sun and the boats stay in view below them */
+        .band-in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: clamp(64px, 7vw, 150px) 24px 0; text-align: center; }
         .band h2 { color: #fff; margin-bottom: 14px; text-shadow: 0 2px 14px rgba(40,50,120,.35); }
         .band h2 span { color: rgba(255,255,255,.75); }
         .tray { margin-top: 28px; background: rgba(255,255,255,.35); border: 1px solid rgba(255,255,255,.55); border-radius: 18px; padding: 8px; backdrop-filter: blur(6px); max-width: 860px; width: 100%; }
@@ -406,11 +447,29 @@
             .chip, .pulse, .bars span, .caret { animation: none; }
         }
 
+        /* Big monitors: the hero copy grows with the screen instead of sitting small in a corner. */
+        @media (min-width: 1700px) {
+            .nav-in { height: 92px; padding: 0 40px; }
+            .wordmark { font-size: 36px; }
+            .pillgroup { height: 46px; }
+            .pillgroup a { font-size: 17px; padding: 0 18px; }
+            .nav .cta { height: 46px; padding: 0 18px; font-size: 17px; }
+            .hero-copy { padding: clamp(150px, 13vh, 240px) 40px 0; max-width: min(46vw, 1100px); }
+            .hero h1 { font-size: clamp(80px, 4.9vw, 150px); margin-bottom: 1.6vw; }
+            .hero p { font-size: clamp(18px, 1.12vw, 32px); max-width: 34vw; margin-bottom: 2.2vw; }
+            .hero .row .cta { height: clamp(40px, 2.6vw, 68px); padding: 0 clamp(14px, 1.1vw, 28px); font-size: clamp(15px, .95vw, 24px); border-radius: clamp(8px, .6vw, 14px); }
+            .hero .fine { font-size: clamp(14px, .8vw, 20px); margin-top: 1.4vw; }
+            .chip { font-size: clamp(13px, .72vw, 19px); padding: clamp(10px, .6vw, 16px) clamp(14px, .8vw, 22px); border-radius: clamp(8px, .5vw, 12px); min-width: clamp(250px, 14vw, 380px); }
+            .chip i { width: clamp(7px, .42vw, 11px); height: clamp(7px, .42vw, 11px); }
+            .wrap { max-width: 1240px; }
+        }
+
         @media (max-width: 960px) {
             .pillgroup { display: none; }
             .chips { right: 24px; left: 24px; top: auto; bottom: 6%; justify-items: stretch; }
-            .hero > .hero-art { object-position: 12% 100%; }
-            .hero::after { content: ''; position: absolute; inset: 0 0 45% 0; z-index: 1; background: linear-gradient(to bottom, rgba(30,80,170,.55), rgba(30,80,170,0)); pointer-events: none; }
+            .hero > .hero-art { object-position: 66% 100%; }
+            .hero::after { content: ''; position: absolute; inset: 0 0 40% 0; z-index: 1; background: radial-gradient(130% 100% at 0% 0%, rgba(22,96,196,.6), rgba(22,96,196,0) 72%); pointer-events: none; }
+            .hero .fine, .hero p { text-shadow: 0 1px 2px rgba(14,52,128,.75), 0 0 14px rgba(20,70,160,.7); }
             .chip { min-width: 0; }
             .cols3, .ledger { grid-template-columns: 1fr 1fr; }
             .feat, .feat.flip { grid-template-columns: 1fr; gap: 32px; }
@@ -429,9 +488,17 @@
             .st-pills .sm { display: inline; }
             .st-pills button { font-size: 13px; padding-right: 11px; }
         }
+        @media (max-width: 760px) {
+            /* Harbour band: the boats stay in view above the agent tray instead of hiding behind it. */
+            .band { margin-top: 110px; }
+            .band > img { height: 340px; min-height: 0; }
+            .band-in { position: relative; inset: auto; margin-top: -340px; padding: 34px 16px 0; justify-content: flex-start; }
+            .band h2 { min-height: 300px; margin-bottom: 0; }
+            .tray { margin-top: 0; background: var(--panel); border-color: var(--line-2); backdrop-filter: none; }
+        }
         @media (max-width: 600px) {
             .cols3, .ledger, .rcpt, .stats { grid-template-columns: 1fr; }
-            .wl { flex-direction: column; } .phone { width: 280px; }
+            .wl { flex-direction: column; } .wl input[type=email] { flex: none; height: 48px; font-size: 16px; } .wl .cta { height: 48px; justify-content: center; } .phone { width: 280px; }
             .hero-copy { padding-top: 112px; }
             .links { gap: 32px; flex-wrap: wrap; }
             .mini-grid { grid-template-columns: 1fr; }
@@ -461,6 +528,15 @@
         window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
     </script>
     <script defer src="/_vercel/insights/script.js"></script>
+    <script>
+        /* Cadence runs on a Mac. On a phone or tablet the Download buttons become
+           "Email me the Mac link" (the form in the hero), set before first paint. */
+        (() => {
+            const ua = navigator.userAgent || '';
+            const touchMac = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;   // iPadOS
+            if (/iPhone|iPod|iPad|Android/.test(ua) || touchMac) document.documentElement.dataset.device = 'handheld';
+        })();
+    </script>
 </head>
 <body>
 
@@ -469,34 +545,60 @@
         <a href="/" class="wordmark">Cadence</a>
         <div class="nav-right">
             <div class="pillgroup">
-                <a href="#inbox">Inbox</a>
-                <a href="#talk">Talk</a>
                 <a href="#dictation">Dictation</a>
+                <a href="#talk">Talk</a>
+                <a href="#inbox">Inbox</a>
             </div>
             <div class="pillgroup"><a href="/docs.html">Docs</a></div>
             <div class="pillgroup"><a href="/pricing">Pricing</a></div>
             <div class="pillgroup"><a href="/blog/">Writing</a></div>
             <a href="/download" class="cta navcta">Download</a>
+            <details class="menu" id="menu">
+                <summary aria-label="Menu"><span></span><span></span><span></span></summary>
+                <div class="menu-panel">
+                    <a href="#dictation">Dictation</a>
+                    <a href="#talk">Talk</a>
+                    <a href="#inbox">Inbox</a>
+                    <a href="#iphone">iPhone</a>
+                    <a href="/pricing">Pricing</a>
+                    <a href="/docs.html">Docs</a>
+                    <a href="/guides/">Guides</a>
+                    <a href="/blog/">Writing</a>
+                    <a href="/faq.html">FAQ</a>
+                </div>
+            </details>
         </div>
     </div>
 </nav>
 
 <header class="hero">
-    <img class="px hero-art" src="art/hero.png" alt="Pixel art of a desk in a sunny meadow. The monitor shows the Cadence toolbar with blue, amber and green agent dots." width="1920" height="1080">
-    <canvas class="px hero-art" id="hero-canvas" width="480" height="270" aria-hidden="true"></canvas>
+    <img class="px hero-art" src="art/hero.png" alt="A desk in a sunny meadow, drawn as pixel art. The monitor shows a terminal and the Cadence toolbar with blue, amber and green agent dots." width="1920" height="1080">
+    <canvas class="px hero-art" id="hero-canvas" width="640" height="360" aria-hidden="true"></canvas>
     <div class="hero-copy">
         <h1>Every agent,<br>one inbox.</h1>
         <p>Cadence keeps Claude Code, Codex and the rest moving. Every question and finished task lands in one place. Answer with a keystroke, or just say it.</p>
-        <div class="row">
+        <div class="row desk">
             <a href="/download" class="cta">Download for Mac</a>
             <a href="#try" class="cta glass">Try the Inbox</a>
         </div>
-        <div class="fine">Free · <a href="/pricing">Pro from $20/mo</a> · No account · macOS 13+ on Apple Silicon · <a href="/windows">Windows preview</a></div>
+        <form class="ml hand" id="maclink" novalidate>
+            <label class="sr" for="ml-email">Your email address</label>
+            <input id="ml-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Your email" required>
+            <input class="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="submit" class="cta" id="ml-btn">Email me the Mac link</button>
+        </form>
+        <p class="ml-msg hand" id="ml-msg" role="status" aria-live="polite">Cadence runs on your Mac. One email, nothing else.</p>
+        <div class="row hand">
+            <a href="#try" class="cta glass">Try the Inbox</a>
+            <button type="button" class="cta glass" id="ml-share" hidden>Send it another way</button>
+        </div>
+        <div class="fine desk">Free · <a href="/pricing">Pro from $20/mo</a> · No account · macOS 13+ on Apple Silicon · <a href="/windows">Windows preview</a></div>
+        <div class="fine hand">Free · No account · macOS 13+ on Apple Silicon</div>
     </div>
     <div class="chips" aria-hidden="true">
-        <div class="chip amber" data-slot="1"><i></i><span class="lbl">Needs you</span> <b>Billing webhooks</b><span class="sub">Duplicate Stripe retries?</span></div>
-        <div class="chip blue" data-slot="0"><i></i><span class="lbl">Working</span> <b>Auth refactor</b><span class="sub">Editing session.ts</span></div>
-        <div class="chip green" data-slot="3"><i></i><span class="lbl">Done</span> <b>Docs site upgrade</b><span class="sub">Build green</span></div>
+        <div class="chip amber" data-slot="1"><i></i><span class="lbl">Needs you</span> <b>Contact form</b><span class="sub">Where do messages go?</span></div>
+        <div class="chip blue" data-slot="0"><i></i><span class="lbl">Working</span> <b>Password reset</b><span class="sub">Editing login.js</span></div>
+        <div class="chip green" data-slot="3"><i></i><span class="lbl">Done</span> <b>Typo sweep</b><span class="sub">12 typos fixed</span></div>
     </div>
 </header>
 
@@ -533,9 +635,9 @@
                 <svg class="play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.2v9.6a.6.6 0 0 0 .9.5l7.4-4.8a.6.6 0 0 0 0-1L4.9 1.7a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>
             </button>
             <ol class="st-pills" aria-label="Demo chapters">
-                <li><button type="button" data-ch="1"><span class="n">1</span><span class="lg">Agents ask</span><span class="sm">Agents ask</span><span class="xs">Ask</span><i></i></button></li>
-                <li><button type="button" data-ch="2"><span class="n">2</span><span class="lg">You answer in a keystroke</span><span class="sm">You answer</span><span class="xs">Answer</span><i></i></button></li>
-                <li><button type="button" data-ch="3"><span class="n">3</span><span class="lg">It lands back in the terminal</span><span class="sm">It lands back</span><span class="xs">Lands back</span><i></i></button></li>
+                <li><button type="button" data-ch="1"><span class="n">1</span><span class="lg">An agent has a question</span><span class="sm">A question</span><span class="xs">Asks</span><i></i></button></li>
+                <li><button type="button" data-ch="2"><span class="n">2</span><span class="lg">You press one key</span><span class="sm">One key</span><span class="xs">Key</span><i></i></button></li>
+                <li><button type="button" data-ch="3"><span class="n">3</span><span class="lg">It gets back to work</span><span class="sm">Back to work</span><span class="xs">Back</span><i></i></button></li>
             </ol>
         </div>
         <p class="live-cap reveal">Cadence's actual interface running in your browser, with sample agents in their terminals. Click or tap into it, then use <kbd class="k">1</kbd>–<kbd class="k">9</kbd>, <kbd class="k">esc</kbd>, <kbd class="k">J</kbd> <kbd class="k">K</kbd> and <kbd class="k">E</kbd>, or hover the dots.</p>
@@ -552,6 +654,135 @@
     </div>
 </section>
 
+<!-- What Cadence does -->
+<section class="what">
+    <div class="wrap">
+        <div class="eyebrow reveal">What Cadence does</div>
+        <h2 class="two reveal">Your voice does the typing.<br><span>Your agents keep moving.</span></h2>
+        <p class="lead reveal">Hold a key and talk, and the words land in whatever app you're in. Say what you need and it reaches the right coding agent. When one of them needs a decision, it comes to you instead of waiting in a terminal you forgot about.</p>
+
+        <!-- 1.0 Dictation -->
+        <div class="feat" id="dictation">
+            <div class="copy reveal">
+                <div class="eyebrow">1.0 / Dictation</div>
+                <h3 class="two">Hold ⌥ and talk<br><span>in any app</span></h3>
+                <p>The same key types for you everywhere: Slack, Mail, your editor, a terminal. Speech recognition runs on your Mac, so your audio never leaves it.</p>
+                <ul class="points">
+                    <li><small>1.1</small><div><b>On-device speech</b><p>NVIDIA's Parakeet model transcribes while you hold the key, with a second pass to get names right.</p></div></li>
+                    <li><small>1.2</small><div><b>Your vocabulary</b><p>Teach it project names, people and jargon, and set auto-corrections for the words it keeps missing.</p></div></li>
+                    <li><small>1.3</small><div><b>Text Polish</b><p>A small local model cleans up filler words and punctuation, and adjusts tone per app: casual in Slack, formal in email.</p></div></li>
+                </ul>
+                <p class="guide-link">Guide: <a href="/guides/offline-dictation-mac">Offline dictation for Mac</a></p>
+            </div>
+            <div>
+                <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/dictation-poster.jpg" width="1600" height="1000" aria-label="Recording of dictation: holding Option, the Cadence indicator listens and the words land in the text field">
+                    <source src="media/dictation.webm" type="video/webm">
+                    <source src="media/dictation.mp4" type="video/mp4">
+                </video>
+            </figure>
+                <div class="dstats reveal">
+                    <div><b>1.9%</b><span>word error rate, clean speech</span></div>
+                    <div><b>~330ms</b><span>from letting go to text</span></div>
+                    <div><b>0</b><span>phantom words from noise</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2.0 Talk + Director -->
+        <div class="feat flip" id="talk">
+            <div class="copy reveal">
+                <div class="eyebrow">2.0 / Talk and Director</div>
+                <h3 class="two">Say it once.<br><span>It finds the right agent.</span></h3>
+                <p>Double-tap <kbd class="k">⌥</kbd> and say what you want, or type it. Cadence knows what each agent is working on, which app you're looking at and which repos you have.</p>
+                <ul class="points">
+                    <li><small>2.1</small><div><b>Routing</b><p>Your request goes to the agent already on that work, or Cadence starts a new one in the right folder. It tells you where it went.</p></div></li>
+                    <li><small>2.2</small><div><b>The Director</b><p>An always-on agent that can see every other agent, read their work, message them, start new ones and close finished ones. Ask "what's left before I can ship?"</p></div></li>
+                    <li><small>2.3</small><div><b>Titles, not process IDs</b><p>Every agent gets a short plain-English title, so your list reads like a to-do list.</p></div></li>
+                    <li><small>2.4</small><div><b>Sets</b><p>Put a whole project's agents away as a set. Their windows close, they keep running, and one chip turns amber if anything needs you.</p></div></li>
+                </ul>
+                <p class="guide-link">Guide: <a href="/guides/voice-control-claude-code">Voice control for Claude Code</a></p>
+            </div>
+            <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/talk-poster.jpg" width="1600" height="1000" aria-label="Recording of Talk: a spoken request is routed to the Contact form agent and a typed one starts a new agent">
+                    <source src="media/talk.webm" type="video/webm">
+                    <source src="media/talk.mp4" type="video/mp4">
+                </video>
+            </figure>
+        </div>
+        <div class="pair">
+            <div class="reveal">
+                <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/director-poster.jpg" width="1600" height="1000" aria-label="Recording of the Director answering what is left before shipping">
+                    <source src="media/director.webm" type="video/webm">
+                    <source src="media/director.mp4" type="video/mp4">
+                </video>
+            </figure>
+                <p><b>Director.</b> Ask "what's left before I can ship?" and it answers from every agent's actual work.</p>
+            </div>
+            <div class="reveal">
+                <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/sets-poster.jpg" width="1600" height="1000" aria-label="Recording of putting a group of agents away as a set">
+                    <source src="media/sets.webm" type="video/webm">
+                    <source src="media/sets.mp4" type="video/mp4">
+                </video>
+            </figure>
+                <p><b>Sets.</b> Put a project's agents away. They keep running in one chip that turns amber when something needs you.</p>
+            </div>
+        </div>
+
+        <!-- 3.0 Toolbar + Inbox -->
+        <div class="feat" id="inbox">
+            <div class="copy reveal">
+                <div class="eyebrow">3.0 / Toolbar and Inbox</div>
+                <h3 class="two">See every agent<br><span>at a glance</span></h3>
+                <p>A thin toolbar on the edge of your screen shows one dot per agent. Blue is working, amber needs you, green is done. Open the Inbox and answer in a keystroke.</p>
+                <ul class="points">
+                    <li><small>3.1</small><div><b>Status at a glance</b><p>Hover the agent pill to peek at every agent's title. Click any agent to jump straight to it.</p></div></li>
+                    <li><small>3.2</small><div><b>Numbered answers</b><p>Questions, plan approvals and Allow/Deny prompts become numbered options. Press <kbd class="k">1</kbd> to <kbd class="k">9</kbd>, or start typing a reply.</p></div></li>
+                    <li><small>3.3</small><div><b>Recaps of finished work</b><p>When an agent finishes, you get a short recap and suggested next steps instead of a wall of output.</p></div></li>
+                    <li><small>3.4</small><div><b>Keyboard first</b><p><kbd class="k">J</kbd> <kbd class="k">K</kbd> to move, <kbd class="k">E</kbd> to dismiss, <kbd class="k">V</kbd> to talk, <kbd class="k">S</kbd> to attach a screenshot. Every answer has a two-second take-back.</p></div></li>
+                </ul>
+                <p class="guide-link">Guides: <a href="/guides/run-multiple-claude-code-agents">How to run multiple Claude Code agents</a> · <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac</a></p>
+            </div>
+            <figure class="clip reveal">
+                <video muted loop playsinline preload="none" poster="media/toolbar-poster.jpg" width="1600" height="1000" aria-label="Recording of the Cadence toolbar: an agent turns amber, then the peek list of agent titles opens">
+                    <source src="media/toolbar.webm" type="video/webm">
+                    <source src="media/toolbar.mp4" type="video/mp4">
+                </video>
+            </figure>
+        </div>
+
+        <!-- 4.0 The small things -->
+        <div class="minis">
+            <div class="eyebrow reveal">4.0 / The small things</div>
+            <h3 class="two reveal">Small things<br><span>you'll use all day</span></h3>
+            <div class="mini-grid reveal">
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></div>
+                    <h4>Take it back</h4>
+                    <p>Pressed the wrong number? Every answer waits two seconds, and <kbd class="k">esc</kbd> takes it back.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6.5 10h.01M10 10h.01M14 10h.01M17.5 10h.01M8 14h8"/></svg></div>
+                    <h4>Keyboard first</h4>
+                    <p><kbd class="k">1</kbd>–<kbd class="k">9</kbd> answer, <kbd class="k">J</kbd> <kbd class="k">K</kbd> move between cards, <kbd class="k">E</kbd> clears one, and Space starts a reply.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M9 12h6M12 9v6"/></svg></div>
+                    <h4>Point at it</h4>
+                    <p>Press <kbd class="k">S</kbd>, drag over part of your screen, and the screenshot goes along with your answer.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></div>
+                    <h4>Next steps</h4>
+                    <p>Finished work arrives with a one-line recap and replies you can send with one key.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Setup in three steps -->
 <section class="setup" id="setup">
     <div class="wrap">
@@ -559,7 +790,7 @@
         <h2 class="two reveal">Three steps.<br><span>No account, no config files.</span></h2>
         <div class="steps">
             <article class="step reveal">
-                <div class="sv" style="background-image:url(art/hero.png); background-size:250% auto; background-position:50% 18%">
+                <div class="sv" style="background-image:url(art/hero-desk.png); background-size:250% auto; background-position:50% 18%">
                     <div class="sv-in">
                         <img class="appicon" src="icon.png" alt="" width="64" height="64">
                         <div class="perms"><span class="glass">Microphone</span><span class="glass">Accessibility</span><span class="glass">Input Monitoring</span></div>
@@ -594,12 +825,12 @@
                 <div class="sv" style="background-image:url(art/lighthouse.png); background-size:125% auto; background-position:78% 30%">
                     <div class="sv-in">
                         <div class="mcard glass">
-                            <div class="h"><i></i>Billing webhooks<small>1 of 2</small></div>
-                            <p>How should I handle duplicate Stripe retries?</p>
-                            <div class="o on"><kbd>1</kbd>Idempotency key per event</div>
-                            <div class="o"><kbd>2</kbd>Lock the row</div>
+                            <div class="h"><i></i>Contact form<small>1 of 2</small></div>
+                            <p>Where should messages from the form go?</p>
+                            <div class="o on"><kbd>1</kbd>Email them to me</div>
+                            <div class="o"><kbd>2</kbd>Save them in a spreadsheet</div>
                         </div>
-                        <div class="receipt glass"><b>✓</b>Sent to Billing webhooks</div>
+                        <div class="receipt glass"><b>✓</b>Sent to Contact form</div>
                     </div>
                 </div>
                 <div class="step-copy">
@@ -615,138 +846,9 @@
     </div>
 </section>
 
-<!-- What Cadence does -->
-<section class="what">
-    <div class="wrap">
-        <div class="eyebrow reveal">What Cadence does</div>
-        <h2 class="two reveal">Keep writing the code.<br><span>Let Cadence keep the agents moving.</span></h2>
-        <p class="lead reveal">Five terminals, three of them waiting on a yes, and you find out ten minutes later when you happen to tab back. Cadence watches every agent for you, brings you only what needs a decision, and sends your answer back to the right place.</p>
-
-        <!-- 1.0 Toolbar + Inbox -->
-        <div class="feat" id="inbox">
-            <div class="copy reveal">
-                <div class="eyebrow">1.0 / Toolbar and Inbox</div>
-                <h3 class="two">See every agent<br><span>at a glance</span></h3>
-                <p>A thin toolbar on the edge of your screen shows one dot per agent. Blue is working, amber needs you, green is done. Open the Inbox and answer in a keystroke.</p>
-                <ul class="points">
-                    <li><small>1.1</small><div><b>Status at a glance</b><p>Hover the agent pill to peek at every agent's title. Click any agent to jump straight to it.</p></div></li>
-                    <li><small>1.2</small><div><b>Numbered answers</b><p>Questions, plan approvals and Allow/Deny prompts become numbered options. Press <kbd class="k">1</kbd> to <kbd class="k">9</kbd>, or start typing a reply.</p></div></li>
-                    <li><small>1.3</small><div><b>Recaps of finished work</b><p>When an agent finishes, you get a short recap and suggested next steps instead of a wall of output.</p></div></li>
-                    <li><small>1.4</small><div><b>Keyboard first</b><p><kbd class="k">J</kbd> <kbd class="k">K</kbd> to move, <kbd class="k">E</kbd> to dismiss, <kbd class="k">V</kbd> to talk, <kbd class="k">S</kbd> to attach a screenshot. Every answer has a two-second take-back.</p></div></li>
-                </ul>
-                <p class="guide-link">Guides: <a href="/guides/run-multiple-claude-code-agents">How to run multiple Claude Code agents</a> · <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac</a></p>
-            </div>
-            <figure class="clip reveal">
-                <video muted loop playsinline preload="none" poster="media/toolbar-poster.jpg" width="1600" height="1000" aria-label="Recording of the Cadence toolbar: an agent turns amber, then the peek list of agent titles opens">
-                    <source src="media/toolbar.webm" type="video/webm">
-                    <source src="media/toolbar.mp4" type="video/mp4">
-                </video>
-            </figure>
-        </div>
-
-        <!-- 2.0 Talk + Director -->
-        <div class="feat flip" id="talk">
-            <div class="copy reveal">
-                <div class="eyebrow">2.0 / Talk and Director</div>
-                <h3 class="two">Say it once.<br><span>It finds the right agent.</span></h3>
-                <p>Double-tap <kbd class="k">⌥</kbd> and say what you want, or type it. Cadence knows what each agent is working on, which app you're looking at and which repos you have.</p>
-                <ul class="points">
-                    <li><small>2.1</small><div><b>Routing</b><p>Your request goes to the agent already on that work, or Cadence starts a new one in the right folder. It tells you where it went.</p></div></li>
-                    <li><small>2.2</small><div><b>The Director</b><p>An always-on agent that can see every other agent, read their work, message them, start new ones and close finished ones. Ask "what's left before I can ship?"</p></div></li>
-                    <li><small>2.3</small><div><b>Titles, not process IDs</b><p>Every agent gets a short plain-English title, so your list reads like a to-do list.</p></div></li>
-                    <li><small>2.4</small><div><b>Sets</b><p>Put a whole project's agents away as a set. Their windows close, they keep running, and one chip turns amber if anything needs you.</p></div></li>
-                </ul>
-                <p class="guide-link">Guide: <a href="/guides/voice-control-claude-code">Voice control for Claude Code</a></p>
-            </div>
-            <figure class="clip reveal">
-                <video muted loop playsinline preload="none" poster="media/talk-poster.jpg" width="1600" height="1000" aria-label="Recording of Talk: a spoken request is routed to the Billing webhooks agent and a typed one starts a new agent">
-                    <source src="media/talk.webm" type="video/webm">
-                    <source src="media/talk.mp4" type="video/mp4">
-                </video>
-            </figure>
-        </div>
-        <div class="pair">
-            <div class="reveal">
-                <figure class="clip reveal">
-                <video muted loop playsinline preload="none" poster="media/director-poster.jpg" width="1600" height="1000" aria-label="Recording of the Director answering what is left before shipping">
-                    <source src="media/director.webm" type="video/webm">
-                    <source src="media/director.mp4" type="video/mp4">
-                </video>
-            </figure>
-                <p><b>Director.</b> Ask "what's left before I can ship?" and it answers from every agent's actual work.</p>
-            </div>
-            <div class="reveal">
-                <figure class="clip reveal">
-                <video muted loop playsinline preload="none" poster="media/sets-poster.jpg" width="1600" height="1000" aria-label="Recording of putting a group of agents away as a set">
-                    <source src="media/sets.webm" type="video/webm">
-                    <source src="media/sets.mp4" type="video/mp4">
-                </video>
-            </figure>
-                <p><b>Sets.</b> Put a project's agents away. They keep running in one chip that turns amber when something needs you.</p>
-            </div>
-        </div>
-
-        <!-- 3.0 Dictation -->
-        <div class="feat" id="dictation">
-            <div class="copy reveal">
-                <div class="eyebrow">3.0 / Dictation</div>
-                <h3 class="two">Hold ⌥ and talk<br><span>in any app</span></h3>
-                <p>The same key types for you everywhere: Slack, Mail, your editor, a terminal. Speech recognition runs on your Mac, so your audio never leaves it.</p>
-                <ul class="points">
-                    <li><small>3.1</small><div><b>On-device speech</b><p>NVIDIA's Parakeet model transcribes while you hold the key, with a second pass to get names right.</p></div></li>
-                    <li><small>3.2</small><div><b>Your vocabulary</b><p>Teach it project names, people and jargon, and set auto-corrections for the words it keeps missing.</p></div></li>
-                    <li><small>3.3</small><div><b>Text Polish</b><p>A small local model cleans up filler words and punctuation, and adjusts tone per app: casual in Slack, formal in email.</p></div></li>
-                </ul>
-                <p class="guide-link">Guide: <a href="/guides/offline-dictation-mac">Offline dictation for Mac</a></p>
-            </div>
-            <div>
-                <figure class="clip reveal">
-                <video muted loop playsinline preload="none" poster="media/dictation-poster.jpg" width="1600" height="1000" aria-label="Recording of dictation: holding Option, the Cadence indicator listens and the words land in the text field">
-                    <source src="media/dictation.webm" type="video/webm">
-                    <source src="media/dictation.mp4" type="video/mp4">
-                </video>
-            </figure>
-                <div class="dstats reveal">
-                    <div><b>1.9%</b><span>word error rate, clean speech</span></div>
-                    <div><b>~330ms</b><span>from letting go to text</span></div>
-                    <div><b>0</b><span>phantom words from noise</span></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 4.0 The small things -->
-        <div class="minis">
-            <div class="eyebrow reveal">4.0 / The small things</div>
-            <h3 class="two reveal">Small things<br><span>you'll use all day</span></h3>
-            <div class="mini-grid reveal">
-                <div class="mini">
-                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></div>
-                    <h4>Take it back</h4>
-                    <p>Pressed the wrong number? Every answer waits two seconds, and <kbd class="k">esc</kbd> takes it back.</p>
-                </div>
-                <div class="mini">
-                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6.5 10h.01M10 10h.01M14 10h.01M17.5 10h.01M8 14h8"/></svg></div>
-                    <h4>Keyboard first</h4>
-                    <p><kbd class="k">1</kbd>–<kbd class="k">9</kbd> answer, <kbd class="k">J</kbd> <kbd class="k">K</kbd> move between cards, <kbd class="k">E</kbd> clears one, and Space starts a reply.</p>
-                </div>
-                <div class="mini">
-                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M9 12h6M12 9v6"/></svg></div>
-                    <h4>Point at it</h4>
-                    <p>Press <kbd class="k">S</kbd>, drag over part of your screen, and the screenshot goes along with your answer.</p>
-                </div>
-                <div class="mini">
-                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z"/><path d="M22 2 11 13"/></svg></div>
-                    <h4>Next steps</h4>
-                    <p>Finished work arrives with a one-line recap and replies you can send with one key.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Harbour band: any agent -->
 <section class="band" id="agents">
-    <img class="px" src="art/harbour.png" alt="Pixel art of sailboats at sunset. Their sails are blue, amber and green, like agent statuses." width="1920" height="800">
+    <img class="px" src="art/harbour.png" alt="Pixel art of sailboats at sunset. Their sails are blue, amber and green, like agent statuses." width="1920" height="801" loading="lazy" data-loop="/art/harbour.webp">
     <div class="band-in">
         <h2 class="two">All the agents you already use<br><span>in one place</span></h2>
         <div class="tray">
@@ -777,20 +879,20 @@
             <p class="wl-msg" id="wl-msg" role="status" aria-live="polite">One email when the beta opens up. Nothing else.</p>
             <p class="guide-link">Guide: <a href="/guides/claude-code-on-iphone">Claude Code on your iPhone</a></p>
         </div>
-        <div class="phone reveal" role="img" aria-label="The Cadence Inbox on an iPhone, showing a question from the Billing webhooks agent">
+        <div class="phone reveal" role="img" aria-label="The Cadence Inbox on an iPhone, showing a question from the Contact form agent">
             <div class="phone-in">
                 <div class="island"></div>
                 <div class="ph-top"><span>9:41</span><span class="ph-sig">●●● ◗</span></div>
                 <div class="ph-title">Inbox <small>2</small></div>
                 <div class="ph-card">
-                    <div class="h"><i style="background:var(--amber)"></i>Billing webhooks</div>
-                    <p>How should I handle duplicate Stripe retries?</p>
-                    <div class="ph-opt sel">1 · Idempotency key per event</div>
-                    <div class="ph-opt">2 · Lock the row</div>
+                    <div class="h"><i style="background:var(--amber)"></i>Contact form</div>
+                    <p>Where should messages from the form go?</p>
+                    <div class="ph-opt sel">1 · Email them to me</div>
+                    <div class="ph-opt">2 · Save them in a spreadsheet</div>
                 </div>
                 <div class="ph-card">
-                    <div class="h"><i style="background:var(--green)"></i>Docs site upgrade</div>
-                    <p>Done. Build green, one deprecation left.</p>
+                    <div class="h"><i style="background:var(--green)"></i>Typo sweep</div>
+                    <p>Done. 12 typos fixed, one broken link left.</p>
                     <div class="ph-chips"><span>Fix it</span><span>Ship it</span></div>
                 </div>
                 <div class="ph-agents"><i style="background:var(--blue)"></i><i style="background:var(--amber)"></i><i style="background:var(--blue)"></i><i style="background:var(--green)"></i><i style="background:var(--blue)"></i><span>5 agents</span></div>
@@ -883,7 +985,7 @@
         </div>
         <div class="lh-card reveal">
             <div class="art">
-                <img class="px" src="art/lighthouse.png" alt="Pixel art of a lighthouse at dusk with an amber lamp" width="640" height="880">
+                <img class="px" src="art/lighthouse.png" alt="Pixel art of a lighthouse at dusk, its lamp sweeping a beam across the water" width="640" height="880" loading="lazy" data-loop="/art/lighthouse.webp">
                 <div class="ov">
                     <p>Lights up when an agent needs you. <span>Stays out of the way otherwise.</span></p>
                     <a href="/download" class="cta">Download for Mac</a>
@@ -904,6 +1006,69 @@
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 
+
+<script>
+/* Phones and tablets: "Email me the Mac link" (POST /api/send-link). Every
+   other Download button on the page jumps to that form. If the email can't
+   be sent, the visitor's own mail app opens with the link ready to send. */
+(() => {
+    const menu = document.getElementById('menu');
+    if (menu) {
+        menu.addEventListener('click', e => { if (e.target.closest('.menu-panel a')) menu.open = false; });
+        document.addEventListener('click', e => { if (menu.open && !menu.contains(e.target)) menu.open = false; });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') menu.open = false; });
+    }
+    if (document.documentElement.dataset.device !== 'handheld') return;
+    const form = document.getElementById('maclink');
+    if (!form) return;
+    const email = document.getElementById('ml-email'), btn = document.getElementById('ml-btn'), msg = document.getElementById('ml-msg');
+    const LINK = 'https://www.cadencevoice.ai/download';
+    const say = (t, cls) => { msg.className = 'ml-msg hand ' + (cls || ''); msg.innerHTML = t; };
+    const track = how => { if (window.va) window.va('event', { name: 'maclink', data: { how } }); };
+    document.querySelectorAll('a[href="/download"]').forEach(a => {
+        a.setAttribute('href', '#maclink');
+        if (/Download for Mac/.test(a.textContent)) a.textContent = a.textContent.replace(/↓?\s*Download for Mac/, 'Email me the Mac link');
+        else if (a.textContent.trim() === 'Download') a.textContent = 'Get the link';
+        a.addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); setTimeout(() => email.focus({ preventScroll: true }), 450); });
+    });
+    // arriving from a Download button on another page
+    if (location.hash === '#maclink') setTimeout(() => email.focus({ preventScroll: true }), 600);
+    const share = document.getElementById('ml-share');
+    if (share && navigator.share) {
+        share.hidden = false;
+        share.addEventListener('click', () => navigator.share({ title: 'Cadence for Mac', text: 'Cadence: every coding agent in one inbox. Open on your Mac.', url: LINK }).then(() => track('share')).catch(() => {}));
+    }
+    form.addEventListener('submit', async e => {
+        e.preventDefault();
+        const v = email.value.trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+            email.setAttribute('aria-invalid', 'true'); email.focus();
+            return say('That email doesn’t look right.', 'err');
+        }
+        email.removeAttribute('aria-invalid');
+        btn.disabled = true; btn.textContent = 'Sending…';
+        try {
+            const r = await fetch('/api/send-link', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: v, company: form.company.value }) });
+            if (r.ok) {
+                form.classList.add('done');
+                say('Sent. Open it on your Mac and Cadence is one click away.', 'ok');
+                dispatchEvent(new Event('resize'));
+                return track('email');
+            }
+            if (r.status === 422) { email.setAttribute('aria-invalid', 'true'); throw { shown: 'That email doesn’t look right.' }; }
+            if (r.status === 429) throw { shown: 'That’s a lot of tries. Give it a few minutes.' };
+            throw { fallback: true };
+        } catch (err) {
+            btn.disabled = false; btn.textContent = 'Email me the Mac link';
+            if (err && err.shown) return say(err.shown, 'err');
+            const href = 'mailto:' + encodeURIComponent(v) + '?subject=' + encodeURIComponent('Cadence for Mac') + '&body=' + encodeURIComponent('Download Cadence on your Mac:\n' + LINK);
+            say('We couldn’t send it just now. <a href="' + href + '">Email it to yourself</a> instead.', 'err');
+            track('fallback');
+        }
+    });
+})();
+</script>
 
 <script>
 /* iPhone waitlist: POST /api/waitlist. If the store isn't connected yet,
@@ -998,6 +1163,7 @@
 })();
 </script>
 <script src="hero-anim.js" defer></script>
+<script src="art-anim.js" defer></script>
 <script src="download-v2.js" defer></script>
 <script src="/platform.js" defer></script>
 </body>

@@ -12,6 +12,12 @@
   "redirects": [
     {
       "source": "/download",
+      "has": [{ "type": "header", "key": "user-agent", "value": ".*(iPhone|iPod|Android).*" }],
+      "destination": "/?from=phone#maclink",
+      "permanent": false
+    },
+    {
+      "source": "/download",
       "has": [{ "type": "header", "key": "user-agent", "value": ".*Windows NT.*" }],
       "destination": "/download/windows",
       "permanent": false

@@ -199,4 +199,25 @@ function resendEmail(email, found) {
     return { to: email, subject: 'Your Cadence Pro license key', ...body };
 }
 
-module.exports = { provider, send, purchaseEmail, resendEmail, iphoneUrl };
+// "Email me the Mac link": what a phone visitor asks for from the home page.
+function macLinkEmail(email) {
+    const body = render("Here's the link you asked for. Open this email on your Mac and click the link to download Cadence.", [
+        [
+            'Cadence for Mac',
+            [
+                { text: 'Download Cadence for Mac', href: `${SITE}/download` },
+                'Free, no account. Needs macOS 13 or later on Apple Silicon.',
+            ],
+        ],
+        [
+            'Getting started',
+            [
+                { text: 'Install and first run, in two minutes', href: `${SITE}/docs/quickstart` },
+                "You asked for this from cadencevoice.ai. It's the only email you'll get; your address isn't added to a list.",
+            ],
+        ],
+    ]);
+    return { to: email, subject: 'Your link to Cadence for Mac', ...body };
+}
+
+module.exports = { provider, send, purchaseEmail, resendEmail, macLinkEmail, iphoneUrl };

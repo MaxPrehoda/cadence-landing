@@ -62,27 +62,29 @@
   };
 
   // ── the scenario's agents ──────────────────────────────────────────
+  // A small bakery's website. The ids (billing, auth, flaky, docs) are from an
+  // earlier scene and are only internal; what a visitor reads is below.
   const HOME = "/Users/max/Developer";
   function freshState() {
     const now = Date.now();
     return {
       native: [
         {
-          id: "auth", kind: "standalone", display_name: "Auth refactor",
-          config: { name: "auth-refactor", display_name: "Auth refactor", working_dir: `${HOME}/shop/api`, kind: "standalone" },
+          id: "auth", kind: "standalone", display_name: "Password reset",
+          config: { name: "password-reset", display_name: "Password reset", working_dir: `${HOME}/bakery`, kind: "standalone" },
           status: "Running", session_id: "c-auth", total_cost_usd: 0.42, last_activity: now - 15_000, message_count: 18,
-          output_lines: [], current_activity: "Editing session.ts",
-          last_user_turn: "Move auth off localStorage tokens and onto signed cookies",
-          last_assistant_message: "Swapping the token helpers for cookie-based sessions now.",
+          output_lines: [], current_activity: "Editing login.js",
+          last_user_turn: "Add a forgot-password link to the login page",
+          last_assistant_message: "Adding the reset link and the email that goes with it.",
           spawned_at: now - 2_400_000,
         },
         {
-          id: "billing", kind: "standalone", display_name: "Billing webhooks",
-          config: { name: "billing-webhooks", display_name: "Billing webhooks", working_dir: `${HOME}/shop/billing`, kind: "standalone" },
+          id: "billing", kind: "standalone", display_name: "Contact form",
+          config: { name: "contact-form", display_name: "Contact form", working_dir: `${HOME}/bakery`, kind: "standalone" },
           status: "Running", session_id: "c-billing", total_cost_usd: 0.31, last_activity: now - 40_000, message_count: 11,
-          output_lines: [], current_activity: "Writing the webhook handler",
-          last_user_turn: "Handle the Stripe subscription webhooks.",
-          last_assistant_message: "The handler is in. One decision before I write the retry path.",
+          output_lines: [], current_activity: "Building the contact form",
+          last_user_turn: "Add a contact form to the site.",
+          last_assistant_message: "The form is in. One decision before I hook it up.",
           spawned_at: now - 1_900_000,
         },
         {
@@ -93,32 +95,32 @@
         },
       ],
       herdr: [
-        { pane_id: "w2:p1", workspace: "shop/web", label: "Flaky CI tests", kind: "codex", status: "working", cwd: `${HOME}/shop/web`, machine: "local",
-          last_lines: ["› Find out why the checkout tests flake on CI", "• Running vitest --repeat 20"], question: null, updated_at: now - 9_000 },
-        { pane_id: "w3:p1", workspace: "docs-site", label: "Docs site upgrade", kind: "amp", status: "working", cwd: `${HOME}/docs-site`, machine: "local",
-          last_lines: ["› Upgrade the docs site to Next 15", "✻ Working…"], question: null, updated_at: now - 25_000 },
-        { pane_id: "w4:p1", workspace: "shop/web", label: "Onboarding copy", kind: "gemini", status: "working", cwd: `${HOME}/shop/web`, machine: "local",
-          last_lines: ["› Rewrite the onboarding emails in a warmer voice", "✻ Working…"], question: null, updated_at: now - 4_000 },
+        { pane_id: "w2:p1", workspace: "bakery", label: "Slow homepage", kind: "codex", status: "working", cwd: `${HOME}/bakery`, machine: "local",
+          last_lines: ["› Find out why the homepage loads slowly", "• Running a speed check"], question: null, updated_at: now - 9_000 },
+        { pane_id: "w3:p1", workspace: "bakery", label: "Typo sweep", kind: "amp", status: "working", cwd: `${HOME}/bakery`, machine: "local",
+          last_lines: ["› Fix the typos across the site", "✻ Working…"], question: null, updated_at: now - 25_000 },
+        { pane_id: "w4:p1", workspace: "bakery", label: "Welcome email", kind: "gemini", status: "working", cwd: `${HOME}/bakery`, machine: "local",
+          last_lines: ["› Rewrite the welcome email in a warmer voice", "✻ Working…"], question: null, updated_at: now - 4_000 },
       ],
       buffers: {
         auth: [
-          "> Move auth off localStorage tokens and onto signed cookies",
-          "I'll start with where tokens are read and written.",
-          '[tool_use:Grep] {"pattern":"localStorage","path":"src/auth"}',
-          "[tool_result] src/auth/session.ts:14\nsrc/auth/client.ts:31",
-          "Two places. Swapping the token helpers for cookie-based sessions now.",
-          '[tool_use:Edit] {"file_path":"/Users/max/Developer/shop/api/src/auth/session.ts"}',
+          "> Add a forgot-password link to the login page",
+          "I'll start with the login page and where it sends people.",
+          '[tool_use:Grep] {"pattern":"password","path":"src/login"}',
+          "[tool_result] src/login/login.js:14\nsrc/login/form.js:31",
+          "Two places. Adding the reset link and the email that goes with it.",
+          '[tool_use:Edit] {"file_path":"/Users/max/Developer/bakery/src/login/login.js"}',
         ],
         billing: [
-          "> Handle the Stripe subscription webhooks.",
-          '[tool_use:Write] {"file_path":"/Users/max/Developer/shop/billing/src/webhooks.ts"}',
+          "> Add a contact form to the site.",
+          '[tool_use:Write] {"file_path":"/Users/max/Developer/bakery/src/contact.js"}',
           "[tool_result] File created.",
-          "The handler is in. One decision before I write the retry path.",
+          "The form is in. One decision before I hook it up.",
         ],
         director: [],
       },
       meta: {},
-      sets: { sets: [], last_used: { kind: "claude", cwd: `${HOME}/shop`, at: Math.floor(now / 1000) } },
+      sets: { sets: [], last_used: { kind: "claude", cwd: `${HOME}/bakery`, at: Math.floor(now / 1000) } },
       panelView: "inbox",
       anchor: "right",
     };
@@ -139,12 +141,12 @@
       request_id: "q-billing-1", session_id: "billing", tool_name: "AskUserQuestion", summary: "",
       requested_at: Date.now() - 60_000,
       tool_input: { questions: [{
-        header: "Duplicates", multiSelect: false,
-        question: "Stripe retries can arrive out of order. How should I handle duplicates?",
+        header: "Messages", multiSelect: false,
+        question: "Where should messages from the form go?",
         options: [
-          { label: "Idempotency key per event (Recommended)", description: "Store each event.id, skip any already handled" },
-          { label: "Lock the row while processing", description: "Serialize updates per subscription" },
-          { label: "Ignore and log them", description: "Process every delivery, log the repeats" },
+          { label: "Email them to me (Recommended)", description: "Each message arrives in your email" },
+          { label: "Save them in a spreadsheet", description: "One row per message, in a shared sheet" },
+          { label: "Both", description: "Email now, and keep a copy in the sheet" },
         ],
       }] },
     };
@@ -156,10 +158,10 @@
     d.status = "done";
     d.updated_at = Date.now() - ago;
     d.last_lines = [
-      "› Upgrade the docs site to Next 15",
-      "⏺ Upgraded to Next 15.2 and the build is green. One deprecation is left in the nav (next/link legacyBehavior). Want me to fix it now?",
+      "› Fix the typos across the site",
+      "⏺ Fixed 12 typos across 5 pages. One link on the menu page is broken. Want me to fix it now?",
     ];
-    S.meta["herdr:w3:p1"] = { recap: "Next 15.2, build green. One deprecation left in the nav.", updated_at: Date.now() };
+    S.meta["herdr:w3:p1"] = { recap: "12 typos fixed on 5 pages. One broken link left.", updated_at: Date.now() };
     herdrChanged();
     B.emit("agent-meta-changed", {});
   };
@@ -168,10 +170,10 @@
     a.status = "WaitingApproval";
     a.current_activity = undefined;
     a.last_activity = Date.now();
-    a.last_assistant_message = "Sessions are on signed cookies now. I'd like to run the auth tests before I touch the login form.";
+    a.last_assistant_message = "The reset link is in. I'd like to run the tests before I touch the sign-up page.";
     a.pending_approval = {
-      request_id: "q-auth-1", session_id: "auth", tool_name: "Bash", summary: "pnpm test src/auth",
-      requested_at: Date.now(), tool_input: { command: "pnpm test src/auth", description: "Run the auth tests" },
+      request_id: "q-auth-1", session_id: "auth", tool_name: "Bash", summary: "npm test",
+      requested_at: Date.now(), tool_input: { command: "npm test", description: "Run the tests" },
     };
     S.buffers.auth.push("[tool_result] The file has been updated.", a.last_assistant_message);
     B.emit("agent-approval-requested", { session_id: "auth" });
@@ -182,10 +184,10 @@
     h.status = "done";
     h.updated_at = Date.now();
     h.last_lines = [
-      "› Find out why the checkout tests flake on CI",
-      "⏺ Found it: the checkout tests shared one Stripe mock across workers. It is per worker now and 20 of 20 runs pass. Want me to open a PR?",
+      "› Find out why the homepage loads slowly",
+      "⏺ Found it: the banner photo was 4 MB. It is 180 KB now and the homepage loads in under a second. Want me to open a PR?",
     ];
-    S.meta["herdr:w2:p1"] = { recap: "A shared Stripe mock between workers. Fixed, 20/20 green.", updated_at: Date.now() };
+    S.meta["herdr:w2:p1"] = { recap: "The banner photo was 4 MB. Now 180 KB, loads in under a second.", updated_at: Date.now() };
     herdrChanged();
     B.emit("agent-meta-changed", {});
   };
@@ -272,14 +274,14 @@
     const doneList = [];
     for (const a of S.native) {
       if (a.kind === "director") continue;
-      if (a.pending_approval) lines.push(`**${label(a)}** is waiting on you: ${a.id === "billing" ? "how to handle duplicate Stripe events" : `it wants to run \`${a.pending_approval.tool_input?.command ?? "a command"}\``}.`);
+      if (a.pending_approval) lines.push(`**${label(a)}** is waiting on you: ${a.id === "billing" ? "where the contact form's messages should go" : `it wants to run \`${a.pending_approval.tool_input?.command ?? "a command"}\``}.`);
       else if (a.status === "Running") lines.push(`**${label(a)}** is still on it: ${(a.current_activity ?? "working").replace(/^./, (c) => c.toLowerCase())}.`);
       else doneList.push(label(a));
     }
     for (const h of S.herdr) {
-      if (h.status === "working") lines.push(`**${h.label}** is still running${h.pane_id === "w2:p1" ? " the checkout tests 20 times over" : ""}.`);
+      if (h.status === "working") lines.push(`**${h.label}** is still running${h.pane_id === "w2:p1" ? " the speed check" : ""}.`);
       else if (h.status === "blocked") lines.push(`**${h.label}** is waiting on you.`);
-      else doneList.push(h.label + (h.pane_id === "w3:p1" && S.meta["herdr:w3:p1"]?.recap?.includes("deprecation") ? " (one nav deprecation left)" : ""));
+      else doneList.push(h.label + (h.pane_id === "w3:p1" && S.meta["herdr:w3:p1"]?.recap?.includes("broken link") ? " (one broken link left)" : ""));
     }
     const head = lines.length ? `${lines.length === 1 ? "One thing" : `${["", "", "Two", "Three", "Four", "Five"][lines.length] ?? lines.length} things`} before you can ship:` : "Nothing. Everything is done and green.";
     return [head, "", ...lines.map((l, i) => `${i + 1}. ${l}`), ...(doneList.length ? ["", `Done: ${doneList.map((d) => `**${d}**`).join(", ")}.`] : [])].join("\n");
@@ -291,18 +293,15 @@
 
   // ── Talk routing (keyword match; else a new agent) ─────────────────
   const ROUTES = [
-    [/\b(bill|billing|webhooks?|stripe|payments?|refunds?)\b/, "billing"],
-    [/\b(auth|login|cookies?|sessions?|tokens?|sign[- ]?in)\b/, "auth"],
-    [/\b(flak\w*|ci|checkout tests?|vitest)\b/, "herdr:w2:p1"],
-    [/\b(docs?|next(\.js)?|nav|deprecations?)\b/, "herdr:w3:p1"],
-    [/\b(onboarding|emails?|copy|welcome)\b/, "herdr:w4:p1"],
+    [/\b(contact|forms?|messages?)\b/, "billing"],
+    [/\b(auth|login|passwords?|reset|sign[- ]?in)\b/, "auth"],
+    [/\b(slow|speed|homepage|loads?|banner|photos?)\b/, "herdr:w2:p1"],
+    [/\b(typos?|spelling|links?|menu)\b/, "herdr:w3:p1"],
+    [/\b(welcome|emails?|copy|newsletter)\b/, "herdr:w4:p1"],
   ];
   const STOP = new Set("a an the to in on for of and or with my our this that it please can you could would start new agent spin up kick off make add fix get have let lets me".split(" "));
-  function folderFor(t) {
-    if (/\bdocs?(-site)?\b/.test(t)) return ["~/Developer/docs-site", `${HOME}/docs-site`];
-    if (/\b(api|server|backend|database|db)\b/.test(t)) return ["~/Developer/shop/api", `${HOME}/shop/api`];
-    if (/\b(web|page|ui|css|button|landing|frontend|site)\b/.test(t)) return ["~/Developer/shop/web", `${HOME}/shop/web`];
-    return ["~/Developer/shop", `${HOME}/shop`];
+  function folderFor() {
+    return ["~/Developer/bakery", `${HOME}/bakery`];
   }
   let spawnSeq = 5;
   function routeText(text) {
@@ -341,7 +340,7 @@
       });
       return;
     }
-    const words = t.replace(/[^a-z0-9\s-]/g, " ").split(/\s+/).filter((w) => w && !STOP.has(w) && !/^(docs-site|shop|web|api)$/.test(w));
+    const words = t.replace(/[^a-z0-9\s-]/g, " ").split(/\s+/).filter((w) => w && !STOP.has(w) && !/^(bakery|site)$/.test(w));
     const name = words.slice(0, 3).join("-") || `claude-${spawnSeq}`;
     const [folder, cwd] = folderFor(t);
     later(800, () => B.emit("talk-state", { phase: "starting", text, target: name, folder }));
@@ -382,7 +381,7 @@
       const el = pop?.document.activeElement;
       if (el && el.matches?.("input, textarea")) {
         const card = pop.document.querySelector(".card .name")?.textContent ?? "";
-        const text = /billing/i.test(card) ? "Idempotency key, and log the repeats we skip" : /auth/i.test(card) ? "Yes, run them" : "Yes, go ahead";
+        const text = /contact/i.test(card) ? "Email them to me, and keep a copy" : /password/i.test(card) ? "Yes, run them" : "Yes, go ahead";
         el.focus();
         pop.document.execCommand("insertText", false, text);
       }
@@ -400,13 +399,13 @@
   const esc = (t) => String(t).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
   const SPIN = ["·", "✢", "✳", "✶", "✻", "✽", "✻", "✶", "✳", "✢"];
   const RESULT = {
-    "File created.": "Wrote 84 lines to src/webhooks.ts",
+    "File created.": "Wrote 84 lines to src/contact.js",
   };
   const T = (B.term = {});
   function termReset() {
     const now = Date.now();
-    T.billing = { title: "claude", path: "~/shop/billing", reveal: 3, since: now - 74_000, count: 0, answered: null };
-    T.flaky = { title: "codex", path: "~/shop/web", since: now - 38_000, count: 0, log: [], seen: new Set(), status: "working" };
+    T.billing = { title: "claude", path: "~/bakery", reveal: 3, since: now - 74_000, count: 0, answered: null };
+    T.flaky = { title: "codex", path: "~/bakery", since: now - 38_000, count: 0, log: [], seen: new Set(), status: "working" };
   }
   termReset();
   const termEl = (k) => document.getElementById(`term-${k}`);
@@ -426,7 +425,7 @@
       } else if (raw.startsWith("[tool_use:")) {
         const m = raw.match(/^\[tool_use:(\w+)\]\s*(.*)$/);
         let arg = "";
-        try { const j = JSON.parse(m[2]); arg = String(j.file_path ?? j.command ?? j.pattern ?? "").replace(/^.*\/shop\/[\w-]+\//, ""); } catch {}
+        try { const j = JSON.parse(m[2]); arg = String(j.file_path ?? j.command ?? j.pattern ?? "").replace(/^.*\/bakery\//, ""); } catch {}
         out.push(`<div class="l b"><span class="ok">⏺</span> <b>${esc(m[1] === "Edit" ? "Update" : m[1])}</b>(${esc(arg)})</div>`);
       } else if (raw.startsWith("[tool_result]")) {
         const r = raw.slice(14).split("\n")[0];
@@ -463,7 +462,7 @@
     for (const raw of h.last_lines ?? []) {
       if (/^✻/.test(raw) || st.seen.has(raw)) continue;
       st.seen.add(raw);
-      if (raw === "› Find out why the checkout tests flake on CI" || raw === "• Running vitest --repeat 20") continue;
+      if (raw === "› Find out why the homepage loads slowly" || raw === "• Running a speed check") continue;
       if (raw.startsWith("› ")) st.log.push(`<div class="l u">› ${esc(raw.slice(2))}</div>`);
       else st.log.push(`<div class="l b"><span class="txt">•</span> ${esc(raw.replace(/^[⏺•]\s*/, ""))}</div>`);
     }
@@ -473,11 +472,11 @@
       st.status = h.status;
     }
     const out = [
-      `<div class="l u">› Find out why the checkout tests flake on CI</div>`,
+      `<div class="l u">› Find out why the homepage loads slowly</div>`,
       `<div class="l b"><span class="txt">•</span> Explored</div>`,
-      `<div class="l sub"><span class="dim">└ Read checkout.test.ts, stripe-mock.ts, vitest.config.ts</span></div>`,
-      `<div class="l b"><span class="txt">•</span> Ran <b>pnpm vitest run checkout --repeat 20</b></div>`,
-      `<div class="l sub"><span class="dim">└ 17 passed · 3 failed (timeout in stripe-mock.ts)</span></div>`,
+      `<div class="l sub"><span class="dim">└ Read index.html, banner.jpg, styles.css</span></div>`,
+      `<div class="l b"><span class="txt">•</span> Ran <b>npm run speed-check</b></div>`,
+      `<div class="l sub"><span class="dim">└ Homepage took 6.2s · banner.jpg is 4 MB</span></div>`,
       ...st.log,
     ];
     if (h.status === "working") out.push(`<div class="l spin"><span class="dim g2">◦</span> <span class="shim">Working</span> <span class="dim">(<span class="s" data-since="${st.since}">0s</span> • esc to interrupt)</span></div>`);
@@ -728,7 +727,7 @@
       case "sets_put_away": {
         for (const x of S.sets.sets) x.open = false;
         const ids = (args.loose ?? []).map((m) => m.id);
-        if (ids.length) S.sets.sets.push({ id: `set-${S.sets.sets.length + 1}`, name: "shop", folder: `${HOME}/shop`, members: ids, open: false, opened_at: 0, tabs: [] });
+        if (ids.length) S.sets.sets.push({ id: `set-${S.sets.sets.length + 1}`, name: "bakery", folder: `${HOME}/bakery`, members: ids, open: false, opened_at: 0, tabs: [] });
         B.emit("sets-changed", S.sets);
         return S.sets;
       }
@@ -764,7 +763,7 @@
       }
       case "quick_new_agent": {
         const pane = `w${spawnSeq++}:p1`;
-        B.addHerdr({ pane_id: pane, workspace: "shop", label: `claude-${spawnSeq - 1}`, kind: args.kind || "claude", status: "working", cwd: `${HOME}/shop`, last_lines: ["✻ Ready"] });
+        B.addHerdr({ pane_id: pane, workspace: "bakery", label: `claude-${spawnSeq - 1}`, kind: args.kind || "claude", status: "working", cwd: `${HOME}/bakery`, last_lines: ["✻ Ready"] });
         return `claude-${spawnSeq - 1}`;
       }
       case "list_teams":
@@ -848,27 +847,27 @@
         if (s.id === "billing") {
           s.status = "Running";
           const ans = answer ?? "";
-          s.current_activity = /lock/i.test(ans) ? "Locking the row while processing" : /ignore|log/i.test(ans) ? "Logging duplicate events" : /idempot|event.?id|key/i.test(ans) ? "Adding an idempotency key per event" : "Working your answer in";
+          s.current_activity = /both|copy/i.test(ans) ? "Sending email and keeping a copy" : /sheet/i.test(ans) ? "Saving messages to the spreadsheet" : /e-?mail/i.test(ans) ? "Sending messages to your email" : "Working your answer in";
           if (asked && answer) T.billing.answered = { answer, question: asked };
           T.billing.since = Date.now();
           S.buffers.billing.push(`> ${answer}`);
           // The agent picks the answer up in its terminal and keeps going.
           const step = (ms, line) => RECORD || later(ms, () => { if (nat("billing")?.status === "Running") { S.buffers.billing.push(line); changed(); } });
-          step(1500, `[tool_use:Edit] {"file_path":"${HOME}/shop/billing/src/webhooks.ts"}`);
-          step(2700, "[tool_result] Updated src/webhooks.ts with 14 additions");
-          step(4300, '[tool_use:Bash] {"command":"pnpm test webhooks"}');
+          step(1500, `[tool_use:Edit] {"file_path":"${HOME}/bakery/src/contact.js"}`);
+          step(2700, "[tool_result] Updated src/contact.js with 14 additions");
+          step(4300, '[tool_use:Bash] {"command":"npm test contact"}');
           step(6400, "[tool_result] 16 passed (4 new)");
-          nativeFinish("billing", "Retries are safe now: every Stripe event.id is stored and repeats are skipped, with 4 new tests. Want me to open a PR?", 9000);
+          nativeFinish("billing", "The contact form works: a test message came through, and there are 4 new tests. Want me to open a PR?", 9000);
           landed();
         } else if (s.id === "auth") {
           if (args.allow) {
             s.status = "Running";
-            s.current_activity = "Running pnpm test src/auth";
-            nativeFinish("auth", "All 38 auth tests pass. Sessions now live in signed, httpOnly cookies.", 6000);
+            s.current_activity = "Running npm test";
+            nativeFinish("auth", "All 38 tests pass. The login page has a working reset link.", 6000);
           } else {
             s.status = "Running";
-            s.current_activity = "Checking the types instead";
-            nativeFinish("auth", "Okay, no test run. Types check clean; the cookie sessions are in.", 5000);
+            s.current_activity = "Checking the page instead";
+            nativeFinish("auth", "Okay, no test run. The reset link is in and the page loads clean.", 5000);
           }
         } else {
           s.status = "Running";
@@ -879,7 +878,7 @@
       case "session_send": {
         const a = nat(args.id);
         if (!a) return null;
-        streamTurn(args.id, args.prompt, a.id === "billing" ? "On it. I'll fold that in and run the webhook tests again." : "Got it. Picking that up next.", { activity: "Reading your note" });
+        streamTurn(args.id, args.prompt, a.id === "billing" ? "On it. I'll fold that in and run the form tests again." : "Got it. Picking that up next.", { activity: "Reading your note" });
         return null;
       }
       case "director_send":
@@ -903,8 +902,8 @@
         if (!h) return null;
         const t = String(args.text ?? "");
         const yes = /^(yes|go|ok|sure|do it|please)/i.test(t);
-        if (h.pane_id === "w3:p1") herdrWork(h.pane_id, t, yes ? "Fixed: the nav uses the new next/link API and the build has no warnings left." : "Okay, leaving the nav as it is.", yes ? "Nav deprecation fixed. No warnings left." : null, 8000);
-        else if (h.pane_id === "w2:p1") herdrWork(h.pane_id, t, yes ? "Opened PR #482: one Stripe mock per worker. CI is green." : "Okay, the fix stays local.", yes ? "PR #482 is open, CI green." : null, 8000);
+        if (h.pane_id === "w3:p1") herdrWork(h.pane_id, t, yes ? "Fixed: the menu link points to the right page, and every link on the site works." : "Okay, leaving the link as it is.", yes ? "Broken link fixed. Every link works." : null, 8000);
+        else if (h.pane_id === "w2:p1") herdrWork(h.pane_id, t, yes ? "Opened PR #482: a smaller banner photo. The homepage loads in under a second." : "Okay, the fix stays local.", yes ? "PR #482 is open." : null, 8000);
         else herdrWork(h.pane_id, t);
         return null;
       }

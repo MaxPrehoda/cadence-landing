@@ -27,9 +27,22 @@ Plain HTML, CSS and JS with no build step, deployed on Vercel.
 
 ## Art
 
-The pixel art is generated, not drawn: `python3 art/generate.py` (needs Pillow and NumPy) rewrites `art/hero.png`, `art/harbour.png` and `art/lighthouse.png`. Output is deterministic.
+The pixel art is sculpted, not drawn. Each scene is a small 3D world written for [ink-studio](https://github.com/siliconjungle/shapeshift-labs-ink-studio) (MIT), which bakes signed-distance solids into pixel-art splats and renders them: `art/ink/meadow.js` (the hero), `art/ink/harbour.js` and `art/ink/lighthouse.js`. ink-studio is not a dependency of the site; keep a checkout at `~/Developer/ink-studio` or point `INK_STUDIO` at one. It needs Node 18+, and `encode.sh` needs ffmpeg.
 
-The homepage hero is animated: `generate.py` also writes the layers in `art/hero/` (sky, drifting wisps, cloud bank, scene, eight wind frames of the trees and bushes with sun flecks moving through their shade (`tree0`–`tree7`), two sets of sun rays to crossfade, four foreground sway frames, a cloud shadow, edge dissolve) plus `meta.json`, and `hero-anim.js` composites them in a 480x270 canvas at 12 fps (toolbar dots on the monitor, typing, steam, swaying trees that speed up in gusts, falling leaves, breathing sun rays, cloud shadows drifting across the field, birds, a butterfly). Leaf clumps move by whole pixels and take their ragged edges from position-based noise (`hash_seed`), so they keep their shapes from frame to frame. It pauses off screen and shows one still frame with reduced motion; `art/hero.png` is the static fallback. The status chips over the hero play the same story as the monitor's toolbar dots (`PHASES` in `hero-anim.js`: questions get answered, work finishes, new work starts) and sit right on top of the monitor, placed from `monitor` in `meta.json`; hovering a chip rings its dot on the monitor.
+Every scene is rendered as a seamless 12-second loop at 12 frames a second, then packed as a lossless animated WebP at the picture's own pixel size (one art pixel is shown as about three screen pixels):
+
+```sh
+node art/ink/loop.js art/ink/meadow.js --out build/wide                                    && art/ink/encode.sh build/wide wide art/hero art/hero.png
+node art/ink/loop.js art/ink/meadow.js --cam tall --w 1080 --h 2340 --px 3 --out build/tall && art/ink/encode.sh build/tall tall art/hero art/hero-tall.png
+node art/ink/loop.js art/ink/harbour.js --w 1920 --h 800 --px 3 --out build/harbour        && art/ink/encode.sh build/harbour harbour art art/harbour.png
+node art/ink/loop.js art/ink/lighthouse.js --w 640 --h 880 --px 2 --out build/lighthouse    && art/ink/encode.sh build/lighthouse lighthouse art art/lighthouse.png
+```
+
+`loop.js` is what makes a loop close on itself: it sets every swaying leaf and grass blade to a whole number of turns per loop (and uses a private copy of ink-studio's renderer with one sway factor changed from 1.3 to 4/3 so that works out), and moves what each scene marks itself: clouds drift, flower heads nod, boats bob, the lighthouse beam makes one turn. It renders frames in parallel and writes a `meta.json` with the picture's size and where the monitor's glass sits. A loop takes a few minutes to render.
+
+The hero has two framings of the same meadow: `art/hero/wide.webp` for wide screens and `art/hero/tall.webp`, a portrait framing with the desk low and open sky above, for phones and upright tablets. `hero-anim.js` shows the right one, lays the hero out (on tall screens: whole device pixels per art pixel, the status chips stacked between the copy and the monitor, and a hero as tall as that needs) and draws the live parts on a transparent canvas over the picture at the same pixel size: the terminal on the monitor, the toolbar dots, the typing, steam, birds, butterflies and falling leaves. The status chips play the same story as the monitor's toolbar dots (`PHASES` in `hero-anim.js`: questions get answered, work finishes, new work starts); hovering a chip rings its dot on the monitor. With reduced motion the still pictures (`art/hero.png`, `art/hero-tall.png`) stay.
+
+The harbour and lighthouse start as stills (`art/harbour.png`, `art/lighthouse.png`); `art-anim.js` swaps in `art/harbour.webp` and `art/lighthouse.webp` when each is about to scroll into view.
 
 `art/agents/` holds the agent logos for the "Works with" strip, the setup steps and the harbour band. Claude, Codex (OpenAI), Gemini, Cursor and Copilot are tiles built from [Simple Icons](https://simpleicons.org) (CC0); Amp, OpenCode, Grok, Pi and Omp are each project's own site icon. `art/founder.png` is Max's GitHub avatar at its native 23x23 grid (scale it by whole numbers with `image-rendering: pixelated`).
 

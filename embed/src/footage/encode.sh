@@ -13,9 +13,9 @@ OUT=../../../media
 mkdir -p $OUT
 poster_at() {
   case $1 in
-    toolbar) echo 7.0 ;;    # peek open: billing amber, docs green
+    toolbar) echo 7.0 ;;    # peek open: contact form amber, typo sweep green
     inbox) echo 2.1 ;;      # answered with 1, take-back running
-    talk) echo 5.6 ;;       # "Sent to Billing webhooks" receipt
+    talk) echo 5.9 ;;       # "Sent to Contact form" receipt
     dictation) echo 5.6 ;;  # the dictated sentence just landed
     director) echo 6.4 ;;   # the full "before you can ship" answer
     sets) echo 4.95 ;;      # pointer on "Put away as a set"

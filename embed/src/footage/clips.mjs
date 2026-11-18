@@ -65,7 +65,7 @@ const CLIPS = {
     async setup(page) {
       await engage(page);
       await showWindow(page, "indicator", ".pill.agents .dot[data-agent]");
-      const SAID1 = "Tell the billing one the tests are flaky on CI";
+      const SAID1 = "Tell the contact form one to add a phone number field";
       await B(page, (said1) => {
         const b = __bridge;
         b.hooks.talkStop = () => {
@@ -91,7 +91,7 @@ const CLIPS = {
       await B(page, () => { __bridge.keys(["⌥", "⌥"], 800); __bridge.emit("recording-toggled", true); __bridge.show("talk", true); __bridge.emit("talk-state", { phase: "listening" }); });
       await page.frame({ name: "talk" }).evaluate(() => window.focus());
       await at(7.6);
-      await page.keyboard.type("Start an agent to fix the nav deprecation in docs-site", { delay: 26 });
+      await page.keyboard.type("Start an agent to add opening hours to the footer", { delay: 26 });
       await sleep(250);
       await page.keyboard.press("Enter");
     },
@@ -159,11 +159,11 @@ const CLIPS = {
         __bridge.directorText = () => [
           "Three things stand between you and shipping:",
           "",
-          "1. **Billing webhooks** needs your call on duplicate Stripe events. It's first in your Inbox.",
-          "2. **Auth refactor** is moving sessions to signed cookies. Tests next, about 10 minutes.",
-          "3. **Flaky CI tests** found the flake and is running checkout 20 times to be sure.",
+          "1. **Contact form** needs your call on where its messages go. It's first in your Inbox.",
+          "2. **Password reset** is adding the reset link. Tests next, about 10 minutes.",
+          "3. **Slow homepage** found the cause and is checking the speed again to be sure.",
           "",
-          "**Docs site upgrade** is done (one nav deprecation, not blocking). **Onboarding copy** isn't part of this release.",
+          "**Typo sweep** is done (one broken link, not blocking). **Welcome email** isn't part of this release.",
         ].join("\n");
       });
       await showWindow(page, "indicator", ".pill.agents .dot[data-agent]");
