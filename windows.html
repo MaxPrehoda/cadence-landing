@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadence for Windows: early preview</title>
+
+    <meta name="description" content="An early preview of Cadence for Windows 11. It has not been tested on Windows yet and the installer is unsigned. What to expect, how to install it, and where to send problems.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://www.cadencevoice.ai/windows">
+    <meta name="theme-color" content="#f5f5f2">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Cadence for Windows: early preview">
+    <meta property="og:description" content="An early preview of Cadence for Windows 11. It has not been tested on Windows yet and the installer is unsigned. What to expect, how to install it, and where to send problems.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/windows">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cadence for Windows: early preview">
+    <meta name="twitter:description" content="An early preview of Cadence for Windows 11. It has not been tested on Windows yet and the installer is unsigned. What to expect, how to install it, and where to send problems.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Cadence for Windows: early preview",
+        "url": "https://www.cadencevoice.ai/windows",
+        "description": "An early preview of Cadence for Windows 11. It has not been tested on Windows yet and the installer is unsigned. What to expect, how to install it, and where to send problems.",
+        "isPartOf": { "@type": "WebSite", "name": "Cadence", "url": "https://www.cadencevoice.ai/" },
+        "publisher": { "@type": "Organization", "name": "Cadence Labs", "url": "https://www.cadencevoice.ai/" }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <style>
+        .win { max-width: 1120px; margin: 0 auto; padding: 72px 24px 0; }
+        .w-head { max-width: 720px; margin-bottom: 40px; }
+        .w-head .lede { color: var(--ink-2); font-size: 18px; margin: 0 0 28px; }
+        .wl { display: flex; gap: 8px; max-width: 460px; position: relative; }
+        .wl input[type=email] { flex: 1; min-width: 0; height: 44px; padding: 0 14px; border: 1px solid var(--line-2); border-radius: 8px; background: #fff; font: inherit; font-size: 15px; color: var(--ink); }
+        .wl input[type=email]:focus { outline: none; border-color: #9a9a92; box-shadow: 0 0 0 3px rgba(0,0,0,.05); }
+        .wl input[aria-invalid=true] { border-color: #d9534f; }
+        .wl .cta { height: 44px; cursor: pointer; font-family: inherit; }
+        .wl .cta[disabled] { opacity: .6; cursor: default; }
+        .wl .hp, .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+        .wl-msg { margin: 12px 0 0; font-size: 13.5px; color: var(--ink-3); min-height: 20px; }
+        .wl-msg.ok { color: #17703b; } .wl-msg.err { color: #b4382f; }
+        .wl.done { display: none; }
+        .cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 56px; }
+        .col { padding: 24px; }
+        .col small { display: block; font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 10px; }
+        .col h2 { font-weight: 500; font-size: 20px; line-height: 1.3; margin: 0 0 8px; color: var(--ink); }
+        .col p { color: var(--ink-2); font-size: 15.5px; margin: 0; }
+        .faq-lite { max-width: 760px; margin: 72px 0 0; }
+        .faq-lite h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin: 28px 0 6px; }
+        .faq-lite p { color: var(--ink-2); margin: 0; }
+        .warn { border: 1px solid #e3c98a; background: #fbf4e2; border-radius: 10px; padding: 14px 16px; color: #5b4a17; font-size: 15px; margin: 0 0 24px; }
+        .warn b { color: #3f3310; font-weight: 600; }
+        .dl-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+        .dl-meta { margin: 12px 0 0; font-size: 13.5px; color: var(--ink-3); }
+        .sec { max-width: 760px; margin: 64px 0 0; }
+        .sec h2 { font-weight: 500; font-size: 24px; line-height: 1.25; margin: 0 0 12px; color: var(--ink); }
+        .sec p, .sec li { color: var(--ink-2); }
+        .sec ol, .sec ul { padding-left: 20px; margin: 0; display: grid; gap: 8px; }
+        .sec code, .faq-lite code { font-family: var(--mono); font-size: 13px; background: #ebebe5; border-radius: 4px; padding: 1px 5px; overflow-wrap: anywhere; }
+        .col ul { padding-left: 18px; margin: 0; display: grid; gap: 6px; color: var(--ink-2); font-size: 15px; }
+        @media (max-width: 860px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+        @media (max-width: 480px) { .wl { flex-direction: column; } }
+    </style>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download/mac"]')) window.va('event', { name: 'download', data: { arch: 'arm64' } }); });
+        document.addEventListener('click', (e) => { if (e.target.closest('a[href="/download/windows-preview"]')) window.va('event', { name: 'download', data: { arch: 'windows-x64-preview' } }); });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+    <header class="site-nav">
+        <div class="site-nav-in">
+            <a class="wordmark" href="/">Cadence</a>
+            <nav aria-label="Primary">
+                <a href="/docs.html">Docs</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/faq.html">FAQ</a>
+                <a href="/blog/">Writing</a>
+                <a class="cta dark" href="/download/mac">Download for Mac</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="win">
+        <div class="w-head">
+            <p class="eyebrow">Early preview / Windows</p>
+            <h1 class="two">Cadence for Windows. <span>An untested preview.</span></h1>
+            <p class="lede">This is the first Windows build of Cadence. It was written and compiled without a Windows PC to try it on, so nobody has run it yet. If you install it, you are among the first. The Mac version is the finished one.</p>
+            <p class="warn"><b>Before you download.</b> Nothing in this build has been tested on Windows. It may not start. The installer is not signed, so Windows will warn you about it. Don't rely on it for real work yet.</p>
+            <div class="dl-row">
+                <a class="cta dark" id="win-dl" href="/download/windows-preview">↓ Download the Windows preview</a>
+                <a class="cta" href="https://github.com/MaxPrehoda/cadence-landing/releases/tag/windows-preview">Release page</a>
+            </div>
+            <p class="dl-meta"><span id="win-file">Installer for Windows 11, x64 (Intel and AMD)</span><span id="win-size"></span><span id="win-date"></span></p>
+        </div>
+
+        <section class="sec" aria-label="Install">
+            <h2>Install it</h2>
+            <ol>
+                <li>Download the installer. Your browser may say the file "isn't commonly downloaded". Choose <b>Keep</b>.</li>
+                <li>Run it. Windows shows a blue box, "Windows protected your PC", because the installer is unsigned. Click <b>More info</b>, then <b>Run anyway</b>.</li>
+                <li>Open Cadence from the Start menu. It should walk you through setup and offer to download a speech model.</li>
+                <li>To remove it: Settings, Apps, Installed apps, Cadence, Uninstall.</li>
+            </ol>
+        </section>
+
+        <div class="cols">
+            <section class="panel col">
+                <small>Built, never run</small>
+                <h2>Should be there</h2>
+                <ul>
+                    <li>Hold <b>Alt</b> and speak to dictate into the app in front</li>
+                    <li>Speech recognition on your own PC</li>
+                    <li>The toolbar, the tray icon and Settings</li>
+                    <li>The Inbox and Talk, with Claude Code installed and signed in</li>
+                    <li>Voice commands and moving windows by voice</li>
+                </ul>
+            </section>
+            <section class="panel col">
+                <small>Left out of this build</small>
+                <h2>Not there</h2>
+                <ul>
+                    <li>Continue in the cloud</li>
+                    <li>Routing <code>claude</code> from your own terminal through Cadence</li>
+                    <li>Closing and restoring terminal windows with Sets</li>
+                    <li>Mail and iMessage actions, Split view</li>
+                    <li>Updates that install themselves: you get the new installer to run</li>
+                </ul>
+            </section>
+            <section class="panel col">
+                <small>What we don't know</small>
+                <h2>Everything else</h2>
+                <p>"Should be there" means the code exists and compiles for Windows. It does not mean it works. The parts most likely to misbehave are the toolbar's position on screen, the Alt key on some keyboards, and anything typed into a window running as administrator, which Windows doesn't allow.</p>
+            </section>
+        </div>
+
+        <section class="sec" aria-label="Report a problem">
+            <h2>When something breaks</h2>
+            <p>Please tell us. Write to <a href="mailto:support@cadencevoice.ai?subject=Windows%20preview">support@cadencevoice.ai</a> with what you did, what you expected and what happened, and attach the log file:</p>
+            <p><code>%LOCALAPPDATA%\com.cadence.app\logs\cadence.log</code></p>
+            <p>Paste that path into File Explorer's address bar to find it. The log stays on your PC unless you send it.</p>
+        </section>
+
+        <section class="faq-lite" aria-label="Windows questions">
+            <h3>Is it safe to run an unsigned installer?</h3>
+            <p>Unsigned means Windows can't check who made the file, so only install it if you downloaded it from this page or from the release page linked above. We don't have a code-signing certificate for Windows yet.</p>
+            <h3>What do I need?</h3>
+            <p>Windows 11 on an Intel or AMD PC. Windows on Arm and Windows 10 haven't been built for. For agents, Claude Code installed with its own Windows installer and signed in.</p>
+            <h3>Is it free? Does Pro work?</h3>
+            <p>The preview is free and needs no account, like the Mac app. Cadence Pro has not been tried on Windows, so don't buy it for this build.</p>
+            <h3>I'd rather wait for the tested version.</h3>
+            <p>Leave your email and you'll get one message, the day Cadence for Windows is tested and ready.</p>
+            <form class="wl" id="waitlist" novalidate style="margin-top:14px">
+                <label class="sr" for="wl-email">Email address</label>
+                <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
+                <input class="hp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <button type="submit" class="cta dark" id="wl-btn">Join the waitlist</button>
+            </form>
+            <p class="wl-msg" id="wl-msg" role="status" aria-live="polite">One email when it's ready. Nothing else. To be removed, write to support@cadencevoice.ai.</p>
+            <h3>I have a Mac too. Can I start there?</h3>
+            <p>Yes. Cadence is free on a Mac with Apple Silicon (M1 or newer) on macOS 13 or later, with no account. <a href="/download/mac">Download for Mac</a>, or read <a href="/docs.html">the docs</a> to see what it does. The docs describe the Mac app.</p>
+        </section>
+    </main>
+
+    <footer class="site-foot">
+        <div class="site-foot-in">
+            <div class="links">
+                <a href="/docs.html">Docs</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/faq.html">FAQ</a>
+                <a href="/blog/">Writing</a>
+                <a href="/changelog.html">Changelog</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms of Service</a>
+                <a href="mailto:support@cadencevoice.ai">Support</a>
+            </div>
+            <div class="copy">&copy; 2026 Cadence Labs</div>
+        </div>
+    </footer>
+
+    <script>
+    /* Show the preview's file name, size and date, read from its GitHub
+       release. If that fails the generic line stays. */
+    fetch('https://api.github.com/repos/MaxPrehoda/cadence-landing/releases/tags/windows-preview')
+        .then((r) => (r.ok ? r.json() : null))
+        .then((rel) => {
+            const a = rel && (rel.assets || []).find((x) => /x64|x86_64/.test(x.name) && /-setup\.exe$/.test(x.name));
+            if (!a) return;
+            document.getElementById('win-file').textContent = a.name;
+            document.getElementById('win-size').textContent = ' · ' + (a.size / 1048576).toFixed(1) + ' MB';
+            document.getElementById('win-date').textContent = ' · ' + new Date(rel.published_at || a.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        })
+        .catch(() => {});
+
+    /* Windows waitlist: POST /api/waitlist with list "windows". If the store
+       isn't connected, fall back to a prefilled email so no sign-up is lost. */
+    (() => {
+        const form = document.getElementById('waitlist');
+        const email = document.getElementById('wl-email');
+        const btn = document.getElementById('wl-btn');
+        const msg = document.getElementById('wl-msg');
+        const say = (t, cls) => { msg.className = 'wl-msg ' + (cls || ''); msg.innerHTML = t; };
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const v = email.value.trim();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+                email.setAttribute('aria-invalid', 'true'); email.focus();
+                return say('That email doesn’t look right.', 'err');
+            }
+            email.removeAttribute('aria-invalid');
+            btn.disabled = true; btn.textContent = 'Joining…';
+            try {
+                const r = await fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: v, list: 'windows', company: form.company.value }) });
+                const j = await r.json().catch(() => ({}));
+                if (r.ok) {
+                    form.classList.add('done');
+                    say(j.already ? 'You’re already on the list. We’ll email you when it’s ready.' : 'You’re on the list. We’ll email you once, when Cadence for Windows is tested and ready.', 'ok');
+                    if (window.va) window.va('event', { name: 'waitlist_join', data: { list: 'windows' } });
+                    return;
+                }
+                if (r.status === 422) { email.setAttribute('aria-invalid', 'true'); throw { shown: 'That email doesn’t look right.' }; }
+                throw { fallback: true };
+            } catch (err) {
+                btn.disabled = false; btn.textContent = 'Join the waitlist';
+                if (err && err.shown) return say(err.shown, 'err');
+                const a = document.createElement('a');
+                a.href = 'mailto:support@cadencevoice.ai?subject=' + encodeURIComponent('Windows waitlist') + '&body=' + encodeURIComponent('Please add ' + v + ' to the Windows waitlist.');
+                a.textContent = 'Email us';
+                msg.className = 'wl-msg err';
+                msg.replaceChildren('The waitlist is down for a moment. ', a, ' and we’ll add you by hand.');
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

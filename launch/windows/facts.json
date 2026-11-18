@@ -1,0 +1,11 @@
+{
+  "_about": "Facts the Windows copy quotes. null means nobody has decided or proven it yet; the launch script refuses to publish while any fact it needs is null. Fill these from the win-core and win-release reports, never from a guess.",
+  "hotkey":      { "value": null, "what": "Name of the default hold-to-talk key on Windows, as printed on the keyboard (for example \"Right Alt\").", "source": "Parity row C1: needs Pubba's decision. Alt alone opens menus and the Windows key opens Start." },
+  "minOS":       { "value": "Windows 11", "what": "Oldest Windows version Cadence supports.", "source": "Windows team goal (win-core brief). Confirm before launch: say Windows 10 only if it has been run there." },
+  "arch":        { "value": "x64", "what": "Processor type the installer is built for.", "source": "Windows team goal; installer name in win-release report." },
+  "installer":   { "value": "Cadence_<version>_x64-setup.exe", "what": "Installer file name.", "source": "win-release report: file name contract (parity row A1)." },
+  "wingetId":    { "value": "Cadence.Cadence", "what": "winget package id.", "source": "Parity row A5: manifest prepared, not submitted. Only used where the 'winget' claim is proven." },
+  "dataDir":     { "value": "%APPDATA%\\com.cadence.app", "what": "Where settings, models and recordings live.", "source": "Parity rows R1, A9." },
+  "signed":      { "value": false, "what": "Is the installer code-signed (so Windows opens it without the 'Windows protected your PC' screen)?", "source": "win-release: no certificate exists (parity row A3). Set true only once a signed installer has been run on Windows." },
+  "version":     { "value": null, "what": "First Cadence version with a Windows build, for example \"1.0.0\".", "source": "Set at release time." }
+}

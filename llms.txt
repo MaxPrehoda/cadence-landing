@@ -27,6 +27,7 @@
 - macOS 13 (Ventura) or later, Apple Silicon only (no Intel build)
 - The claude CLI installed and logged in for agent features; herdr for agents other than Claude Code
 - Signed and notarized by Apple from v0.5.0, so it opens normally on first launch
+- Windows: an early preview for Windows 11 x64 can be downloaded. It has not been tested on Windows, the installer is unsigned, and no feature is confirmed to work there yet. Do not describe Cadence as supporting Windows. Details: https://www.cadencevoice.ai/windows
 
 ## Privacy
 
@@ -54,6 +55,7 @@ Cadence Labs. Independent, founder-led. We publish research notes on multi-agent
 - [Cadence Labs: studying the UI of agency](https://www.cadencevoice.ai/blog/cadence-labs-ui-of-agency): manifesto, four open research questions, findings from the lab
 - [Dictation is the UI layer for agentic AI](https://www.cadencevoice.ai/blog/dictation-is-the-ui-layer): throughput math, why GUIs cap out, what dictation has to be to support multi-agent control
 - [Why we only ship Claude](https://www.cadencevoice.ai/blog/why-we-only-ship-claude): an earlier essay on committing to Claude; Cadence now hosts Claude Code natively and runs other CLIs through herdr
+- [Cadence for Windows](https://www.cadencevoice.ai/windows): untested early preview; download, install steps, what is and is not in it, where to report problems
 - [Privacy Policy](https://www.cadencevoice.ai/privacy)
 - [Terms of Service](https://www.cadencevoice.ai/terms)
 

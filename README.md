@@ -16,8 +16,13 @@ Plain HTML, CSS and JS with no build step, deployed on Vercel.
 | `blog/` | Writing (Cadence Labs); `blog/blog.css` sits on top of `site.css` |
 | `art/` | Pixel art and the social card (see below) |
 | `media/` | Recorded clips of the app UI used on the homepage |
-| `api/waitlist.js` | Vercel serverless function for the iPhone waitlist |
+| `api/waitlist.js` | Vercel serverless function for the iPhone and Windows waitlists |
+| `api/download.js` | `/download`, `/download/mac`, `/download/windows`: redirects to the newest installer |
 | `download-v2.js` | Fills the download card from the latest GitHub release of this repo |
+| `platform.js` | Points a Windows visitor's Download buttons at the right place |
+| `windows.html` | Cadence for Windows: what's coming and the waitlist |
+| `launch/windows/` | Unpublished Windows launch copy and its script (see below) |
+| `launch/windows-preview/` | Unpublished "untested Windows preview" state and its script (see below) |
 | `llms.txt`, `robots.txt`, `sitemap.xml` | Crawler and AI-search metadata |
 
 ## Art
@@ -30,13 +35,21 @@ The homepage hero is animated: `generate.py` also writes the layers in `art/hero
 
 The social card `art/og.png` (1200x630) is a screenshot of `art/og-card.html`. Serve the repo locally, open that page at 1200x630 and screenshot it after editing.
 
-## iPhone waitlist
+## Waitlists
 
-The form on the homepage posts to `/api/waitlist`, which stores emails in Upstash Redis.
+The iPhone form on the homepage and the Windows form on `/windows` post to `/api/waitlist` (with `list` set to `iphone` or `windows`), which stores emails in Upstash Redis.
 
 To turn it on: in the Vercel project, open **Storage**, create an **Upstash for Redis** database (free tier is fine) and connect it to this project. That adds `KV_REST_API_URL` and `KV_REST_API_TOKEN` (or the `UPSTASH_REDIS_REST_*` pair) to the environment; redeploy. Until then the endpoint returns 503 and the form offers an email link instead, so no sign-up is lost.
 
-To read the list, run `SMEMBERS waitlist:iphone` in the Upstash console. Sign-up times are in the hash `waitlist:iphone:joined`.
+To read a list, run `SMEMBERS waitlist:iphone` or `SMEMBERS waitlist:windows` in the Upstash console. Sign-up times are in the hashes `waitlist:iphone:joined` and `waitlist:windows:joined`.
+
+## Windows
+
+Cadence for Windows isn't released. Until it is, `/windows` says so and takes waitlist sign-ups, and a Windows browser that asks for `/download` is sent there (a User-Agent redirect in `vercel.json`, then `api/download.js`); `platform.js` relabels the Download buttons for Windows visitors.
+
+A middle state, an untested preview download, is in `launch/windows-preview/`: `node scripts/windows-preview.mjs apply --tag <tag>` turns it on and `undo` turns it off. Its README has the order of steps.
+
+The launch copy is written but unpublished, in `launch/windows/`. `node scripts/windows-launch.mjs status` shows what is ready; it only publishes what the Windows team's parity matrix marks as run on Windows. Read `launch/windows/README.md` before touching it, and run `status` after changing any page's copy so the kit stays in step.
 
 ## Releases
 

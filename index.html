@@ -491,7 +491,7 @@
             <a href="/download" class="cta">Download for Mac</a>
             <a href="#try" class="cta glass">Try the Inbox</a>
         </div>
-        <div class="fine">Free · <a href="/pricing">Pro from $20/mo</a> · No account · macOS 13+ on Apple Silicon</div>
+        <div class="fine">Free · <a href="/pricing">Pro from $20/mo</a> · No account · macOS 13+ on Apple Silicon · <a href="/windows">Windows preview</a></div>
     </div>
     <div class="chips" aria-hidden="true">
         <div class="chip amber" data-slot="1"><i></i><span class="lbl">Needs you</span> <b>Billing webhooks</b><span class="sub">Duplicate Stripe retries?</span></div>
@@ -848,7 +848,7 @@
                 <details><summary>Can I use it from my phone?</summary><p>Yes, in beta. The iPhone app is in a private TestFlight beta: it pairs with your Mac over a QR code, traffic between them is end-to-end encrypted, and you answer your agents from Home, a widget or Siri. <a href="#iphone">Join the waitlist</a> and you'll get one email when it opens up. More in <a href="/guides/claude-code-on-iphone">Claude Code on your iPhone</a>.</p></details>
                 <details><summary>What does Cadence send, and where does it go?</summary><p>Speech recognition and Text Polish run on your Mac, and audio is never uploaded. Agents, routing, titles and recaps use your own Claude Code login; other agents talk to their own providers, as they already do. Cloud Polish and the Intent Engine only run if you add your own Anthropic API key. The <a href="/privacy.html">privacy policy</a> has the details.</p></details>
                 <details><summary>Does it work offline?</summary><p>Dictation and Text Polish do, once their models are downloaded. Agents, Talk routing and the Director need a connection, because they talk to Claude or your other agents' providers.</p></details>
-                <details><summary>What do I need?</summary><p>A Mac with Apple Silicon (M1 or newer) on macOS 13 or later. For agents, the <code>claude</code> CLI installed and signed in, plus herdr if you want agents other than Claude Code. Dictation works without either.</p></details>
+                <details><summary>What do I need?</summary><p>A Mac with Apple Silicon (M1 or newer) on macOS 13 or later. For agents, the <code>claude</code> CLI installed and signed in, plus herdr if you want agents other than Claude Code. Dictation works without either.</p><p>On Windows? There is an early preview for Windows 11. It has not been tested on Windows yet. <a href="/windows">Cadence for Windows</a> says what to expect.</p></details>
             </div>
             <aside class="faq-side reveal">
                 <p>Something else on your mind? Write to <a href="mailto:support@cadencevoice.ai">support@cadencevoice.ai</a> and a person answers.</p>
@@ -865,12 +865,14 @@
             <h2 class="two">Run every agent<br><span>from one inbox</span></h2>
             <div class="reqs">
                 <div><b>macOS 13 or later</b> on Apple Silicon (M1 or newer).</div>
+                <div><b>Windows 11:</b> an early preview. Not tested on Windows yet, and unsigned. <a href="/windows">Read this first</a>.</div>
                 <div><b>Permissions:</b> Microphone, Accessibility and Input Monitoring.</div>
                 <div><b>For agents:</b> the <code>claude</code> CLI, signed in. Other agents run through herdr.</div>
                 <div><b>Updating from v0.4 or earlier:</b> if Cadence asks for permissions System Settings already shows as on, run <code>tccutil reset All com.cadence.app</code> in Terminal and reopen Cadence.</div>
             </div>
             <a id="download-arm64" href="/download" class="cta dark">↓ Download for Mac</a>
             <a id="release-notes-arm64" href="https://github.com/MaxPrehoda/cadence-landing/releases" class="cta" style="margin-left:6px">Release notes</a>
+            <span data-os-only="mac"><a href="/windows" class="cta" style="margin-left:6px">Windows preview</a></span>
             <div class="meta"><span id="arm64-title">Cadence for Mac, Apple Silicon</span> · <span id="arm64-file">.dmg</span> · <span id="arm64-size">-</span> · <span id="arm64-date">-</span></div>
 
             <div class="links">
@@ -997,5 +999,6 @@
 </script>
 <script src="hero-anim.js" defer></script>
 <script src="download-v2.js" defer></script>
+<script src="/platform.js" defer></script>
 </body>
 </html>

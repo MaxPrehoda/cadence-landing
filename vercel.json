@@ -5,10 +5,17 @@
 
   "rewrites": [
     { "source": "/download", "destination": "/api/download" },
+    { "source": "/download/:os(mac|windows|windows-preview)", "destination": "/api/download?os=:os" },
     { "source": "/docs/:page([a-z0-9-]+)", "destination": "/docs" }
   ],
 
   "redirects": [
+    {
+      "source": "/download",
+      "has": [{ "type": "header", "key": "user-agent", "value": ".*Windows NT.*" }],
+      "destination": "/download/windows",
+      "permanent": false
+    },
     {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "cadencevoice.org" }],

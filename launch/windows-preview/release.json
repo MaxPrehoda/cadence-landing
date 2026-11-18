@@ -1,0 +1,15 @@
+{
+  "_about": "Names the preview page and the download quote. scripts/windows-preview.mjs refuses to apply while any value is null.",
+  "tag": {
+    "value": "windows-preview",
+    "source": "The GitHub pre-release tag on MaxPrehoda/cadence-landing that carries Cadence_<version>_x64-setup.exe. Take it from reports/windows-ship.md (win-release). Must be a pre-release, not the latest release."
+  },
+  "hotkey": {
+    "value": "Alt",
+    "source": "win-core report: the Windows default is Alt today (src/state.rs:599). Change here if Pubba picks another default before the build."
+  },
+  "logFile": {
+    "value": "%LOCALAPPDATA%\\com.cadence.app\\logs\\cadence.log",
+    "source": "win-core report (src/lib.rs log_file). Confirm against windows-ship.md."
+  }
+}

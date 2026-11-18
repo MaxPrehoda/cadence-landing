@@ -1,14 +1,17 @@
 // POST /api/waitlist  { email, list?, company? }  ->  { ok, already }
 //
-// Stores sign-ups for the iPhone app waitlist in Upstash Redis (Vercel
-// Marketplace "Upstash for Redis" / Vercel KV). Connecting that store to
-// the project injects the REST credentials below; until then the endpoint
-// answers 503 and the page falls back to an email link.
+// Stores waitlist sign-ups in Upstash Redis (Vercel Marketplace "Upstash for
+// Redis" / Vercel KV). There are two lists: "iphone" (the iPhone app, the
+// default when no list is named) and "windows" (Cadence for Windows).
+// Connecting that store to the project injects the REST credentials below;
+// until then the endpoint answers 503 and the page falls back to an email
+// link.
 //
-// Read the list: in the Upstash console run  SMEMBERS waitlist:iphone
-// (sign-up times are in the hash waitlist:iphone:joined).
+// Read a list: in the Upstash console run  SMEMBERS waitlist:iphone  or
+// SMEMBERS waitlist:windows  (sign-up times are in the hashes
+// waitlist:iphone:joined and waitlist:windows:joined).
 
-const LISTS = new Set(['iphone']);
+const LISTS = new Set(['iphone', 'windows']);
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/;
 
 function creds() {

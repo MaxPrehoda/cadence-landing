@@ -26,6 +26,24 @@ async function loadDownloadLinks() {
         const headerVersion = document.getElementById('header-version');
         if (headerVersion) headerVersion.textContent = version;
 
+        // Once Cadence for Windows is out (platform.js sets winLive), a
+        // Windows visitor sees the installer's details in the same card.
+        const root = document.documentElement.dataset;
+        const setupAsset = assets.find(a =>
+            (a.name.includes('x64') || a.name.includes('x86_64')) && a.name.endsWith('-setup.exe')
+        );
+        if (root.os === 'windows' && root.winLive === '1') {
+            if (setupAsset) populateCard('arm64', setupAsset, version, releaseDate, releaseUrl, 'Windows x64');
+            else {
+                // No installer on this release: don't describe the Mac file.
+                const title = document.getElementById('arm64-title');
+                const file = document.getElementById('arm64-file');
+                if (title) title.textContent = 'Cadence for Windows';
+                if (file) file.textContent = 'x64 installer';
+            }
+            return;
+        }
+
         // Populate Apple Silicon card
         if (arm64Asset) {
             populateCard('arm64', arm64Asset, version, releaseDate, releaseUrl);
@@ -42,7 +60,7 @@ async function loadDownloadLinks() {
     }
 }
 
-function populateCard(arch, asset, version, releaseDate, releaseUrl) {
+function populateCard(arch, asset, version, releaseDate, releaseUrl, labelOverride) {
     const title = document.getElementById(`${arch}-title`);
     const file = document.getElementById(`${arch}-file`);
     const size = document.getElementById(`${arch}-size`);
@@ -50,14 +68,17 @@ function populateCard(arch, asset, version, releaseDate, releaseUrl) {
     const downloadBtn = document.getElementById(`download-${arch}`);
     const notesBtn = document.getElementById(`release-notes-${arch}`);
 
-    const label = arch === 'arm64' ? 'Apple Silicon' : 'Intel';
+    const label = labelOverride || (arch === 'arm64' ? 'Apple Silicon' : 'Intel');
     const sizeInMB = (asset.size / (1024 * 1024)).toFixed(1);
 
     if (title) title.textContent = `Cadence ${version}, ${label}`;
     if (file) file.textContent = asset.name;
     if (size) size.textContent = `${sizeInMB} MB`;
     if (date) date.textContent = releaseDate;
-    if (downloadBtn) downloadBtn.href = asset.browser_download_url;
+    // On a Windows PC platform.js has already pointed this button at the
+    // Windows page; don't hand that visitor a Mac disk image.
+    const onWindows = document.documentElement.dataset.os === 'windows';
+    if (downloadBtn && !onWindows) downloadBtn.href = asset.browser_download_url;
     if (notesBtn) notesBtn.href = releaseUrl;
 }
 
