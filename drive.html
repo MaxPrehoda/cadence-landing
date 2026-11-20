@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadence Drive: one folder on every computer, shared by every agent</title>
+
+    <meta name="description" content="Cadence Drive is a real folder, ~/Cadence Drive, kept the same on every computer you pair with Cadence and on your iPhone. See which agent wrote what, edits merge on their own, and it is sealed end to end. Part of Cadence Pro.">
+    <meta name="author" content="Cadence Labs">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1">
+    <link rel="canonical" href="https://www.cadencevoice.ai/drive">
+    <meta name="theme-color" content="#f5f5f2">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Cadence">
+    <meta property="og:title" content="Cadence Drive: one folder on every computer, shared by every agent">
+    <meta property="og:description" content="A real folder kept the same on every computer you pair with Cadence and on your iPhone. See which agent wrote what, edits merge on their own, and it is sealed end to end. Part of Cadence Pro.">
+    <meta property="og:url" content="https://www.cadencevoice.ai/drive">
+    <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:video" content="https://www.cadencevoice.ai/media/drive-trailer.mp4">
+    <meta property="og:video:type" content="video/mp4">
+    <meta property="og:video:width" content="1920">
+    <meta property="og:video:height" content="1080">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cadence Drive: one folder on every computer, shared by every agent">
+    <meta name="twitter:description" content="A real folder kept the same on every computer you pair with Cadence and on your iPhone. See which agent wrote what, edits merge on their own, and it is sealed end to end. Part of Cadence Pro.">
+    <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
+
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "@id": "https://www.cadencevoice.ai/drive#webpage",
+        "name": "Cadence Drive",
+        "url": "https://www.cadencevoice.ai/drive",
+        "description": "Cadence Drive is a real folder, ~/Cadence Drive, kept the same on every computer you pair with Cadence and on your iPhone. Cadence shows which agent wrote what, merges edits on its own, and seals every file end to end. Part of Cadence Pro.",
+        "isPartOf": { "@type": "WebSite", "name": "Cadence", "url": "https://www.cadencevoice.ai/" },
+        "publisher": { "@type": "Organization", "name": "Cadence Labs", "url": "https://www.cadencevoice.ai/" },
+        "about": {
+            "@type": "SoftwareApplication",
+            "name": "Cadence",
+            "applicationCategory": "DeveloperApplication",
+            "operatingSystem": "macOS 13.0+",
+            "softwareVersion": "0.12.0",
+            "url": "https://www.cadencevoice.ai/",
+            "featureList": [
+                "Cadence Drive: one folder, ~/Cadence Drive, kept the same on every paired computer and the iPhone app",
+                "Each change credited to the agent that made it, live",
+                "Edits to different lines merge on their own; CSV and TSV merge row by row",
+                "Collisions arrive in the Inbox with a combined version by Claude, either side, or both as separate files",
+                "The last 200 versions of every file; deleted files wait 30 days in the Trash",
+                "Sealed end to end with AES-256-GCM; the relay can't read file contents or names"
+            ],
+            "offers": { "@type": "Offer", "name": "Cadence Pro, monthly", "price": "20.00", "priceCurrency": "USD", "url": "https://www.cadencevoice.ai/pricing" }
+        },
+        "video": {
+            "@type": "VideoObject",
+            "name": "Cadence Drive",
+            "description": "A short film about Cadence Drive: one folder on every computer, shared by every agent.",
+            "thumbnailUrl": "https://www.cadencevoice.ai/media/drive-trailer-poster.jpg",
+            "contentUrl": "https://www.cadencevoice.ai/media/drive-trailer.mp4",
+            "uploadDate": "2026-11-20",
+            "width": 1920,
+            "height": 1080
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is Cadence Drive a normal folder?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes. It is ~/Cadence Drive in your home folder. Finder, your editor, your terminal and every agent open it like any other folder. Cadence keeps it the same on each computer you've paired and turned Drive on." }
+            },
+            {
+                "@type": "Question",
+                "name": "Can Cadence read my files?",
+                "acceptedAnswer": { "@type": "Answer", "text": "No. Each file is sealed on your device with AES-256-GCM, using keys that only your devices hold. The relay stores the sealed copies, but it can't read what is in them or what they're called." }
+            },
+            {
+                "@type": "Question",
+                "name": "What happens when two agents edit the same file?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Edits to different lines combine on their own, and CSV and TSV files merge row by row. When two agents change the same lines, a card arrives in the Inbox on your Mac and iPhone with both sides and a combined version by Claude. Keep the combined version, either side, or both as separate files. There is a 2-second undo, and both agents get the result." }
+            },
+            {
+                "@type": "Question",
+                "name": "Can I get an old version of a file back?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes. Open the file and use the history bar to replay it and restore any of its last 200 versions. Deleted files, deleted on this computer or another one, wait in the Trash for 30 days." }
+            },
+            {
+                "@type": "Question",
+                "name": "How big can files be?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Up to 512 MB each. Empty folders sync once a file is in them." }
+            },
+            {
+                "@type": "Question",
+                "name": "What does Cadence Drive cost?",
+                "acceptedAnswer": { "@type": "Answer", "text": "It comes with Cadence Pro at no extra charge: $20 a month, $200 a year, or $249 once for the first 100. It is in Cadence 0.12.0 and later. The iPhone app is in a TestFlight beta." }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600&family=Instrument+Serif&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <style>
+        .drv { max-width: 1120px; margin: 0 auto; padding: 72px 24px 0; }
+        code { font-family: var(--mono); font-size: .86em; background: var(--code-bg); border-radius: 4px; padding: 1px 5px; color: var(--ink); white-space: nowrap; }
+        kbd.k { font-family: var(--mono); font-size: 12px; border: 1px solid var(--line-2); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: #fff; }
+
+        /* Heading block */
+        .d-head { max-width: 760px; margin-bottom: 40px; }
+        .d-head h1.two { font-size: clamp(38px, 5vw, 58px); line-height: 1.06; letter-spacing: -0.01em; margin-bottom: 22px; }
+        .d-head h1.two span { display: block; }
+        .d-head .lede { color: var(--ink-2); font-size: 18px; margin: 0 0 28px; max-width: 640px; }
+        .d-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+        .d-cta .fine { flex-basis: 100%; margin: 6px 0 0; color: var(--ink-3); font-size: 14px; }
+        .d-cta .fine a { color: inherit; text-underline-offset: 3px; }
+
+        /* The trailer */
+        .reel { margin: 0; border: 1px solid var(--line-2); border-radius: 18px; background: #efefeb; padding: 8px; box-shadow: 0 30px 60px -40px rgba(0,0,0,.3); }
+        .reel video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 12px; background: #1a1a1f; }
+
+        /* Feature rows: copy beside a pixel-art panel with the UI on glass */
+        .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr); gap: 56px; align-items: center; padding-top: 130px; }
+        .row.flip > .copy { order: 2; }
+        .copy .eyebrow { margin-bottom: 14px; }
+        .copy h2.two { margin-bottom: 18px; }
+        .copy > p:not(.eyebrow) { color: var(--ink-2); font-size: 16.5px; margin: 0 0 22px; }
+        .points { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-2); }
+        .points li { display: grid; grid-template-columns: 34px minmax(0, 1fr); padding: 13px 0 14px; border-bottom: 1px solid var(--line-2); }
+        .points small { font-family: var(--mono); font-size: 11px; color: var(--ink-3); padding-top: 4px; }
+        .points b { display: block; font-weight: 500; font-size: 15.5px; color: var(--ink); margin-bottom: 2px; }
+        .points p { margin: 0; color: var(--ink-2); font-size: 15px; }
+
+        .art { border: 1px solid var(--line-2); border-radius: 18px; background: var(--panel); padding: 8px; box-shadow: 0 24px 50px -40px rgba(0,0,0,.3); }
+        .sv { position: relative; min-height: 400px; border-radius: 12px; overflow: hidden; background: #3e7fd9 center / cover no-repeat; image-rendering: pixelated; isolation: isolate; display: flex; align-items: center; justify-content: center; padding: 28px 22px; }
+        .sv::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgba(10,18,44,.45), rgba(10,18,44,.06) 70%); }
+        .sv-stack { width: 100%; max-width: 440px; display: grid; gap: 10px; justify-items: center; }
+        .glass { background: rgba(14,14,18,.8); border: 1px solid rgba(255,255,255,.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); color: #f2f2f4; box-shadow: 0 14px 30px -10px rgba(0,0,0,.45); }
+        .pill { display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 12px; border-radius: 999px; font-size: 12.5px; white-space: nowrap; }
+        .pill i { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+        .pill b { color: #4ec36e; font-weight: 600; }
+        .pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+        .card { width: 100%; border-radius: 14px; padding: 14px; font-size: 13px; }
+        .card .h { display: flex; align-items: center; gap: 8px; font-weight: 600; margin-bottom: 10px; min-width: 0; }
+        .card .h small { margin-left: auto; font-weight: 400; color: #9c9ca6; font-size: 11.5px; white-space: nowrap; }
+        .card .h .path { font-family: var(--mono); font-weight: 500; font-size: 12.5px; }
+        .card p { color: #c9c9d1; margin: 0 0 8px; line-height: 1.4; }
+        .mono { font-family: var(--mono); }
+
+        /* Agent colours (identity, not status) */
+        .a1 { --a: #8b7cf6; } .a2 { --a: #2fb7a4; } .a3 { --a: #ec7a5c; } .you { --a: #c9c9d1; }
+
+        /* File rows */
+        .files { display: grid; gap: 2px; }
+        .file { display: grid; grid-template-columns: 18px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 7px 8px; border-radius: 8px; color: #e4e4ea; }
+        .file:nth-child(odd) { background: rgba(255,255,255,.04); }
+        .file svg { color: #9c9ca6; }
+        .file.live svg { color: var(--a); }
+        .file .nm { font-family: var(--mono); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .file .who { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; color: #b9b9c2; white-space: nowrap; }
+        .file .who::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--a); }
+        .file.live .nm::after { content: ' · writing'; color: var(--a); font-family: var(--sans); }
+
+        /* Toolbar with writing rings */
+        .strip { display: inline-flex; align-items: center; gap: 12px; height: 38px; padding: 0 16px; border-radius: 12px; }
+        .strip i { position: relative; width: 9px; height: 9px; border-radius: 50%; background: var(--dot); }
+        .strip i.ring::after { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid var(--a); animation: ring 1.6s ease-in-out infinite; }
+        .strip .sep { width: 1px; height: 16px; background: rgba(255,255,255,.18); }
+        .strip svg { color: #d6d6dc; }
+        @keyframes ring { 50% { transform: scale(1.18); opacity: .55; } }
+        .stream { font-family: var(--mono); font-size: 12px; line-height: 1.6; color: #d6d6dc; background: rgba(255,255,255,.05); border-radius: 8px; padding: 10px 12px; border-left: 2px solid var(--a); }
+        .stream .dim { color: #8a8a94; }
+        .caret { display: inline-block; width: 7px; height: 13px; margin-left: 1px; vertical-align: -2px; background: var(--a); animation: blink 1s steps(2, start) infinite; }
+        @keyframes blink { to { visibility: hidden; } }
+
+        /* Collision card */
+        .side { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+        .side div { border-radius: 8px; padding: 8px 9px; background: rgba(255,255,255,.05); font-size: 12px; color: #d6d6dc; line-height: 1.4; border-top: 2px solid var(--a); }
+        .side small { display: block; color: #9c9ca6; font-size: 11px; margin-bottom: 3px; }
+        .opt { display: flex; align-items: center; gap: 8px; padding: 7px 9px; border-radius: 8px; background: rgba(255,255,255,.06); margin-top: 4px; color: #d6d6dc; font-size: 12.5px; }
+        .opt kbd { font: 600 10.5px/1 var(--mono); padding: 3px 5px; border-radius: 4px; background: rgba(255,255,255,.12); }
+        .opt.on { background: rgba(78,195,110,.16); color: #fff; box-shadow: inset 0 0 0 1px rgba(78,195,110,.55); }
+
+        /* File view: who wrote each line, and the history bar */
+        .doc { font-family: var(--mono); font-size: 12px; line-height: 1.55; color: #e4e4ea; display: grid; gap: 1px; }
+        .doc div { padding: 2px 0 2px 12px; border-left: 3px solid var(--a); }
+        .doc .h1 { font-weight: 500; color: #fff; }
+        .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 12px; font-size: 11.5px; color: #b9b9c2; }
+        .legend span::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; background: var(--a); }
+        .hist { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,.1); font-size: 11.5px; color: #b9b9c2; }
+        .track { position: relative; height: 6px; border-radius: 3px; background: rgba(255,255,255,.12); }
+        .track::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 68%; border-radius: 3px; background: rgba(255,255,255,.42); }
+        .track::after { content: ''; position: absolute; left: 68%; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.4); }
+        .restore { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 7px; background: #fff; color: #0b0b0c; font-weight: 600; font-size: 11.5px; }
+
+        /* iPhone */
+        .phone { justify-self: center; width: 300px; max-width: 100%; padding: 10px; border-radius: 52px; background: #1b1a1f; box-shadow: 0 40px 70px -40px rgba(0,0,0,.45), inset 0 0 0 2px #3a3940; }
+        .phone-in { position: relative; border-radius: 42px; background: var(--page); padding: 54px 16px 18px; min-height: 560px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+        .island { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 96px; height: 28px; border-radius: 20px; background: #000; }
+        .ph-top { position: absolute; top: 18px; left: 30px; right: 26px; display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; }
+        .ph-sig { font-size: 9px; letter-spacing: 1px; }
+        .ph-title { font-family: var(--serif); font-size: 34px; line-height: 1; margin: 6px 4px 4px; }
+        .ph-list { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 4px 12px; font-size: 13px; }
+        .ph-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line); }
+        .ph-row:last-child { border-bottom: 0; }
+        .ph-row b { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .ph-row span { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--ink-3); white-space: nowrap; }
+        .ph-row span::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--a); }
+        .a1.l { --a: #6d5ce8; } .a2.l { --a: #17977f; } .a3.l { --a: #d65e3f; } .you.l { --a: #8b8b85; }
+        .sheet { margin-top: auto; background: #fff; border: 1px solid var(--line-2); border-radius: 18px; padding: 12px; box-shadow: 0 -10px 30px -18px rgba(0,0,0,.25); font-size: 13px; }
+        .sheet .thumb { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+        .sheet .thumb i { width: 40px; height: 40px; border-radius: 8px; background: #3e7fd9 url(/art/harbour.png) 40% 60% / 400% auto; image-rendering: pixelated; flex: none; }
+        .sheet .thumb small { display: block; color: var(--ink-3); font-size: 11.5px; }
+        .sheet .note-in { border: 1px solid var(--line-2); border-radius: 10px; padding: 8px 10px; color: var(--ink-3); font-size: 12.5px; margin-bottom: 8px; }
+        .sheet .save { display: flex; justify-content: center; align-items: center; height: 38px; border-radius: 10px; background: #2b2b2a; color: #fff; font-weight: 600; }
+
+        /* Talk phrases */
+        .said { display: grid; gap: 8px; width: 100%; }
+        .said .pill { height: auto; min-height: 36px; padding: 8px 14px; white-space: normal; line-height: 1.35; font-size: 13px; justify-self: start; border-radius: 14px; }
+        .said .pill:nth-child(2) { justify-self: center; }
+        .said .pill:nth-child(3) { justify-self: end; }
+        .key2 { display: inline-flex; align-items: center; gap: 8px; }
+        .key2 kbd { font: 600 12px/1 var(--mono); padding: 6px 8px; border-radius: 6px; background: rgba(255,255,255,.14); }
+        .tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+        .tools code { background: #ebebe5; }
+
+        /* The rest: small cards */
+        .more { padding-top: 130px; }
+        .more h2.two { margin-bottom: 34px; }
+        .mini-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+        .mini { background: var(--panel); border: 1px solid var(--line-2); border-radius: 14px; padding: 20px 20px 22px; }
+        .mini .ic { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: #2b2b2a; color: #fff; margin-bottom: 18px; box-shadow: inset 0 1px 0 rgba(255,255,255,.14); }
+        .mini h3 { font-weight: 500; font-size: 16.5px; margin: 0 0 6px; color: var(--ink); }
+        .mini p { margin: 0; color: var(--ink-2); font-size: 14.5px; }
+
+        /* Privacy */
+        .priv { padding-top: 130px; }
+        .priv .lead { max-width: 640px; color: var(--ink-2); font-size: 16.5px; margin: 0 0 36px; }
+        .ledger { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; counter-reset: step; }
+        .ledger div { background: var(--panel); border: 1px solid var(--line-2); border-radius: 12px; padding: 20px; }
+        .ledger small { font-family: var(--mono); font-size: 11px; color: var(--ink-3); letter-spacing: .08em; text-transform: uppercase; }
+        .ledger h3 { font-weight: 500; font-size: 17px; margin: 10px 0 8px; color: var(--ink); }
+        .ledger p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+
+        /* Questions */
+        .faq-lite { max-width: 760px; padding-top: 130px; }
+        .faq-lite h3 { font-size: 18px; font-weight: 600; color: var(--ink); margin: 28px 0 6px; }
+        .faq-lite p { color: var(--ink-2); margin: 0; }
+
+        /* Pro */
+        .pro-cta { margin-top: 130px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 40px; align-items: center; padding: 36px; background: var(--card); border-color: #2b2b2a; box-shadow: 0 1px 0 rgba(0,0,0,.04), 0 12px 32px rgba(0,0,0,.06); }
+        .pro-cta h2.two { margin-bottom: 12px; }
+        .pro-cta p { color: var(--ink-2); margin: 0; }
+        .prices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 14px; }
+        .prices a { display: flex; flex-direction: column; gap: 3px; padding: 12px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--panel); color: var(--ink); text-decoration: none; transition: border-color .15s, transform .15s, background .15s; }
+        .prices a:hover { border-color: #2b2b2a; background: #fff; color: var(--ink); transform: translateY(-1px); }
+        .prices a.best { border-color: #2b2b2a; background: #fff; }
+        .prices small { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+        .prices b { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; }
+        .prices b i { font-style: normal; font-size: 13px; font-weight: 400; letter-spacing: 0; color: var(--ink-3); }
+        .prices span { font-size: 12.5px; line-height: 1.35; color: var(--ink-3); }
+        .pro-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+        .pro-row span { font-size: 14px; color: var(--ink-3); }
+
+        .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+        .reveal.in { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .strip i.ring::after, .caret { animation: none; }
+        }
+
+        @media (max-width: 960px) {
+            .row, .row.flip { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-top: 100px; }
+            .row.flip > .copy { order: 0; }
+            .mini-grid { grid-template-columns: 1fr 1fr; }
+            .pro-cta { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+            .more, .priv, .faq-lite { padding-top: 100px; }
+            .pro-cta { margin-top: 100px; }
+        }
+        @media (max-width: 600px) {
+            .drv { padding: 48px 16px 0; }
+            .d-head .lede { font-size: 17px; }
+            .reel { padding: 5px; border-radius: 14px; }
+            .reel video { border-radius: 10px; }
+            .sv { min-height: 0; padding: 22px 12px; }
+            .ledger, .mini-grid { grid-template-columns: minmax(0, 1fr); }
+            .prices { grid-template-columns: minmax(0, 1fr); }
+            .pro-cta { padding: 24px 20px; }
+            .side { grid-template-columns: minmax(0, 1fr); }
+            .said .pill, .said .pill:nth-child(2), .said .pill:nth-child(3) { justify-self: stretch; }
+        }
+    </style>
+    <script>
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        document.addEventListener('click', (e) => {
+            const a = e.target.closest && e.target.closest('a');
+            if (!a) return;
+            const href = a.getAttribute('href') || '';
+            if (href === '/download') window.va('event', { name: 'download', data: { arch: 'arm64' } });
+            else if (href === '/pricing') window.va('event', { name: 'pricing_click', data: a.dataset.plan ? { where: 'drive', plan: a.dataset.plan } : { where: 'drive' } });
+        });
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script defer src="/platform.js"></script>
+</head>
+<body>
+    <header class="site-nav">
+        <div class="site-nav-in">
+            <a class="wordmark" href="/">Cadence</a>
+            <nav aria-label="Primary">
+                <a href="/docs.html">Docs</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/faq.html">FAQ</a>
+                <a href="/blog/">Writing</a>
+                <a class="cta dark" href="/download">Download</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="drv">
+        <div class="d-head">
+            <p class="eyebrow">New in Cadence 0.12 / Cadence Pro</p>
+            <h1 class="two">Cadence Drive. <span>One folder on every computer, and every agent can write to it.</span></h1>
+            <p class="lede">A real folder, <code>~/Cadence Drive</code>, kept the same on every computer you've paired with Cadence and on your iPhone. Agents write ordinary files. You see which agent wrote what while it writes, edits merge on their own, and the relay that carries it can't read any of it.</p>
+            <div class="d-cta">
+                <a class="cta dark" href="/pricing">Get Cadence Pro</a>
+                <a class="cta" href="/download">Download for Mac</a>
+                <p class="fine">Comes with <a href="/pricing">Cadence Pro</a> at no extra charge. Cadence 0.12.0 or later.</p>
+            </div>
+        </div>
+
+        <figure class="reel">
+            <video controls playsinline preload="metadata" poster="/media/drive-trailer-poster.jpg" width="1920" height="1080" aria-label="Cadence Drive trailer">
+                <source src="/media/drive-trailer.webm" type="video/webm">
+                <source src="/media/drive-trailer.mp4" type="video/mp4">
+            </video>
+        </figure>
+
+        <!-- 01 A real folder -->
+        <section class="row" aria-labelledby="folder-h">
+            <div class="copy reveal">
+                <p class="eyebrow">01 / A real folder</p>
+                <h2 class="two" id="folder-h">The same folder <span>on every computer</span></h2>
+                <p>Turn Drive on and <code>~/Cadence Drive</code> appears in your home folder. Turn it on on a second computer you've paired with Cadence and that computer joins the same drive. Put a file in on one, and it's on the others.</p>
+                <ul class="points">
+                    <li><small>1.1</small><div><b>An ordinary folder</b><p>Finder, your editor, your terminal and every agent use it directly. There is nothing to install in them.</p></div></li>
+                    <li><small>1.2</small><div><b>Your iPhone too</b><p>The iPhone app has a Drive tab with the same live view.</p></div></li>
+                </ul>
+            </div>
+            <div class="art reveal">
+                <div class="sv" style="background-image:url(/art/harbour.png); background-position:52% 60%">
+                    <div class="sv-stack">
+                        <div class="pills">
+                            <span class="pill glass"><i style="background:var(--green)"></i>Mac mini</span>
+                            <span class="pill glass"><i style="background:var(--green)"></i>MacBook Air</span>
+                            <span class="pill glass"><i style="background:var(--green)"></i>iPhone</span>
+                        </div>
+                        <div class="card glass">
+                            <div class="h"><span class="path">~/Cadence Drive</span><small>Same on 3 devices</small></div>
+                            <div class="files">
+                                <div class="file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="nm">briefs/</span><span class="who a2">docs agent</span></div>
+                                <div class="file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg><span class="nm">api-notes.md</span><span class="who a1">checkout agent</span></div>
+                                <div class="file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg><span class="nm">launch-copy.md</span><span class="who you">You</span></div>
+                                <div class="file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg><span class="nm">prices.csv</span><span class="who a3">pricing agent</span></div>
+                                <div class="file"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg><span class="nm">checkout-bug.png</span><span class="who you">You</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 Who wrote what, live -->
+        <section class="row flip" aria-labelledby="live-h">
+            <div class="copy reveal">
+                <p class="eyebrow">02 / Who wrote what, live</p>
+                <h2 class="two" id="live-h">See which agent <span>is writing, while it writes</span></h2>
+                <p>Cadence credits each change to the agent that made it. It follows the file edits of Claude Code sessions, and agents can also write through Cadence's own Drive tools.</p>
+                <ul class="points">
+                    <li><small>2.1</small><div><b>A ring on the toolbar</b><p>Each agent that's writing to the drive gets a ring in its colour.</p></div></li>
+                    <li><small>2.2</small><div><b>Writing now</b><p>The Drive view in Cadence's panel lists the files being written right now, with the text arriving as the agent writes it.</p></div></li>
+                </ul>
+            </div>
+            <div class="art reveal">
+                <div class="sv" style="background-image:url(/art/hero-desk.png); background-size:180% auto; background-position:56% 30%">
+                    <div class="sv-stack">
+                        <div class="strip glass" role="img" aria-label="The Cadence toolbar with rings around two agents that are writing">
+                            <i class="a1 ring" style="--dot:var(--blue)"></i>
+                            <i style="--dot:var(--amber)"></i>
+                            <i class="a2 ring" style="--dot:var(--blue)"></i>
+                            <i style="--dot:var(--green)"></i>
+                            <span class="sep"></span>
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+                        </div>
+                        <div class="card glass">
+                            <div class="h">Writing now<small>2 agents</small></div>
+                            <div class="files" style="margin-bottom:10px">
+                                <div class="file live a1"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span class="nm">api-notes.md</span><span class="who a1">checkout agent</span></div>
+                                <div class="file live a2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span class="nm">briefs/docs-refresh.md</span><span class="who a2">docs agent</span></div>
+                            </div>
+                            <div class="stream a1"><span class="dim">## Webhooks</span><br>Stripe retries a failed event for three days, so the handler has to<span class="caret" aria-hidden="true"></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 03 Edits merge on their own -->
+        <section class="row" aria-labelledby="merge-h">
+            <div class="copy reveal">
+                <p class="eyebrow">03 / Edits merge on their own</p>
+                <h2 class="two" id="merge-h">Two agents, one file. <span>Both edits stay.</span></h2>
+                <p>Edits to different lines of a file combine automatically. CSV and TSV files merge row by row, so two agents adding rows to one table both get their rows in.</p>
+                <ul class="points">
+                    <li><small>3.1</small><div><b>Same lines? You decide</b><p>When two agents change the same lines, a card arrives in the Inbox on your Mac and your iPhone. It shows both sides, with a combined version by Claude first.</p></div></li>
+                    <li><small>3.2</small><div><b>Four ways out</b><p>Keep the combined version, keep either side, or keep both as separate files. You get two seconds to undo, and both agents get the result.</p></div></li>
+                </ul>
+            </div>
+            <div class="art reveal">
+                <div class="sv" style="background-image:url(/art/lighthouse.png); background-position:70% 32%">
+                    <div class="sv-stack">
+                        <div class="card glass">
+                            <div class="h"><i style="width:7px;height:7px;border-radius:50%;background:var(--amber);flex:none"></i><span>Two agents changed the same lines</span></div>
+                            <p class="mono" style="font-size:12px">launch-copy.md</p>
+                            <div class="side">
+                                <div class="a1"><small>checkout agent</small>Checkout takes Apple Pay and cards.</div>
+                                <div class="a3"><small>pricing agent</small>Pay monthly or yearly, cancel any time.</div>
+                            </div>
+                            <div class="opt on"><kbd>1</kbd>Claude's combined version</div>
+                            <div class="opt"><kbd>2</kbd>Keep checkout agent's</div>
+                            <div class="opt"><kbd>3</kbd>Keep pricing agent's</div>
+                            <div class="opt"><kbd>4</kbd>Keep both as separate files</div>
+                        </div>
+                        <span class="pill glass"><b>✓</b>Both agents get the result</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 Every line knows who wrote it -->
+        <section class="row flip" aria-labelledby="lines-h">
+            <div class="copy reveal">
+                <p class="eyebrow">04 / Every line knows who wrote it</p>
+                <h2 class="two" id="lines-h">Open a file <span>and see who wrote each part</span></h2>
+                <p>A coloured edge runs down the side of the file. Each colour is an agent, or you.</p>
+                <ul class="points">
+                    <li><small>4.1</small><div><b>Replay the file</b><p>A history bar plays the file back, version by version.</p></div></li>
+                    <li><small>4.2</small><div><b>Restore any of the last 200 versions</b><p>Every file keeps its last 200 versions. Pick one and restore it.</p></div></li>
+                </ul>
+            </div>
+            <div class="art reveal">
+                <div class="sv" style="background-image:url(/art/harbour.png); background-size:240% auto; background-position:18% 40%">
+                    <div class="sv-stack">
+                        <div class="card glass">
+                            <div class="h"><span class="path">api-notes.md</span><small>Version 34 of 51</small></div>
+                            <div class="doc">
+                                <div class="you h1"># Payments API notes</div>
+                                <div class="you">Keys live in the vault, never in the repo.</div>
+                                <div class="a1">Checkout calls <span style="color:#fff">POST /v1/sessions</span> once per cart.</div>
+                                <div class="a1">Retry on 409 with the same idempotency key.</div>
+                                <div class="a2">See briefs/docs-refresh.md for the public wording.</div>
+                                <div class="a3">Prices come from prices.csv, one row per plan.</div>
+                            </div>
+                            <div class="legend"><span class="you">You</span><span class="a1">checkout agent</span><span class="a2">docs agent</span><span class="a3">pricing agent</span></div>
+                            <div class="hist"><div class="track" aria-hidden="true"></div><span class="restore">Restore</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 05 iPhone -->
+        <section class="row" aria-labelledby="phone-h">
+            <div class="copy reveal">
+                <p class="eyebrow">05 / On your iPhone</p>
+                <h2 class="two" id="phone-h">The drive <span>in your pocket</span></h2>
+                <p>The Cadence iPhone app, in a TestFlight beta, has a Drive tab with the same live view as your computers.</p>
+                <ul class="points">
+                    <li><small>5.1</small><div><b>Read any file</b><p>Open anything in the drive from your phone.</p></div></li>
+                    <li><small>5.2</small><div><b>Answer collisions</b><p>The same collision card as on your Mac, with the same choices.</p></div></li>
+                    <li><small>5.3</small><div><b>Save to Cadence Drive</b><p>From the share sheet, send a photo, a screenshot or a PDF into the drive, with an optional note to an agent.</p></div></li>
+                </ul>
+            </div>
+            <div class="phone reveal" role="img" aria-label="The Drive tab in the Cadence iPhone app, with the share sheet open to save a screenshot to Cadence Drive">
+                <div class="phone-in">
+                    <div class="island"></div>
+                    <div class="ph-top"><span>9:41</span><span class="ph-sig">●●● ◗</span></div>
+                    <div class="ph-title">Drive</div>
+                    <div class="ph-list">
+                        <div class="ph-row"><b>api-notes.md</b><span class="a1 l">checkout agent</span></div>
+                        <div class="ph-row"><b>launch-copy.md</b><span class="you l">You</span></div>
+                        <div class="ph-row"><b>prices.csv</b><span class="a3 l">pricing agent</span></div>
+                        <div class="ph-row"><b>briefs/</b><span class="a2 l">docs agent</span></div>
+                    </div>
+                    <div class="sheet">
+                        <div class="thumb"><i></i><div><b>Screenshot</b><small>Save to Cadence Drive</small></div></div>
+                        <div class="note-in">Note to an agent (optional)</div>
+                        <div class="save">Save</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 06 Hand files to agents -->
+        <section class="row flip" aria-labelledby="hand-h">
+            <div class="copy reveal">
+                <p class="eyebrow">06 / Hand files to agents</p>
+                <h2 class="two" id="hand-h">Give an agent a file <span>by saying so</span></h2>
+                <p>Hand a file to an agent from the file view or the right-click menu. Or double-tap <kbd class="k">⌥</kbd> and say it to Talk.</p>
+                <ul class="points">
+                    <li><small>6.1</small><div><b>Drive tools for agents</b><p>Claude Code agents that Cadence starts get four tools for the drive:</p><div class="tools"><code>drive_list</code><code>drive_read</code><code>drive_write</code><code>drive_search</code></div></div></li>
+                    <li><small>6.2</small><div><b>Search the whole drive</b><p>Every text file in the drive, by plain words or a regular expression.</p></div></li>
+                </ul>
+            </div>
+            <div class="art reveal">
+                <div class="sv" style="background-image:url(/art/hero.png); background-size:220% auto; background-position:4% 0%">
+                    <div class="sv-stack">
+                        <span class="pill glass key2"><kbd>⌥</kbd><kbd>⌥</kbd>Talk</span>
+                        <div class="said">
+                            <span class="pill glass">“Give the checkout agent the API notes”</span>
+                            <span class="pill glass">“Put my clipboard in the drive as launch copy”</span>
+                            <span class="pill glass">“What changed in the drive today?”</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 07 The rest -->
+        <section class="more" aria-labelledby="more-h">
+            <p class="eyebrow reveal">07 / The rest of it</p>
+            <h2 class="two reveal" id="more-h">A file browser, a Trash <span>and notes for the next agent</span></h2>
+            <div class="mini-grid reveal">
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
+                    <h3>A full file browser</h3>
+                    <p>Folders, list or grid, and columns you can sort by who changed a file, when, and its size. Drag files in.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+                    <h3>Right-click anything</h3>
+                    <p>Open, show in Finder, copy path, rename, move, duplicate, version history, hand to an agent, move to Trash.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></div>
+                    <h3>30 days in the Trash</h3>
+                    <p>A deleted file waits in the Trash for 30 days, whether you deleted it here or on another device.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
+                    <h3>Briefs</h3>
+                    <p>When an agent finishes, its recap is saved in <code>briefs/</code>. The next agent, on any computer, picks up where it left off.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+                    <h3>Search</h3>
+                    <p>Every text file in the drive, by plain words or a regular expression like <code>/TODO|FIXME/</code>.</p>
+                </div>
+                <div class="mini">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg></div>
+                    <h3>Limits</h3>
+                    <p>Files up to 512 MB each. An empty folder syncs once a file is in it.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it stays private -->
+        <section class="priv" aria-labelledby="priv-h">
+            <p class="eyebrow reveal">How it stays private</p>
+            <h2 class="two reveal" id="priv-h">Sealed on your devices. <span>The relay just holds it.</span></h2>
+            <p class="lead reveal">Cadence's relay stores your files for your other devices. It only ever has sealed copies, and the keys to open them never leave your devices.</p>
+            <div class="ledger reveal">
+                <div><small>1 · On your device</small><h3>Sealed where it's written</h3><p>Before a file leaves your computer or phone, Cadence encrypts its contents and its name with AES-256-GCM.</p></div>
+                <div><small>2 · At the relay</small><h3>Stored, not read</h3><p>The relay stores the sealed copy for your other devices. It has no key, so it can't open the file or see what it's called.</p></div>
+                <div><small>3 · On your other devices</small><h3>Opened only by you</h3><p>The keys are held only by your devices. Each one opens what the relay hands it and writes the file into <code>~/Cadence Drive</code>.</p></div>
+            </div>
+        </section>
+
+        <!-- Questions -->
+        <section class="faq-lite" aria-labelledby="faq-h">
+            <p class="eyebrow">Questions</p>
+            <h2 class="two" id="faq-h">What people ask <span>about Cadence Drive</span></h2>
+            <h3>Is it a normal folder?</h3>
+            <p>Yes. It's <code>~/Cadence Drive</code> in your home folder. Finder, your editor, your terminal and every agent open it like any other folder. Cadence keeps it the same on each computer you've paired and turned Drive on.</p>
+            <h3>Can Cadence read my files?</h3>
+            <p>No. Each file is sealed on your device with AES-256-GCM, using keys that only your devices hold. The relay stores the sealed copies, but it can't read what's in them or what they're called.</p>
+            <h3>What happens when two agents edit the same file?</h3>
+            <p>Edits to different lines combine on their own, and CSV and TSV files merge row by row. When two agents change the same lines, a card arrives in the Inbox on your Mac and iPhone with both sides and a combined version by Claude. Keep the combined version, either side, or both as separate files. There's a 2-second undo, and both agents get the result.</p>
+            <h3>Can I get an old version back?</h3>
+            <p>Yes. Open the file and use the history bar to replay it and restore any of its last 200 versions. Deleted files, deleted on this computer or another one, wait in the Trash for 30 days.</p>
+            <h3>How big can files be?</h3>
+            <p>Up to 512 MB each. Empty folders sync once a file is in them.</p>
+            <h3>What does it cost?</h3>
+            <p>It comes with <a href="/pricing">Cadence Pro</a> at no extra charge: $20 a month, $200 a year, or $249 once for the first 100. It's in Cadence 0.12.0 and later. The iPhone app is in a TestFlight beta.</p>
+        </section>
+
+        <!-- Pro -->
+        <section class="panel pro-cta" aria-labelledby="pro-h">
+            <div>
+                <p class="eyebrow">Cadence Pro</p>
+                <h2 class="two" id="pro-h">Cadence Drive <span>comes with Pro</span></h2>
+                <p>Pro also answers the questions Cadence already knows your answer to, keeps your agents working while you're away, and puts the Inbox on your iPhone. No account: Pro is a license key.</p>
+            </div>
+            <div>
+                <div class="prices">
+                    <a href="/pricing" data-plan="monthly"><small>Monthly</small><b>$20 <i>/ month</i></b><span>Cancel any time</span></a>
+                    <a href="/pricing" data-plan="yearly" class="best"><small>Yearly</small><b>$200 <i>/ year</i></b><span>Two months free</span></a>
+                    <a href="/pricing" data-plan="lifetime"><small>Founding</small><b>$249 <i>once</i></b><span id="founding-left">First 100, Pro for good</span></a>
+                </div>
+                <div class="pro-row"><a href="/pricing" class="cta dark">See Pro plans</a><a href="/download" class="cta">Download for Mac</a><span>macOS 13+ on Apple Silicon</span></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-foot">
+        <div class="site-foot-in">
+            <div class="links">
+                <a href="/docs.html">Docs</a>
+                <a href="/pricing">Pricing</a>
+                <a href="/faq.html">FAQ</a>
+                <a href="/blog/">Writing</a>
+                <a href="/changelog.html">Changelog</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms of Service</a>
+                <a href="mailto:support@cadencevoice.ai">Support</a>
+            </div>
+            <div class="copy">&copy; 2026 Cadence Labs</div>
+        </div>
+    </footer>
+
+    <script>
+        (() => {
+            const io = new IntersectionObserver((es) => es.forEach((e) => {
+                if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+            }), { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+            // Founding seats: the real count, shown once at least one is gone.
+            const left = document.getElementById('founding-left');
+            if (left) fetch('/api/founding').then((r) => (r.ok ? r.json() : null)).then((d) => {
+                if (!d || typeof d.left !== 'number') return;
+                if (d.left <= 0) left.textContent = 'All ' + d.seats + ' taken';
+                else if (d.left < d.seats) left.textContent = d.left + ' of ' + d.seats + ' left';
+            }).catch(() => {});
+        })();
+    </script>
+</body>
+</html>

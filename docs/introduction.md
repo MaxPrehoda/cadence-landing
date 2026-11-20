@@ -4,7 +4,7 @@ Cadence is a native macOS app that sits between you and your coding agents, so y
 
 Every question and finished task lands in one Inbox. Answer in a keystroke, or just talk.
 
-Cadence is free at your desk, with no account. [Cadence Pro](/pricing) adds what works while you're away: answering for you, away mode, long runs, its own ideas and the iPhone app.
+Cadence is free at your desk, with no account. [Cadence Pro](/pricing) adds what works while you're away: answering for you, away mode, long runs, its own ideas and the iPhone app. It also includes [Cadence Drive](#/drive), one folder shared by every agent on every computer you've paired.
 
 ## What it does
 
@@ -14,6 +14,7 @@ Cadence is free at your desk, with no account. [Cadence Pro](/pricing) adds what
 - **Director.** A Claude session that can see every agent and can message, start, check on and stop them for you.
 - **Any CLI.** Claude Code runs natively inside Cadence. Codex, OpenCode, Pi, Amp, Grok, Cursor, Copilot, Gemini and others run in terminals through [herdr](https://herdr.dev).
 - **Dictation anywhere.** Hold `⌥` to type into any app. Speech recognition runs on your Mac.
+- **Cadence Drive (Pro).** One folder, `~/Cadence Drive`, the same on every paired computer and your iPhone. See which agent wrote what, and edits merge on their own.
 
 ## How it fits together
 

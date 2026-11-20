@@ -117,6 +117,19 @@
 }
 .article-body.prose table { font-variant-numeric: tabular-nums; }
 
+/* A film at the top of a post: framed like the homepage clips, with controls */
+.article-body.prose figure.article-video { margin: 0 0 48px; }
+.article-video video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    background: #1a1a1f;
+    border: 6px solid #efefeb;
+    box-shadow: 0 0 0 1px var(--line-2), 0 24px 50px -36px rgba(0,0,0,.3);
+}
+
 /* Dated update note */
 .update-note {
     margin: 0 0 44px;

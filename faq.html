@@ -62,7 +62,7 @@
                 "name": "Is Cadence free?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Cadence is free for everything you do at your desk: dictation, every agent, the Inbox, Talk, and Cadence learning how you decide. Cadence Pro, for when you're not there (answering for you, away mode, long runs, its own ideas and the iPhone app), is $20 a month, $200 a year, or $249 once for the first 100 founding members. No account either way. Agents use your own Claude Code plan or whichever provider each CLI is set up with."
+                    "text": "Cadence is free for everything you do at your desk: dictation, every agent, the Inbox, Talk, and Cadence learning how you decide. Cadence Pro, for when you're not there (answering for you, away mode, long runs, its own ideas, the iPhone app and Cadence Drive), is $20 a month, $200 a year, or $249 once for the first 100 founding members. No account either way. Agents use your own Claude Code plan or whichever provider each CLI is set up with."
                 }
             },
             {
@@ -71,6 +71,14 @@
                 "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "Yes, in beta. The Cadence iPhone app is in a private TestFlight beta: it pairs with your Mac over a QR code, traffic is end-to-end encrypted, and you can answer your agents from the app, a widget or Siri. Join the waitlist on cadencevoice.ai to hear when it opens up."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is Cadence Drive?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Cadence Drive is a folder, ~/Cadence Drive, kept the same on every computer you've paired with Cadence and on the iPhone app. Finder, editors and every agent use it like any other folder. Cadence credits each change to the agent that made it, merges edits to different lines on its own, and sends collisions on the same lines to your Inbox. Files are sealed with AES-256-GCM using keys only your devices hold, so the relay can't read their contents or names. It is part of Cadence Pro, in Cadence 0.12.0 and later."
                 }
             },
             {
@@ -257,7 +265,7 @@
             <p>
                 <strong>Yes, at your desk.</strong> Dictation, every agent, the Inbox, Talk, and Cadence learning
                 how you decide are free. <a href="/pricing">Cadence Pro</a> is for when you're not there: answering
-                for you, away mode, long runs, its own ideas and the iPhone app. $20 a month, $200 a year, or $249
+                for you, away mode, long runs, its own ideas, the iPhone app and <a href="/drive">Cadence Drive</a>. $20 a month, $200 a year, or $249
                 once for the first 100. No account either way, and the agents you run use your own Claude Code
                 plan, or whichever provider each CLI is set up with.
             </p>
@@ -323,6 +331,19 @@
                 <strong>Yes, in beta.</strong> The iPhone app is in a private TestFlight beta. It pairs with your Mac over a QR code,
                 traffic is end-to-end encrypted, and you answer your agents from the app, a widget or Siri.
                 <a href="/#iphone">Join the waitlist</a> to hear when it opens up, or read <a href="/guides/claude-code-on-iphone">Claude Code on your iPhone</a>.
+            </p>
+                        </div>
+                    </details>
+                    <details>
+                        <summary>What is Cadence Drive?</summary>
+                        <div class="answer prose">
+            <p>
+                <strong>One folder every agent shares.</strong> <code>~/Cadence Drive</code> is kept the same on every computer
+                you've paired with Cadence and on the iPhone app. Finder, your editor and every agent use it like any other folder.
+                Cadence shows which agent wrote what, merges edits to different lines on its own, and sends collisions on the
+                same lines to your Inbox. Files are sealed with AES-256-GCM using keys only your devices hold, so the relay
+                can't read them or their names. It comes with <a href="/pricing">Cadence Pro</a>, in Cadence 0.12.0 and later.
+                <a href="/drive">How Cadence Drive works</a>.
             </p>
                         </div>
                     </details>

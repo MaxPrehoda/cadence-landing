@@ -20,6 +20,7 @@ To stop a phone reaching your Mac, press **Remove** next to it in Paired phones,
 - **Widgets and Siri**: a Home Screen widget and Lock Screen widgets show what's waiting. Say "Talk to Cadence", or use the Talk control in Control Center, on the Lock Screen or on the Action Button.
 - **Notifications** carry the agent's real options as buttons. Answering from the Lock Screen asks for Face ID, and when previews are hidden the Lock Screen shows only that an agent needs you.
 - **Dictation** and the Cadence keyboard type anywhere on the phone.
+- **Drive** shows [Cadence Drive](#/drive) live, with Cadence Pro: read any file, answer collisions, and use **Save to Cadence Drive** in the share sheet for photos, screenshots and PDFs.
 
 ## Continue in the cloud
 

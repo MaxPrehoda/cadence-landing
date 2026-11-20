@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadence pricing: free while you're watching, Pro when you're not</title>
 
-    <meta name="description" content="Cadence is free for dictation, every agent and the Inbox. Cadence Pro lets it work while you're away: answering for you, away mode, long runs and your iPhone. $20 a month, $200 a year, or $249 once for the first 100.">
+    <meta name="description" content="Cadence is free for dictation, every agent and the Inbox. Cadence Pro lets it work while you're away: answering for you, away mode, long runs, your iPhone and Cadence Drive. $20 a month, $200 a year, or $249 once for the first 100.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://www.cadencevoice.ai/pricing">
     <meta name="theme-color" content="#f5f5f2">
@@ -13,7 +13,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Cadence">
     <meta property="og:title" content="Cadence pricing: free while you're watching, Pro when you're not">
-    <meta property="og:description" content="Free for dictation, every agent and the Inbox. Pro lets Cadence work while you're away. $20 a month, $200 a year, or $249 once for the first 100.">
+    <meta property="og:description" content="Free for dictation, every agent and the Inbox. Pro lets Cadence work while you're away and adds Cadence Drive. $20 a month, $200 a year, or $249 once for the first 100.">
     <meta property="og:url" content="https://www.cadencevoice.ai/pricing">
     <meta property="og:image" content="https://www.cadencevoice.ai/art/og.png">
     <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Cadence pricing: free while you're watching, Pro when you're not">
-    <meta name="twitter:description" content="Free for dictation, every agent and the Inbox. Pro lets Cadence work while you're away. $20 a month, $200 a year, or $249 once for the first 100.">
+    <meta name="twitter:description" content="Free for dictation, every agent and the Inbox. Pro lets Cadence work while you're away and adds Cadence Drive. $20 a month, $200 a year, or $249 once for the first 100.">
     <meta name="twitter:image" content="https://www.cadencevoice.ai/art/og.png">
 
     <link rel="icon" type="image/png" href="/icon.png">
@@ -32,7 +32,7 @@
         "@context": "https://schema.org",
         "@type": "Product",
         "name": "Cadence Pro",
-        "description": "Cadence working while you're not watching: answering the decisions you hand over, away mode, long runs, its own long-job ideas, and the iPhone app.",
+        "description": "Cadence working while you're not watching: answering the decisions you hand over, away mode, long runs, its own long-job ideas, the iPhone app, and Cadence Drive, one end-to-end encrypted folder shared by every agent on every paired computer.",
         "brand": { "@type": "Brand", "name": "Cadence" },
         "offers": [
             { "@type": "Offer", "name": "Monthly", "price": "20.00", "priceCurrency": "USD", "url": "https://www.cadencevoice.ai/pricing" },
@@ -61,6 +61,7 @@
         .tier li { padding-left: 26px; position: relative; line-height: 1.45; }
         .tier li::before { content: ""; position: absolute; left: 2px; top: 6px; width: 12px; height: 7px; border-left: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: rotate(-45deg); }
         .tier li strong { color: var(--ink); font-weight: 600; }
+        .tier li code { font-family: var(--mono); font-size: .86em; background: var(--code-bg); border-radius: 4px; padding: 1px 5px; color: var(--ink); }
         .tier .spacer { flex: 1; }
         .plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
         .plan { display: flex; flex-direction: column; gap: 2px; padding: 14px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--panel); color: var(--ink); text-decoration: none; transition: border-color .15s ease, transform .15s ease, background .15s ease; }
@@ -147,6 +148,7 @@
                     <li><strong>Away mode</strong>: say "I'm stepping away". Cadence starts the day's plan and keeps your agents working for hours. Your phone buzzes three times a day at most</li>
                     <li><strong>Its own long jobs</strong>: Cadence reads your repos and proposes hours of work toward your goals. One key starts a job on its own branch. Nothing is pushed until you say ship it</li>
                     <li><strong>iPhone</strong>: answer agents from your phone, at home or anywhere, end-to-end encrypted</li>
+                    <li><strong>Cadence Drive</strong>: <code>~/Cadence Drive</code>, one folder kept the same on all your computers and your iPhone, for you and every agent. You see who wrote what, edits merge on their own, and the relay can't read it. <a href="/drive">How it works</a></li>
                 </ul>
                 <div class="spacer"></div>
                 <div class="plans">
@@ -176,6 +178,8 @@
         <section class="faq-lite" aria-label="Pricing questions">
             <h3>Do I need an account?</h3>
             <p>No. Pro is a license key. Buy from Cadence's Settings → Pro and it turns on by itself; bought here, paste the key there.</p>
+            <h3>Does Cadence Drive cost extra?</h3>
+            <p>No. <a href="/drive">Cadence Drive</a> comes with every Pro plan. It's in Cadence 0.12.0 and later: turn it on in Settings → Agents → Cadence Drive.</p>
             <h3>What do my agents cost?</h3>
             <p>Agents use your own Claude Code plan, or whichever provider each CLI is set up with. Cadence Pro doesn't change that.</p>
             <h3>What happens if I stop paying?</h3>

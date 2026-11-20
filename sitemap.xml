@@ -2,13 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://www.cadencevoice.ai/</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-11-20</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/docs/introduction</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -61,6 +61,12 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://www.cadencevoice.ai/docs/drive</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://www.cadencevoice.ai/docs/dictation</loc>
         <lastmod>2026-10-14</lastmod>
         <changefreq>monthly</changefreq>
@@ -86,7 +92,7 @@
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/docs/iphone</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -164,7 +170,7 @@
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/faq</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -176,8 +182,14 @@
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/blog</loc>
-        <lastmod>2026-10-14</lastmod>
+        <lastmod>2026-11-20</lastmod>
         <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/blog/introducing-cadence-drive</loc>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
@@ -395,7 +407,13 @@
     </url>
     <url>
         <loc>https://www.cadencevoice.ai/pricing</loc>
-        <lastmod>2026-10-30</lastmod>
+        <lastmod>2026-11-20</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.cadencevoice.ai/drive</loc>
+        <lastmod>2026-11-20</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>

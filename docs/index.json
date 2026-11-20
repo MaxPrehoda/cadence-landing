@@ -54,6 +54,12 @@
           "id": "sets",
           "title": "Sets",
           "seoTitle": "Sets: put a project's agents away \u00b7 Cadence Docs"
+        },
+        {
+          "id": "drive",
+          "title": "Cadence Drive",
+          "seoTitle": "Cadence Drive: one folder every agent shares \u00b7 Cadence Docs",
+          "description": "Cadence Drive keeps ~/Cadence Drive the same on every computer you pair with Cadence and on your iPhone. Turn it on, see who wrote what, merges, collisions, history, Trash and privacy."
         }
       ]
     },
