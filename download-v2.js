@@ -65,7 +65,6 @@ function populateCard(arch, asset, version, releaseDate, releaseUrl, labelOverri
     const file = document.getElementById(`${arch}-file`);
     const size = document.getElementById(`${arch}-size`);
     const date = document.getElementById(`${arch}-date`);
-    const downloadBtn = document.getElementById(`download-${arch}`);
     const notesBtn = document.getElementById(`release-notes-${arch}`);
 
     const label = labelOverride || (arch === 'arm64' ? 'Apple Silicon' : 'Intel');
@@ -75,19 +74,20 @@ function populateCard(arch, asset, version, releaseDate, releaseUrl, labelOverri
     if (file) file.textContent = asset.name;
     if (size) size.textContent = `${sizeInMB} MB`;
     if (date) date.textContent = releaseDate;
-    // On a Windows PC platform.js has already pointed this button at the
-    // Windows page; don't hand that visitor a Mac disk image.
-    const onWindows = document.documentElement.dataset.os === 'windows';
-    if (downloadBtn && !onWindows) downloadBtn.href = asset.browser_download_url;
+    // The button keeps pointing at /download: that page starts the newest
+    // build and walks through the install (platform.js points it at the
+    // Windows page on a PC).
     if (notesBtn) notesBtn.href = releaseUrl;
 }
 
 // Count download clicks as a Vercel Web Analytics custom event, so ad
-// spend can be measured against downloads
+// spend can be measured against downloads. `where` is the button's place on
+// the page (nav, hero, try, setup, pro, footer, lighthouse).
 document.addEventListener('click', (event) => {
     const link = event.target.closest('a[id^="download-"], a[href="/download"]');
     if (link && window.va) {
-        window.va('event', { name: 'download', data: { arch: link.id ? link.id.replace('download-', '') : 'arm64' } });
+        const where = window.cadenceWhere ? window.cadenceWhere(link) : 'page';
+        window.va('event', { name: 'download', data: { arch: link.id ? link.id.replace('download-', '') : 'arm64', where } });
     }
 });
 

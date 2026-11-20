@@ -378,4 +378,11 @@ if (releases[0]) {
     if (bumped !== sitemap) writeFileSync(join(ROOT, 'sitemap.xml'), bumped);
 }
 
+// The home page's structured data names the newest version.
+if (releases[0]) {
+    const home = read('index.html');
+    const synced = home.replace(/("softwareVersion":\s*")[^"]*(")/, `$1${releases[0].version}$2`);
+    if (synced !== home) writeFileSync(join(ROOT, 'index.html'), synced);
+}
+
 console.log(`${generated.length} release posts: ${generated.map((r) => r.tag).join(', ') || 'none'}`);

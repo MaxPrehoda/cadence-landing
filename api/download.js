@@ -1,15 +1,16 @@
-// GET /download            ->  302 to the latest Mac DMG
-// GET /download/mac        ->  the same
+// GET /download            ->  the page download.html: it starts /download/mac
+//                              and walks through the install (not this file)
+// GET /download/mac        ->  302 to the latest Mac DMG
 // GET /download/windows    ->  302 to the latest Windows installer once there
 //                              is one; until then, to /windows (the waitlist,
 //                              or the preview page while a preview is out)
 // GET /download/windows-preview -> 302 to the preview installer, only while
 //                              WINDOWS_PREVIEW is on; otherwise as above
-// (all are rewritten here by vercel.json, the last three as ?os=…)
+// (the last three are rewritten here by vercel.json, as ?os=…)
 //
-// Every Download button on the site links to /download, so a click starts
-// the newest Apple Silicon build straight away, with no page script. The
-// redirect is cached at the edge for five minutes, which keeps us far inside
+// Every Download button on the site links to /download, and that page asks
+// for /download/mac, so a click always gets the newest Apple Silicon build.
+// The redirect is cached at the edge for five minutes, which keeps us far inside
 // GitHub's unauthenticated API limit. If GitHub can't be reached, it falls
 // back to the latest release's page.
 //

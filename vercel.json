@@ -4,7 +4,6 @@
   "trailingSlash": false,
 
   "rewrites": [
-    { "source": "/download", "destination": "/api/download" },
     { "source": "/download/:os(mac|windows|windows-preview)", "destination": "/api/download?os=:os" },
     { "source": "/docs/:page([a-z0-9-]+)", "destination": "/docs" }
   ],

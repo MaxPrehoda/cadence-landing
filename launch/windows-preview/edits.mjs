@@ -19,14 +19,11 @@ export const edits = [
     { file: 'api/download.js', find: 'const WINDOWS_PREVIEW_TAG = null;', replace: "const WINDOWS_PREVIEW_TAG = '{{tag}}';" },
     { file: 'platform.js', find: 'const WINDOWS_PREVIEW = false;', replace: 'const WINDOWS_PREVIEW = true;' },
 
-    // ---- home page: one line in the hero, one button and one line by the Mac download ----
+    // ---- home page: one line in the hero and one button by the Mac download ----
     // (the button is hidden on a PC, where the main button already says the same)
     { file: 'index.html',
       find: '<div class="fine">Free · <a href="/pricing">Pro from $20/mo</a> · No account · macOS 13+ on Apple Silicon</div>',
       replace: '<div class="fine">Free · <a href="/pricing">Pro from $20/mo</a> · No account · macOS 13+ on Apple Silicon · <a href="/windows">Windows preview</a></div>' },
-    { file: 'index.html',
-      find: '<div><b>Windows:</b> in the works, not ready yet. <a href="/windows">Join the waitlist</a>.</div>',
-      replace: '<div><b>Windows 11:</b> an early preview. Not tested on Windows yet, and unsigned. <a href="/windows">Read this first</a>.</div>' },
     { file: 'index.html',
       find: 'class="cta" style="margin-left:6px">Release notes</a>',
       replace: 'class="cta" style="margin-left:6px">Release notes</a>\n            <span data-os-only="mac"><a href="/windows" class="cta" style="margin-left:6px">Windows preview</a></span>' },

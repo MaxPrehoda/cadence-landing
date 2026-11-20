@@ -993,6 +993,9 @@
     if (!B.engaged) {
       B.engaged = true;
       document.body.classList.add("engaged");
+      if (!RECORD && window.parent !== window) {
+        try { window.parent.postMessage({ type: "cadence-embed", event: "engaged" }, "*"); } catch {}
+      }
     }
     // Touching the demo mid-story skips to the Inbox and hands over the keys.
     if (!RECORD && story.ch < 2) toInbox();

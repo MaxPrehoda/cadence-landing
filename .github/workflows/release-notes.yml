@@ -42,7 +42,7 @@ jobs:
         env:
           TAG: ${{ github.event.release.tag_name }}
         run: |
-          git add blog changelog.html sitemap.xml
+          git add blog changelog.html sitemap.xml index.html
           if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
