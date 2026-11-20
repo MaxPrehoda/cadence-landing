@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadence is downloading: three steps to your first words</title>
+    <title>Cadence is downloading: three things to do next</title>
 
     <meta name="description" content="Your Cadence download starts here. Open the disk image, allow three permissions, then hold Option and talk.">
     <!-- This page starts a download when it opens, so it stays out of search results. -->
@@ -109,8 +109,8 @@
     <main class="dl" id="dl">
         <div class="d-head">
             <p class="eyebrow"><span class="d-dot" aria-hidden="true"></span>Download</p>
-            <h1 class="two"><b id="d-title" style="font-weight:inherit">Cadence is downloading.</b><br><span>Three steps to your first words.</span></h1>
-            <p class="lede" id="d-lede">It lands in your Downloads folder in a moment. Nothing happening? Start it again with the button.</p>
+            <h1 class="two"><b id="d-title" style="font-weight:inherit">Cadence is downloading.</b><br><span>Do these three things next.</span></h1>
+            <p class="lede" id="d-lede">The file goes to your Downloads folder. If nothing started, press the button.</p>
             <div class="d-row">
                 <a class="cta dark" id="d-again" href="/download/mac">↓ Download again</a>
                 <span class="d-meta" id="d-meta">Cadence for Mac · Apple Silicon · macOS 13 or later</span>
@@ -126,8 +126,8 @@
                     </div>
                 </div>
                 <div class="step-copy">
-                    <h2><small>1</small>Open it and drag it over</h2>
-                    <p>Open the Cadence disk image in your Downloads folder and drag Cadence into Applications. The first time you open it, macOS asks whether to open an app from the internet. Click Open: Cadence is signed and notarized by Apple.</p>
+                    <h2><small>1</small>Drag Cadence to Applications</h2>
+                    <p>Open the Cadence disk image in your Downloads folder and drag Cadence into Applications. The first time you open it, macOS asks whether to open an app from the internet. Click Open. Cadence is signed and notarized by Apple.</p>
                 </div>
             </li>
             <li class="step">
@@ -137,8 +137,8 @@
                     </div>
                 </div>
                 <div class="step-copy">
-                    <h2><small>2</small>Say yes to three things</h2>
-                    <p>Cadence asks for each of these once, the first time it opens.</p>
+                    <h2><small>2</small>Allow three permissions</h2>
+                    <p>Cadence asks for each one the first time it opens. Dictation doesn't work without them.</p>
                     <dl>
                         <div><dt>Microphone</dt><dd>To hear you while you hold the key. Your audio never leaves your Mac.</dd></div>
                         <div><dt>Accessibility</dt><dd>To type your words into the app you're in.</dd></div>
@@ -155,7 +155,7 @@
                 </div>
                 <div class="step-copy">
                     <h2><small>3</small>Hold ⌥ and talk</h2>
-                    <p>Setup downloads the speech model once, about 630 MB. After that, hold <kbd>⌥</kbd> in any app and your words land where the cursor is. Double-tap <kbd>⌥</kbd> to say what you need to your agents.</p>
+                    <p>Setup downloads the speech model once, about 630 MB. After that, hold <kbd>⌥</kbd> in any app, talk, and the text is typed where your cursor is. Double-tap <kbd>⌥</kbd> to give a task to your agents.</p>
                 </div>
             </li>
         </ol>
@@ -163,8 +163,8 @@
         <div class="after">
             <section class="panel" aria-labelledby="ip-h">
                 <p class="eyebrow">While it downloads</p>
-                <h2 id="ip-h">Your inbox, in your pocket</h2>
-                <p>The iPhone app answers your agents from the couch, the train or the coffee line. It comes with <a href="/pricing">Cadence Pro</a> and is in a private beta on TestFlight. Leave your email for one message when it opens up.</p>
+                <h2 id="ip-h">Answer your agents from your phone</h2>
+                <p>The iPhone app shows the same Inbox and answers with one tap. It comes with <a href="/pricing">Cadence Pro</a> and is in a private beta on TestFlight. Leave your email and you get one message when it opens.</p>
                 <form class="wl" id="waitlist" novalidate>
                     <label class="sr" for="wl-email">Email address</label>
                     <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
@@ -174,8 +174,8 @@
                 <p class="wl-msg" id="wl-msg" role="status" aria-live="polite">One email when the beta opens up. Nothing else.</p>
             </section>
             <section class="panel" aria-labelledby="help-h">
-                <p class="eyebrow">If something's off</p>
-                <h2 id="help-h">Help is one click away</h2>
+                <p class="eyebrow">If it doesn't work</p>
+                <h2 id="help-h">Where to look</h2>
                 <ul>
                     <li><a href="/docs/quickstart">Quickstart</a> <span>· five things to try in your first ten minutes</span></li>
                     <li><a href="/docs/installation">Installation</a> <span>· requirements, Homebrew, first launch</span></li>
@@ -225,7 +225,7 @@
         } else {
             document.getElementById('dl').classList.add('manual');
             document.getElementById('d-title').textContent = 'Get Cadence for Mac.';
-            document.getElementById('d-lede').textContent = 'The newest build, signed and notarized by Apple. The download starts when you press the button.';
+            document.getElementById('d-lede').textContent = 'The newest build, signed and notarized by Apple. Press the button to download it.';
             again.textContent = '↓ Download for Mac';
         }
         again.addEventListener('click', () => send('download_start', { how: fresh ? 'again' : 'button', from }));

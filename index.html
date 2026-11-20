@@ -612,7 +612,7 @@
     <canvas class="px hero-art" id="hero-canvas" width="640" height="360" aria-hidden="true"></canvas>
     <div class="hero-copy">
         <h1>Every agent,<br>one inbox.</h1>
-        <p>Cadence keeps Claude Code, Codex and the rest moving. Every question and finished task lands in one place. Answer with a keystroke, or just say it.</p>
+        <p>Run as many Claude Code and Codex agents as you like. Every question, permission request and finished job shows up in one list. Press 1 to answer, or say it out loud.</p>
         <div class="row desk">
             <a href="/download" class="cta">Download for Mac</a>
             <a href="#try" class="cta glass">Try the Inbox</a>
@@ -679,12 +679,12 @@
         <p class="live-cap reveal">Cadence's actual interface running in your browser, with sample agents in their terminals. Click or tap into it, then use <kbd class="k">1</kbd>–<kbd class="k">9</kbd>, <kbd class="k">esc</kbd>, <kbd class="k">J</kbd> <kbd class="k">K</kbd> and <kbd class="k">E</kbd>, or hover the dots.</p>
 
         <div class="cols3 reveal">
-            <div><b>One inbox.</b> Plan approvals, tool permissions and questions from every agent, as numbered choices you answer with one key.</div>
-            <div><b>You stay in the loop.</b> Nothing runs that you haven't allowed, and every answer has a two-second take-back.</div>
-            <div><b>Bring your own agents.</b> Claude Code runs natively. Codex, Gemini, Amp, Cursor, Copilot and more run in herdr terminals.</div>
+            <div><b>One list for every agent.</b> Questions, plan approvals and permission requests arrive as numbered choices. One key answers one.</div>
+            <div><b>You decide what runs.</b> An agent asks before any command you haven't already allowed, and you get two seconds to undo every answer.</div>
+            <div><b>The agents you already pay for.</b> Claude Code runs inside Cadence. Codex, Gemini, Amp, Cursor, Copilot and four more run in herdr terminals that Cadence watches.</div>
         </div>
         <div class="ctarow reveal">
-            <p>Keep the agents you already use. Cadence sits at the edge of your screen and tells you the moment one needs you.</p>
+            <p>Cadence is a thin strip on the edge of your screen with one dot per agent. A dot turns amber when that agent has stopped to wait for you.</p>
             <a href="/download" class="cta dark">Download for Mac</a>
         </div>
     </div>
@@ -694,19 +694,19 @@
 <section class="what">
     <div class="wrap">
         <div class="eyebrow reveal">What Cadence does</div>
-        <h2 class="two reveal">Your voice does the typing.<br><span>Your agents keep moving.</span></h2>
-        <p class="lead reveal">Hold a key and talk, and the words land in whatever app you're in. Say what you need and it reaches the right coding agent. When one of them needs a decision, it comes to you instead of waiting in a terminal you forgot about.</p>
+        <h2 class="two reveal">It types what you say,<br><span>and it shows you which agent is stuck.</span></h2>
+        <p class="lead reveal">Hold <kbd class="k">⌥</kbd> and talk: the words are typed into whatever app you're in. Double-tap <kbd class="k">⌥</kbd> and say what you want built: Cadence gives it to the agent already working on that, or starts a new one. When an agent stops to ask you something, you see it right away, not an hour later in a terminal tab you forgot about.</p>
 
         <!-- 1.0 Dictation -->
         <div class="feat" id="dictation">
             <div class="copy reveal">
                 <div class="eyebrow">1.0 / Dictation</div>
                 <h3 class="two">Hold ⌥ and talk<br><span>in any app</span></h3>
-                <p>The same key types for you everywhere: Slack, Mail, your editor, a terminal. Speech recognition runs on your Mac, so your audio never leaves it.</p>
+                <p>Hold the key, talk, let go. The text is typed where your cursor is: Slack, Mail, your editor, a terminal. Speech recognition runs on your Mac, so your audio never leaves it.</p>
                 <ul class="points">
-                    <li><small>1.1</small><div><b>On-device speech</b><p>NVIDIA's Parakeet model transcribes while you hold the key, with a second pass to get names right.</p></div></li>
-                    <li><small>1.2</small><div><b>Your vocabulary</b><p>Teach it project names, people and jargon, and set auto-corrections for the words it keeps missing.</p></div></li>
-                    <li><small>1.3</small><div><b>Text Polish</b><p>A small local model cleans up filler words and punctuation, and adjusts tone per app: casual in Slack, formal in email.</p></div></li>
+                    <li><small>1.1</small><div><b>Text a third of a second after you let go</b><p>NVIDIA's Parakeet model transcribes while you're still talking, so only the last few words are left when you release. A second pass gets names right.</p></div></li>
+                    <li><small>1.2</small><div><b>It knows your words</b><p>Add project names, people and jargon once, and set a correction for any word it keeps getting wrong.</p></div></li>
+                    <li><small>1.3</small><div><b>Text Polish</b><p>A small model on your Mac takes out the ums, fixes punctuation, and writes casual in Slack and formal in email.</p></div></li>
                 </ul>
                 <p class="guide-link">Guide: <a href="/guides/offline-dictation-mac">Offline dictation for Mac</a></p>
             </div>
@@ -729,13 +729,13 @@
         <div class="feat flip" id="talk">
             <div class="copy reveal">
                 <div class="eyebrow">2.0 / Talk and Director</div>
-                <h3 class="two">Say it once.<br><span>It finds the right agent.</span></h3>
-                <p>Double-tap <kbd class="k">⌥</kbd> and say what you want, or type it. Cadence knows what each agent is working on, which app you're looking at and which repos you have.</p>
+                <h3 class="two">Double-tap ⌥ and say the task.<br><span>Cadence picks the agent.</span></h3>
+                <p>You don't choose an agent or a folder. Cadence reads what every agent is working on, the window in front of you and a screenshot of your screen, then sends your request where it belongs. Typing works too.</p>
                 <ul class="points">
-                    <li><small>2.1</small><div><b>Routing</b><p>Your request goes to the agent already on that work, or Cadence starts a new one in the right folder. It tells you where it went.</p></div></li>
-                    <li><small>2.2</small><div><b>The Director</b><p>An always-on agent that can see every other agent, read their work, message them, start new ones and close finished ones. Ask "what's left before I can ship?"</p></div></li>
-                    <li><small>2.3</small><div><b>Titles, not process IDs</b><p>Every agent gets a short plain-English title, so your list reads like a to-do list.</p></div></li>
-                    <li><small>2.4</small><div><b>Sets</b><p>Put a whole project's agents away as a set. Their windows close, they keep running, and one chip turns amber if anything needs you.</p></div></li>
+                    <li><small>2.1</small><div><b>Follow-ups reach the same agent</b><p>"Also make it blue" goes to whoever got your last request. New work starts a new agent in the right folder. Either way you get a receipt, like "Sent to claude-2, the landing page thread".</p></div></li>
+                    <li><small>2.2</small><div><b>The Director</b><p>One agent that can read every other agent. Ask it "what's left before I can ship?" or "is anything stuck?". Tell it to start, message or stop agents and it does.</p></div></li>
+                    <li><small>2.3</small><div><b>Titles, not process IDs</b><p>Every agent gets a short title like "settings page dark mode", so the list reads like a to-do list.</p></div></li>
+                    <li><small>2.4</small><div><b>Sets</b><p>Close a whole project's terminal windows with one click. The agents keep running, and one chip turns amber if any of them needs you.</p></div></li>
                 </ul>
                 <p class="guide-link">Guide: <a href="/guides/voice-control-claude-code">Voice control for Claude Code</a></p>
             </div>
@@ -763,7 +763,7 @@
                     <source src="media/sets.mp4" type="video/mp4">
                 </video>
             </figure>
-                <p><b>Sets.</b> Put a project's agents away. They keep running in one chip that turns amber when something needs you.</p>
+                <p><b>Sets.</b> One click closes a project's windows. The agents keep running behind one chip that turns amber when one needs you.</p>
             </div>
         </div>
 
@@ -771,13 +771,13 @@
         <div class="feat" id="inbox">
             <div class="copy reveal">
                 <div class="eyebrow">3.0 / Toolbar and Inbox</div>
-                <h3 class="two">See every agent<br><span>at a glance</span></h3>
-                <p>A thin toolbar on the edge of your screen shows one dot per agent. Blue is working, amber needs you, green is done. Open the Inbox and answer in a keystroke.</p>
+                <h3 class="two">One dot per agent.<br><span>Amber means it's waiting on you.</span></h3>
+                <p>Blue is working, amber is waiting on you, green is done. Open the Inbox and every waiting agent is there as a card with numbered answers.</p>
                 <ul class="points">
-                    <li><small>3.1</small><div><b>Status at a glance</b><p>Hover the agent pill to peek at every agent's title. Click any agent to jump straight to it.</p></div></li>
-                    <li><small>3.2</small><div><b>Numbered answers</b><p>Questions, plan approvals and Allow/Deny prompts become numbered options. Press <kbd class="k">1</kbd> to <kbd class="k">9</kbd>, or start typing a reply.</p></div></li>
-                    <li><small>3.3</small><div><b>Recaps of finished work</b><p>When an agent finishes, you get a short recap and suggested next steps instead of a wall of output.</p></div></li>
-                    <li><small>3.4</small><div><b>Keyboard first</b><p><kbd class="k">J</kbd> <kbd class="k">K</kbd> to move, <kbd class="k">E</kbd> to dismiss, <kbd class="k">V</kbd> to talk, <kbd class="k">S</kbd> to attach a screenshot. Every answer has a two-second take-back.</p></div></li>
+                    <li><small>3.1</small><div><b>Hover to read, click to open</b><p>Hover the dots to see every agent's title. Click one to go straight to that agent.</p></div></li>
+                    <li><small>3.2</small><div><b>Answer with a number</b><p>Questions, plan approvals and Allow/Deny prompts become numbered options. Press <kbd class="k">1</kbd> to <kbd class="k">9</kbd>, or start typing a reply.</p></div></li>
+                    <li><small>3.3</small><div><b>25 words, not 400 lines</b><p>When an agent finishes you get a recap of at most 25 words, plus replies you can send with one key when there's an obvious next step.</p></div></li>
+                    <li><small>3.4</small><div><b>No mouse needed</b><p><kbd class="k">J</kbd> <kbd class="k">K</kbd> to move, <kbd class="k">E</kbd> to dismiss, <kbd class="k">V</kbd> to talk, <kbd class="k">S</kbd> to attach a screenshot. You get two seconds to undo any answer.</p></div></li>
                 </ul>
                 <p class="guide-link">Guides: <a href="/guides/run-multiple-claude-code-agents">How to run multiple Claude Code agents</a> · <a href="/guides/claude-code-notifications-mac">Claude Code notifications on Mac</a></p>
             </div>
@@ -792,7 +792,7 @@
         <!-- 4.0 The small things -->
         <div class="minis">
             <div class="eyebrow reveal">4.0 / The small things</div>
-            <h3 class="two reveal">Small things<br><span>you'll use all day</span></h3>
+            <h3 class="two reveal">Four details<br><span>that make it fast</span></h3>
             <div class="mini-grid reveal">
                 <div class="mini">
                     <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></div>
@@ -886,7 +886,7 @@
 <section class="band" id="agents">
     <img class="px" src="art/harbour.png" alt="Pixel art of sailboats at sunset. Their sails are blue, amber and green, like agent statuses." width="1920" height="801" loading="lazy" data-loop="/art/harbour.webp">
     <div class="band-in">
-        <h2 class="two">All the agents you already use<br><span>in one place</span></h2>
+        <h2 class="two">Claude Code, Codex and eight more<br><span>in the same Inbox</span></h2>
         <div class="tray">
             <div class="tray-in">
                 <div class="clis">
@@ -904,7 +904,7 @@
     <div class="wrap">
         <div class="eyebrow reveal">Cadence Pro</div>
         <h2 class="two reveal">Free while you're watching.<br><span>Pro when you're not.</span></h2>
-        <p class="lead reveal">Everything you do at your desk is free, with every agent you run. Pro is Cadence carrying the work while you're away from it.</p>
+        <p class="lead reveal">At your Mac, Cadence costs nothing and has no agent limit. Pro is for when you leave: Cadence answers the questions it already knows your answer to, keeps your agents working for hours, and puts the Inbox on your iPhone.</p>
         <div class="tiers">
             <article class="step tier reveal">
                 <div class="sv" style="background-image:url(art/hero-desk.png); background-size:150% auto; background-position:62% 46%">
@@ -913,10 +913,10 @@
                 <div class="tier-copy">
                     <h3>Free <span>while you're watching</span></h3>
                     <ul class="ticks">
-                        <li><b>Dictation</b> into any app, on your Mac</li>
-                        <li><b>Every agent</b>, no limit: Claude Code, Codex and the rest in one Inbox</li>
-                        <li><b>Talk</b> to your agents and arrange your windows by voice</li>
-                        <li><b>Your judgment</b>: Cadence learns how you decide and suggests the answer</li>
+                        <li><b>Dictation</b> in any app, running on your Mac</li>
+                        <li><b>Unlimited agents</b> in one Inbox: Claude Code, Codex and eight more</li>
+                        <li><b>Talk</b>: say a task and it goes to the right agent. Arrange your windows by voice too</li>
+                        <li><b>It learns how you answer</b>: Cadence guesses before you do, shows whether it matched, and <kbd class="k">⏎</kbd> takes its pick</li>
                     </ul>
                     <div class="tier-foot">
                         <div class="tier-price">$0<small>no account</small></div>
@@ -931,10 +931,10 @@
                 <div class="tier-copy">
                     <h3>Pro <span>when you're not</span></h3>
                     <ul class="ticks">
-                        <li><b>Cadence answers for you</b> in the kinds of decision you hand over, only where your past answers agree</li>
-                        <li><b>Away mode</b>: it starts your plan for the day and keeps your agents going for hours</li>
-                        <li><b>Its own ideas</b>: long jobs toward your goals, read from the repo, ready for your yes</li>
-                        <li><b>Your iPhone</b>: the Inbox and your agents on your phone, on your Wi-Fi or anywhere</li>
+                        <li><b>It answers for you</b>: once Cadence has matched you often enough on a kind of question, it answers those itself. <kbd class="k">esc</kbd> stops it, and one wrong answer sends it back to asking. It never answers anything that leaves your Mac or can't be undone</li>
+                        <li><b>Away mode</b>: say "I'm stepping away". Cadence starts the day's plan and keeps your agents working for hours. Your phone buzzes three times a day at most</li>
+                        <li><b>Its own long jobs</b>: Cadence reads your repos and proposes hours of work toward your goals. One key starts a job on its own branch. Nothing is pushed until you say ship it</li>
+                        <li><b>iPhone</b>: answer agents from your phone, at home or anywhere, end-to-end encrypted</li>
                     </ul>
                     <div class="tier-foot">
                         <div class="prices">
@@ -955,8 +955,8 @@
     <div class="wrap iphone-grid">
         <div class="reveal">
             <div class="eyebrow">In beta / iPhone</div>
-            <h2 class="two">Your inbox,<br><span>in your pocket</span></h2>
-            <p class="lead">Pair your iPhone with a QR code and answer your agents from the couch, the train or the coffee line. Traffic between your phone and your Mac is end-to-end encrypted, and your Mac never opens a port. The app comes with <a href="/pricing">Cadence Pro</a> and is in a private beta on TestFlight; join the list to hear when it opens up.</p>
+            <h2 class="two">Answer your agents<br><span>from your phone</span></h2>
+            <p class="lead">Scan a QR code on your Mac and your phone gets the same Inbox: the question, the numbered answers, one tap. Notifications carry the answers as buttons, so you can reply from the Lock Screen. Traffic between your phone and your Mac is end-to-end encrypted, and your Mac never opens a port. The app comes with <a href="/pricing">Cadence Pro</a> and is in a private beta on TestFlight; join the list to hear when it opens up.</p>
             <form class="wl" id="waitlist" novalidate>
                 <label class="sr" for="wl-email">Email address</label>
                 <input id="wl-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required>
@@ -1013,7 +1013,7 @@
 <section class="privacy" id="privacy">
     <div class="wrap">
         <div class="eyebrow reveal">Your data</div>
-        <h2 class="two reveal">Plain answers<br><span>about what goes where</span></h2>
+        <h2 class="two reveal">What leaves your Mac<br><span>and what doesn't</span></h2>
         <div class="ledger reveal">
             <div><small>On your Mac</small><h4>Voice and dictation</h4><p>Speech recognition and Text Polish run locally. Audio is never uploaded, and recordings aren't saved unless you turn that on.</p></div>
             <div><small>Your Claude login</small><h4>Agents and routing</h4><p>Routing, titles, recaps and the Director use your own Claude Code login. Other agents talk to their own providers, as they already do.</p></div>
@@ -1030,7 +1030,7 @@
         <h2 class="two reveal">What people ask<br><span>before they install</span></h2>
         <div class="faq-grid">
             <div class="reveal">
-                <details><summary>Is Cadence another coding agent?</summary><p>No. It sits on top of the agents you already run, like Claude Code and Codex, and keeps them moving: it shows you what they need, sends your answers back, and routes new requests to the right one.</p></details>
+                <details><summary>Is Cadence another coding agent?</summary><p>No. Cadence doesn't write code. It runs on top of the agents you already use, like Claude Code and Codex: it shows you what each one is waiting for, sends your answer back, and gives new requests to the right one.</p></details>
                 <details><summary>Does Cadence act on my agents by itself?</summary><p>It never answers for you. Questions, plan approvals and Allow/Deny prompts wait in your Inbox until you answer, and every answer has a two-second take-back. Which tools an agent may use without asking is up to you, the same as in the CLI.</p><p>The Director only starts, messages or closes agents when you ask it to.</p></details>
                 <details><summary>Do my agents have to run in herdr?</summary><p>Not Claude Code: Cadence runs it directly, with real Allow/Deny, cost tracking and worktree diffs. Every other CLI (Codex, OpenCode, Gemini, Amp, Cursor, Copilot, Grok, Pi, Omp) runs in herdr, an open-source terminal workspace, and opens in a Cadence terminal window. Their questions land in the same Inbox.</p></details>
                 <details><summary>What does it cost?</summary><p>Nothing at your desk. Dictation, every agent, the Inbox, Talk, and Cadence learning how you decide are free, with no account. <a href="/pricing">Cadence Pro</a> is for when you're not there: answering for you, away mode, long runs, its own ideas and the iPhone app. $20 a month, $200 a year, or $249 once for the first 100.</p><p>Your agents keep using the plans you already pay for: your Claude Code login, or whichever provider each CLI is set up with.</p></details>
@@ -1073,7 +1073,7 @@
             <div class="art">
                 <img class="px" src="art/lighthouse.png" alt="Pixel art of a lighthouse at dusk, its lamp sweeping a beam across the water" width="640" height="880" loading="lazy" data-loop="/art/lighthouse.webp">
                 <div class="ov">
-                    <p>Lights up when an agent needs you. <span>Stays out of the way otherwise.</span></p>
+                    <p>One dot goes amber when an agent needs you. <span>That's the whole interruption.</span></p>
                     <a href="/download" class="cta" data-where="lighthouse">Download for Mac</a>
                 </div>
             </div>
