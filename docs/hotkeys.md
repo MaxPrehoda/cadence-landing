@@ -8,6 +8,7 @@ Cadence uses one key for two jobs. The default is `⌥` (Option).
 | **Double-tap** the key (both taps within 350 ms) | [Talk](#/talk). Say or type a request for your agents. |
 | **Tap** the key while Talk is open | Send the request. |
 | **Double-tap and hold** | Talk, sent when you let go. |
+| **Triple-tap** the key | [Triple tap](#/triple-tap). Every agent on one screen, with the microphone on. |
 | A quick tap, or a shortcut such as `⌥←` | Nothing. The recording is cancelled and nothing is typed. |
 
 ## Change the key

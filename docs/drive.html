@@ -385,7 +385,7 @@
         </div>
         <div id="toc"><!--DOC:TOC-->
             <div class="toc-section"><div class="toc-heading">Getting started</div><ul class="toc-list"><li><a class="toc-link" href="/docs/introduction" data-id="introduction">Introduction</a></li><li><a class="toc-link" href="/docs/installation" data-id="installation">Installation</a></li><li><a class="toc-link" href="/docs/quickstart" data-id="quickstart">Quickstart</a></li></ul></div>
-            <div class="toc-section"><div class="toc-heading">Agents</div><ul class="toc-list"><li><a class="toc-link" href="/docs/toolbar" data-id="toolbar">Toolbar</a></li><li><a class="toc-link" href="/docs/inbox" data-id="inbox">Inbox</a></li><li><a class="toc-link" href="/docs/talk" data-id="talk">Talk</a></li><li><a class="toc-link" href="/docs/director" data-id="director">Director</a></li><li><a class="toc-link" href="/docs/agents-and-clis" data-id="agents-and-clis">Agents and CLIs</a></li><li><a class="toc-link" href="/docs/sets" data-id="sets">Sets</a></li><li><a class="toc-link active" href="/docs/drive" data-id="drive">Cadence Drive</a></li></ul></div>
+            <div class="toc-section"><div class="toc-heading">Agents</div><ul class="toc-list"><li><a class="toc-link" href="/docs/toolbar" data-id="toolbar">Toolbar</a></li><li><a class="toc-link" href="/docs/inbox" data-id="inbox">Inbox</a></li><li><a class="toc-link" href="/docs/talk" data-id="talk">Talk</a></li><li><a class="toc-link" href="/docs/triple-tap" data-id="triple-tap">Triple tap</a></li><li><a class="toc-link" href="/docs/director" data-id="director">Director</a></li><li><a class="toc-link" href="/docs/agents-and-clis" data-id="agents-and-clis">Agents and CLIs</a></li><li><a class="toc-link" href="/docs/sets" data-id="sets">Sets</a></li><li><a class="toc-link active" href="/docs/drive" data-id="drive">Cadence Drive</a></li></ul></div>
             <div class="toc-section"><div class="toc-heading">Dictation</div><ul class="toc-list"><li><a class="toc-link" href="/docs/dictation" data-id="dictation">Dictation</a></li><li><a class="toc-link" href="/docs/hotkeys" data-id="hotkeys">Hotkeys</a></li><li><a class="toc-link" href="/docs/text-polish" data-id="text-polish">Text Polish</a></li></ul></div>
             <div class="toc-section"><div class="toc-heading">More</div><ul class="toc-list"><li><a class="toc-link" href="/docs/voice-commands" data-id="voice-commands">Voice commands</a></li><li><a class="toc-link" href="/docs/iphone" data-id="iphone">iPhone (beta)</a></li><li><a class="toc-link" href="/docs/cloud" data-id="cloud">Continue in the cloud</a></li></ul></div>
             <div class="toc-section"><div class="toc-heading">Reference</div><ul class="toc-list"><li><a class="toc-link" href="/docs/settings" data-id="settings">Settings reference</a></li><li><a class="toc-link" href="/docs/troubleshooting" data-id="troubleshooting">Troubleshooting</a></li><li><a class="toc-link" href="/docs/privacy" data-id="privacy">Privacy</a></li></ul></div><!--/DOC:TOC--></div>
@@ -432,6 +432,14 @@
 <li>From the file view or the right-click menu, choose <strong>Hand to an agent…</strong>.</li>
 <li>With <a href="/docs/talk">Talk</a>: double-tap <code>⌥</code> and say &quot;Give the checkout agent the API notes&quot;, &quot;Put my clipboard in the drive as launch copy&quot; or &quot;What changed in the drive today?&quot;.</li>
 <li>Claude Code agents that Cadence starts get four tools: <code>drive_list</code>, <code>drive_read</code>, <code>drive_write</code> and <code>drive_search</code>.</li>
+</ul>
+<h2>Skills</h2>
+<p>Skills in the drive&#39;s <code>skills/</code> folder work for every agent on every computer. Each computer links them into Claude Code (<code>~/.claude/skills</code>) and, where it is installed, Codex (<code>~/.codex/skills</code>), so agents find them the way they find any skill. Agents without skills read them through the Drive tools.</p>
+<ul>
+<li>An agent shares a skill by writing it as <code>skills/&lt;name&gt;/SKILL.md</code>. Every computer has it after the next sync.</li>
+<li>A skill an agent makes in its own skills folder moves into the drive on its own once nothing has written to it for 30 seconds, and a link takes its place. There is one copy, and an edit from any computer reaches the rest.</li>
+<li>When Drive is on, your existing skills move in the same way. A skill of the same name already on a computer wins there.</li>
+<li>Settings → Agents → Cadence Drive → <strong>Share skills with every agent</strong> turns this off for one computer.</li>
 </ul>
 <h2>Briefs</h2>
 <p>When an agent finishes, its recap is saved in <code>briefs/</code> in the drive. The next agent, on any computer, can read it and pick up where the last one left off.</p>

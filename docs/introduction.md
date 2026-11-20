@@ -11,6 +11,7 @@ Cadence is free at your desk, with no account. [Cadence Pro](/pricing) adds what
 - **Toolbar.** A thin strip on the edge of your screen with one dot per agent. Blue is working, amber needs you, green is done.
 - **Inbox.** Questions, plan approvals and tool permission requests from every agent, plus finished work with a short recap. Press `1` to `9` to answer, `J` and `K` to move between cards.
 - **Talk.** Double-tap `⌥`, then say or type what you need. Cadence sends it to the agent already on that work, starts a new one, or hands a question to the Director.
+- **Triple tap.** Triple-tap `⌥` for every agent on one screen, each sized by how much it is doing, with a live summary and a message box on each. See [Triple tap](#/triple-tap).
 - **Director.** A Claude session that can see every agent and can message, start, check on and stop them for you.
 - **Any CLI.** Claude Code runs natively inside Cadence. Codex, OpenCode, Pi, Amp, Grok, Cursor, Copilot, Gemini and others run in terminals through [herdr](https://herdr.dev).
 - **Dictation anywhere.** Hold `⌥` to type into any app. Speech recognition runs on your Mac.

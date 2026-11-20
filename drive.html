@@ -241,6 +241,7 @@
         .more { padding-top: 130px; }
         .more h2.two { margin-bottom: 34px; }
         .mini-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+        .mini.wide { grid-column: 1 / -1; }
         .mini { background: var(--panel); border: 1px solid var(--line-2); border-radius: 14px; padding: 20px 20px 22px; }
         .mini .ic { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; background: #2b2b2a; color: #fff; margin-bottom: 18px; box-shadow: inset 0 1px 0 rgba(255,255,255,.14); }
         .mini h3 { font-weight: 500; font-size: 16.5px; margin: 0 0 6px; color: var(--ink); }
@@ -542,8 +543,13 @@
         <!-- 07 The rest -->
         <section class="more" aria-labelledby="more-h">
             <p class="eyebrow reveal">07 / The rest of it</p>
-            <h2 class="two reveal" id="more-h">A file browser, a Trash <span>and notes for the next agent</span></h2>
+            <h2 class="two reveal" id="more-h">A file browser, your skills <span>and notes for the next agent</span></h2>
             <div class="mini-grid reveal">
+                <div class="mini wide">
+                    <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.6 7.1 18.2l.9-5.5-4-3.9 5.5-.8z"/></svg></div>
+                    <h3>Your skills, on every computer</h3>
+                    <p>Skills in <code>skills/</code> work in Claude Code and Codex everywhere. A skill any agent writes reaches every computer on its own.</p>
+                </div>
                 <div class="mini">
                     <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></div>
                     <h3>A full file browser</h3>

@@ -7,12 +7,12 @@
         {
           "id": "introduction",
           "title": "Introduction",
-          "seoTitle": "What is Cadence? Every coding agent in one inbox \u00b7 Docs"
+          "seoTitle": "What is Cadence? Every coding agent in one inbox · Docs"
         },
         {
           "id": "installation",
           "title": "Installation",
-          "seoTitle": "Install Cadence on your Mac \u00b7 Cadence Docs",
+          "seoTitle": "Install Cadence on your Mac · Cadence Docs",
           "description": "Install Cadence on a Mac with Apple Silicon: requirements, the DMG or Homebrew cask, first launch, permissions, and signing in to Claude Code."
         },
         {
@@ -28,37 +28,43 @@
         {
           "id": "toolbar",
           "title": "Toolbar",
-          "seoTitle": "The toolbar: every agent's status at a glance \u00b7 Cadence Docs"
+          "seoTitle": "The toolbar: every agent's status at a glance · Cadence Docs"
         },
         {
           "id": "inbox",
           "title": "Inbox",
-          "seoTitle": "The Inbox: answer every coding agent in one place \u00b7 Docs"
+          "seoTitle": "The Inbox: answer every coding agent in one place · Docs"
         },
         {
           "id": "talk",
           "title": "Talk",
-          "seoTitle": "Talk: send requests to the right agent by voice \u00b7 Docs"
+          "seoTitle": "Talk: send requests to the right agent by voice · Docs"
+        },
+        {
+          "id": "triple-tap",
+          "title": "Triple tap",
+          "seoTitle": "Triple tap: every coding agent on one screen · Cadence Docs",
+          "description": "Triple-tap your hotkey to see every agent at once, sized by how much it is doing, with a live summary and a message box on each tile."
         },
         {
           "id": "director",
           "title": "Director",
-          "seoTitle": "The Director: an agent that manages your agents \u00b7 Docs"
+          "seoTitle": "The Director: an agent that manages your agents · Docs"
         },
         {
           "id": "agents-and-clis",
           "title": "Agents and CLIs",
-          "seoTitle": "Claude Code, Codex, Gemini and other CLIs \u00b7 Cadence Docs"
+          "seoTitle": "Claude Code, Codex, Gemini and other CLIs · Cadence Docs"
         },
         {
           "id": "sets",
           "title": "Sets",
-          "seoTitle": "Sets: put a project's agents away \u00b7 Cadence Docs"
+          "seoTitle": "Sets: put a project's agents away · Cadence Docs"
         },
         {
           "id": "drive",
           "title": "Cadence Drive",
-          "seoTitle": "Cadence Drive: one folder every agent shares \u00b7 Cadence Docs",
+          "seoTitle": "Cadence Drive: one folder every agent shares · Cadence Docs",
           "description": "Cadence Drive keeps ~/Cadence Drive the same on every computer you pair with Cadence and on your iPhone. Turn it on, see who wrote what, merges, collisions, history, Trash and privacy."
         }
       ]
@@ -69,18 +75,18 @@
         {
           "id": "dictation",
           "title": "Dictation",
-          "seoTitle": "On-device dictation for Mac \u00b7 Cadence Docs"
+          "seoTitle": "On-device dictation for Mac · Cadence Docs"
         },
         {
           "id": "hotkeys",
           "title": "Hotkeys",
-          "seoTitle": "Hotkeys and keyboard shortcuts \u00b7 Cadence Docs",
+          "seoTitle": "Hotkeys and keyboard shortcuts · Cadence Docs",
           "description": "Cadence uses one key for two jobs: hold Option to dictate into any app, double-tap it to talk to your agents. Gestures, timings and how to change the key."
         },
         {
           "id": "text-polish",
           "title": "Text Polish",
-          "seoTitle": "Text Polish: clean up dictated text \u00b7 Cadence Docs"
+          "seoTitle": "Text Polish: clean up dictated text · Cadence Docs"
         }
       ]
     },
@@ -90,17 +96,17 @@
         {
           "id": "voice-commands",
           "title": "Voice commands",
-          "seoTitle": "Voice commands and wake word \u00b7 Cadence Docs"
+          "seoTitle": "Voice commands and wake word · Cadence Docs"
         },
         {
           "id": "iphone",
           "title": "iPhone (beta)",
-          "seoTitle": "Cadence for iPhone \u00b7 Cadence Docs"
+          "seoTitle": "Cadence for iPhone · Cadence Docs"
         },
         {
           "id": "cloud",
           "title": "Continue in the cloud",
-          "seoTitle": "Continue in the cloud: keep Claude Code going \u00b7 Cadence Docs"
+          "seoTitle": "Continue in the cloud: keep Claude Code going · Cadence Docs"
         }
       ]
     },
@@ -110,17 +116,17 @@
         {
           "id": "settings",
           "title": "Settings reference",
-          "seoTitle": "Settings reference \u00b7 Cadence Docs"
+          "seoTitle": "Settings reference · Cadence Docs"
         },
         {
           "id": "troubleshooting",
           "title": "Troubleshooting",
-          "seoTitle": "Troubleshooting Cadence on macOS \u00b7 Cadence Docs"
+          "seoTitle": "Troubleshooting Cadence on macOS · Cadence Docs"
         },
         {
           "id": "privacy",
           "title": "Privacy",
-          "seoTitle": "Privacy: what stays on your Mac \u00b7 Cadence Docs"
+          "seoTitle": "Privacy: what stays on your Mac · Cadence Docs"
         }
       ]
     }

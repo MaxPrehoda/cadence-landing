@@ -45,6 +45,15 @@ Search covers every text file in the drive. Type plain words, or a regular expre
 - With [Talk](#/talk): double-tap `⌥` and say "Give the checkout agent the API notes", "Put my clipboard in the drive as launch copy" or "What changed in the drive today?".
 - Claude Code agents that Cadence starts get four tools: `drive_list`, `drive_read`, `drive_write` and `drive_search`.
 
+## Skills
+
+Skills in the drive's `skills/` folder work for every agent on every computer. Each computer links them into Claude Code (`~/.claude/skills`) and, where it is installed, Codex (`~/.codex/skills`), so agents find them the way they find any skill. Agents without skills read them through the Drive tools.
+
+- An agent shares a skill by writing it as `skills/<name>/SKILL.md`. Every computer has it after the next sync.
+- A skill an agent makes in its own skills folder moves into the drive on its own once nothing has written to it for 30 seconds, and a link takes its place. There is one copy, and an edit from any computer reaches the rest.
+- When Drive is on, your existing skills move in the same way. A skill of the same name already on a computer wins there.
+- Settings → Agents → Cadence Drive → **Share skills with every agent** turns this off for one computer.
+
 ## Briefs
 
 When an agent finishes, its recap is saved in `briefs/` in the drive. The next agent, on any computer, can read it and pick up where the last one left off.

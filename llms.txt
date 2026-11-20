@@ -7,6 +7,7 @@
 - Inbox: agent questions, plan approvals, and tool Allow/Deny requests appear as numbered options; finished work arrives with a short recap and suggested replies. Keys 1-9 answer, with a 2-second take-back
 - Toolbar: a thin strip on the screen edge with one dot per agent (blue working, amber needs you, green done)
 - Talk: double-tap Option, say or type a request, and Cadence sends it to the right agent, starts a new one, or answers in the Director
+- Triple tap: triple-tap Option for every agent on one screen, each tile sized by how much it is doing, with a live summary, a message box per agent, and the Director listening
 - Director: an always-on Claude session that can see and command every agent (start, message, read, close)
 - AI titles and recaps for each agent, Sets to put a group of agents away and keep them running, and an Agents dashboard with branch, worktree, and diff views
 - Dictation anywhere: hold Option to type into any app, transcribed on-device with NVIDIA Parakeet plus a Whisper pass for names (1.88% word error rate on clean speech, about 330 ms from key release to text at p95, in our measurements)
@@ -14,6 +15,7 @@
 - iPhone app (private TestFlight beta, 0.4.0): answer agents from Home, widgets, Siri, Shortcuts and Control Center; pairs by QR with end-to-end encryption, one key per phone, unpair any time
 - Agents on other machines (0.5.7): Linux servers over SSH through herdr, shown under the server's name
 - Cadence Drive (0.12.0, part of Cadence Pro at no extra charge): a real folder, ~/Cadence Drive, kept the same on every computer paired with Cadence and in the iPhone app's Drive tab. Finder, editors and agents use it directly. Each change is credited to the agent that made it (Claude Code sessions' file edits, plus drive_list, drive_read, drive_write and drive_search tools for Claude Code agents Cadence starts). Edits to different lines merge automatically, CSV/TSV merge row by row, and same-line collisions arrive in the Inbox with a combined version by Claude, either side, or both as separate files. The last 200 versions of every file, a 30-day Trash, agent recaps saved in briefs/, full-text and regex search, files up to 512 MB. Sealed end to end with AES-256-GCM using keys only the user's devices hold; the relay stores files but can't read their contents or names. Details: https://www.cadencevoice.ai/drive
+- Drive skills: skills in the drive's skills/ folder are linked into Claude Code and Codex on every computer; a skill any agent writes reaches every computer on its own
 - Guides: https://www.cadencevoice.ai/guides (multiple Claude Code agents, notifications, Claude Code on iPhone, voice control, agents on a server, Claude Code with Codex, offline dictation, Codex notifications, a Mac app for herdr, best tools for parallel coding agents)
 - Comparisons: https://www.cadencevoice.ai/compare (Cadence vs One, Conductor, Claude Squad)
 
