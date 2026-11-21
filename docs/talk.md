@@ -16,6 +16,8 @@ A black pill appears near the middle of the screen with a live transcript.
 | Type instead of speaking | Just start typing. The mic stops and its audio is dropped. |
 | Cancel | `Esc`. Nothing is sent and nothing is typed anywhere. |
 
+To always type, open **Settings → Hotkey → Talk to your agents** and set **Opens ready to** to **Type**. A double-tap (or the toolbar's Talk) then opens the pill with the mic off and the cursor in it. Press `Return` to send. A single tap of `⌥` doesn't send while you type, so `⌥` shortcuts still work in the box, and a triple-tap still starts Continuous Talk.
+
 After sending, the keyboard goes back to the app you were in.
 
 ## Where your request goes

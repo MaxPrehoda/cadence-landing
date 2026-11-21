@@ -18,7 +18,7 @@ Open **Settings → Hotkey → Push-to-Talk Key**.
 - Click a preset: **⌥ Option**, **⌘ Cmd**, **⌃ Control**, **⌘⌥** or **⌃⌥**.
 - Or click **Record** and hold the combination you want, up to three modifiers. Click **Cancel** to stop recording without changing it.
 
-The same key is used for both dictation and Talk. The **Talk to your agents** section below it shows the current double-tap trigger.
+The same key is used for both dictation and Talk. The **Talk to your agents** section below it shows the current double-tap trigger, and **Opens ready to** chooses whether a double-tap starts the mic (**Speak**) or opens Talk for typing (**Type**).
 
 Option is recommended because it rarely clashes with app shortcuts. Command works, but you use it in shortcuts all the time. A hold that turns into a shortcut, like `⌘C`, is cancelled and types nothing.
 
