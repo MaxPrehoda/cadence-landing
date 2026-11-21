@@ -1,8 +1,11 @@
 // The license endpoint.
 //
-//   POST /api/license  { key, device?, device_name? }
-//                                       ->  { token, plan, email, renews, cancel_at_period_end, ends_at, status, devices?, iphone_url? }
+//   POST /api/license  { key, device?, device_name?, computer?: { id, name }, phones?: [id] }
+//                                       ->  { token, plan, email, renews, cancel_at_period_end, ends_at, status, devices?, iphone_url?, account? }
 //                                           (the Mac app, every few hours)
+//                                           account = { secret, computers: [{ id, name, last_seen }] }: the person's
+//                                           computers, whatever key each holds (same email, or the same iPhone)
+//   POST /api/license  { key, computer, phones?, roster: true }  ->  { account }   (the app, every few minutes)
 //                                           402 { error: 'not_paid', plan, reason } once a license has lapsed or been revoked
 //                                           409 { error: 'device_limit', max, devices, message } when its seats are full
 //   POST /api/license  { key, device, release: true }  ->  { released }   (the Mac app, "Remove from this Mac")
@@ -31,6 +34,9 @@ const {
     normalizeDevice,
     claimDevice,
     releaseDevice,
+    normalizeComputer,
+    normalizePhones,
+    accountFor,
     licenseFromSession,
     sendPurchaseEmail,
     readJson,
@@ -48,6 +54,17 @@ function sessionFresh(lic) {
     const issued = Number(lic.issued) || Math.floor(Date.parse(lic.created) / 1000) || 0;
     const shown = Number(lic.shown) || now;
     return now < shown + SHOWN_FOR && now < issued + SHOWN_BY;
+}
+
+// The account this license's computer belongs to. Trouble here never costs
+// anyone their license: the app keeps what it had and asks again.
+async function accountOf(lic, body) {
+    try {
+        return await accountFor(lic.email, normalizePhones(body.phones), normalizeComputer(body.computer));
+    } catch (e) {
+        console.error('account', e.message);
+        return null;
+    }
 }
 
 module.exports = async function handler(req, res) {
@@ -119,6 +136,10 @@ module.exports = async function handler(req, res) {
             if (maxDevices() && device) reply.devices = { used: seat.used, max: seat.max };
             const iphone = iphoneUrl();
             if (iphone) reply.iphone_url = iphone;
+            const account = await accountOf(lic, body);
+            if (account) reply.account = account;
+            // Who else is on the account, asked often: no new token needed.
+            if (body.roster === true) return res.status(200).json({ account: account || null });
             return res.status(200).json(reply);
         }
 

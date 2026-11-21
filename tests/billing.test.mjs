@@ -1072,3 +1072,94 @@ test('"send my key again" is limited per visitor and per address, and off withou
     for (let i = 0; i < 7; i++) flood.push((await call(resendKey, { method: 'POST', body: { email: `x${i}@example.com` }, headers: { 'x-forwarded-for': '192.0.2.200' } })).status);
     assert.deepEqual(flood, [200, 200, 200, 200, 200, 429, 429]);
 });
+
+// ---- accounts: one person's computers, whatever key each holds -------------
+
+const mac = (n) => ({ id: String(n).repeat(32).slice(0, 32), name: `Computer ${n}` });
+const phone = (c) => c.repeat(64).slice(0, 64);
+
+test('two keys under one email are one account: the same secret, and each computer sees the other', async () => {
+    const a = await buy('monthly', { email: 'Sam@Example.com' });
+    const b = await buy('yearly', { email: 'sam@example.com ' });
+    const first = await activate(a.key, { computer: mac(1) });
+    assert.equal(first.status, 200);
+    assert.match(first.body.account.secret, /^[0-9a-f]{64}$/);
+    assert.deepEqual(first.body.account.computers.map((c) => c.id), [mac(1).id]);
+    const second = await activate(b.key, { computer: mac(2) });
+    assert.equal(second.body.account.secret, first.body.account.secret);
+    assert.deepEqual(second.body.account.computers.map((c) => c.name).sort(), ['Computer 1', 'Computer 2']);
+    // The first computer learns of the second without a new token.
+    const roster = await activate(a.key, { computer: mac(1), roster: true });
+    assert.equal(roster.status, 200);
+    assert.equal(roster.body.token, undefined);
+    assert.deepEqual(roster.body.account.computers.map((c) => c.id).sort(), [mac(1).id, mac(2).id]);
+});
+
+test('someone else is another account', async () => {
+    const mine = await buy('monthly', { email: 'sam@example.com' });
+    const theirs = await buy('monthly', { email: 'alex@example.com' });
+    const a = await activate(mine.key, { computer: mac(1) });
+    const b = await activate(theirs.key, { computer: mac(2) });
+    assert.notEqual(a.body.account.secret, b.body.account.secret);
+    assert.deepEqual(b.body.account.computers.map((c) => c.id), [mac(2).id]);
+});
+
+test('keys under different emails are one account once both computers are paired with the same iPhone', async () => {
+    const home = await buy('monthly', { email: 'sam@example.com' });
+    const work = await buy('monthly', { email: 'sam@work.example' });
+    const a = await activate(home.key, { computer: mac(1), phones: [phone('a')] });
+    const b = await activate(work.key, { computer: mac(2), phones: [phone('a')] });
+    assert.equal(b.body.account.secret, a.body.account.secret);
+    assert.deepEqual(b.body.account.computers.map((c) => c.id).sort(), [mac(1).id, mac(2).id]);
+    // And it stays that way without the phone in the request.
+    const later = await activate(work.key, { computer: mac(2), roster: true });
+    assert.equal(later.body.account.secret, a.body.account.secret);
+});
+
+test('two accounts that turn out to share an iPhone are joined into the older one, computers and all', async () => {
+    const home = await buy('monthly', { email: 'sam@example.com' });
+    const work = await buy('monthly', { email: 'sam@work.example' });
+    const a = await activate(home.key, { computer: mac(1) });
+    const b = await activate(work.key, { computer: mac(2) });
+    assert.notEqual(a.body.account.secret, b.body.account.secret);
+    world.kv.set([...world.kv.keys()].find((k) => k.endsWith(':made') && world.kv.get(k) && k.includes(String(world.kv.get(`acct:h:e:${crypto.createHash('sha256').update('sam@work.example').digest('hex')}`)))), String(now() + 60));
+    const joined = await activate(work.key, { computer: mac(2), phones: [phone('b')] });
+    assert.equal(joined.body.account.secret, b.body.account.secret, 'nothing links them yet');
+    const linked = await activate(home.key, { computer: mac(1), phones: [phone('b')] });
+    assert.equal(linked.body.account.secret, a.body.account.secret, 'the older account is kept');
+    assert.deepEqual(linked.body.account.computers.map((c) => c.id).sort(), [mac(1).id, mac(2).id]);
+    const moved = await activate(work.key, { computer: mac(2), roster: true });
+    assert.equal(moved.body.account.secret, a.body.account.secret, 'the other computer moves over when it next asks');
+});
+
+test('a license that lapsed gets no account, and a bad computer or phone id is ignored', async () => {
+    const { session, key } = await buy('monthly', { email: 'sam@example.com' });
+    const odd = await activate(key, { computer: { id: 'not-an-id', name: 'x' }, phones: ['nope', 7] });
+    assert.equal(odd.status, 200);
+    assert.deepEqual(odd.body.account.computers, []);
+    world.stripe.subscriptions[session.subscription].status = 'canceled';
+    world.kv.get(`lic:${key}`).set('period_end', String(now() - 60));
+    const over = await activate(key, { computer: mac(1), roster: true });
+    assert.equal(over.status, 402);
+    assert.equal(over.body.account, undefined);
+});
+
+test('if the account store is down the license still comes back', async () => {
+    const { key } = await buy('monthly', { email: 'sam@example.com' });
+    const real = globalThis.fetch;
+    globalThis.fetch = async (url, init) => {
+        if (typeof init?.body === 'string' && init.body.includes('acct:')) return new Response('down', { status: 500 });
+        return real(url, init);
+    };
+    try {
+        const logs = await captureLogs(async () => {
+            const r = await activate(key, { computer: mac(1) });
+            assert.equal(r.status, 200);
+            assert.ok(r.body.token);
+            assert.equal(r.body.account, undefined);
+        });
+        assert.match(logs, /account/);
+    } finally {
+        globalThis.fetch = real;
+    }
+});

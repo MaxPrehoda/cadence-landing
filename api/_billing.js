@@ -441,6 +441,96 @@ async function keysForEmail(email) {
 }
 
 // ---------------------------------------------------------------------------
+// Accounts: the computers of one person
+// ---------------------------------------------------------------------------
+// Every computer whose license is under the same email, or that is paired
+// with the same iPhone, belongs to one account, whatever key it holds. An
+// account has one secret, handed to its computers with their license. From
+// it they work out the Cadence Drive they share and the sealed links between
+// them, so nothing has to be paired by hand.
+//
+//   acct:h:<handle>     the account a handle belongs to ("e:<email id>" or "p:<phone id>")
+//   acct:<id>:secret    64 hex digits
+//   acct:<id>:made      unix seconds
+//   acct:<id>:handles   its handles
+//   acct:<id>:macs      computer id -> { n: name, t: last seen }
+
+const COMPUTER_RE = /^[0-9a-f]{32}$/;
+const PHONE_RE = /^[0-9a-f]{64}$/;
+const COMPUTER_STALE = 30 * DAY; // a computer not seen this long drops off the list
+
+// -> { id, name } or null. The id is the one the app's computer links use.
+function normalizeComputer(raw) {
+    if (!raw || typeof raw !== 'object' || typeof raw.id !== 'string' || !COMPUTER_RE.test(raw.id)) return null;
+    const name = String(raw.name || '').replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, 80);
+    return { id: raw.id, name: name || 'Computer' };
+}
+
+// The iPhones a computer is paired with, as the app names them: SHA-256 of
+// "cadence-phone|" and the phone's push token, so the token never comes here.
+function normalizePhones(raw) {
+    if (!Array.isArray(raw)) return [];
+    return [...new Set(raw.filter((p) => typeof p === 'string' && PHONE_RE.test(p)))].slice(0, 8);
+}
+
+// The account these handles belong to, made on first sight. Handles that
+// turn out to name two accounts (a second key bought under another email,
+// then the same iPhone paired with both) are joined into the older one; the
+// other's computers move over the next time they ask.
+async function accountId(handles) {
+    const found = await kv(handles.map((h) => ['GET', `acct:h:${h}`]));
+    let ids = [...new Set(found.filter(Boolean))];
+    if (ids.length === 0) {
+        const fresh = crypto.randomBytes(16).toString('hex');
+        await kv([
+            ['SET', `acct:${fresh}:secret`, crypto.randomBytes(32).toString('hex'), 'NX'],
+            ['SET', `acct:${fresh}:made`, Math.floor(Date.now() / 1000), 'NX'],
+        ]);
+        // Two computers arriving at once: the first to claim the handle wins.
+        await kv([['SET', `acct:h:${handles[0]}`, fresh, 'NX']]);
+        const [winner] = await kv([['GET', `acct:h:${handles[0]}`]]);
+        ids = [winner || fresh];
+    }
+    let id = ids[0];
+    if (ids.length > 1) {
+        const made = await kv(ids.map((i) => ['GET', `acct:${i}:made`]));
+        const order = ids.map((i, n) => ({ i, t: Number(made[n] || 0) })).sort((a, b) => a.t - b.t || (a.i < b.i ? -1 : 1));
+        id = order[0].i;
+        for (const { i } of order.slice(1)) {
+            const [theirs, macs] = await kv([['SMEMBERS', `acct:${i}:handles`], ['HGETALL', `acct:${i}:macs`]]);
+            const cmds = (theirs || []).map((h) => ['SET', `acct:h:${h}`, id]);
+            if (theirs && theirs.length) cmds.push(['SADD', `acct:${id}:handles`, ...theirs]);
+            if (macs && macs.length) cmds.push(['HSET', `acct:${id}:macs`, ...macs]);
+            if (cmds.length) await kv(cmds);
+        }
+    }
+    await kv([...handles.map((h) => ['SET', `acct:h:${h}`, id]), ['SADD', `acct:${id}:handles`, ...handles]]);
+    return id;
+}
+
+// -> { secret, computers: [{ id, name, last_seen }] } or null. `computer` is
+// the one asking; it is put on the list and told who else is there.
+async function accountFor(email, phones, computer) {
+    const handles = [];
+    if (email && String(email).trim()) handles.push(`e:${emailId(email)}`);
+    for (const p of phones || []) handles.push(`p:${p}`);
+    if (!handles.length) return null;
+    const id = await accountId(handles);
+    const now = Math.floor(Date.now() / 1000);
+    const cmds = [['GET', `acct:${id}:secret`]];
+    if (computer) cmds.push(['HSET', `acct:${id}:macs`, computer.id, JSON.stringify({ n: computer.name, t: now })]);
+    cmds.push(['HGETALL', `acct:${id}:macs`]);
+    const out = await kv(cmds);
+    const secret = out[0];
+    if (!/^[0-9a-f]{64}$/.test(secret || '')) return null;
+    const all = deviceList(hashToObject(out[out.length - 1]));
+    const stale = all.filter((d) => now - d.last_seen > COMPUTER_STALE);
+    if (stale.length) await kv([['HDEL', `acct:${id}:macs`, ...stale.map((d) => d.id)]]);
+    const computers = all.filter((d) => !stale.includes(d)).map((d) => ({ id: d.id, name: d.name, last_seen: d.last_seen }));
+    return { secret, computers };
+}
+
+// ---------------------------------------------------------------------------
 // Device seats (off unless CADENCE_MAX_DEVICES is a positive number)
 // ---------------------------------------------------------------------------
 
@@ -721,6 +811,9 @@ module.exports = {
     revokeLicense,
     keysForCustomer,
     keysForEmail,
+    normalizeComputer,
+    normalizePhones,
+    accountFor,
     maxDevices,
     normalizeDevice,
     claimDevice,
